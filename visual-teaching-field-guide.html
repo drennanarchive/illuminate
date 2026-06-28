@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Teaching & Communication — Field Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #4a4a6a;
+    --ink-faint: #9898b8;
+    --board: #f7f6f0;
+    --board-dark: #eeece4;
+    --marker-blue: #2d5fa6;
+    --marker-purple: #6b3fa0;
+    --marker-teal: #1a8a6a;
+    --marker-amber: #c47d0e;
+    --marker-coral: #c44a2a;
+    --marker-gray: #5a5a7a;
+    --accent: #6b3fa0;
+    --white: #ffffff;
+    --radius: 10px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--board);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ─── Header ─── */
+  .header {
+    background: var(--white);
+    border-bottom: 2px solid var(--ink);
+    padding: 2rem 2.5rem 1.5rem;
+    position: relative;
+  }
+  .header-eyebrow {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: var(--marker-purple);
+    margin-bottom: 4px;
+    letter-spacing: .03em;
+  }
+  .header h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.15;
+  }
+  .header-sub {
+    font-size: .875rem;
+    color: var(--ink-light);
+    margin-top: 8px;
+    max-width: 560px;
+    line-height: 1.6;
+  }
+  .header-marker {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    font-family: 'Caveat', cursive;
+    font-size: .85rem;
+    color: var(--ink-faint);
+    transform: rotate(-2deg);
+  }
+
+  /* ─── Layout ─── */
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 2rem 4rem;
+  }
+
+  /* ─── Section labels ─── */
+  .step-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 2rem 0 .75rem;
+  }
+  .step-num {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--ink);
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ─── Cards ─── */
+  .card {
+    background: var(--white);
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    box-shadow: 3px 3px 0 var(--ink);
+    pointer-events: none;
+  }
+
+  /* ─── Step 1: Triggers ─── */
+  .trigger-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  @media (max-width: 560px) { .trigger-grid { grid-template-columns: 1fr; } }
+  .trigger-pill {
+    background: var(--board);
+    border: 1px solid var(--ink-faint);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: .825rem;
+    color: var(--ink-light);
+    line-height: 1.45;
+  }
+  .trigger-pill strong {
+    display: block;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+    font-family: 'Caveat', cursive;
+    font-size: .95rem;
+  }
+  .gut-check {
+    margin-top: 12px;
+    background: #f0edf8;
+    border-left: 3px solid var(--marker-purple);
+    border-radius: 0 6px 6px 0;
+    padding: 8px 12px;
+    font-size: .825rem;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+  .gut-check strong { color: var(--ink); }
+
+  /* ─── Step 2: Decision rows ─── */
+  .decision-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px dashed #ddddd0;
+    font-size: .85rem;
+  }
+  .decision-row:last-child { border-bottom: none; }
+  .decision-if { color: var(--ink-light); flex: 1.3; line-height: 1.5; }
+  .decision-arrow { color: var(--ink-faint); flex-shrink: 0; font-size: 1rem; }
+  .decision-then { flex: 1; font-weight: 600; color: var(--ink); line-height: 1.5; font-family: 'Caveat', cursive; font-size: 1rem; }
+
+  /* ─── Step 3: Trigger buttons ─── */
+  .trigger-list { display: flex; flex-direction: column; gap: 6px; }
+  .trigger-btn {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 11px 14px;
+    border-radius: 8px;
+    border: 1.5px solid #d0cec8;
+    background: var(--board);
+    cursor: pointer;
+    text-align: left;
+    transition: all .15s;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+  }
+  .trigger-btn:hover { background: var(--white); border-color: var(--marker-purple); }
+  .trigger-btn.active { background: var(--white); border-color: var(--marker-purple); border-width: 2px; }
+  .trigger-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #d0cec8; flex-shrink: 0; margin-top: 4px;
+    transition: background .15s;
+  }
+  .trigger-btn.active .trigger-dot { background: var(--marker-purple); }
+  .trigger-label { font-size: .875rem; font-weight: 500; color: var(--ink); line-height: 1.4; }
+  .trigger-hint { font-size: .775rem; color: var(--ink-faint); margin-top: 2px; font-style: italic; }
+
+  /* ─── Diagram panel ─── */
+  .diagram-panel {
+    display: none;
+    margin-top: 16px;
+    border-top: 1.5px dashed #ccc;
+    padding-top: 16px;
+  }
+  .diagram-panel.active { display: block; }
+
+  .diagram-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+  }
+  .form-badge {
+    font-family: 'Caveat', cursive;
+    font-size: 1.05rem;
+    font-weight: 600;
+    background: #ede9f8;
+    color: var(--marker-purple);
+    border: 1px solid var(--marker-purple);
+    border-radius: 6px;
+    padding: 3px 10px;
+  }
+  .diagram-hint {
+    font-size: .775rem;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  /* ─── Whiteboard SVG canvas ─── */
+  .wb-canvas {
+    background: #fdfcf6;
+    border: 1.5px solid #d0cec8;
+    border-radius: 8px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .wb-canvas svg { display: block; width: 100%; }
+
+  /* Draw-on animation */
+  .draw {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: none;
+  }
+  .draw.animating {
+    animation: drawOn var(--dur, .6s) ease forwards;
+    animation-delay: var(--delay, 0s);
+  }
+  @keyframes drawOn {
+    to { stroke-dashoffset: 0; }
+  }
+  .fade-in { opacity: 0; transition: opacity .3s ease; }
+  .fade-in.visible { opacity: 1; }
+
+  .replay-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 10px;
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: var(--marker-purple);
+    background: none;
+    border: 1px solid var(--marker-purple);
+    border-radius: 6px;
+    padding: 4px 12px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .replay-btn:hover { background: #ede9f8; }
+
+  .diagram-caption {
+    margin-top: 10px;
+    font-size: .8rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+    font-style: italic;
+    padding: 0 2px;
+  }
+
+  /* ─── Principles ─── */
+  .principle-row {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 9px 0;
+    border-bottom: 1px dashed #ddddd0;
+    font-size: .85rem; line-height: 1.55;
+  }
+  .principle-row:last-child { border-bottom: none; }
+  .p-icon {
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    color: var(--marker-purple);
+    flex-shrink: 0;
+    margin-top: 1px;
+    min-width: 20px;
+  }
+  .p-text { color: var(--ink-light); }
+  .p-text strong { color: var(--ink); font-weight: 600; }
+
+  /* ─── Footer ─── */
+  .footer {
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: .9rem;
+    color: var(--ink-faint);
+    padding: 1rem 0 2rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">for managers & mentors</div>
+  <h1>Visual Teaching &amp; Communication</h1>
+  <p class="header-sub">Pick what's happening in the room. The form and the diagram follow — drawn out so you can see exactly what to put on the whiteboard.</p>
+  <div class="header-marker">field guide ✦</div>
+</div>
+
+<div class="main">
+
+  <!-- STEP 1 -->
+  <div class="step-label">
+    <div class="step-num">1</div>
+    <div class="step-title">Recognize the moment</div>
+  </div>
+  <div class="card">
+    <div class="trigger-grid">
+      <div class="trigger-pill"><strong>Circling the same point</strong>"I keep explaining this and it's not landing"</div>
+      <div class="trigger-pill"><strong>Invisible relationships</strong>"These two things connect but I can't show how"</div>
+      <div class="trigger-pill"><strong>Before / after or cause &amp; effect</strong>"Something changed — I need to show the delta"</div>
+      <div class="trigger-pill"><strong>Teachable pattern</strong>"They'll need to use this mental model again"</div>
+      <div class="trigger-pill"><strong>Scale or change over time</strong>"This grows in a way words can't capture"</div>
+      <div class="trigger-pill"><strong>Competing interpretations</strong>"We're using the same words but meaning different things"</div>
+    </div>
+    <div class="gut-check"><strong>Gut check:</strong> if you've said the same thing twice and it didn't land, that's your cue to draw it instead.</div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-label">
+    <div class="step-num">2</div>
+    <div class="step-title">Pick the right form</div>
+  </div>
+  <div class="card">
+    <div class="decision-row"><div class="decision-if">Steps in order, or a decision branching?</div><div class="decision-arrow">→</div><div class="decision-then">Flowchart</div></div>
+    <div class="decision-row"><div class="decision-if">Where something fits in a bigger picture?</div><div class="decision-arrow">→</div><div class="decision-then">Layers / nesting</div></div>
+    <div class="decision-row"><div class="decision-if">Ranking or prioritizing a pile of things?</div><div class="decision-arrow">→</div><div class="decision-then">2×2 quadrant</div></div>
+    <div class="decision-row"><div class="decision-if">Who does what, or who asks whom?</div><div class="decision-arrow">→</div><div class="decision-then">Swimlanes or org chart</div></div>
+    <div class="decision-row"><div class="decision-if">A pile of incoming things that needs sorting?</div><div class="decision-arrow">→</div><div class="decision-then">Funnel / triage</div></div>
+    <div class="decision-row"><div class="decision-if">How something grows or compounds?</div><div class="decision-arrow">→</div><div class="decision-then">Slope / layer stack</div></div>
+    <div class="decision-row"><div class="decision-if">"Here's how I think about this"?</div><div class="decision-arrow">→</div><div class="decision-then">Mental model / 2×2</div></div>
+    <div class="decision-row"><div class="decision-if">Need them to contribute to it live?</div><div class="decision-arrow">→</div><div class="decision-then">Whiteboard (skeleton first)</div></div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-label">
+    <div class="step-num">3</div>
+    <div class="step-title">Draw it — pick what's happening</div>
+  </div>
+  <div class="card">
+    <div class="trigger-list">
+
+      <button class="trigger-btn" onclick="toggleDiagram('decision', this)">
+        <div class="trigger-dot"></div>
+        <div><div class="trigger-label">I need to explain how a decision got made</div><div class="trigger-hint">"Why did we choose this over the alternatives?"</div></div>
+      </button>
+      <div id="panel-decision" class="diagram-panel">
+        <div class="diagram-header">
+          <span style="color:var(--ink-faint);font-size:1rem">→</span>
+          <span class="form-badge">2×2 quadrant</span>
+          <span class="diagram-hint">axes first, then plot</span>
+        </div>
+        <div class="wb-canvas">
+          <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" font-family="Caveat, cursive">
+            <!-- Axes -->
+            <line class="draw" x1="90" y1="250" x2="90" y2="30" stroke="#1a1a2e" stroke-width="2" stroke-linecap="round"/>
+            <line class="draw" x1="90" y1="250" x2="580" y2="250" stroke="#1a1a2e" stroke-width="2" stroke-linecap="round"/>
+            <!-- Dashed quadrant lines -->
+            <line class="draw" x1="90" y1="140" x2="580" y2="140" stroke="#9898b8" stroke-width="1" stroke-dasharray="6 5" stroke-linecap="round"/>
+            <line class="draw" x1="335" y1="30" x2="335" y2="250" stroke="#9898b8" stroke-width="1" stroke-dasharray="6 5" stroke-linecap="round"/>
+            <!-- Axis arrows -->
+            <polyline class="draw" points="84,38 90,28 96,38" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline class="draw" points="572,244 582,250 572,256" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Axis labels -->
+            <text class="fade-in" x="86" y="26" font-size="13" fill="#4a4a6a" text-anchor="end">high impact</text>
+            <text class="fade-in" x="86" y="252" font-size="13" fill="#4a4a6a" text-anchor="end">low impact</text>
+            <text class="fade-in" x="98" y="268" font-size="13" fill="#4a4a6a">low effort</text>
+            <text class="fade-in" x="510" y="268" font-size="13" fill="#4a4a6a">high effort</text>
+            <!-- Alt boxes (gray) -->
+            <rect class="draw" x="108" y="155" width="86" height="36" rx="6" fill="#f0eeea" stroke="#9898b8" stroke-width="1.5"/>
+            <text class="fade-in" x="151" y="178" font-size="14" fill="#5a5a7a" text-anchor="middle">Alt A</text>
+            <rect class="draw" x="390" y="155" width="86" height="36" rx="6" fill="#f0eeea" stroke="#9898b8" stroke-width="1.5"/>
+            <text class="fade-in" x="433" y="178" font-size="14" fill="#5a5a7a" text-anchor="middle">Alt C</text>
+            <rect class="draw" x="108" y="48" width="86" height="36" rx="6" fill="#e6f4ee" stroke="#1a8a6a" stroke-width="1.5"/>
+            <text class="fade-in" x="151" y="71" font-size="14" fill="#1a8a6a" text-anchor="middle">Alt B</text>
+            <!-- Chosen star box -->
+            <rect class="draw" x="346" y="42" width="170" height="50" rx="8" fill="#ede9f8" stroke="#6b3fa0" stroke-width="2"/>
+            <text class="fade-in" x="431" y="62" font-size="16" fill="#6b3fa0" text-anchor="middle" font-weight="700">★ Chosen</text>
+            <text class="fade-in" x="431" y="82" font-size="12" fill="#6b3fa0" text-anchor="middle">high impact, manageable effort</text>
+            <!-- Quadrant labels -->
+            <text class="fade-in" x="212" y="118" font-size="12" fill="#9898b8" text-anchor="middle">quick wins</text>
+            <text class="fade-in" x="460" y="118" font-size="12" fill="#9898b8" text-anchor="middle">big bets</text>
+            <text class="fade-in" x="212" y="230" font-size="12" fill="#9898b8" text-anchor="middle">question it</text>
+            <text class="fade-in" x="460" y="230" font-size="12" fill="#9898b8" text-anchor="middle">nice-to-haves</text>
+          </svg>
+        </div>
+        <button class="replay-btn" onclick="replayDiagram('decision')">↺ replay</button>
+        <div class="diagram-caption">Name the two things that were actually in tension as your axes. Plot alternatives in gray first. Star the chosen option last. Explain why others were ruled out in conversation — not on the board.</div>
+      </div>
+
+      <button class="trigger-btn" onclick="toggleDiagram('system', this)">
+        <div class="trigger-dot"></div>
+        <div><div class="trigger-label">I need to show how things connect</div><div class="trigger-hint">"Here's the system / team / flow you're inheriting"</div></div>
+      </button>
+      <div id="panel-system" class="diagram-panel">
+        <div class="diagram-header">
+          <span style="color:var(--ink-faint);font-size:1rem">→</span>
+          <span class="form-badge">Box-and-arrow map</span>
+          <span class="diagram-hint">draw from memory, star what matters today</span>
+        </div>
+        <div class="wb-canvas">
+          <svg viewBox="0 0 640 270" xmlns="http://www.w3.org/2000/svg" font-family="Caveat, cursive">
+            <!-- Boxes -->
+            <rect class="draw" x="20" y="110" width="110" height="44" rx="7" fill="#f0eeea" stroke="#5a5a7a" stroke-width="1.5"/>
+            <text class="fade-in" x="75" y="137" font-size="15" fill="#1a1a2e" text-anchor="middle">Customer</text>
+            <rect class="draw" x="200" y="44" width="110" height="44" rx="7" fill="#e6f4ee" stroke="#1a8a6a" stroke-width="1.5"/>
+            <text class="fade-in" x="255" y="71" font-size="15" fill="#1a1a2e" text-anchor="middle">Support</text>
+            <!-- Eng (starred, purple) -->
+            <rect class="draw" x="374" y="38" width="142" height="56" rx="8" fill="#ede9f8" stroke="#6b3fa0" stroke-width="2"/>
+            <text class="fade-in" x="445" y="60" font-size="17" fill="#6b3fa0" text-anchor="middle" font-weight="700">★ Eng</text>
+            <text class="fade-in" x="445" y="80" font-size="12" fill="#6b3fa0" text-anchor="middle">focus here today</text>
+            <rect class="draw" x="200" y="190" width="110" height="44" rx="7" fill="#f0eeea" stroke="#5a5a7a" stroke-width="1.5"/>
+            <text class="fade-in" x="255" y="217" font-size="15" fill="#1a1a2e" text-anchor="middle">Comms</text>
+            <rect class="draw" x="374" y="190" width="110" height="44" rx="7" fill="#f0eeea" stroke="#5a5a7a" stroke-width="1.5"/>
+            <text class="fade-in" x="429" y="217" font-size="15" fill="#1a1a2e" text-anchor="middle">Product</text>
+            <!-- Arrows -->
+            <line class="draw" x1="130" y1="126" x2="198" y2="88" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round"/>
+            <polyline class="draw" points="190,84 198,88 192,96" stroke="#1a1a2e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <line class="draw" x1="130" y1="140" x2="198" y2="200" stroke="#1a1a2e" stroke-width="1.5" stroke-dasharray="6 4" stroke-linecap="round"/>
+            <polyline class="draw" points="190,196 198,200 192,208" stroke="#1a1a2e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <line class="draw" x1="310" y1="66" x2="372" y2="66" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round"/>
+            <polyline class="draw" points="364,60 372,66 364,72" stroke="#1a1a2e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text class="fade-in" x="341" y="58" font-size="12" fill="#9898b8" text-anchor="middle">tickets</text>
+            <line class="draw" x1="445" y1="94" x2="432" y2="188" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round"/>
+            <polyline class="draw" points="426,180 432,188 440,182" stroke="#1a1a2e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <line class="draw" x1="310" y1="212" x2="372" y2="212" stroke="#9898b8" stroke-width="1" stroke-dasharray="5 4" stroke-linecap="round"/>
+            <polyline class="draw" points="364,206 372,212 364,218" stroke="#9898b8" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Legend -->
+            <line class="draw" x1="530" y1="140" x2="560" y2="140" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round"/>
+            <polyline class="draw" points="552,134 560,140 552,146" stroke="#1a1a2e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text class="fade-in" x="566" y="144" font-size="12" fill="#4a4a6a">regular</text>
+            <line class="draw" x1="530" y1="162" x2="560" y2="162" stroke="#9898b8" stroke-width="1" stroke-dasharray="5 4" stroke-linecap="round"/>
+            <polyline class="draw" points="552,156 560,162 552,168" stroke="#9898b8" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text class="fade-in" x="566" y="166" font-size="12" fill="#9898b8">escalation</text>
+          </svg>
+        </div>
+        <button class="replay-btn" onclick="replayDiagram('system')">↺ replay</button>
+        <div class="diagram-caption">Draw from memory — imperfect is more honest. Star the box that matters most today. Solid arrows = regular flow. Dashed = escalation or exception. Only go as deep as this conversation needs.</div>
+      </div>
+
+      <button class="trigger-btn" onclick="toggleDiagram('good', this)">
+        <div class="trigger-dot"></div>
+        <div><div class="trigger-label">I need to show what good looks like</div><div class="trigger-hint">"We're using the same words but meaning different things"</div></div>
+      </button>
+      <div id="panel-good" class="diagram-panel">
+        <div class="diagram-header">
+          <span style="color:var(--ink-faint);font-size:1rem">→</span>
+          <span class="form-badge">Spectrum + before/after</span>
+          <span class="diagram-hint">let them place their dot first</span>
+        </div>
+        <div class="wb-canvas">
+          <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" font-family="Caveat, cursive">
+            <!-- Spectrum line -->
+            <line class="draw" x1="60" y1="100" x2="580" y2="100" stroke="#1a1a2e" stroke-width="2.5" stroke-linecap="round"/>
+            <polyline class="draw" points="54,94 60,100 54,106" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline class="draw" points="574,94 580,100 574,106" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text class="fade-in" x="60" y="125" font-size="16" fill="#1a1a2e" text-anchor="middle" font-weight="600">Reactive</text>
+            <text class="fade-in" x="580" y="125" font-size="16" fill="#1a1a2e" text-anchor="middle" font-weight="600">Proactive</text>
+            <!-- "You here" dot -->
+            <circle class="draw" cx="200" cy="100" r="11" fill="white" stroke="#1a1a2e" stroke-width="2"/>
+            <line class="draw" x1="200" y1="78" x2="200" y2="88" stroke="#4a4a6a" stroke-width="1" stroke-dasharray="3 2"/>
+            <text class="fade-in" x="200" y="72" font-size="13" fill="#4a4a6a" text-anchor="middle">you here</text>
+            <!-- Target star dot -->
+            <circle class="draw" cx="480" cy="100" r="13" fill="#ede9f8" stroke="#6b3fa0" stroke-width="2"/>
+            <text class="fade-in" x="480" y="104" font-size="14" fill="#6b3fa0" text-anchor="middle" font-weight="700">★</text>
+            <line class="draw" x1="480" y1="78" x2="480" y2="86" stroke="#6b3fa0" stroke-width="1" stroke-dasharray="3 2"/>
+            <text class="fade-in" x="480" y="72" font-size="13" fill="#6b3fa0" text-anchor="middle">target</text>
+            <!-- Before box -->
+            <rect class="draw" x="40" y="150" width="255" height="72" rx="8" fill="#f7f6f0" stroke="#9898b8" stroke-width="1.5"/>
+            <text class="fade-in" x="56" y="172" font-size="13" fill="#9898b8">Before</text>
+            <text class="fade-in" x="56" y="192" font-size="14" fill="#4a4a6a">Waits for issues to surface,</text>
+            <text class="fade-in" x="56" y="210" font-size="14" fill="#4a4a6a">then responds</text>
+            <!-- After box -->
+            <rect class="draw" x="310" y="150" width="290" height="72" rx="8" fill="#ede9f8" stroke="#6b3fa0" stroke-width="1.5"/>
+            <text class="fade-in" x="326" y="172" font-size="13" fill="#6b3fa0">After</text>
+            <text class="fade-in" x="326" y="192" font-size="14" fill="#3d2070">Flags risks early, brings solutions</text>
+            <text class="fade-in" x="326" y="210" font-size="14" fill="#3d2070">not just problems</text>
+          </svg>
+        </div>
+        <button class="replay-btn" onclick="replayDiagram('good')">↺ replay</button>
+        <div class="diagram-caption">The visual separates "the gap" from "the person" — which makes the conversation easier. Let them place their own dot first. It usually surfaces more self-awareness than you expected.</div>
+      </div>
+
+      <button class="trigger-btn" onclick="toggleDiagram('breaks', this)">
+        <div class="trigger-dot"></div>
+        <div><div class="trigger-label">I need to show where something broke</div><div class="trigger-hint">"I want to talk about the failure without making it personal"</div></div>
+      </button>
+      <div id="panel-breaks" class="diagram-panel">
+        <div class="diagram-header">
+          <span style="color:var(--ink-faint);font-size:1rem">→</span>
+          <span class="form-badge">Cause-and-effect chain</span>
+          <span class="diagram-hint">draw the flow before naming blame</span>
+        </div>
+        <div class="wb-canvas">
+          <svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" font-family="Caveat, cursive">
+            <!-- Chain boxes -->
+            <rect class="draw" x="20" y="70" width="100" height="44" rx="7" fill="#f0eeea" stroke="#5a5a7a" stroke-width="1.5"/>
+            <text class="fade-in" x="70" y="97" font-size="15" fill="#1a1a2e" text-anchor="middle">Trigger</text>
+            <rect class="draw" x="168" y="70" width="120" height="44" rx="7" fill="#fdf5e0" stroke="#c47d0e" stroke-width="1.5"/>
+            <text class="fade-in" x="228" y="88" font-size="15" fill="#1a1a2e" text-anchor="middle">Gap A</text>
+            <text class="fade-in" x="228" y="106" font-size="12" fill="#7a5000" text-anchor="middle">process unclear</text>
+            <rect class="draw" x="336" y="70" width="120" height="44" rx="7" fill="#fdf5e0" stroke="#c47d0e" stroke-width="1.5"/>
+            <text class="fade-in" x="396" y="88" font-size="15" fill="#1a1a2e" text-anchor="middle">Gap B</text>
+            <text class="fade-in" x="396" y="106" font-size="12" fill="#7a5000" text-anchor="middle">no escalation path</text>
+            <rect class="draw" x="504" y="70" width="112" height="44" rx="7" fill="#fceae6" stroke="#c44a2a" stroke-width="2"/>
+            <text class="fade-in" x="560" y="97" font-size="15" fill="#c44a2a" text-anchor="middle" font-weight="700">Failure</text>
+            <!-- Chain arrows -->
+            <line class="draw" x1="120" y1="92" x2="166" y2="92" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round"/>
+            <polyline class="draw" points="158,86 166,92 158,98" stroke="#1a1a2e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <line class="draw" x1="288" y1="92" x2="334" y2="92" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round"/>
+            <polyline class="draw" points="326,86 334,92 326,98" stroke="#1a1a2e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <line class="draw" x1="456" y1="92" x2="502" y2="92" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round"/>
+            <polyline class="draw" points="494,86 502,92 494,98" stroke="#1a1a2e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Root cause -->
+            <line class="draw" x1="228" y1="155" x2="228" y2="116" stroke="#9898b8" stroke-width="1" stroke-dasharray="4 3" stroke-linecap="round"/>
+            <polyline class="draw" points="222,122 228,114 234,122" stroke="#9898b8" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect class="draw" x="138" y="158" width="182" height="54" rx="7" fill="#f7f6f0" stroke="#9898b8" stroke-width="1" stroke-dasharray="5 3"/>
+            <text class="fade-in" x="229" y="177" font-size="12" fill="#9898b8" text-anchor="middle">root cause</text>
+            <text class="fade-in" x="229" y="196" font-size="13" fill="#4a4a6a" text-anchor="middle">assumption about ownership</text>
+            <!-- Catch point -->
+            <line class="draw" x1="396" y1="155" x2="396" y2="116" stroke="#6b3fa0" stroke-width="1" stroke-dasharray="4 3" stroke-linecap="round"/>
+            <polyline class="draw" points="390,122 396,114 402,122" stroke="#6b3fa0" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect class="draw" x="306" y="158" width="190" height="54" rx="7" fill="#ede9f8" stroke="#6b3fa0" stroke-width="1.5"/>
+            <text class="fade-in" x="401" y="177" font-size="12" fill="#6b3fa0" text-anchor="middle">would have caught it</text>
+            <text class="fade-in" x="401" y="196" font-size="13" fill="#3d2070" text-anchor="middle">a shared definition of done</text>
+          </svg>
+        </div>
+        <button class="replay-btn" onclick="replayDiagram('breaks')">↺ replay</button>
+        <div class="diagram-caption">Draw the flow first without naming anyone. Then ask "where did this enter?" together. Pointing to a box instead of a person changes the room. Circle the root cause. Box what would have caught it.</div>
+      </div>
+
+      <button class="trigger-btn" onclick="toggleDiagram('feeds', this)">
+        <div class="trigger-dot"></div>
+        <div><div class="trigger-label">I need to show how their work fits the bigger picture</div><div class="trigger-hint">"They can't see past their own scope"</div></div>
+      </button>
+      <div id="panel-feeds" class="diagram-panel">
+        <div class="diagram-header">
+          <span style="color:var(--ink-faint);font-size:1rem">→</span>
+          <span class="form-badge">Contribution chain</span>
+          <span class="diagram-hint">draw the downstream impact last</span>
+        </div>
+        <div class="wb-canvas">
+          <svg viewBox="0 0 640 270" xmlns="http://www.w3.org/2000/svg" font-family="Caveat, cursive">
+            <!-- Company goal -->
+            <rect class="draw" x="220" y="10" width="200" height="44" rx="7" fill="#f0eeea" stroke="#5a5a7a" stroke-width="1.5"/>
+            <text class="fade-in" x="320" y="37" font-size="15" fill="#1a1a2e" text-anchor="middle">Company goal</text>
+            <line class="draw" x1="320" y1="54" x2="320" y2="74" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round"/>
+            <polyline class="draw" points="314,66 320,74 326,66" stroke="#1a1a2e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Team objective -->
+            <rect class="draw" x="190" y="74" width="260" height="46" rx="7" fill="#e6f4ee" stroke="#1a8a6a" stroke-width="1.5"/>
+            <text class="fade-in" x="320" y="92" font-size="15" fill="#1a1a2e" text-anchor="middle">Team objective</text>
+            <text class="fade-in" x="320" y="110" font-size="12" fill="#1a8a6a" text-anchor="middle">their team</text>
+            <!-- Fork arrows -->
+            <line class="draw" x1="277" y1="120" x2="207" y2="146" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round"/>
+            <polyline class="draw" points="201,140 207,148 215,144" stroke="#1a1a2e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <line class="draw" x1="363" y1="120" x2="433" y2="146" stroke="#9898b8" stroke-width="1" stroke-dasharray="5 3" stroke-linecap="round"/>
+            <polyline class="draw" points="427,140 433,148 441,144" stroke="#9898b8" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Their work (starred) -->
+            <rect class="draw" x="100" y="148" width="210" height="52" rx="8" fill="#ede9f8" stroke="#6b3fa0" stroke-width="2"/>
+            <text class="fade-in" x="205" y="168" font-size="17" fill="#6b3fa0" text-anchor="middle" font-weight="700">★ Their work</text>
+            <text class="fade-in" x="205" y="188" font-size="12" fill="#6b3fa0" text-anchor="middle">the thing they own</text>
+            <!-- Other work -->
+            <rect class="draw" x="358" y="152" width="168" height="44" rx="7" fill="#f0eeea" stroke="#9898b8" stroke-width="1"/>
+            <text class="fade-in" x="442" y="179" font-size="14" fill="#9898b8" text-anchor="middle">Other work</text>
+            <!-- Impact arrow -->
+            <line class="draw" x1="205" y1="200" x2="205" y2="222" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round"/>
+            <polyline class="draw" points="199,214 205,222 211,214" stroke="#1a1a2e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Downstream impact -->
+            <rect class="draw" x="85" y="222" width="240" height="40" rx="7" fill="#e6f4ee" stroke="#1a8a6a" stroke-width="1.5"/>
+            <text class="fade-in" x="205" y="238" font-size="15" fill="#1a1a2e" text-anchor="middle">Downstream impact</text>
+            <text class="fade-in" x="205" y="254" font-size="12" fill="#1a8a6a" text-anchor="middle">the thing that changes</text>
+          </svg>
+        </div>
+        <button class="replay-btn" onclick="replayDiagram('feeds')">↺ replay</button>
+        <div class="diagram-caption">Draw the downstream impact last — that's the part they usually can't see. If you don't know what it is before the conversation, find out first. The chain makes "your work matters" visible, not just sayable.</div>
+      </div>
+
+      <button class="trigger-btn" onclick="toggleDiagram('grows', this)">
+        <div class="trigger-dot"></div>
+        <div><div class="trigger-label">I need to show how something grows or scales</div><div class="trigger-hint">"We're quietly designing full operations when we meant MVP"</div></div>
+      </button>
+      <div id="panel-grows" class="diagram-panel">
+        <div class="diagram-header">
+          <span style="color:var(--ink-faint);font-size:1rem">→</span>
+          <span class="form-badge">Scope layer stack</span>
+          <span class="diagram-hint">ask "which layer are we designing?" mid-meeting</span>
+        </div>
+        <div class="wb-canvas">
+          <svg viewBox="0 0 640 268" xmlns="http://www.w3.org/2000/svg" font-family="Caveat, cursive">
+            <!-- Layer 1 - bottom gray -->
+            <rect class="draw" x="60" y="210" width="510" height="46" rx="8" fill="#f0eeea" stroke="#5a5a7a" stroke-width="1.5"/>
+            <text class="fade-in" x="315" y="228" font-size="16" fill="#1a1a2e" text-anchor="middle" font-weight="600">Minimum viable action</text>
+            <text class="fade-in" x="315" y="246" font-size="12" fill="#5a5a7a" text-anchor="middle">the floor — what we ship first</text>
+            <!-- Layer 2 - teal -->
+            <rect class="draw" x="90" y="156" width="450" height="46" rx="8" fill="#e6f4ee" stroke="#1a8a6a" stroke-width="1.5"/>
+            <text class="fade-in" x="315" y="174" font-size="16" fill="#1a1a2e" text-anchor="middle" font-weight="600">Repeatable process</text>
+            <text class="fade-in" x="315" y="192" font-size="12" fill="#1a8a6a" text-anchor="middle">documented, others can run it</text>
+            <!-- Layer 3 - purple -->
+            <rect class="draw" x="120" y="102" width="390" height="46" rx="8" fill="#ede9f8" stroke="#6b3fa0" stroke-width="1.5"/>
+            <text class="fade-in" x="315" y="120" font-size="16" fill="#1a1a2e" text-anchor="middle" font-weight="600">Supporting system</text>
+            <text class="fade-in" x="315" y="138" font-size="12" fill="#6b3fa0" text-anchor="middle">tooling, automation, dashboards</text>
+            <!-- Layer 4 - top coral -->
+            <rect class="draw" x="150" y="48" width="330" height="46" rx="8" fill="#fceae6" stroke="#c44a2a" stroke-width="1.5"/>
+            <text class="fade-in" x="315" y="66" font-size="16" fill="#1a1a2e" text-anchor="middle" font-weight="600">Full operations</text>
+            <text class="fade-in" x="315" y="84" font-size="12" fill="#c44a2a" text-anchor="middle">team, budget, SLAs</text>
+            <!-- "We are here" marker on layer 2 -->
+            <line class="draw" x1="28" y1="179" x2="88" y2="179" stroke="#1a8a6a" stroke-width="2.5" stroke-dasharray="6 3" stroke-linecap="round"/>
+            <text class="fade-in" x="24" y="175" font-size="13" fill="#1a8a6a" text-anchor="end">we are</text>
+            <text class="fade-in" x="24" y="189" font-size="13" fill="#1a8a6a" text-anchor="end">here</text>
+          </svg>
+        </div>
+        <button class="replay-btn" onclick="replayDiagram('grows')">↺ replay</button>
+        <div class="diagram-caption">When someone proposes a solution, ask "which layer is this?" and draw a line at that height. Stops the group from quietly designing full operations while thinking they're discussing the MVP.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PRINCIPLES -->
+  <div class="step-label" style="margin-top:2rem">
+    <div class="step-num" style="background:var(--ink-faint)">✦</div>
+    <div class="step-title">Always true — regardless of which template you use</div>
+  </div>
+  <div class="card">
+    <div class="principle-row"><div class="p-icon">▸</div><div class="p-text"><strong>Draw the skeleton before the discussion starts.</strong> Axes, lanes, or layers drawn live while tracking conversation is the main failure mode. Even a rough grid changes the room.</div></div>
+    <div class="principle-row"><div class="p-icon">▸</div><div class="p-text"><strong>Separate capture → structure → decide.</strong> Get ideas up first (no judgment), cluster them, then mark what's actually decided — distinct from what was discussed.</div></div>
+    <div class="principle-row"><div class="p-icon">▸</div><div class="p-text"><strong>Imperfect and immediate beats polished and late.</strong> A rough sketch in the moment teaches more than a perfect slide deck next week. The act of drawing together is part of the teaching.</div></div>
+    <div class="principle-row"><div class="p-icon">▸</div><div class="p-text"><strong>Ask before you draw.</strong> "Can I sketch what I'm thinking?" gives the other person a moment to engage — they watch you build it rather than just receive it, which makes it stick.</div></div>
+    <div class="principle-row"><div class="p-icon">▸</div><div class="p-text"><strong>Close with a translation step.</strong> Say "so the board says X, Y, Z" out loud before the conversation ends. Catches misreadings while people are still there to correct them.</div></div>
+    <div class="principle-row"><div class="p-icon">▸</div><div class="p-text"><strong>Reserve a parking lot corner.</strong> A designated corner for tangents solves most derailed conversations. Label it out loud so people know their point was heard, just deferred.</div></div>
+  </div>
+
+  <div class="footer">visual teaching field guide &nbsp;✦&nbsp; add templates as real situations come up</div>
+
+</div>
+
+<script>
+  const diagrams = ['decision','system','good','breaks','feeds','grows'];
+  let activeDiagram = null;
+  let activeBtn = null;
+
+  function toggleDiagram(id, btn) {
+    if (activeDiagram === id) {
+      document.getElementById('panel-' + id).classList.remove('active');
+      btn.classList.remove('active');
+      activeDiagram = null;
+      activeBtn = null;
+      return;
+    }
+    diagrams.forEach(d => {
+      document.getElementById('panel-' + d).classList.remove('active');
+    });
+    document.querySelectorAll('.trigger-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    btn.classList.add('active');
+    activeDiagram = id;
+    activeBtn = btn;
+    setTimeout(() => animateDiagram(id), 60);
+  }
+
+  function animateDiagram(id) {
+    const panel = document.getElementById('panel-' + id);
+    const draws = panel.querySelectorAll('.draw');
+    const fades = panel.querySelectorAll('.fade-in');
+
+    draws.forEach(el => {
+      el.classList.remove('animating');
+      void el.offsetWidth;
+    });
+    fades.forEach(el => el.classList.remove('visible'));
+
+    const baseDelay = 0.05;
+    const dur = 0.45;
+    draws.forEach((el, i) => {
+      el.style.setProperty('--dur', dur + 's');
+      el.style.setProperty('--delay', (i * baseDelay) + 's');
+      el.classList.add('animating');
+    });
+
+    const totalDrawTime = (draws.length * baseDelay + dur) * 1000;
+    fades.forEach((el, i) => {
+      const t = (draws.length * baseDelay * 1000 * 0.3) + (i * 60);
+      setTimeout(() => el.classList.add('visible'), t);
+    });
+  }
+
+  function replayDiagram(id) {
+    animateDiagram(id);
+  }
+
+  // Auto-open first on load for a nice intro
+  window.addEventListener('load', () => {
+    const firstBtn = document.querySelector('.trigger-btn');
+    if (firstBtn) {
+      setTimeout(() => toggleDiagram('decision', firstBtn), 400);
+    }
+  });
+</script>
+</body>
+</html>
