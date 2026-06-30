@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategy Framework — Definitions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1B2A4A;
+    --navy-deep: #131F38;
+    --paper: #F7F5F0;
+    --slate: #4A6B8A;
+    --amber: #C8954B;
+    --amber-deep: #A87B3A;
+    --charcoal: #2B2D33;
+    --line: rgba(27, 42, 74, 0.14);
+    --rule: rgba(27, 42, 74, 0.55);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #E4DFD3;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--charcoal);
+  }
+
+  .page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--paper);
+    background-image:
+      radial-gradient(ellipse at top left, rgba(27,42,74,0.03), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(200,149,75,0.04), transparent 50%);
+    padding: 36px 56px 28px;
+    position: relative;
+  }
+
+  /* ===== HEADER ===== */
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 3px solid var(--navy);
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+  }
+
+  .masthead-left .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin: 0 0 4px;
+  }
+
+  .masthead-left h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: -0.01em;
+    color: var(--navy-deep);
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .masthead-right {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--slate);
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+  }
+
+  .masthead-right strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* ===== HIERARCHY CASCADE ===== */
+  .cascade {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .band {
+    position: relative;
+    border-radius: 3px;
+    border: 1.5px solid var(--line);
+    background: #FFFFFF;
+    display: grid;
+    grid-template-columns: 230px 1fr 230px;
+    overflow: hidden;
+  }
+
+  .band-1 { box-shadow: 0 1px 0 rgba(27,42,74,0.06); }
+
+  /* connecting tick between bands */
+  .cascade::before { content: none; }
+  .band + .band::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 28px;
+    width: 1.5px;
+    height: 10px;
+    background: var(--rule);
+  }
+
+  .band-label {
+    background: var(--navy);
+    color: var(--paper);
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .band-1 .band-label { background: var(--navy-deep); }
+  .band-2 .band-label { background: var(--navy); }
+  .band-3 .band-label, .band-4 .band-label { background: var(--amber-deep); }
+
+  .band-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+  }
+
+  .band-1 .band-count, .band-2 .band-count { color: var(--amber); opacity: 0.95; }
+  .band-3 .band-count, .band-4 .band-count { color: var(--navy-deep); opacity: 0.8; }
+
+  .band-label h2 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.05;
+  }
+
+  .band-1 .band-label h2 { font-size: 26px; }
+  .band-2 .band-label h2 { font-size: 22px; }
+  .band-3 .band-label h2, .band-4 .band-label h2 { font-size: 19px; }
+
+  .band-body {
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--line);
+  }
+
+  .band-body p {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .band-1 .band-body p { font-size: 16px; font-weight: 500; color: var(--navy-deep); }
+  .band-2 .band-body p { font-size: 15px; color: var(--charcoal); }
+  .band-3 .band-body p, .band-4 .band-body p { font-size: 13.5px; color: var(--charcoal); }
+
+  .band-note {
+    font-size: 12px;
+    color: var(--slate);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  .band-example {
+    padding: 16px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(200,149,75,0.06);
+  }
+
+  .ex-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber-deep);
+    margin: 0 0 5px;
+  }
+
+  .band-example p {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--navy-deep);
+  }
+
+  .band-example .who {
+    display: block;
+    font-size: 10.5px;
+    color: var(--slate);
+    margin-top: 5px;
+    font-weight: 500;
+  }
+
+  /* ===== SPLIT ROW: KPI + MILESTONE ===== */
+  .split-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .split-row .band {
+    grid-template-columns: 150px 1fr;
+  }
+
+  .split-row .band-example {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--line);
+  }
+
+  .split-row .band-body {
+    border-right: none;
+  }
+
+  /* connecting ticks for split row, one per column */
+  .split-row .band::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 22px;
+    width: 1.5px;
+    height: 10px;
+    background: var(--rule);
+  }
+
+  /* ===== SAME-LEVEL CONNECTOR ===== */
+  .same-level-flag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 2px 0 0;
+  }
+  .same-level-flag .dash {
+    height: 1px;
+    width: 60px;
+    background: var(--rule);
+  }
+  .same-level-flag span.txt {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate);
+    white-space: nowrap;
+  }
+
+  /* ===== FOOTER ===== */
+  .footnote {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .footnote p {
+    margin: 0;
+    font-size: 11.5px;
+    color: var(--slate);
+    line-height: 1.5;
+    max-width: 720px;
+  }
+
+  .footnote .stamp {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--amber-deep);
+    border: 1px solid var(--amber);
+    border-radius: 3px;
+    padding: 5px 10px;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    html, body { background: white; }
+    .page { box-shadow: none; max-width: 100%; padding: 24px 36px; }
+  }
+
+  @media (max-width: 760px) {
+    .page { padding: 24px 18px; }
+    .masthead { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .masthead-right { text-align: left; }
+    .band, .split-row .band { grid-template-columns: 1fr; }
+    .band-body { border-right: none; border-bottom: 1px solid var(--line); }
+    .split-row { grid-template-columns: 1fr; }
+    .split-row .band-example { grid-column: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="masthead">
+    <div class="masthead-left">
+      <p class="eyebrow">Strategy Framework Reference</p>
+      <h1>Four Terms, One Through-Line</h1>
+    </div>
+    <div class="masthead-right">
+      <div>Strategic Outcome → Outcome → <strong>KPI</strong> + <strong>Milestones</strong></div>
+      <div>One page · plain language · no jargon</div>
+    </div>
+  </div>
+
+  <div class="cascade">
+
+    <!-- STRATEGIC OUTCOME -->
+    <div class="band band-1">
+      <div class="band-label">
+        <p class="band-count">2–3 per directorate</p>
+        <h2>Strategic<br>Outcome</h2>
+      </div>
+      <div class="band-body">
+        <p>The big, directorate-level destination — what the entire directorate exists to move toward. Broad enough to hold multiple teams' work underneath it.</p>
+      </div>
+      <div class="band-example">
+        <p class="ex-tag">Example</p>
+        <p>"Decision-makers get trustworthy data when they need it, not after."</p>
+        <span class="who">— how a data/analytics shop might frame it</span>
+      </div>
+    </div>
+
+    <!-- OUTCOME -->
+    <div class="band band-2">
+      <div class="band-label">
+        <p class="band-count">3–8 per Strategic Outcome</p>
+        <h2>Outcome</h2>
+      </div>
+      <div class="band-body">
+        <p>What a specific team is on the hook to accomplish over the next 3 years. Specific enough to own; still describes a result, not a task list.</p>
+        <p class="band-note">This is where the Strategic Outcome gets real.</p>
+      </div>
+      <div class="band-example">
+        <p class="ex-tag">Example</p>
+        <p>"Cut the time from data request to delivered report from 2 weeks to 2 days."</p>
+        <span class="who">— how a reporting/analyst team might frame it</span>
+      </div>
+    </div>
+
+    <!-- KPI + MILESTONE side by side -->
+    <div class="split-row">
+      <div class="band band-3">
+        <div class="band-label">
+          <p class="band-count">1 per Outcome</p>
+          <h2>KPI</h2>
+        </div>
+        <div class="band-body">
+          <p>The single number you watch the whole way through. Tells you, at any point, whether you're on track to hit the Outcome — or drifting off it.</p>
+        </div>
+        <div class="band-example">
+          <p class="ex-tag">Example</p>
+          <p>"Average turnaround time per request, tracked monthly."</p>
+        </div>
+      </div>
+
+      <div class="band band-4">
+        <div class="band-label">
+          <p class="band-count">3 per Outcome · 1 per year</p>
+          <h2>Milestone</h2>
+        </div>
+        <div class="band-body">
+          <p>What "on track" looks like by the end of <em>this</em> year specifically — a checkpoint, not the finish line.</p>
+        </div>
+        <div class="band-example">
+          <p class="ex-tag">Example</p>
+          <p>"Yr 1: automate intake. Yr 2: pilot self-service dashboard. Yr 3: full rollout."</p>
+        </div>
+      </div>
+    </div>
+    <div class="same-level-flag">
+      <span class="dash"></span><span class="txt">KPI and Milestones sit at the same level — both measure progress on one Outcome</span><span class="dash"></span>
+    </div>
+
+  </div>
+
+  <div class="footnote">
+    <p>If you're filling this out: start at Outcome. Ask "what are we on the hook for in 3 years," then "what number tells us we're on pace," then "what does year one look like."</p>
+    <div class="stamp">QUICK REFERENCE</div>
+  </div>
+
+</div>
+
+</body>
+</html>
