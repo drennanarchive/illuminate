@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Tub Experiment — A Thought Journey</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --deep: #03040a;
+    --void: #07090f;
+    --ink: #0d1120;
+    --star: #e8eaf6;
+    --muted: #7b82a8;
+    --accent: #4f8ef7;
+    --gold: #f0c060;
+    --purple: #9b6dff;
+    --teal: #38d9a9;
+    --danger: #ff6b6b;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--star);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ── STARFIELD ── */
+  #starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+  }
+
+  .content {
+    max-width: 720px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s;
+  }
+
+  h2 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
+  }
+
+  p.lead {
+    font-size: 1.1rem;
+    color: #b0b8d8;
+    max-width: 580px;
+    margin: 0 auto 32px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease 0.25s, transform 0.7s ease 0.25s;
+  }
+
+  .highlight { color: var(--gold); }
+  .accent-blue { color: var(--accent); }
+  .accent-purple { color: var(--purple); }
+  .accent-teal { color: var(--teal); }
+  .accent-danger { color: var(--danger); }
+
+  .visible .eyebrow,
+  .visible h1,
+  .visible h2,
+  .visible p.lead { opacity: 1; transform: translateY(0); }
+
+  /* ── HERO ── */
+  #hero { background: radial-gradient(ellipse 80% 60% at 50% 40%, #0d1535 0%, var(--deep) 100%); }
+  #hero h1 { font-size: clamp(2.8rem, 8vw, 5.5rem); }
+  .subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 40px;
+    opacity: 0;
+    transition: opacity 1.2s ease 0.8s;
+    letter-spacing: 0.06em;
+  }
+  .visible .subtitle { opacity: 1; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--muted), transparent);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── TUB CANVAS ── */
+  #tub-section { background: radial-gradient(ellipse 70% 50% at 50% 60%, #060d1f 0%, var(--deep) 100%); }
+
+  canvas#tub-canvas {
+    display: block;
+    margin: 48px auto 0;
+    border-radius: 12px;
+    opacity: 0;
+    transform: scale(0.96);
+    transition: opacity 0.9s ease 0.3s, transform 0.9s ease 0.3s;
+  }
+  .visible canvas#tub-canvas { opacity: 1; transform: scale(1); }
+
+  /* ── ANALOGY CARDS ── */
+  #analogy-section { background: var(--void); }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    width: 100%;
+    max-width: 720px;
+    margin-top: 40px;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s;
+  }
+  .card:hover { border-color: rgba(255,255,255,0.2); }
+  .visible .card:nth-child(1) { opacity:1; transform:translateY(0); transition-delay: 0.1s; }
+  .visible .card:nth-child(2) { opacity:1; transform:translateY(0); transition-delay: 0.22s; }
+  .visible .card:nth-child(3) { opacity:1; transform:translateY(0); transition-delay: 0.34s; }
+  .visible .card:nth-child(4) { opacity:1; transform:translateY(0); transition-delay: 0.46s; }
+
+  .card-icon { font-size: 1.8rem; margin-bottom: 12px; }
+  .card-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 8px; }
+  .card p { font-size: 0.85rem; color: #8a92b0; line-height: 1.55; }
+
+  /* ── BLACK HOLE SECTION ── */
+  #blackhole-section { background: radial-gradient(ellipse 60% 60% at 50% 50%, #10021f 0%, var(--deep) 100%); }
+
+  canvas#bh-canvas {
+    display: block;
+    margin: 48px auto 0;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 1s ease 0.4s;
+  }
+  .visible canvas#bh-canvas { opacity: 1; }
+
+  .bh-label {
+    margin-top: 28px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.8s;
+  }
+  .visible .bh-label { opacity: 1; }
+
+  /* ── MASS SECTION ── */
+  #mass-section { background: var(--void); }
+
+  .mass-number {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(2rem, 6vw, 3.6rem);
+    color: var(--gold);
+    margin: 32px 0 12px;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+  }
+  .visible .mass-number { opacity: 1; transform: scale(1); }
+
+  .mass-sub {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 40px;
+    opacity: 0;
+    transition: opacity 0.7s ease 0.5s;
+  }
+  .visible .mass-sub { opacity: 1; }
+
+  /* comparison bar */
+  .compare-wrap {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.5s;
+  }
+  .visible .compare-wrap { opacity: 1; }
+
+  .compare-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .compare-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    min-width: 130px;
+    text-align: right;
+    font-family: 'Space Mono', monospace;
+  }
+  .bar-track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    width: 0%;
+    transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.7s;
+  }
+  .visible .bar-fill { width: var(--w); }
+  .bar-val {
+    font-size: 0.75rem;
+    font-family: 'Space Mono', monospace;
+    color: var(--muted);
+    min-width: 56px;
+  }
+
+  /* ── VERDICT SECTION ── */
+  #verdict-section { background: radial-gradient(ellipse 70% 50% at 50% 40%, #0a1a08 0%, var(--deep) 100%); }
+
+  .verdict-box {
+    margin: 40px auto 0;
+    max-width: 600px;
+    border: 1px solid rgba(56, 217, 169, 0.3);
+    border-radius: 16px;
+    padding: 36px 40px;
+    background: rgba(56, 217, 169, 0.05);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+  }
+  .visible .verdict-box { opacity: 1; transform: translateY(0); }
+
+  .verdict-box p { font-size: 1rem; color: #b0d8cc; line-height: 1.8; }
+  .verdict-box strong { color: var(--teal); font-weight: 500; }
+
+  /* ── THREADS SECTION ── */
+  #threads-section { background: var(--void); }
+
+  .thread-list {
+    list-style: none;
+    margin-top: 40px;
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+  }
+  .thread-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .thread-list li:last-child { border-bottom: none; }
+  .visible .thread-list li:nth-child(1) { opacity:1; transform:translateX(0); transition-delay:0.1s; }
+  .visible .thread-list li:nth-child(2) { opacity:1; transform:translateX(0); transition-delay:0.22s; }
+  .visible .thread-list li:nth-child(3) { opacity:1; transform:translateX(0); transition-delay:0.34s; }
+  .visible .thread-list li:nth-child(4) { opacity:1; transform:translateX(0); transition-delay:0.46s; }
+
+  .thread-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--purple);
+    min-width: 28px;
+    padding-top: 4px;
+  }
+  .thread-list li h4 { font-size: 0.95rem; font-weight: 500; margin-bottom: 4px; }
+  .thread-list li p { font-size: 0.82rem; color: var(--muted); }
+  .recommended-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-family: 'Space Mono', monospace;
+    color: var(--purple);
+    border: 1px solid var(--purple);
+    border-radius: 20px;
+    padding: 2px 8px;
+    margin-left: 10px;
+    vertical-align: middle;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 60px 24px 80px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: #3d4260;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── SCROLL ARROW ── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity 1s ease 1.5s;
+    color: var(--muted);
+    font-size: 0.7rem;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.12em;
+  }
+  .visible .scroll-hint { opacity: 1; }
+  .scroll-arrow {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(to bottom, var(--muted), transparent);
+    animation: bounce 1.6s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(8px); opacity: 0.4; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Starfield -->
+<canvas id="starfield"></canvas>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="content">
+    <div class="eyebrow">Cameron's thought experiment</div>
+    <h1>What if the universe<br>is a <span class="highlight">tub of water</span>?</h1>
+    <p class="lead">A physics thought experiment that started with an analogy — and ended somewhere genuinely wild.</p>
+    <div class="subtitle">scroll to explore ↓</div>
+  </div>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TUB SECTION -->
+<section id="tub-section">
+  <div class="content">
+    <div class="eyebrow">The model</div>
+    <h2>The universe as a <span class="accent-blue">tub of water</span></h2>
+    <p class="lead">Spacetime is the medium. Mass displaces it. Gravity is the pressure pushing back. Watch what happens.</p>
+    <canvas id="tub-canvas" width="560" height="320"></canvas>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ANALOGY CARDS -->
+<section id="analogy-section">
+  <div class="content">
+    <div class="eyebrow">The mapping</div>
+    <h2>Every piece has an <span class="accent-blue">equivalent</span></h2>
+    <p class="lead">Cameron's analogy maps cleanly onto real physics concepts — with one important catch.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🌊</div>
+        <div class="card-label">Analogy → Physics</div>
+        <h3 class="accent-blue">Water = Spacetime</h3>
+        <p>The medium everything moves through. You can't step outside it — it's not in a container, it IS the container.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🪨</div>
+        <div class="card-label">Analogy → Physics</div>
+        <h3 class="accent-blue">Displacement = Mass</h3>
+        <p>Objects don't push spacetime aside like water — they curve it. Geometry changes. Volume doesn't displace the same way.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⬇️</div>
+        <div class="card-label">Analogy → Physics</div>
+        <h3 class="accent-blue">Pressure = Gravity</h3>
+        <p>The intuition holds. Gravity is the medium "wanting" to restore equilibrium around mass — the pressure pushing back.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🫧</div>
+        <div class="card-label">Analogy → Physics</div>
+        <h3 class="accent-purple">Popped bubble = Black hole</h3>
+        <p>A void where mass used to be, with the surrounding medium trying to rush in and fill it. This is where it gets interesting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BLACK HOLE SECTION -->
+<section id="blackhole-section">
+  <div class="content">
+    <div class="eyebrow">The black hole</div>
+    <h2>Not infinite gravity — <span class="accent-purple">total pressure</span></h2>
+    <p class="lead">Cameron pushed back on "infinite gravity." He was right to. Most physicists agree — the singularity is where the math breaks, not a literal physical feature.</p>
+    <canvas id="bh-canvas" width="300" height="300"></canvas>
+    <p class="bh-label">The void trying to be refilled by everything around it</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MASS SECTION -->
+<section id="mass-section">
+  <div class="content">
+    <div class="eyebrow">The big question</div>
+    <h2>Does the universe's total mass exceed <span class="highlight">light's escape velocity</span>?</h2>
+    <div class="mass-number">1.5 × 10⁵³ kg</div>
+    <p class="mass-sub">Observable universe — ordinary matter only</p>
+
+    <div class="compare-wrap">
+      <div class="compare-row">
+        <span class="compare-label">Earth</span>
+        <div class="bar-track"><div class="bar-fill" style="background:#4f8ef7; --w:3%;"></div></div>
+        <span class="bar-val">5.97×10²⁴</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Sun</span>
+        <div class="bar-track"><div class="bar-fill" style="background:#4f8ef7; --w:8%;"></div></div>
+        <span class="bar-val">1.99×10³⁰</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Milky Way</span>
+        <div class="bar-track"><div class="bar-fill" style="background:#9b6dff; --w:38%;"></div></div>
+        <span class="bar-val">~10⁴²</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Observable universe</span>
+        <div class="bar-track"><div class="bar-fill" style="background:#f0c060; --w:100%;"></div></div>
+        <span class="bar-val">1.5×10⁵³</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VERDICT SECTION -->
+<section id="verdict-section">
+  <div class="content">
+    <div class="eyebrow">The verdict</div>
+    <h2>Cameron was <span class="accent-teal">essentially correct</span></h2>
+    <p class="lead">When you plug the universe's mass into the black hole equation, you get a Schwarzschild radius roughly the size of... the observable universe.</p>
+    <div class="verdict-box">
+      <p>
+        This is a <strong>known result in cosmology</strong> — and it's not a coincidence. 
+        The Friedmann equations (which describe how the universe expands) are <strong>structurally identical</strong> to the escape velocity equation.
+        <br><br>
+        The universe sits right at the critical density threshold. It has the <strong>mass budget of a black hole</strong> — but expansion is running the other direction. 
+        Dark energy is pushing outward faster than gravity can pull inward.
+        <br><br>
+        Cameron's "pressure trying to refill" intuition? That's the <strong>right direction</strong>. The tension between them is what we're living inside.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THREADS SECTION -->
+<section id="threads-section">
+  <div class="content">
+    <div class="eyebrow">What's next</div>
+    <h2>Four threads to <span class="accent-purple">pull</span></h2>
+    <p class="lead">Cameron's taking time to think. When he's ready, here's where the experiment goes next.</p>
+    <ul class="thread-list">
+      <li>
+        <span class="thread-num">01</span>
+        <div>
+          <h4>Why expanding instead of collapsing? <span class="recommended-tag">CJ recommends</span></h4>
+          <p>The universe has black hole mass dynamics — so what is dark energy, and does it fit into the tub model?</p>
+        </div>
+      </li>
+      <li>
+        <span class="thread-num">02</span>
+        <div>
+          <h4>What's at the boundary of the tub?</h4>
+          <p>Is the tub a fixed container or a growing one? If it's growing — what is it growing into?</p>
+        </div>
+      </li>
+      <li>
+        <span class="thread-num">03</span>
+        <div>
+          <h4 class="accent-purple">Nested black holes — bubbles within bubbles</h4>
+          <p>Cameron independently reinvented a fringe-but-serious idea called black hole cosmology. Worth chasing.</p>
+        </div>
+      </li>
+      <li>
+        <span class="thread-num">04</span>
+        <div>
+          <h4>Does "refill pressure" map onto Hawking radiation?</h4>
+          <p>Black holes slowly lose mass at their boundary. Cameron's framing might have something to say about that.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Cameron &amp; Ellie × CJ — July 2026 &nbsp;·&nbsp; a thought experiment in progress
+</footer>
+
+<script>
+// ── STARFIELD ──
+(function() {
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  let W, H;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < 280; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.4 + 0.2,
+        a: Math.random(),
+        speed: Math.random() * 0.004 + 0.001,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  let t = 0;
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t += 0.008;
+    for (const s of stars) {
+      const alpha = s.a * (0.5 + 0.5 * Math.sin(t * s.speed * 80 + s.phase));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200, 210, 255, ${alpha})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  initStars();
+  draw();
+  window.addEventListener('resize', () => { resize(); initStars(); });
+})();
+
+// ── TUB CANVAS ──
+(function() {
+  const canvas = document.getElementById('tub-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  let t = 0;
+  let running = false;
+
+  function drawTub() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Background
+    ctx.fillStyle = '#060d1f';
+    ctx.roundRect(0, 0, W, H, 12);
+    ctx.fill();
+
+    // Water (spacetime)
+    const waterTop = 40;
+    ctx.fillStyle = 'rgba(79, 142, 247, 0.09)';
+    ctx.fillRect(0, waterTop, W, H - waterTop);
+
+    // Wave ripples
+    for (let i = 0; i < 4; i++) {
+      const waveY = waterTop + 10 + i * 22;
+      ctx.beginPath();
+      ctx.strokeStyle = `rgba(79, 142, 247, ${0.12 - i * 0.025})`;
+      ctx.lineWidth = 0.8;
+      for (let x = 0; x < W; x++) {
+        const y = waveY + Math.sin((x * 0.018) + t + i * 0.8) * 4;
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+
+    // PLANET (mass)
+    const px = W / 2, py = H / 2 + 20;
+    const pr = 52;
+
+    // Gravity pressure arrows
+    const arrows = [
+      { angle: 0, dist: 110 }, { angle: Math.PI / 2, dist: 110 },
+      { angle: Math.PI, dist: 110 }, { angle: Math.PI * 1.5, dist: 110 },
+      { angle: Math.PI * 0.25, dist: 105 }, { angle: Math.PI * 0.75, dist: 105 },
+      { angle: Math.PI * 1.25, dist: 105 }, { angle: Math.PI * 1.75, dist: 105 },
+    ];
+    for (const a of arrows) {
+      const pulse = 0.5 + 0.5 * Math.sin(t * 1.4 + a.angle);
+      const fromX = px + Math.cos(a.angle) * a.dist;
+      const fromY = py + Math.sin(a.angle) * a.dist;
+      const toX = px + Math.cos(a.angle) * (pr + 12);
+      const toY = py + Math.sin(a.angle) * (pr + 12);
+      ctx.beginPath();
+      ctx.moveTo(fromX, fromY);
+      ctx.lineTo(toX, toY);
+      ctx.strokeStyle = `rgba(79, 142, 247, ${0.25 + pulse * 0.35})`;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+      // arrowhead
+      const angle = Math.atan2(toY - fromY, toX - fromX);
+      ctx.beginPath();
+      ctx.moveTo(toX, toY);
+      ctx.lineTo(toX - 8 * Math.cos(angle - 0.4), toY - 8 * Math.sin(angle - 0.4));
+      ctx.lineTo(toX - 8 * Math.cos(angle + 0.4), toY - 8 * Math.sin(angle + 0.4));
+      ctx.closePath();
+      ctx.fillStyle = `rgba(79, 142, 247, ${0.25 + pulse * 0.35})`;
+      ctx.fill();
+    }
+
+    // Planet glow
+    const grd = ctx.createRadialGradient(px, py, pr * 0.3, px, py, pr * 1.4);
+    grd.addColorStop(0, 'rgba(79,142,247,0.0)');
+    grd.addColorStop(1, 'rgba(79,142,247,0.12)');
+    ctx.beginPath();
+    ctx.arc(px, py, pr * 1.4, 0, Math.PI * 2);
+    ctx.fillStyle = grd;
+    ctx.fill();
+
+    // Planet body
+    ctx.beginPath();
+    ctx.arc(px, py, pr, 0, Math.PI * 2);
+    ctx.fillStyle = '#1a3a7a';
+    ctx.fill();
+    ctx.strokeStyle = '#4f8ef7';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Planet label
+    ctx.fillStyle = '#b0c8f8';
+    ctx.font = '500 13px "Space Grotesk", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('mass', px, py - 6);
+    ctx.fillStyle = '#7090c0';
+    ctx.font = '11px "Space Grotesk", sans-serif';
+    ctx.fillText('displaces spacetime', px, py + 10);
+
+    // BLACK HOLE (bubble / void)
+    const bx = W * 0.78, by = H * 0.32;
+    const br = 32;
+    const bhPulse = 0.5 + 0.5 * Math.sin(t * 0.8);
+
+    // void fill
+    ctx.beginPath();
+    ctx.arc(bx, by, br, 0, Math.PI * 2);
+    ctx.fillStyle = '#03040a';
+    ctx.fill();
+
+    // dashed ring
+    ctx.save();
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.arc(bx, by, br, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(155, 109, 255, ${0.5 + bhPulse * 0.4})`;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.restore();
+
+    // refill arrows circling inward
+    for (let i = 0; i < 6; i++) {
+      const a = (i / 6) * Math.PI * 2 + t * 0.4;
+      const fromDist = br + 28;
+      const toDist = br + 6;
+      const fx = bx + Math.cos(a) * fromDist;
+      const fy = by + Math.sin(a) * fromDist;
+      const tx2 = bx + Math.cos(a) * toDist;
+      const ty2 = by + Math.sin(a) * toDist;
+      ctx.beginPath();
+      ctx.moveTo(fx, fy);
+      ctx.lineTo(tx2, ty2);
+      ctx.strokeStyle = `rgba(155, 109, 255, ${0.35 + bhPulse * 0.25})`;
+      ctx.lineWidth = 0.9;
+      ctx.stroke();
+    }
+
+    ctx.fillStyle = '#9b6dff';
+    ctx.font = '500 11px "Space Grotesk", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('black hole', bx, by - 3);
+    ctx.fillStyle = '#6a50a8';
+    ctx.font = '10px "Space Grotesk", sans-serif';
+    ctx.fillText('void', bx, by + 10);
+
+    // Labels
+    ctx.fillStyle = 'rgba(79, 142, 247, 0.45)';
+    ctx.font = '12px "Space Grotesk", sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('← spacetime (the water) →', 28, 30);
+
+    ctx.fillStyle = 'rgba(79, 142, 247, 0.35)';
+    ctx.font = '11px "Space Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('gravity = pressure', 28, H - 18);
+
+    // Tub walls
+    ctx.strokeStyle = 'rgba(79, 142, 247, 0.18)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(2, 2, W - 4, H - 4);
+
+    t += 0.022;
+    if (running) requestAnimationFrame(drawTub);
+  }
+
+  // Start when visible
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !running) {
+      running = true;
+      drawTub();
+    }
+  }, { threshold: 0.3 });
+  obs.observe(canvas);
+})();
+
+// ── BLACK HOLE CANVAS ──
+(function() {
+  const canvas = document.getElementById('bh-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2;
+  let t = 0, running = false;
+
+  function drawBH() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Accretion disk rings
+    for (let i = 8; i >= 1; i--) {
+      const r = 30 + i * 16;
+      const alpha = (0.05 + (9 - i) * 0.025) * (0.6 + 0.4 * Math.sin(t * 0.5 + i));
+      const hue = 260 + i * 8;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = `hsla(${hue}, 70%, 65%, ${alpha})`;
+      ctx.lineWidth = i === 1 ? 2 : 1;
+      ctx.stroke();
+    }
+
+    // Spinning particles
+    for (let i = 0; i < 40; i++) {
+      const angle = (i / 40) * Math.PI * 2 + t * (0.3 + (i % 5) * 0.04);
+      const r = 55 + (i % 6) * 18;
+      const px = cx + Math.cos(angle) * r;
+      const py = cy + Math.sin(angle) * r * 0.4; // ellipse
+      const size = 1 + Math.random() * 1.5;
+      const brightness = 0.3 + 0.7 * Math.sin(t * 2 + i);
+      ctx.beginPath();
+      ctx.arc(px, py, size * 0.7, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(155, 109, 255, ${brightness * 0.7})`;
+      ctx.fill();
+    }
+
+    // Inward rushing lines
+    for (let i = 0; i < 16; i++) {
+      const angle = (i / 16) * Math.PI * 2 + t * 0.15;
+      const fromR = 120 + Math.sin(t * 0.7 + i) * 10;
+      const toR = 34;
+      const fx = cx + Math.cos(angle) * fromR;
+      const fy = cy + Math.sin(angle) * fromR;
+      const tx = cx + Math.cos(angle) * toR;
+      const ty = cy + Math.sin(angle) * toR;
+      const alpha = 0.08 + 0.12 * Math.sin(t + i * 0.4);
+      ctx.beginPath();
+      ctx.moveTo(fx, fy);
+      ctx.lineTo(tx, ty);
+      ctx.strokeStyle = `rgba(155, 109, 255, ${alpha})`;
+      ctx.lineWidth = 0.7;
+      ctx.stroke();
+    }
+
+    // Event horizon glow
+    const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 36);
+    grd.addColorStop(0, 'rgba(155, 109, 255, 0.25)');
+    grd.addColorStop(0.5, 'rgba(80, 20, 160, 0.15)');
+    grd.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.beginPath();
+    ctx.arc(cx, cy, 38, 0, Math.PI * 2);
+    ctx.fillStyle = grd;
+    ctx.fill();
+
+    // Void core
+    ctx.beginPath();
+    ctx.arc(cx, cy, 28, 0, Math.PI * 2);
+    ctx.fillStyle = '#03040a';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(155, 109, 255, 0.6)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    t += 0.018;
+    if (running) requestAnimationFrame(drawBH);
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !running) {
+      running = true;
+      drawBH();
+    }
+  }, { threshold: 0.3 });
+  obs.observe(canvas);
+})();
+
+// ── SCROLL REVEAL ──
+(function() {
+  const sections = document.querySelectorAll('section');
+  const obs = new IntersectionObserver(entries => {
+    for (const e of entries) {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    }
+  }, { threshold: 0.18 });
+  sections.forEach(s => obs.observe(s));
+
+  // Hero starts visible
+  document.getElementById('hero').classList.add('visible');
+})();
+</script>
+</body>
+</html>
