@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starlight Sleep Checklist — Plan & Roadmap</title>
+  <style>
+    :root {
+      --bg-0: #090917;
+      --bg-1: #11152d;
+      --bg-2: #1b2346;
+      --ink: #f7f1ff;
+      --muted: #c9bfdc;
+      --soft: rgba(255, 255, 255, 0.11);
+      --soft-2: rgba(255, 255, 255, 0.17);
+      --line: rgba(255, 255, 255, 0.18);
+      --violet: #b99cff;
+      --blue: #94d9ff;
+      --pink: #ffc1ee;
+      --gold: #ffe7a8;
+      --green: #baf5d4;
+      --danger: #ffb5c8;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 10%, rgba(185, 156, 255, .30), transparent 31%),
+        radial-gradient(circle at 82% 18%, rgba(148, 217, 255, .21), transparent 28%),
+        radial-gradient(circle at 50% 90%, rgba(255, 193, 238, .16), transparent 34%),
+        linear-gradient(140deg, var(--bg-0), var(--bg-1) 52%, var(--bg-2));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,.42) 0 1px, transparent 1.5px);
+      background-size: 84px 84px, 137px 137px;
+      background-position: 12px 7px, 44px 58px;
+      opacity: .36;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+
+    .aurora {
+      position: fixed;
+      inset: auto -20% 0 -20%;
+      height: 45vh;
+      background: linear-gradient(90deg, rgba(148,217,255,.0), rgba(148,217,255,.15), rgba(185,156,255,.17), rgba(255,193,238,.10), rgba(148,217,255,.0));
+      filter: blur(38px);
+      opacity: .75;
+      transform: rotate(-3deg);
+      pointer-events: none;
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 34px));
+      margin: 0 auto;
+      padding: 34px 0 72px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 22px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(255,255,255,.13), rgba(255,255,255,.06));
+      backdrop-filter: blur(18px);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.11) 45%, transparent 55%);
+      transform: translateX(-120%);
+      animation: shimmer 12s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 70% { transform: translateX(-120%); }
+      85%, 100% { transform: translateX(120%); }
+    }
+
+    .hero-copy { padding: 38px; }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--gold);
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: .94;
+      letter-spacing: -.055em;
+    }
+
+    .subtitle {
+      font-size: clamp(17px, 2.2vw, 22px);
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0;
+    }
+
+    .north-star {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+    }
+
+    .quote {
+      font-size: clamp(24px, 3vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+      margin: 0 0 22px;
+    }
+
+    .mini-label {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 28px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.08);
+      padding: 10px 13px;
+      border-radius: 999px;
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    .section { margin-top: 28px; }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 0 0 14px;
+    }
+
+    h2 {
+      font-size: clamp(27px, 4vw, 44px);
+      line-height: 1;
+      letter-spacing: -.045em;
+      margin: 0;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      margin: 0;
+      max-width: 540px;
+      line-height: 1.45;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.085);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 18% 5%, rgba(255,255,255,.16), transparent 32%);
+      pointer-events: none;
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    .kicker {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      margin: 0 0 9px;
+      font-size: 21px;
+      letter-spacing: -.02em;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+      line-height: 1.55;
+      margin-top: 0;
+    }
+
+    ul { padding-left: 18px; margin-bottom: 0; }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
+
+    .pill {
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.08);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 13px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .phase {
+      display: grid;
+      grid-template-columns: 108px minmax(0, 1fr);
+      gap: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.08);
+      border-radius: var(--radius-xl);
+      padding: 18px;
+    }
+
+    .phase-num {
+      width: 86px;
+      height: 86px;
+      border-radius: 26px;
+      display: grid;
+      place-items: center;
+      font-size: 34px;
+      font-weight: 900;
+      background: linear-gradient(135deg, rgba(185,156,255,.36), rgba(148,217,255,.20));
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: inset 0 0 28px rgba(255,255,255,.08);
+    }
+
+    .phase h3 { font-size: 25px; }
+
+    .phase-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 14px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #150f24;
+      background: var(--gold);
+      border-radius: 999px;
+      padding: 6px 9px;
+    }
+    .tag.blue { background: var(--blue); }
+    .tag.pink { background: var(--pink); }
+    .tag.green { background: var(--green); }
+    .tag.violet { background: var(--violet); }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .decision {
+      border-left: 3px solid var(--gold);
+      padding-left: 14px;
+      color: var(--ink);
+    }
+
+    .score {
+      display: grid;
+      gap: 10px;
+    }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 12px;
+      align-items: center;
+      color: var(--muted);
+    }
+
+    .bar {
+      height: 10px;
+      background: rgba(255,255,255,.10);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--violet), var(--blue), var(--pink));
+    }
+
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .spark {
+      color: var(--gold);
+      text-shadow: 0 0 18px rgba(255,231,168,.5);
+    }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-copy { padding: 28px; }
+      .section-title { display: block; }
+      .section-title p { margin-top: 10px; }
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
+      .phase { grid-template-columns: 1fr; }
+      .phase-num { width: 66px; height: 66px; font-size: 28px; border-radius: 20px; }
+      .two-col { grid-template-columns: 1fr; }
+      .score-row { grid-template-columns: 1fr; gap: 6px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .panel::after { animation: none; display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora"></div>
+  <main class="wrap">
+    <section class="hero">
+      <div class="panel hero-copy">
+        <div class="eyebrow">✦ Starlight Sleep Checklist</div>
+        <h1>Plan & Roadmap</h1>
+        <p class="subtitle">A browser-openable map of where the magical sleep checklist goes next: what we protect, what we improve first, and how we keep it beautiful without making it laggy.</p>
+        <nav class="nav" aria-label="Roadmap sections">
+          <a href="#north-star">North Star</a>
+          <a href="#protect">Protect</a>
+          <a href="#phases">Phases</a>
+          <a href="#decisions">Decision Points</a>
+          <a href="#testing">Testing</a>
+        </nav>
+      </div>
+      <aside class="panel north-star" id="north-star">
+        <div>
+          <div class="mini-label">Emotional target</div>
+          <p class="quote">“I want to hear the sparkle and add one more little star to my night sky.”</p>
+        </div>
+        <p class="subtitle">Every interaction should feel like adding light, not checking work off a guilt-list.</p>
+      </aside>
+    </section>
+
+    <section class="section" id="protect">
+      <div class="section-title">
+        <h2>What we protect</h2>
+        <p>These are the non-negotiables from the current handoff. Future changes should make these stronger, not accidentally flatten them.</p>
+      </div>
+      <div class="grid">
+        <article class="card span-4">
+          <div class="kicker">Reliability</div>
+          <h3>Reset stays safe</h3>
+          <p>Preserve the reset guard logic: state clears immediately, reset is silent, and completion cannot trigger during reset.</p>
+          <div class="pill-row"><span class="pill">isResetting</span><span class="pill">silent update</span><span class="pill">no phantom popup</span></div>
+        </article>
+        <article class="card span-4">
+          <div class="kicker">Tone</div>
+          <h3>No guilt, no streak pressure</h3>
+          <p>The app should feel kind and inviting. It should never punish missed days or make sleep feel like homework.</p>
+          <div class="pill-row"><span class="pill">Future Clara</span><span class="pill">soft choice</span><span class="pill">no shame</span></div>
+        </article>
+        <article class="card span-4">
+          <div class="kicker">Performance</div>
+          <h3>Magic without lag</h3>
+          <p>Prefer better particles over more particles. Use layered timing, bigger hero sparkles, and short lifetimes instead of DOM overload.</p>
+          <div class="pill-row"><span class="pill">mobile lighter</span><span class="pill">FX tuning</span><span class="pill">remove particles</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="phases">
+      <div class="section-title">
+        <h2>Roadmap phases</h2>
+        <p>A practical path from “current best version” to a more polished, magical, distinct desktop/mobile experience.</p>
+      </div>
+      <div class="timeline">
+        <article class="phase">
+          <div class="phase-num">1</div>
+          <div>
+            <h3>Polish the current build</h3>
+            <div class="phase-meta"><span class="tag green">Lowest risk</span><span class="tag">Next iteration</span></div>
+            <div class="two-col">
+              <div>
+                <div class="kicker">Build</div>
+                <ul>
+                  <li>Richer foreground sparkles without raising total particle count too much.</li>
+                  <li>Low / medium / high sparkle setting.</li>
+                  <li>More distinct status panel text and icons.</li>
+                  <li>Refined reset animation while preserving reset guards.</li>
+                </ul>
+              </div>
+              <div>
+                <div class="kicker">Success looks like</div>
+                <p>It feels prettier and more responsive, but not meaningfully heavier. Reset remains boringly reliable.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="phase">
+          <div class="phase-num">2</div>
+          <div>
+            <h3>Make the constellation meaningful</h3>
+            <div class="phase-meta"><span class="tag blue">High delight</span><span class="tag violet">Core magic</span></div>
+            <div class="two-col">
+              <div>
+                <div class="kicker">Build</div>
+                <ul>
+                  <li>Each completed checklist item lights one star or orb.</li>
+                  <li>A tiny star trail flies from card to constellation.</li>
+                  <li>Lines connect between lit stars.</li>
+                  <li>Completion draws or brightens the full constellation.</li>
+                </ul>
+              </div>
+              <div>
+                <div class="kicker">Success looks like</div>
+                <p>The checklist stops feeling like five boxes and starts feeling like a tiny sky slowly coming alive.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="phase">
+          <div class="phase-num">3</div>
+          <div>
+            <h3>Differentiate desktop and mobile</h3>
+            <div class="phase-meta"><span class="tag pink">Product feel</span><span class="tag blue">Responsive design</span></div>
+            <div class="two-col">
+              <div>
+                <div class="kicker">Desktop</div>
+                <ul>
+                  <li>More cinematic constellation panel.</li>
+                  <li>Subtle parallax or hover tilt.</li>
+                  <li>Wider “enchanted desktop app” composition.</li>
+                </ul>
+              </div>
+              <div>
+                <div class="kicker">Mobile</div>
+                <ul>
+                  <li>Cozy app-like stacking.</li>
+                  <li>Lower sparkle density.</li>
+                  <li>Fewer hover assumptions and stronger touch targets.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="phase">
+          <div class="phase-num">4</div>
+          <div>
+            <h3>Expand personality carefully</h3>
+            <div class="phase-meta"><span class="tag violet">Charm</span><span class="tag green">Optional</span></div>
+            <div class="two-col">
+              <div>
+                <div class="kicker">Build</div>
+                <ul>
+                  <li>Future Clara message variants.</li>
+                  <li>Gentle achievements without streak pressure.</li>
+                  <li>Rare Portal-ish humor toggle.</li>
+                  <li>Optional themes: Starlight, Aurora, Moon Garden, Cozy Inn.</li>
+                </ul>
+              </div>
+              <div>
+                <div class="kicker">Success looks like</div>
+                <p>The app feels more personal, but not noisy, childish, witchy, or productivity-branded.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="phase">
+          <div class="phase-num">5</div>
+          <div>
+            <h3>Consider a technical upgrade</h3>
+            <div class="phase-meta"><span class="tag">Only if needed</span><span class="tag pink">Performance gate</span></div>
+            <div class="two-col">
+              <div>
+                <div class="kicker">Possible upgrade</div>
+                <ul>
+                  <li>Canvas-based particles if DOM particles become limiting.</li>
+                  <li>Config object for all copy, themes, and checklist items.</li>
+                  <li>Optional PWA shell later if we want app-like installability.</li>
+                </ul>
+              </div>
+              <div>
+                <div class="kicker">Rule</div>
+                <p>Do not add complexity just because it is clever. Upgrade only when it directly improves smoothness, maintainability, or the magical feel.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="decisions">
+      <div class="section-title">
+        <h2>Decision points</h2>
+        <p>Questions to answer before the next substantial implementation round.</p>
+      </div>
+      <div class="grid">
+        <article class="card span-6">
+          <div class="kicker">Visual density</div>
+          <h3>How sparkly should “default” be?</h3>
+          <p class="decision">Recommended: make medium the default, with low/high sparkle modes available. High can be dramatic; medium should remain bedtime-friendly.</p>
+        </article>
+        <article class="card span-6">
+          <div class="kicker">Humor</div>
+          <h3>How visible should Portal references be?</h3>
+          <p class="decision">Recommended: rare and optional. Think easter egg, not theme. The primary identity is Starlight, not Aperture.</p>
+        </article>
+        <article class="card span-6">
+          <div class="kicker">Scope</div>
+          <h3>Should checklist items become editable?</h3>
+          <p class="decision">Recommended: later. First polish the fixed experience. Personalization is valuable, but it can dilute the curated ritual if added too early.</p>
+        </article>
+        <article class="card span-6">
+          <div class="kicker">Tech</div>
+          <h3>DOM effects or Canvas?</h3>
+          <p class="decision">Recommended: stay DOM/CSS for the next pass. Consider Canvas only if richer effects become laggy on mobile.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="testing">
+      <div class="section-title">
+        <h2>Testing scorecard</h2>
+        <p>Use this after each new version to decide whether it is truly better.</p>
+      </div>
+      <div class="grid">
+        <article class="card span-7">
+          <div class="kicker">Ask after every build</div>
+          <ul>
+            <li>Does it feel laggy on phone?</li>
+            <li>Does desktop feel meaningfully different from mobile?</li>
+            <li>Do the sparkles feel foreground enough?</li>
+            <li>Does reset clear reliably?</li>
+            <li>Does reset accidentally trigger completion?</li>
+            <li>Does the status panel feel distinct?</li>
+            <li>Do the list cards feel alive?</li>
+            <li>Are the sounds magical or too sharp/loud?</li>
+            <li>Does it still feel bedtime-friendly?</li>
+          </ul>
+        </article>
+        <article class="card span-5">
+          <div class="kicker">Current priority balance</div>
+          <div class="score" aria-label="Priority balance chart">
+            <div class="score-row"><span>Reliability</span><div class="bar"><span style="width: 100%"></span></div></div>
+            <div class="score-row"><span>Mobile smoothness</span><div class="bar"><span style="width: 95%"></span></div></div>
+            <div class="score-row"><span>Foreground sparkle</span><div class="bar"><span style="width: 84%"></span></div></div>
+            <div class="score-row"><span>Constellation meaning</span><div class="bar"><span style="width: 70%"></span></div></div>
+            <div class="score-row"><span>Theme expansion</span><div class="bar"><span style="width: 38%"></span></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel hero-copy">
+        <div class="mini-label">Definition of success</div>
+        <p class="quote">The app succeeds if Clara wants to open it because it feels good, not because she feels obligated. <span class="spark">✦</span></p>
+      </div>
+    </section>
+
+    <p class="footer">Built from the Starlight Sleep Checklist handoff. Keep it soft, smooth, sparkly, and kind.</p>
+  </main>
+</body>
+</html>
