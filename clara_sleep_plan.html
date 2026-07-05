@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clara's July Sleep Spell</title>
+  <style>
+    :root{
+      --bg1:#151127; --bg2:#2b1d4f; --bg3:#50307c;
+      --lav:#d7c2ff; --pink:#ffc9ec; --moon:#fff4c7;
+      --text:#fff9ff; --muted:#e8dcffcc; --card:#ffffff16;
+      --border:#ffffff38; --glow:#c9a7ff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+      color:var(--text); overflow-x:hidden;
+      background: radial-gradient(circle at 20% 10%, #8f68e955 0 14%, transparent 36%),
+                  radial-gradient(circle at 80% 20%, #ff9fe955 0 12%, transparent 34%),
+                  linear-gradient(135deg,var(--bg1),var(--bg2) 55%,var(--bg3));
+    }
+    .stars{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0}
+    .star{position:absolute; width:3px; height:3px; border-radius:50%; background:white; opacity:.7; animation:twinkle 3s infinite ease-in-out alternate}
+    @keyframes twinkle{from{transform:scale(.65);opacity:.35}to{transform:scale(1.35);opacity:.95}}
+    .orb{position:fixed; border-radius:50%; filter:blur(2px); opacity:.55; animation:float 8s ease-in-out infinite alternate; z-index:0}
+    .orb.one{width:170px;height:170px;background:#ffb7e6;left:-45px;bottom:12vh}
+    .orb.two{width:210px;height:210px;background:#a98cff;right:-70px;top:18vh;animation-delay:1.5s}
+    @keyframes float{to{transform:translateY(-25px) translateX(18px)}}
+    main{position:relative; z-index:1; min-height:100vh; display:grid; place-items:center; padding:34px 16px}
+    .wrap{width:min(920px,100%)}
+    .hero{text-align:center; margin-bottom:22px}
+    .badge{display:inline-flex; gap:8px; align-items:center; padding:8px 14px; border:1px solid var(--border); border-radius:999px; background:#ffffff13; backdrop-filter:blur(10px); color:var(--muted); font-weight:700; letter-spacing:.04em; font-size:.86rem}
+    h1{font-size:clamp(2.4rem,8vw,5.4rem); line-height:.92; margin:18px 0 10px; text-shadow:0 0 24px #c9a7ff66}
+    .subtitle{font-size:clamp(1.03rem,2.5vw,1.35rem); color:var(--muted); margin:0 auto; max-width:700px}
+    .card{border:1px solid var(--border); background:linear-gradient(145deg,#ffffff20,#ffffff0d); backdrop-filter:blur(18px); border-radius:34px; padding:26px; box-shadow:0 30px 80px #00000055, inset 0 1px 0 #ffffff44}
+    .moonrow{display:flex; justify-content:center; align-items:center; gap:18px; flex-wrap:wrap; margin:8px 0 24px}
+    .moon{width:106px;height:106px;border-radius:50%; background:radial-gradient(circle at 35% 30%,#fff 0 8%,var(--moon) 38%,#ffd987 100%); box-shadow:0 0 35px #fff4c799,0 0 90px #ffd98755; animation:pulse 3.8s infinite ease-in-out}
+    @keyframes pulse{50%{transform:scale(1.05);box-shadow:0 0 50px #fff4c7cc,0 0 110px #ffd98777}}
+    .mantra{font-size:1.25rem; font-weight:850; color:#fff; max-width:520px}
+    .mantra span{color:var(--pink)}
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:16px}
+    .step{position:relative; min-height:185px; padding:20px; border-radius:26px; background:#0f0b221f; border:1px solid #ffffff24; overflow:hidden; transition:.25s transform,.25s background}
+    .step:hover{transform:translateY(-6px); background:#ffffff22}
+    .step .icon{font-size:2.5rem; margin-bottom:10px; filter:drop-shadow(0 0 10px #fff6)}
+    .step h2{margin:0 0 8px; font-size:1.2rem}
+    .step p{margin:0; color:var(--muted); line-height:1.45}
+    .spark{position:absolute; right:16px; bottom:12px; font-size:3.4rem; opacity:.15}
+    .footer{margin-top:18px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
+    .pill{padding:12px 16px; border-radius:999px; background:#ffffff18; border:1px solid #ffffff2f; color:#fff; font-weight:750}
+    .tiny{text-align:center; margin-top:18px; color:#e8dcffb0; font-size:.95rem}
+    .portal{margin:26px auto 0; width:min(620px,94%); height:10px; border-radius:999px; background:linear-gradient(90deg,#67d8ff,#b589ff,#ffb4ec); box-shadow:0 0 25px #9edcffcc,0 0 45px #ffb4ec88; animation:portal 2.5s ease-in-out infinite alternate}
+    @keyframes portal{to{filter:hue-rotate(25deg); transform:scaleX(.94)}}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.card{padding:20px;border-radius:28px}.moon{width:88px;height:88px}.step{min-height:unset}}
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="orb one"></div><div class="orb two"></div>
+  <main>
+    <div class="wrap">
+      <section class="hero">
+        <div class="badge">🌙 JULY SLEEP QUEST • LOW PRESSURE MODE</div>
+        <h1>Make Sleep Easier</h1>
+        <p class="subtitle">Not perfect. Not obsessive. Just protecting sleep like it’s one of your health tools.</p>
+      </section>
+      <section class="card">
+        <div class="moonrow">
+          <div class="moon" aria-hidden="true"></div>
+          <div class="mantra">The goal is not <span>8 perfect hours</span>. The goal is creating a softer landing into bed.</div>
+        </div>
+        <div class="grid">
+          <article class="step">
+            <div class="icon">📱</div>
+            <h2>Phone Down Earlier</h2>
+            <p>Try 15–20 minutes earlier a few nights a week. Tiny portal closure. Big nervous-system signal.</p>
+            <div class="spark">✦</div>
+          </article>
+          <article class="step">
+            <div class="icon">🛌</div>
+            <h2>Consistent-ish Bedtime</h2>
+            <p>When work allows, aim for the same general bedtime window. Gentle rhythm beats perfection.</p>
+            <div class="spark">☾</div>
+          </article>
+          <article class="step">
+            <div class="icon">☀️</div>
+            <h2>Morning Light</h2>
+            <p>Get a little daylight when you can. It helps your body remember when “awake” and “sleepy” happen.</p>
+            <div class="spark">✧</div>
+          </article>
+        </div>
+        <div class="footer">
+          <div class="pill">No all-or-nothing rules</div>
+          <div class="pill">Small wins count</div>
+          <div class="pill">Stationery can wait 😂</div>
+        </div>
+        <div class="portal"></div>
+        <p class="tiny">Cari reminder: the mission is momentum, not a flawless bedtime personality transplant. 💜</p>
+      </section>
+    </div>
+  </main>
+  <script>
+    const stars = document.querySelector('.stars');
+    for (let i=0;i<90;i++){
+      const s=document.createElement('div');
+      s.className='star';
+      s.style.left=Math.random()*100+'%';
+      s.style.top=Math.random()*100+'%';
+      s.style.animationDelay=(Math.random()*3)+'s';
+      s.style.opacity=.25+Math.random()*.7;
+      stars.appendChild(s);
+    }
+  </script>
+</body>
+</html>
