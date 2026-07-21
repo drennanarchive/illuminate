@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A beginner-friendly interactive guide to using AI with judgment, clarity, and confidence." />
+  <title>AI With Judgment | A Beginner’s Guide</title>
+
+  <style>
+    :root {
+      --bg: #f7f8fc;
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-strong: #ffffff;
+      --surface-soft: #eef2ff;
+      --text: #172033;
+      --muted: #667085;
+      --border: rgba(99, 102, 241, 0.16);
+
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --green: #10b981;
+      --gold: #f59e0b;
+      --red: #ef4444;
+      --navy: #111827;
+
+      --shadow-sm: 0 8px 24px rgba(15, 23, 42, 0.07);
+      --shadow-md: 0 18px 50px rgba(15, 23, 42, 0.12);
+      --shadow-glow: 0 0 0 6px rgba(59, 130, 246, 0.08);
+
+      --radius-sm: 14px;
+      --radius-md: 22px;
+      --radius-lg: 30px;
+      --max-width: 760px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090d18;
+        --surface: rgba(18, 24, 39, 0.88);
+        --surface-strong: #111827;
+        --surface-soft: #151b2d;
+        --text: #f3f4f6;
+        --muted: #aab4c4;
+        --border: rgba(148, 163, 184, 0.14);
+        --navy: #f8fafc;
+
+        --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.24);
+        --shadow-md: 0 20px 58px rgba(0, 0, 0, 0.35);
+        --shadow-glow: 0 0 0 6px rgba(59, 130, 246, 0.12);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 15%, rgba(139, 92, 246, 0.16), transparent 28%),
+        radial-gradient(circle at 88% 10%, rgba(59, 130, 246, 0.14), transparent 26%),
+        radial-gradient(circle at 50% 100%, rgba(16, 185, 129, 0.10), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      color: inherit;
+    }
+
+    .ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(10px);
+      opacity: 0.55;
+      animation: drift 11s ease-in-out infinite alternate;
+    }
+
+    .orb.one {
+      width: 180px;
+      height: 180px;
+      left: -40px;
+      top: 22%;
+      background: rgba(139, 92, 246, 0.17);
+    }
+
+    .orb.two {
+      width: 220px;
+      height: 220px;
+      right: -80px;
+      top: 46%;
+      background: rgba(59, 130, 246, 0.15);
+      animation-delay: -3s;
+    }
+
+    .orb.three {
+      width: 160px;
+      height: 160px;
+      left: 36%;
+      bottom: -70px;
+      background: rgba(16, 185, 129, 0.12);
+      animation-delay: -6s;
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(16px, -18px, 0) scale(1.08); }
+    }
+
+    .app-shell {
+      width: min(calc(100% - 28px), var(--max-width));
+      margin: 0 auto;
+      padding: 32px 0 70px;
+    }
+
+    .hero {
+      position: relative;
+      padding: 34px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(145deg, rgba(59, 130, 246, 0.10), rgba(139, 92, 246, 0.08)),
+        var(--surface);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      right: -70px;
+      top: -70px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.22), transparent 65%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.10);
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      max-width: 620px;
+      font-size: clamp(2.15rem, 8vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--blue), var(--purple), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .meta-pill {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface-strong);
+      color: var(--muted);
+      font-size: 0.84rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .progress-wrap {
+      margin-top: 22px;
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .progress-track {
+      height: 10px;
+      background: rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 20%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), var(--purple), var(--green));
+      transition: width 420ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .tabs {
+      position: sticky;
+      top: 10px;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      margin: 18px 0;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tab-button {
+      border: 0;
+      border-radius: 14px;
+      background: transparent;
+      padding: 11px 8px;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .tab-button:hover {
+      transform: translateY(-2px);
+      color: var(--text);
+      background: rgba(59, 130, 246, 0.07);
+    }
+
+    .tab-button.active {
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      box-shadow: 0 10px 22px rgba(79, 70, 229, 0.24);
+    }
+
+    .panel {
+      display: none;
+      animation: panelIn 360ms ease both;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-card {
+      margin-top: 18px;
+      padding: 26px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(16px);
+    }
+
+    .section-card h2 {
+      margin: 0;
+      font-size: clamp(1.65rem, 5vw, 2.25rem);
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .section-card > p {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .golden-rule {
+      position: relative;
+      margin-top: 20px;
+      padding: 22px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      background:
+        linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(139, 92, 246, 0.06)),
+        var(--surface-strong);
+      overflow: hidden;
+    }
+
+    .golden-rule::before {
+      content: "✦";
+      position: absolute;
+      right: 18px;
+      top: 10px;
+      font-size: 2rem;
+      color: var(--gold);
+      opacity: 0.5;
+      animation: sparkle 2.4s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: scale(0.95) rotate(0deg); opacity: 0.35; }
+      50% { transform: scale(1.12) rotate(10deg); opacity: 0.85; }
+    }
+
+    .golden-rule strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--gold);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .info-card {
+      position: relative;
+      min-height: 155px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-strong);
+      box-shadow: var(--shadow-sm);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      overflow: hidden;
+    }
+
+    .info-card:hover {
+      border-color: rgba(59, 130, 246, 0.24);
+    }
+
+    .info-card strong {
+      color: var(--text);
+      font-weight: 850;
+    }
+
+    .info-card .icon {
+      display: inline-grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      background: rgba(59, 130, 246, 0.10);
+      font-size: 1.15rem;
+    }
+
+    .info-card h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .info-card p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .reveal-stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .reveal {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-strong);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .reveal:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .reveal.open {
+      border-color: rgba(59, 130, 246, 0.32);
+      box-shadow: var(--shadow-glow), var(--shadow-sm);
+    }
+
+    .reveal-toggle {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .reveal-toggle span:first-child {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .reveal-toggle::after {
+      content: "Tap to open";
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 750;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .reveal.open .reveal-toggle::after {
+      content: "Tap to close";
+    }
+
+    .chevron {
+      order: 3;
+      flex: 0 0 auto;
+      transition: transform 220ms ease;
+      color: var(--blue);
+    }
+
+    .reveal.open .chevron {
+      transform: rotate(180deg);
+    }
+
+    .reveal-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 280ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.open .reveal-content {
+      grid-template-rows: 1fr;
+    }
+
+    .reveal-inner {
+      overflow: hidden;
+    }
+
+    .reveal-body {
+      padding: 0 20px 20px;
+      color: var(--muted);
+    }
+
+    .tool-meta {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .tool-line {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--surface-soft);
+      font-size: 0.9rem;
+    }
+
+    .tool-line strong {
+      color: var(--text);
+    }
+
+    .tool-drawer {
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+      min-height: 330px;
+    }
+
+    .tool-menu {
+      display: grid;
+      align-content: start;
+      gap: 9px;
+    }
+
+    .tool-button {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface-strong);
+      color: var(--muted);
+      text-align: left;
+      cursor: pointer;
+      font-weight: 850;
+      box-shadow: var(--shadow-sm);
+      transition: transform 180ms ease, border-color 180ms ease, color 180ms ease, background 180ms ease;
+    }
+
+    .tool-button::after {
+      content: "→";
+      margin-left: auto;
+      opacity: 0.45;
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .tool-button:hover {
+      transform: translateX(3px);
+      color: var(--text);
+      border-color: rgba(59, 130, 246, 0.30);
+    }
+
+    .tool-button.active {
+      color: white;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      box-shadow: 0 14px 28px rgba(79, 70, 229, 0.22);
+    }
+
+    .tool-button.active::after {
+      transform: translateX(3px);
+      opacity: 1;
+    }
+
+    .tool-stage {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background:
+        radial-gradient(circle at 95% 0%, rgba(139, 92, 246, 0.15), transparent 34%),
+        var(--surface-strong);
+      box-shadow: var(--shadow-md);
+    }
+
+    .tool-panel {
+      display: none;
+      min-height: 100%;
+      padding: 26px;
+      animation: drawerIn 300ms cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .tool-panel.active {
+      display: block;
+    }
+
+    @keyframes drawerIn {
+      from { opacity: 0; transform: translateX(24px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .tool-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 10px;
+      color: var(--purple);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tool-panel h3 {
+      margin: 0;
+      font-size: 1.55rem;
+      letter-spacing: -0.03em;
+    }
+
+    .tool-summary {
+      margin: 8px 0 18px;
+      color: var(--muted);
+    }
+
+    .tool-example {
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px dashed rgba(139, 92, 246, 0.32);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.05));
+    }
+
+    .tool-example strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--purple);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .warning {
+      border-color: rgba(239, 68, 68, 0.25);
+    }
+
+    .warning .icon,
+    .warning-accent {
+      color: var(--red);
+    }
+
+    .success {
+      border-color: rgba(16, 185, 129, 0.22);
+    }
+
+    .prompt-formula {
+      display: grid;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background:
+        linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.08)),
+        var(--surface-strong);
+      border: 1px solid rgba(139, 92, 246, 0.22);
+    }
+
+    .prompt-line {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
+      border-left: 4px solid var(--purple);
+      font-size: 0.93rem;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .compare-card {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--surface-strong);
+    }
+
+    .compare-card.bad {
+      border-color: rgba(239, 68, 68, 0.24);
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.06), var(--surface-strong));
+    }
+
+    .compare-card.good {
+      border-color: rgba(16, 185, 129, 0.24);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), var(--surface-strong));
+    }
+
+    .compare-label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .bad .compare-label { color: var(--red); }
+    .good .compare-label { color: var(--green); }
+
+    .example-block {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .context-box,
+    .flow-box,
+    .tip-box {
+      padding: 16px;
+      border-radius: 16px;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+    }
+
+    .context-box {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .flow-box {
+      background: var(--surface-strong);
+      border-left-width: 5px;
+    }
+
+    .flow-box.prompt { border-left-color: var(--purple); }
+    .flow-box.response { border-left-color: var(--green); }
+    .flow-box.edit { border-left-color: var(--gold); }
+
+    .flow-label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 900;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .prompt .flow-label { color: var(--purple); }
+    .response .flow-label { color: var(--green); }
+    .edit .flow-label { color: var(--gold); }
+
+    .tip-box {
+      border-color: rgba(245, 158, 11, 0.22);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.10), var(--surface-strong));
+    }
+
+    .ministry-note {
+      margin-top: 18px;
+      padding: 20px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(16, 185, 129, 0.06));
+      border: 1px solid rgba(59, 130, 246, 0.18);
+    }
+
+    .finish {
+      text-align: center;
+      margin-top: 18px;
+      padding: 28px 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow-md);
+    }
+
+    .finish .big {
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+
+    .finish h2 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    .finish p {
+      color: var(--muted);
+      max-width: 520px;
+      margin: 8px auto 0;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .footer-note strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 680px) {
+      .app-shell {
+        width: min(calc(100% - 18px), var(--max-width));
+        padding-top: 14px;
+      }
+
+      .hero,
+      .section-card {
+        padding: 21px;
+        border-radius: 24px;
+      }
+
+      .hero-meta {
+        gap: 7px;
+      }
+
+      .meta-pill {
+        font-size: 0.76rem;
+      }
+
+      .tabs {
+        display: flex;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scrollbar-width: none;
+        top: 6px;
+        padding: 7px;
+      }
+
+      .tabs::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tab-button {
+        flex: 0 0 auto;
+        min-width: 78px;
+        padding: 10px 12px;
+        font-size: 0.78rem;
+      }
+
+      .grid.two,
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+
+      .info-card {
+        min-height: 0;
+      }
+
+      .tool-drawer {
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+
+      .tool-menu {
+        display: flex;
+        overflow-x: auto;
+        padding: 2px 2px 8px;
+        scrollbar-width: none;
+      }
+
+      .tool-menu::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tool-button {
+        flex: 0 0 auto;
+        width: auto;
+        min-width: 132px;
+        padding: 13px 14px;
+      }
+
+      .tool-button::after {
+        content: "↓";
+      }
+
+      .tool-button:hover {
+        transform: translateY(-2px);
+      }
+
+      .tool-panel {
+        padding: 21px;
+        animation-name: panelIn;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.1rem, 13vw, 3.3rem);
+      }
+    }
+
+    
+    /* Editorial theme: warm, tactile, and intentionally different from the homepage. */
+    :root {
+      --bg: #f1ece3;
+      --surface: rgba(251, 247, 239, 0.90);
+      --surface-strong: #fffaf1;
+      --surface-soft: #ebe4d8;
+      --text: #242522;
+      --muted: #686861;
+      --border: rgba(64, 62, 55, 0.16);
+      --blue: #b85f42;
+      --purple: #7d6650;
+      --green: #687b65;
+      --gold: #ba8736;
+      --red: #a9483d;
+      --navy: #242522;
+      --shadow-sm: 0 7px 18px rgba(63, 54, 43, 0.08);
+      --shadow-md: 0 22px 54px rgba(63, 54, 43, 0.13);
+      --shadow-glow: 0 0 0 5px rgba(184, 95, 66, 0.10);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171817;
+        --surface: rgba(35, 36, 33, 0.91);
+        --surface-strong: #262724;
+        --surface-soft: #30312d;
+        --text: #f3eee5;
+        --muted: #b8b2a8;
+        --border: rgba(235, 225, 208, 0.13);
+        --blue: #df896a;
+        --purple: #c2a784;
+        --green: #9caf95;
+        --gold: #d6aa60;
+        --red: #df756c;
+        --navy: #f3eee5;
+        --shadow-sm: 0 8px 22px rgba(0, 0, 0, 0.22);
+        --shadow-md: 0 24px 62px rgba(0, 0, 0, 0.38);
+        --shadow-glow: 0 0 0 5px rgba(223, 137, 106, 0.11);
+      }
+    }
+
+    body {
+      background:
+        linear-gradient(rgba(104, 123, 101, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(104, 123, 101, 0.035) 1px, transparent 1px),
+        radial-gradient(circle at 9% 8%, rgba(184, 95, 66, 0.12), transparent 24%),
+        radial-gradient(circle at 92% 35%, rgba(104, 123, 101, 0.11), transparent 28%),
+        var(--bg);
+      background-size: 34px 34px, 34px 34px, auto, auto, auto;
+    }
+
+    .orb { display: none; }
+
+    .hero {
+      background:
+        linear-gradient(110deg, rgba(184, 95, 66, 0.09), transparent 48%),
+        var(--surface);
+      border-radius: 8px 30px 8px 30px;
+    }
+
+    .hero::before {
+      content: "AI / 01";
+      position: absolute;
+      right: 28px;
+      bottom: 18px;
+      color: var(--muted);
+      font: 800 0.68rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: 0.14em;
+      opacity: 0.55;
+    }
+
+    .hero::after {
+      width: 120px;
+      height: 120px;
+      right: -35px;
+      top: -35px;
+      background: repeating-linear-gradient(45deg, rgba(104, 123, 101, 0.16) 0 2px, transparent 2px 9px);
+      border-radius: 0;
+      transform: rotate(8deg);
+    }
+
+    .eyebrow {
+      border-radius: 5px;
+      background: rgba(184, 95, 66, 0.10);
+      color: var(--blue);
+    }
+
+    .gradient-text {
+      background: none;
+      color: var(--blue);
+      text-decoration: underline;
+      text-decoration-thickness: 0.12em;
+      text-underline-offset: 0.12em;
+      text-decoration-color: rgba(184, 95, 66, 0.28);
+    }
+
+    .meta-pill {
+      border-radius: 7px;
+      box-shadow: none;
+    }
+
+    .section-signal {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.7fr) 1.3fr;
+      align-items: center;
+      gap: 18px;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .signal-copy { display: grid; gap: 1px; }
+    .signal-label {
+      color: var(--muted);
+      font-size: 0.67rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .signal-copy strong { font-size: 0.92rem; }
+    .signal-track {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: center;
+      height: 20px;
+    }
+    .signal-track::before {
+      content: "";
+      position: absolute;
+      left: 10%; right: 10%; top: 50%;
+      height: 1px;
+      background: var(--border);
+    }
+    .signal-node {
+      position: relative;
+      z-index: 2;
+      justify-self: center;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--surface-strong);
+      border: 1px solid var(--muted);
+      transition: transform 220ms ease, background 220ms ease, border-color 220ms ease;
+    }
+    .signal-node.active {
+      transform: scale(1.8);
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+    .signal-sweep {
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      width: 20%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(184, 95, 66, 0.14), transparent);
+      transition: transform 420ms cubic-bezier(.2,.8,.2,1);
+    }
+    .signal-sweep.pulse { animation: signalPulse 430ms ease; }
+    @keyframes signalPulse {
+      0% { opacity: 0; scale: .55 1; }
+      100% { opacity: 1; scale: 1 1; }
+    }
+
+    .tabs {
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--surface-strong) 94%, transparent);
+    }
+    .tab-button { border-radius: 6px; }
+    .tab-button.active {
+      color: var(--surface-strong);
+      background: var(--text);
+      box-shadow: none;
+    }
+
+    .section-card { border-radius: 10px 28px 10px 28px; }
+    .info-card {
+      border-radius: 9px;
+      box-shadow: none;
+      border-left: 3px solid var(--green);
+    }
+    .info-card:hover { transform: none; box-shadow: none; }
+    .info-card .icon {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--blue);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .golden-rule,
+    .ministry-note,
+    .finish { border-radius: 8px 24px 8px 24px; }
+    .golden-rule::before { content: "+"; }
+
+    .reveal { border-radius: 8px; box-shadow: none; }
+    .reveal:hover { transform: none; box-shadow: none; }
+    .reveal-toggle { position: relative; padding-left: 28px; }
+    .reveal-toggle::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      width: 3px;
+      height: 20px;
+      border-radius: 9px;
+      background: var(--blue);
+      opacity: 0.72;
+    }
+    .reveal.open { box-shadow: var(--shadow-glow); }
+    .chevron { color: var(--blue); }
+
+    .tool-drawer { grid-template-columns: 190px minmax(0, 1fr); }
+    .tool-button { border-radius: 7px; box-shadow: none; }
+    .tool-button::before {
+      content: attr(data-tool);
+      display: grid;
+      place-items: center;
+      width: 25px; height: 25px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      font-size: 0;
+      opacity: 0.65;
+    }
+    .tool-button::before { font-size: 0; }
+    .tool-button[data-tool="claude"]::before { content: "C"; font-size: .68rem; }
+    .tool-button[data-tool="chatgpt"]::before { content: "G"; font-size: .68rem; }
+    .tool-button[data-tool="gemini"]::before { content: "M"; font-size: .68rem; }
+    .tool-button[data-tool="copilot"]::before { content: "P"; font-size: .68rem; }
+    .tool-button[data-tool="meta"]::before { content: "A"; font-size: .68rem; }
+    .tool-button:hover { border-color: var(--blue); }
+    .tool-button.active {
+      color: var(--surface-strong);
+      background: var(--text);
+      box-shadow: none;
+    }
+    .tool-stage {
+      border-radius: 8px 24px 8px 24px;
+      background: var(--surface-strong);
+    }
+    .tool-placeholder {
+      display: none;
+      min-height: 100%;
+      padding: 28px;
+      align-items: center;
+      gap: 18px;
+      animation: drawerIn 300ms cubic-bezier(.2,.8,.2,1) both;
+    }
+    .tool-placeholder.active { display: flex; }
+    .placeholder-mark {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 48px; height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--blue);
+      font-size: 1.4rem;
+    }
+    .tool-kicker, .tool-example strong { color: var(--blue); }
+    .tool-example {
+      border-color: rgba(184, 95, 66, 0.30);
+      background: rgba(184, 95, 66, 0.06);
+    }
+
+    .prompt-formula {
+      background: rgba(125, 102, 80, 0.07);
+      border-color: rgba(125, 102, 80, 0.20);
+      border-radius: 8px 22px 8px 22px;
+    }
+    .prompt-line { border-left-color: var(--blue); border-radius: 5px; }
+    .compare-card, .context-box, .flow-box, .tip-box { border-radius: 7px; }
+    .flow-box.prompt { border-left-color: var(--blue); }
+    .prompt .flow-label { color: var(--blue); }
+    .flow-box.response { border-left-color: var(--green); }
+    .flow-box.edit { border-left-color: var(--gold); }
+
+    @media (max-width: 680px) {
+      .section-signal { grid-template-columns: 1fr; gap: 8px; }
+      .signal-track { height: 16px; }
+      .hero, .section-card { border-radius: 8px 22px 8px 22px; }
+      .tool-drawer { grid-template-columns: 1fr; }
+      .tool-placeholder { min-height: 220px; align-items: flex-start; }
+      .tool-button { min-width: 116px; }
+    }
+
+@media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ambient" aria-hidden="true">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+  </div>
+
+  <main class="app-shell">
+    <section class="hero">
+      <div class="eyebrow">✦ Beginner-friendly AI guide</div>
+      <h1>Use AI with <span class="gradient-text">judgment.</span></h1>
+      <p>
+        AI can help you research, organize, brainstorm, and edit, but it should never replace your thinking, your voice, or your responsibility.
+      </p>
+
+      <div class="hero-meta">
+        <div class="meta-pill">About 12 minutes</div>
+        <div class="meta-pill">No tech background needed</div>
+        <div class="meta-pill">Learn by example</div>
+      </div>
+    </section>
+    <section class="section-signal" aria-live="polite">
+      <div class="signal-copy">
+        <span class="signal-label">Now viewing</span>
+        <strong id="signalTitle">What AI does</strong>
+      </div>
+      <div class="signal-track" aria-hidden="true">
+        <span class="signal-node active"></span>
+        <span class="signal-node"></span>
+        <span class="signal-node"></span>
+        <span class="signal-node"></span>
+        <span class="signal-node"></span>
+        <span class="signal-sweep"></span>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="Guide sections">
+      <button class="tab-button active" data-tab="one" aria-selected="true">AI</button>
+      <button class="tab-button" data-tab="two" aria-selected="false">Tools</button>
+      <button class="tab-button" data-tab="three" aria-selected="false">When</button>
+      <button class="tab-button" data-tab="four" aria-selected="false">Ask</button>
+      <button class="tab-button" data-tab="five" aria-selected="false">Examples</button>
+    </nav>
+
+    <section class="panel active" id="one">
+      <div class="section-card">
+        <h2>What AI actually does</h2>
+        <p>Think of AI as an eager assistant: fast, useful, and sometimes confidently wrong.</p>
+
+        <div class="golden-rule">
+          <strong>The golden rule</strong>
+          <div><b>Never stop thinking.</b> You are still responsible for what you publish, teach, email, preach, or post.</div>
+        </div>
+
+        <div class="grid two">
+          <article class="info-card">
+            <div class="icon">R</div>
+            <h3>Research</h3>
+            <p>Find starting points, compare ideas, summarize long material, and help you see what needs verification.</p>
+          </article>
+          <article class="info-card">
+            <div class="icon">S</div>
+            <h3>Structuring</h3>
+            <p>Turn scattered notes into outlines, categories, steps, or a clearer flow.</p>
+          </article>
+          <article class="info-card">
+            <div class="icon">B</div>
+            <h3>Brainstorming</h3>
+            <p>Generate angles, examples, questions, titles, and possibilities you can react to.</p>
+          </article>
+          <article class="info-card">
+            <div class="icon">E</div>
+            <h3>Editing</h3>
+            <p>Improve clarity, shorten text, adjust tone, and help your original ideas land better.</p>
+          </article>
+        </div>
+
+        <div class="reveal-stack">
+          <div class="reveal">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>AI is not infallible</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              AI can invent facts, misunderstand your question, or sound certain when it is wrong. Important claims still need checking.
+            </div></div></div>
+          </div>
+
+          <div class="reveal">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>AI is not an authority</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              It can show perspectives and explain reasoning, but it does not get the final say,especially in theology, ethics, pastoral care, or personal decisions.
+            </div></div></div>
+          </div>
+
+          <div class="reveal">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>AI is not always a time-saver</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              A two-sentence announcement may be faster to write yourself. AI helps most when the task is tedious, messy, unfamiliar, or hard to organize.
+            </div></div></div>
+          </div>
+
+          <div class="reveal">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>AI is not your replacement</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              Your experience, judgment, relationships, faith, and voice are the valuable part. AI should support those,not flatten them.
+            </div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="two">
+      <div class="section-card">
+        <h2>The tools</h2>
+        <p><strong>You do not need every AI tool.</strong> Pick one or two, learn their strengths, and switch only when the job calls for it.</p>
+
+        <div class="tool-drawer" aria-label="AI tool guide">
+          <div class="tool-menu" role="tablist" aria-label="Choose an AI tool">
+            <button class="tool-button" data-tool="claude" role="tab" aria-selected="false">Claude</button>
+            <button class="tool-button" data-tool="chatgpt" role="tab" aria-selected="false">ChatGPT</button>
+            <button class="tool-button" data-tool="gemini" role="tab" aria-selected="false">Gemini</button>
+            <button class="tool-button" data-tool="copilot" role="tab" aria-selected="false">Copilot</button>
+            <button class="tool-button" data-tool="meta" role="tab" aria-selected="false">Meta AI</button>
+          </div>
+
+          <div class="tool-stage">
+            <article class="tool-placeholder active" id="tool-placeholder">
+              <div class="placeholder-mark">+</div>
+              <div>
+                <div class="tool-kicker">Choose a tool</div>
+                <h3>Open one to see where it fits.</h3>
+                <p class="tool-summary">Each panel gives you a practical use, a realistic example, and a quick sense of when that tool earns its place.</p>
+              </div>
+            </article>
+            <article class="tool-panel" id="tool-claude" role="tabpanel">
+              <div class="tool-kicker">Thoughtful work</div>
+              <h3>Claude</h3>
+              <p class="tool-summary">Especially useful when you have <strong>a lot to read</strong> or a complicated idea to work through carefully.</p>
+              <div class="tool-meta">
+                <div class="tool-line"><strong>Best for:</strong> Long documents, careful analysis, thoughtful writing, and organizing complex ideas.</div>
+                <div class="tool-line"><strong>Try it for:</strong> Comparing interpretations, reviewing a long draft, or building a structured paper outline.</div>
+              </div>
+              <div class="tool-example"><strong>Example request</strong>“Read these notes, identify the three main themes, and show me where my reasoning is unclear.”</div>
+            </article>
+
+            <article class="tool-panel" id="tool-chatgpt" role="tabpanel">
+              <div class="tool-kicker">Flexible all-rounder</div>
+              <h3>ChatGPT</h3>
+              <p class="tool-summary">A strong choice when you want <strong>one conversational workspace</strong> for writing, planning, visuals, and practical help.</p>
+              <div class="tool-meta">
+                <div class="tool-line"><strong>Best for:</strong> Brainstorming, drafting, editing, interactive guidance, research assistance, and creating useful artifacts.</div>
+                <div class="tool-line"><strong>Try it for:</strong> Refining a church post, planning an event, building a checklist, or iterating on an idea.</div>
+              </div>
+              <div class="tool-example"><strong>Example request</strong>“Here is my announcement. Keep my meaning, make it warmer, and give me one shorter alternative.”</div>
+            </article>
+
+            <article class="tool-panel" id="tool-gemini" role="tabpanel">
+              <div class="tool-kicker">Google-connected</div>
+              <h3>Gemini</h3>
+              <p class="tool-summary">Most attractive when your day already happens inside <strong>Google’s ecosystem</strong>.</p>
+              <div class="tool-meta">
+                <div class="tool-line"><strong>Best for:</strong> Quick information gathering and work connected to Google products.</div>
+                <div class="tool-line"><strong>Try it for:</strong> Working alongside Gmail, Docs, Drive, or other Google-based tasks.</div>
+              </div>
+              <div class="tool-example"><strong>Example request</strong>“Turn these meeting notes into a clean follow-up with decisions, owners, and next steps.”</div>
+            </article>
+
+            <article class="tool-panel" id="tool-copilot" role="tabpanel">
+              <div class="tool-kicker">Microsoft workflow</div>
+              <h3>Copilot</h3>
+              <p class="tool-summary">Best understood as AI that is most useful when it sits beside <strong>Microsoft 365 work</strong>.</p>
+              <div class="tool-meta">
+                <div class="tool-line"><strong>Best for:</strong> Documents, spreadsheets, email, meetings, and workplace tasks in Microsoft tools.</div>
+                <div class="tool-line"><strong>Try it for:</strong> Summarizing a Teams meeting, shaping a Word document, or analyzing an Excel table.</div>
+              </div>
+              <div class="tool-example"><strong>Example request</strong>“Summarize this meeting into decisions, unresolved questions, and actions by person.”</div>
+            </article>
+
+            <article class="tool-panel" id="tool-meta" role="tabpanel">
+              <div class="tool-kicker">Quick and familiar</div>
+              <h3>Meta AI</h3>
+              <p class="tool-summary">Useful for <strong>lightweight questions</strong> inside social or messaging apps you already use.</p>
+              <div class="tool-meta">
+                <div class="tool-line"><strong>Best for:</strong> Fast, simple help without starting a larger project or workflow.</div>
+                <div class="tool-line"><strong>Try it for:</strong> Quick idea generation, casual questions, or simple wording help.</div>
+              </div>
+              <div class="tool-example"><strong>Example request</strong>“Give me five friendly ways to remind people that registration closes Friday.”</div>
+            </article>
+          </div>
+        </div>
+
+        <div class="golden-rule">
+          <strong>Simple starting advice</strong>
+          Start with the tool you can access easily. <b>Skill comes from practice,not collecting subscriptions.</b>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="three">
+      <div class="section-card">
+        <h2>When AI helps,and when it gets in the way</h2>
+        <p>The best use of AI is not “everything.” It is knowing when the tool earns its place.</p>
+
+        <div class="grid two">
+          <article class="info-card success">
+            <div class="icon">R</div>
+            <h3>Research a starting point</h3>
+            <p>Ask for concepts, keywords, perspectives, or questions to investigate,then verify important details.</p>
+          </article>
+          <article class="info-card success">
+            <div class="icon">O</div>
+            <h3>Organize what you already have</h3>
+            <p>Paste in rough notes and ask for themes, an outline, or a more useful order.</p>
+          </article>
+          <article class="info-card success">
+            <div class="icon">I</div>
+            <h3>Generate possibilities</h3>
+            <p>Ask for ten options so you can react, combine, reject, and sharpen your own thinking.</p>
+          </article>
+          <article class="info-card success">
+            <div class="icon">E</div>
+            <h3>Improve a draft</h3>
+            <p>Write first, then ask AI to make it clearer, shorter, warmer, or more appropriate for the audience.</p>
+          </article>
+        </div>
+
+        <div class="reveal-stack">
+          <div class="reveal warning">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>Quick writing you can finish yourself</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              If the message is obvious and takes thirty seconds, using AI may create more editing than it saves.
+            </div></div></div>
+          </div>
+
+          <div class="reveal warning">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>Expecting AI to decide for you</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              AI can help identify options and consequences. It should not carry the moral, spiritual, or relational responsibility for your choice.
+            </div></div></div>
+          </div>
+
+          <div class="reveal warning">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>Outsourcing your voice</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              If every post, sermon note, email, and announcement sounds machine-polished, people stop hearing you.
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="golden-rule">
+          <strong>Reality check</strong>
+          AI saves time on tedium,not on thinking.
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="four">
+      <div class="section-card">
+        <h2>How to ask for better help</h2>
+        <p>Good prompting is mostly good communication: context, purpose, constraints, and a clear request.</p>
+
+        <div class="grid two">
+          <article class="info-card">
+            <div class="icon">1</div>
+            <h3>Write first</h3>
+            <p>Start with your own notes, opinion, outline, or rough draft whenever possible.</p>
+          </article>
+          <article class="info-card">
+            <div class="icon">2</div>
+            <h3>Ask specifically</h3>
+            <p>Say what you need, who it is for, and what “good” should feel like.</p>
+          </article>
+          <article class="info-card">
+            <div class="icon">3</div>
+            <h3>Read and edit</h3>
+            <p>Remove what sounds generic, check claims, and put your own language back in.</p>
+          </article>
+          <article class="info-card">
+            <div class="icon">4</div>
+            <h3>Ask for alternatives</h3>
+            <p>Do not force one answer to work. Ask for another tone, angle, structure, or approach.</p>
+          </article>
+        </div>
+
+        <div class="prompt-formula">
+          <div class="prompt-line"><strong>I need to…</strong> describe the task.</div>
+          <div class="prompt-line"><strong>The audience is…</strong> say who will read or hear it.</div>
+          <div class="prompt-line"><strong>The goal is…</strong> explain what should happen next.</div>
+          <div class="prompt-line"><strong>Please give me…</strong> name the output you want.</div>
+          <div class="prompt-line"><strong>Keep it…</strong> set the tone, length, or boundaries.</div>
+        </div>
+
+        <div class="comparison">
+          <div class="compare-card bad">
+            <span class="compare-label">Too vague</span>
+            “Write a church post.”
+          </div>
+          <div class="compare-card good">
+            <span class="compare-label">Much better</span>
+            “Write a warm Facebook post inviting local families to our free six-week beginner martial arts program. Keep it friendly, clear, and under 120 words.”
+          </div>
+        </div>
+
+        <div class="comparison">
+          <div class="compare-card bad">
+            <span class="compare-label">Generic edit</span>
+            “Make this better.”
+          </div>
+          <div class="compare-card good">
+            <span class="compare-label">Specific edit</span>
+            “Keep my meaning and voice, but make this easier to understand and remove anything repetitive.”
+          </div>
+        </div>
+
+        <div class="comparison">
+          <div class="compare-card bad">
+            <span class="compare-label">No context</span>
+            “Give me discussion questions.”
+          </div>
+          <div class="compare-card good">
+            <span class="compare-label">With context</span>
+            “Give me eight discussion questions for young adults studying John 15. Start simple, then move toward personal application.”
+          </div>
+        </div>
+
+        <div class="reveal-stack">
+          <div class="reveal">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>Tell AI your goal</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              “I want people to feel welcomed,” “I need leadership to make a decision,” or “I want this to sound like me” gives AI a useful target.
+            </div></div></div>
+          </div>
+
+          <div class="reveal">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>Ask for perspectives</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              Try: “What might I be overlooking?” or “Show me how three different audiences could interpret this.”
+            </div></div></div>
+          </div>
+
+          <div class="reveal">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>Tell AI who you are</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              Relevant context helps: your role, experience level, audience, beliefs, and how direct or polished you want the answer to be.
+            </div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="five">
+      <div class="section-card">
+        <h2>See the workflow in action</h2>
+        <p>The point is not to copy the AI. The point is to use it as part of your own process.</p>
+
+        <div class="reveal-stack">
+          <div class="reveal">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>Example 1: Deep research</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              <div class="example-block">
+                <div class="context-box">You are preparing a Bible college paper and need a clearer starting map before reading primary sources.</div>
+                <div class="flow-box prompt"><span class="flow-label">You ask</span>“Help me map the major interpretations of this passage. Explain the differences clearly, list questions I should investigate, and do not present any interpretation as settled fact.”</div>
+                <div class="flow-box response"><span class="flow-label">AI gives you</span>A structured overview, key terms, competing viewpoints, and possible research questions.</div>
+                <div class="flow-box edit"><span class="flow-label">You then</span>Check the claims against Scripture, assigned readings, and reliable sources. Keep only what helps your own analysis.</div>
+                <div class="tip-box"><strong>Why this worked:</strong> You asked AI to organize the field,not to do your discernment or make the conclusion for you.</div>
+              </div>
+            </div></div></div>
+          </div>
+
+          <div class="reveal">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>Example 2: Writing a church post</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              <div class="example-block">
+                <div class="context-box">You already know what the announcement needs to say, but your first draft feels stiff.</div>
+                <div class="flow-box prompt"><span class="flow-label">You ask</span>“Here is my draft. Keep every fact the same, but make it warmer and easier to read. Do not make it sound like advertising.”</div>
+                <div class="flow-box response"><span class="flow-label">AI gives you</span>A cleaner version with smoother flow and a more welcoming tone.</div>
+                <div class="flow-box edit"><span class="flow-label">You then</span>Put back any wording that sounds more like your church, remove anything over-polished, and verify the date and time.</div>
+                <div class="tip-box"><strong>Why this worked:</strong> You brought the message. AI helped with delivery.</div>
+              </div>
+            </div></div></div>
+          </div>
+
+          <div class="reveal">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>B Example 3: Brainstorming</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              <div class="example-block">
+                <div class="context-box">You need ideas for a young adult discussion night, but you do not want a generic list.</div>
+                <div class="flow-box prompt"><span class="flow-label">You ask</span>“Give me twelve discussion-night ideas for young adults. Make them low-cost, relational, and realistic for a small church. Avoid anything that feels forced or childish.”</div>
+                <div class="flow-box response"><span class="flow-label">AI gives you</span>A range of ideas with different formats and energy levels.</div>
+                <div class="flow-box edit"><span class="flow-label">You then</span>Choose two that fit your people, combine the best pieces, and adjust for your actual space and budget.</div>
+                <div class="tip-box"><strong>Why this worked:</strong> You used AI to widen the option set while keeping judgment in human hands.</div>
+              </div>
+            </div></div></div>
+          </div>
+
+          <div class="reveal">
+            <button class="reveal-toggle" aria-expanded="false">
+              <span>AI hall of fame</span><span class="chevron">⌄</span>
+            </button>
+            <div class="reveal-content"><div class="reveal-inner"><div class="reveal-body">
+              <div class="example-block">
+                <div class="compare-card bad">
+                  AI invented a quotation that sounded biblical.
+                </div>
+                <div class="compare-card bad">
+                  AI cited a source that did not exist.
+                </div>
+                <div class="compare-card bad">
+                  AI answered a different question with total confidence.
+                </div>
+                <div class="tip-box"><strong>The lesson:</strong> Fluency is not the same as truth. Verify anything important.</div>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
+        <div class="ministry-note">
+          <strong>AI and ministry</strong><br />
+          AI can help organize your thoughts, summarize research, improve clarity, and generate possibilities. It should never replace prayer, biblical study, discernment, pastoral judgment, or care for actual people.
+        </div>
+      </div>
+
+      <div class="finish">
+        <div class="big">✦</div>
+        <h2>You are ready to try it.</h2>
+        <p>
+          You do not become good at AI by memorizing prompts. You become good by asking, checking, editing, and trying again.
+        </p>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      Built with curiosity by <strong>Clara + AI</strong> · ChatGPT, aka Cari 
+    </div>
+  </main>
+
+  <script>
+    const tabs = [...document.querySelectorAll(".tab-button")];
+    const panels = [...document.querySelectorAll(".panel")];
+    const signalTitle = document.getElementById("signalTitle");
+    const signalNodes = [...document.querySelectorAll(".signal-node")];
+    const signalSweep = document.querySelector(".signal-sweep");
+    const sectionNames = ["What AI does", "The tools", "When to use it", "How to ask", "Examples"];
+
+    function activateTab(tabId) {
+      const index = tabs.findIndex(tab => tab.dataset.tab === tabId);
+
+      tabs.forEach((tab, i) => {
+        const active = tab.dataset.tab === tabId;
+        tab.classList.toggle("active", active);
+        tab.setAttribute("aria-selected", active ? "true" : "false");
+        if (active) tab.focus({ preventScroll: true });
+      });
+
+      panels.forEach(panel => {
+        panel.classList.toggle("active", panel.id === tabId);
+      });
+      signalTitle.textContent = sectionNames[index];
+      signalNodes.forEach((node, i) => node.classList.toggle("active", i === index));
+      signalSweep.style.transform = `translateX(${index * 100}%)`;
+      signalSweep.classList.remove("pulse");
+      void signalSweep.offsetWidth;
+      signalSweep.classList.add("pulse");
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => activateTab(tab.dataset.tab));
+    });
+
+    document.querySelectorAll(".reveal-toggle").forEach(button => {
+      button.addEventListener("click", () => {
+        const reveal = button.closest(".reveal");
+        const isOpen = reveal.classList.toggle("open");
+        button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+    });
+
+    document.querySelectorAll(".tool-button").forEach(button => {
+      button.addEventListener("click", () => {
+        const toolId = button.dataset.tool;
+        const wasActive = button.classList.contains("active");
+
+        document.querySelectorAll(".tool-button").forEach(item => {
+          item.classList.remove("active");
+          item.setAttribute("aria-selected", "false");
+        });
+
+        document.querySelectorAll(".tool-panel").forEach(panel => panel.classList.remove("active"));
+        const placeholder = document.getElementById("tool-placeholder");
+
+        if (wasActive) {
+          placeholder.classList.add("active");
+        } else {
+          placeholder.classList.remove("active");
+          button.classList.add("active");
+          button.setAttribute("aria-selected", "true");
+          document.getElementById(`tool-${toolId}`).classList.add("active");
+        }
+      });
+    });
+
+    document.addEventListener("keydown", event => {
+      const activeIndex = tabs.findIndex(tab => tab.classList.contains("active"));
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        activateTab(tabs[(activeIndex + 1) % tabs.length].dataset.tab);
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        activateTab(tabs[(activeIndex - 1 + tabs.length) % tabs.length].dataset.tab);
+      }
+    });
+  </script>
+</body>
+</html>
