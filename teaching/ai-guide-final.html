@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started With AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            --text-primary: #1a1a1a;
+            --text-secondary: #666;
+            --text-muted: #999;
+            --border: 0.5px solid #ddd;
+            --border-strong: 0.5px solid #bbb;
+            --surface-2: #fff;
+            --surface-1: #faf9f7;
+            --surface-0: #f5f3f0;
+            --radius: 8px;
+            --gap-sm: 0.75rem;
+            --gap-md: 1.25rem;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            html {
+                --text-primary: #f0ede8;
+                --text-secondary: #999;
+                --text-muted: #666;
+                --border: 0.5px solid #333;
+                --border-strong: 0.5px solid #555;
+                --surface-2: #1a1a1a;
+                --surface-1: #252525;
+                --surface-0: #0f0f0f;
+            }
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--surface-0);
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: var(--border);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+        
+        .nav-button {
+            background: none;
+            border: none;
+            padding: 0.75rem 1rem;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--text-secondary);
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+        
+        .nav-button:hover {
+            color: var(--text-primary);
+        }
+        
+        .nav-button.active {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        p {
+            margin-bottom: 1.25rem;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        h2 {
+            font-size: 22px;
+            font-weight: 500;
+            margin: 2rem 0 1rem 0;
+        }
+        
+        h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .card {
+            background: var(--surface-2);
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-bottom: var(--gap-md);
+        }
+        
+        .card p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-intro {
+            background: var(--surface-1);
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-intro p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .accordion {
+            background: var(--surface-2);
+            border: var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            background: var(--surface-1);
+            border-bottom: var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            user-select: none;
+        }
+        
+        .accordion-header:hover {
+            background: var(--surface-2);
+        }
+        
+        .accordion-toggle {
+            font-size: 12px;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+        
+        .accordion.open .accordion-toggle {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .accordion.open .accordion-content {
+            max-height: 1000px;
+        }
+        
+        .accordion-inner {
+            padding: 1.5rem;
+        }
+        
+        .good {
+            background: #ecfdf5;
+            border: 0.5px solid #d1fae5;
+            border-left: 2px solid #10b981;
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-bottom: var(--gap-md);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .good {
+                background: rgba(16, 185, 129, 0.1);
+                border-color: rgba(16, 185, 129, 0.3);
+                border-left-color: #10b981;
+            }
+        }
+        
+        .bad {
+            background: #fef2f2;
+            border: 0.5px solid #fecaca;
+            border-left: 2px solid #ef4444;
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-bottom: var(--gap-md);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .bad {
+                background: rgba(239, 68, 68, 0.1);
+                border-color: rgba(239, 68, 68, 0.3);
+                border-left-color: #ef4444;
+            }
+        }
+        
+        .tip {
+            background: #fffbeb;
+            border: 0.5px solid #fce7b6;
+            border-left: 2px solid #f59e0b;
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            margin: 2rem 0;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .tip {
+                background: rgba(245, 158, 11, 0.1);
+                border-color: rgba(245, 158, 11, 0.3);
+                border-left-color: #f59e0b;
+            }
+        }
+        
+        .tip strong {
+            color: #d97706;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .tip strong {
+                color: #fbbf24;
+            }
+        }
+        
+        .tip p {
+            margin-bottom: 0;
+        }
+        
+        .example {
+            background: var(--surface-2);
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .example-context {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-style: italic;
+            padding: 1rem;
+            background: var(--surface-1);
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            margin-top: -0.5rem;
+        }
+        
+        .prompt-item, .response-item, .edit-item {
+            background: var(--surface-1);
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            font-size: 14px;
+        }
+        
+        .prompt-label {
+            font-weight: 500;
+            color: #8b5cf6;
+            font-size: 13px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .response-label {
+            font-weight: 500;
+            color: #10b981;
+            font-size: 13px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .edit-label {
+            font-weight: 500;
+            color: #f59e0b;
+            font-size: 13px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .response-item ul {
+            margin: 0 0 0 1.5rem;
+            padding: 0;
+        }
+        
+        .response-item li {
+            margin-bottom: 0.4rem;
+        }
+        
+        .prompt-item p, .response-item p, .edit-item p {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+        
+        .reality {
+            background: #fffbeb;
+            border: var(--border);
+            border-left: 2px solid #f59e0b;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .reality {
+                background: rgba(245, 158, 11, 0.1);
+                border-color: rgba(245, 158, 11, 0.3);
+            }
+        }
+        
+        .reality h3 {
+            color: #d97706;
+            margin-bottom: 0.75rem;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .reality h3 {
+                color: #fbbf24;
+            }
+        }
+        
+        .reality p {
+            margin-bottom: 0.75rem;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        @media (max-width: 600px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        ul li {
+            margin-bottom: 0.5rem;
+            font-size: 16px;
+        }
+        
+        footer {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 3rem;
+            border-top: var(--border);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Getting Started With AI</h1>
+            <p class="subtitle">A friendly guide to using AI well</p>
+        </header>
+        
+        <div class="nav-tabs">
+            <button class="nav-button active" onclick="showTab('what')">What is AI?</button>
+            <button class="nav-button" onclick="showTab('tools')">The tools</button>
+            <button class="nav-button" onclick="showTab('when')">When to use</button>
+            <button class="nav-button" onclick="showTab('how')">How to ask</button>
+            <button class="nav-button" onclick="showTab('examples')">Examples</button>
+        </div>
+        
+        <div id="what" class="tab-content active">
+            <div class="section-intro">
+                <p><strong>AI</strong> is software that understands what you ask and generates helpful responses.</p>
+                <p>Think: You talk to it. It listens. It gives you words back designed to help.</p>
+            </div>
+            
+            <h2>What it's good at</h2>
+            
+            <div class="card">
+                <h3>Research and understanding</h3>
+                <p>Gathering background, explaining concepts, finding multiple angles on a topic.</p>
+            </div>
+            
+            <div class="card">
+                <h3>Structuring ideas</h3>
+                <p>Taking your rough thoughts and organizing them into a clear outline.</p>
+            </div>
+            
+            <div class="card">
+                <h3>Brainstorming</h3>
+                <p>Generating options when you're stuck or the well feels dry.</p>
+            </div>
+            
+            <div class="card">
+                <h3>Editing and polish</h3>
+                <p>Tightening prose, smoothing awkward sentences, improving flow.</p>
+            </div>
+            
+            <h2>What it's not</h2>
+            
+            <div class="card">
+                <h3>Infallible</h3>
+                <p>AI can sound confident while being completely wrong. Always fact-check, especially on theology and citations.</p>
+            </div>
+            
+            <div class="card">
+                <h3>An authority</h3>
+                <p>It's research and brainstorming help. You make the final decisions based on Scripture and your integrity.</p>
+            </div>
+            
+            <div class="card">
+                <h3>A time-saver for everything</h3>
+                <p>Sometimes you're faster just writing it yourself. Use AI for tedious stuff, not everything.</p>
+            </div>
+            
+            <div class="card">
+                <h3>A replacement for you</h3>
+                <p>Your voice, your judgment, your theological understanding—those can't be outsourced.</p>
+            </div>
+        </div>
+        
+        <div id="tools" class="tab-content">
+            <div class="section-intro">
+                <p>Five main AI tools you'll encounter. Click any to learn more. Pick one to start.</p>
+            </div>
+            
+            <div class="accordion" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>Claude — Best for deep work</span>
+                    <span class="accordion-toggle">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p><strong>Where:</strong> claude.ai</p>
+                        <p><strong>Best for:</strong> Deep research, complex writing, long conversations.</p>
+                        <p>Claude is patient and thoughtful. Great when you need real depth—sermon prep, working through complex ideas.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>ChatGPT — Quick answers</span>
+                    <span class="accordion-toggle">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p><strong>Where:</strong> chatgpt.com</p>
+                        <p><strong>Best for:</strong> Quick answers, brainstorming, creative ideas.</p>
+                        <p>Fast, versatile, solid all-arounder. The one most people have heard of.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>Google Gemini — Current information</span>
+                    <span class="accordion-toggle">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p><strong>Where:</strong> gemini.google.com</p>
+                        <p><strong>Best for:</strong> Fact-checking, current information, searching the web.</p>
+                        <p>Gemini can look up recent news and scholarship. Use it when you need what just happened.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>Meta AI — On the go</span>
+                    <span class="accordion-toggle">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p><strong>Where:</strong> Built into Messenger and Instagram</p>
+                        <p><strong>Best for:</strong> On-the-go questions, social media help.</p>
+                        <p>Right there in apps you already use. Convenient for quick questions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span>Copilot — Microsoft integration</span>
+                    <span class="accordion-toggle">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p><strong>Where:</strong> copilot.microsoft.com</p>
+                        <p><strong>Best for:</strong> Microsoft Office integration, task generation.</p>
+                        <p>If your church uses Word or Excel, Copilot integrates directly into those apps.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tip">
+                <strong>Start simple:</strong> Pick one tool. Spend a week with it. Get comfortable. Then try another if you want.
+            </div>
+        </div>
+        
+        <div id="when" class="tab-content">
+            <div class="section-intro">
+                <p>AI doesn't always save time. But it's perfect for specific kinds of work. Knowing when to use it is key.</p>
+            </div>
+            
+            <h2>When AI actually helps</h2>
+            
+            <div class="card">
+                <h3>Research and background</h3>
+                <p>Need context for a sermon? AI gathers background, finds perspectives, explains concepts. Then you write something only you could write.</p>
+            </div>
+            
+            <div class="card">
+                <h3>Structuring big ideas</h3>
+                <p>Have 10 rough ideas? AI helps organize them. You then fill in the actual content.</p>
+            </div>
+            
+            <div class="card">
+                <h3>Brainstorming options</h3>
+                <p>Stuck on planning an event? AI generates ideas. You pick what fits your people.</p>
+            </div>
+            
+            <div class="card">
+                <h3>Editing and polish</h3>
+                <p>You wrote something. It feels clunky. AI tightens it. You read the result, edit it, then send it.</p>
+            </div>
+            
+            <h2>When AI wastes your time</h2>
+            
+            <div class="bad">
+                <p><strong>Quick, simple writing:</strong> A 2-line email? You're faster just writing it yourself.</p>
+            </div>
+            
+            <div class="bad">
+                <p><strong>Expecting AI to decide for you:</strong> You have three ideas. That's your job to pick.</p>
+            </div>
+            
+            <div class="bad">
+                <p><strong>Outsourcing your voice:</strong> Asking AI to write a post and posting it as-is. Your people will notice.</p>
+            </div>
+            
+            <div class="reality">
+                <h3>The real talk</h3>
+                <p><strong>AI saves time on tedium, not thinking.</strong> If the work is mostly thinking, AI won't help much.</p>
+                <p><strong>You're accountable for everything.</strong> Whether you wrote it, AI wrote it, or you both did—your name is on it. Read it. Verify it. Own it.</p>
+            </div>
+        </div>
+        
+        <div id="how" class="tab-content">
+            <div class="section-intro">
+                <p>How you ask AI to help determines what you get back. Clear questions get useful answers.</p>
+            </div>
+            
+            <h2>The 4-step workflow</h2>
+            
+            <div class="card">
+                <h3>1. Write your own first</h3>
+                <p>Draft your sermon, post, or essay yourself. Your thinking is the foundation. AI fills gaps; it doesn't create from scratch.</p>
+            </div>
+            
+            <div class="card">
+                <h3>2. Ask for a specific edit</h3>
+                <p>Don't say "improve this." Say "Make this warmer" or "Add a question here." Tell AI exactly what to change.</p>
+            </div>
+            
+            <div class="card">
+                <h3>3. Read and edit</h3>
+                <p>Read what AI gives you. If it doesn't sound like you, change it. You're responsible for everything you share.</p>
+            </div>
+            
+            <div class="card">
+                <h3>4. Ask for alternatives (if stuck)</h3>
+                <p>If you're unsure, ask for 2–3 other ways to approach it. Get options. Pick the best one.</p>
+            </div>
+            
+            <h2>How to ask better</h2>
+            
+            <div class="grid-2">
+                <div class="bad">
+                    <p><strong>Vague</strong><br>"Help me write about prayer"</p>
+                </div>
+                <div class="good">
+                    <p><strong>Specific</strong><br>"I'm writing a 10-min sermon on prayer for young adults. Focus on vulnerability."</p>
+                </div>
+            </div>
+            
+            <div class="grid-2">
+                <div class="bad">
+                    <p><strong>Generic</strong><br>"Improve this post"</p>
+                </div>
+                <div class="good">
+                    <p><strong>Specific edit</strong><br>"Make this conversational and authentic. Too formal for Instagram."</p>
+                </div>
+            </div>
+            
+            <div class="grid-2">
+                <div class="bad">
+                    <p><strong>No context</strong><br>"Suggest youth group ideas"</p>
+                </div>
+                <div class="good">
+                    <p><strong>With context</strong><br>"I lead ages 15–17. Skeptical but care about faith. Money is tight. What ideas work?"</p>
+                </div>
+            </div>
+            
+            <h2>Advanced tips</h2>
+            
+            <div class="card">
+                <h3>Tell AI your goal, not just your constraint</h3>
+                <p><strong>Better:</strong> "I want this welcoming to people hurt by the church"</p>
+                <p><strong>Instead:</strong> "Make this not preachy"</p>
+            </div>
+            
+            <div class="card">
+                <h3>Ask for different perspectives</h3>
+                <p><strong>Example:</strong> "How would a skeptic, a scholar, and someone struggling with faith understand this verse?"</p>
+            </div>
+            
+            <div class="card">
+                <h3>Tell AI who you are</h3>
+                <p><strong>Example:</strong> "I'm a young pastor at a small church. Our people are working-class. I want this real, not preachy."</p>
+                <p>Context helps AI adapt instead of giving generic advice.</p>
+            </div>
+        </div>
+        
+        <div id="examples" class="tab-content">
+            <div class="section-intro">
+                <p>Three real ministry scenarios. Click to expand and see the full conversation.</p>
+            </div>
+            
+            <div class="accordion open" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span><strong>Example 1: Sermon Research</strong></span>
+                    <span class="accordion-toggle">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="example">
+                            <div class="example-context">You've read Romans 3:21-26. You have rough notes. But you need cultural background. Why was Paul's message radical? You want your congregation to understand.</div>
+                            
+                            <div class="prompt-item">
+                                <div class="prompt-label">You ask:</div>
+                                <p>"I'm writing a sermon on Romans 3:21-26. My people are working-class and have struggled with shame. Why would first-century Jews have been shocked by Paul's teaching? Help me understand so I can explain it simply."</p>
+                            </div>
+                            
+                            <div class="response-item">
+                                <div class="response-label">AI gives you:</div>
+                                <ul>
+                                    <li>Honor/shame culture (not just guilt)</li>
+                                    <li>Law as identity marker</li>
+                                    <li>How "grace, not works" would sound radical</li>
+                                    <li>Modern parallel: redefined by grace, not failures</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="edit-item">
+                                <div class="edit-label">You then:</div>
+                                <p>The honor/shame angle resonates. That's your hook. You use AI's framework but write your own stories. You find someone in your congregation who struggled with shame. You use that. It's yours now.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Why this worked:</strong> You asked for background, not a sermon. AI gave angles. You stayed in charge.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span><strong>Example 2: Social Media Post</strong></span>
+                    <span class="accordion-toggle">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="example">
+                            <div class="example-context">Your church did community cleanup. Neighborhood people came, not just church members. You want to post—genuine, not preachy, invite people back.</div>
+                            
+                            <div class="prompt-item">
+                                <div class="prompt-label">You ask:</div>
+                                <p>"I'm posting about community cleanup. Neighborhood people came too. I want it real and welcoming. Invite people back without being pushy. Give me two versions—upbeat and reflective."</p>
+                            </div>
+                            
+                            <div class="response-item">
+                                <div class="response-label">AI gives you:</div>
+                                <p><strong>Upbeat:</strong> "Loving your neighborhood isn't talk—it's action. Saturday we showed up. Church folks, neighbors, people we'd never met. Picked up trash. Ate pizza. That's community. Next month?"</p>
+                                <p><strong>Reflective:</strong> "Something shifts when you work alongside someone instead of just talking past them. Saturday proved it. Next month. Hope you will too."</p>
+                            </div>
+                            
+                            <div class="edit-item">
+                                <div class="edit-label">You then:</div>
+                                <p>Upbeat has the energy but feels stiff. You rewrite: "Saturday we cleaned up 5th Street. Church folks, neighbors, people who've never stepped foot in our building. Ate pizza together. That's community. Next month—come help." Now it's you.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Why this worked:</strong> You got options in different tones. You picked your direction. Then rewrote in your voice.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <span><strong>Example 3: Brainstorming</strong></span>
+                    <span class="accordion-toggle">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="example">
+                            <div class="example-context">Your church needs young adults ministry. You know some folks but you're blank on what to actually do together. Bible study feels boring to them.</div>
+                            
+                            <div class="prompt-item">
+                                <div class="prompt-label">You ask:</div>
+                                <p>"Starting a young adults group. Most work long hours. Some married, some single. Skeptical of 'church stuff' but they care about faith. Give me 5 different monthly ideas—not Bible study. Mix faith, community, fun."</p>
+                            </div>
+                            
+                            <div class="response-item">
+                                <div class="response-label">AI gives you:</div>
+                                <ul>
+                                    <li>Dinner and conversation (bring a real question)</li>
+                                    <li>Service project month (habitat, food bank)</li>
+                                    <li>Book/podcast discussions</li>
+                                    <li>Skill-share potluck</li>
+                                    <li>Panel nights (people doing interesting work)</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="edit-item">
+                                <div class="edit-label">You then:</div>
+                                <p>"Dinner conversation" resonates. You start at your house. Invite 6 people. Say "Bring one question you're wrestling with." You ask AI: "Give me 10 open-ended faith questions for a dinner." You pick 3. Your event is now designed—but it's yours.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Why this worked:</strong> AI gave options when your mind was blank. You picked one and shaped it into something real.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Made for people doing real ministry work.</p>
+        <p>Use AI wisely. Stay accountable. Keep your voice.</p>
+    </footer>
+    
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-button').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function toggleAccordion(el) {
+            el.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
