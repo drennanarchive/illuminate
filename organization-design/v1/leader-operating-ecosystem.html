@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leader Operating Ecosystem</title>
+<style>
+  :root{
+    --paper:#EFEEE4; --card:#FBFAF6; --ink:#1F2A24; --muted:#6B7268;
+    --line:#D9D5C6; --accent:#2F5D50; --accent-soft:#E1E9E4; --accent-text:#1E4237;
+    --flag:#B8793C; --flag-soft:#F3E7D6; --flag-text:#7A4E20;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;}
+  #app{max-width:900px;margin:0 auto;padding:50px 24px 90px;}
+
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:10px;}
+  .savenote{font-family:'Courier New',monospace;font-size:10.5px;color:var(--muted);letter-spacing:.03em;}
+  .btn{font-family:'Courier New',monospace;font-size:11px;letter-spacing:.04em;color:var(--muted);
+    background:var(--card);border:1px solid var(--line);padding:7px 12px;cursor:pointer;border-radius:2px;}
+  .btn:hover{color:var(--ink);border-color:var(--accent);}
+  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .btn.primary:hover{opacity:.9;}
+
+  .eyebrow{font-family:'Courier New',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+  h1{font-size:36px;font-weight:600;margin:0 0 10px;letter-spacing:-.01em;line-height:1.1;}
+  .lede{font-size:15.5px;color:var(--muted);max-width:680px;line-height:1.6;margin-bottom:0;}
+
+  .oneline{margin-top:26px;background:var(--accent);color:#fff;border-radius:3px;padding:24px 26px;}
+  .oneline b{display:block;font-family:'Courier New',monospace;font-size:10.5px;text-transform:uppercase;
+    letter-spacing:.1em;opacity:.8;margin-bottom:8px;}
+  .oneline [contenteditable]{font-size:17px;line-height:1.5;outline:none;}
+  .oneline [contenteditable]:focus{background:rgba(255,255,255,.12);}
+  .oneline [contenteditable]:empty:before{content:attr(data-ph);opacity:.65;}
+
+  .flow{margin-top:36px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+    font-family:'Courier New',monospace;font-size:11px;color:var(--muted);letter-spacing:.03em;}
+  .flow .node{background:var(--card);border:1px solid var(--line);padding:6px 10px;border-radius:20px;}
+  .flow .arrow{color:var(--line);}
+
+  .block{margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:3px;
+    padding:26px 28px;position:relative;}
+  .block-head{display:flex;align-items:baseline;gap:14px;margin-bottom:4px;}
+  .block-num{font-family:'Courier New',monospace;font-size:12px;color:var(--accent-text);
+    background:var(--accent-soft);padding:4px 9px;border-radius:2px;letter-spacing:.05em;}
+  .block-title{font-size:20px;font-weight:600;margin:0;}
+  .block-q{font-size:13.5px;color:var(--muted);font-style:italic;margin:8px 0 16px;}
+
+  .block [contenteditable]{font-size:14.5px;line-height:1.65;outline:none;min-height:24px;}
+  .block [contenteditable]:focus{background:var(--accent-soft);}
+  .block [contenteditable]:empty:before{content:attr(data-ph);color:var(--muted);font-style:italic;}
+
+  .drillrow{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);}
+  .drillrow .lab{font-family:'Courier New',monospace;font-size:10px;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--muted);margin-bottom:8px;}
+  .drilltags{display:flex;flex-wrap:wrap;gap:8px;}
+  .drilltags a{font-family:'Courier New',monospace;font-size:11.5px;color:var(--accent-text);
+    background:var(--accent-soft);border:1px solid var(--line);padding:5px 10px;border-radius:2px;
+    text-decoration:none;}
+  .drilltags a:hover{border-color:var(--accent);}
+  .drilltags span.gap{font-family:'Courier New',monospace;font-size:11.5px;color:var(--flag-text);
+    background:var(--flag-soft);border:1px solid #E3C8A0;padding:5px 10px;border-radius:2px;}
+
+  .contract{margin-top:36px;background:var(--flag-soft);border:1px solid #E3C8A0;border-radius:3px;
+    padding:20px 22px;}
+  .contract b.title{font-family:'Courier New',monospace;font-size:11px;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--flag-text);display:block;margin-bottom:8px;}
+  .contract p{font-size:13.5px;line-height:1.6;color:var(--flag-text);margin:0;}
+
+  .footer-note{margin-top:44px;font-size:12.5px;color:var(--muted);font-family:'Courier New',monospace;
+    line-height:1.8;text-align:center;}
+
+  @media print{
+    body{background:#fff;}
+    .toolbar{display:none;}
+    .block, .oneline, .contract{break-inside:avoid;}
+    [contenteditable]:focus{background:none;}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div class="toolbar">
+    <span class="savenote" id="savenote">edits save automatically</span>
+    <div>
+      <button class="btn" onclick="resetDoc()">Reset to draft</button>
+      <button class="btn primary" onclick="window.print()">Print / save PDF</button>
+    </div>
+  </div>
+
+  <div class="eyebrow">The shape above the tool map</div>
+  <h1>Leader Operating Ecosystem</h1>
+  <p class="lede">One page, six pieces. This is the trunk — your leader's role, what they're actually
+  on the hook for, and how information should move around them. Every worksheet and canvas in the
+  tool map is a drill-down into one of these six pieces, not a separate thing. Fill it in loosely
+  first; precision comes later, from the linked tools.</p>
+
+  <div class="oneline">
+    <b>The one-liner — say this out loud, refine until it's true</b>
+    <div contenteditable="true" spellcheck="false" id="oneliner"
+      data-ph="The leader exists to ___, decides and promulgates ___, so that ___ stays owned rather than orphaned.">The leader exists to hold decision authority for AI and data governance across the organization — the team develops the options, the leader decides and promulgates them.</div>
+  </div>
+
+  <div class="flow">
+    <span class="node">Mandate</span><span class="arrow">→</span>
+    <span class="node">Decision Surface</span><span class="arrow">→</span>
+    <span class="node">Information Diet</span><span class="arrow">→</span>
+    <span class="node">Support Structure</span><span class="arrow">→</span>
+    <span class="node">External Interfaces</span><span class="arrow">→</span>
+    <span class="node">Maturity Signals</span>
+  </div>
+
+  <!-- BLOCK 1 -->
+  <div class="block">
+    <div class="block-head">
+      <span class="block-num">01</span>
+      <h2 class="block-title">Mandate</h2>
+    </div>
+    <div class="block-q">Why does this role exist, and on what authority?</div>
+    <div contenteditable="true" spellcheck="false" data-ph="Draft the mandate here..."
+    >A senior governance and technology leadership role. Authority anchored in the organization's data-governance and AI-governance policy. Serves as a translator and operational counterpart to senior leadership — carries their intent down, and represents the team's readiness up. The team exists to develop the work product the leader needs in order to exercise this mandate well; the team does not hold the authority itself.</div>
+    <div class="drillrow">
+      <div class="lab">Feeds from / anchors</div>
+      <div class="drilltags">
+        <span class="gap">Org data/AI governance policy (policy, not a tool)</span>
+        <a href="Team_Operating_Model_Architect_v3.html" target="_blank">The team's own operating model (Architect v3)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCK 2 -->
+  <div class="block">
+    <div class="block-head">
+      <span class="block-num">02</span>
+      <h2 class="block-title">Decision Surface</h2>
+    </div>
+    <div class="block-q">What is the leader actually on the hook to decide or promulgate — and nothing more?</div>
+    <div contenteditable="true" spellcheck="false" data-ph="What decisions land on their desk?"
+    >Sign-off on team-recommended governance frameworks and role assignments (e.g., expanding a team member's scope). Resolution of flagged ownership gaps (e.g., a budget/resourcing owner, still open). Leadership-review decks and similar artifacts, once the team has drafted them. The test for what belongs here: they have to decide it, they'll be asked about it, or something changed materially. Everything else should never reach this list.</div>
+    <div class="drillrow">
+      <div class="lab">Feeds from / drills into</div>
+      <div class="drilltags">
+        <a href="daig-state-of-play.html" target="_blank">Team State of Play (weekly decision sheet)</a>
+        <a href="Role-Alignment-and-Responsibility-Design-Canvas.html" target="_blank">Role Alignment Canvas</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCK 3 -->
+  <div class="block">
+    <div class="block-head">
+      <span class="block-num">03</span>
+      <h2 class="block-title">Information Diet</h2>
+    </div>
+    <div class="block-q">What reaches the leader, how often, and in what format — so nothing arrives as a surprise?</div>
+    <div contenteditable="true" spellcheck="false" data-ph="What's the cadence and the minimum feed?"
+    >Weekly: State of Play, refreshed in standup (Mon/Wed/Fri). As-needed: team recommendations and briefs ahead of a decision. If a monthly strategic touchpoint is adopted: PMR Lite pre-read + discussion. Per-initiative: weekly effort syncs where they exist. Still to define: the minimum they get even when "nothing changed," and the exact escalation channel for anything urgent and off-cadence.</div>
+    <div class="drillrow">
+      <div class="lab">Feeds from / drills into</div>
+      <div class="drilltags">
+        <a href="team-cadence-tool.html" target="_blank">Team Cadence Builder (design the loop)</a>
+        <a href="0-Walkthrough-Artifact.html" target="_blank">Monthly Touchpoint suite (0→3→1→2)</a>
+        <a href="Weekly-Effort-Leadership-Touchpoint-Canvas.html" target="_blank">Weekly Effort Touchpoint</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCK 4 -->
+  <div class="block">
+    <div class="block-head">
+      <span class="block-num">04</span>
+      <h2 class="block-title">Support Structure</h2>
+    </div>
+    <div class="block-q">Who serves this mandate, and where are the gaps still open?</div>
+    <div contenteditable="true" spellcheck="false" data-ph="Who's around them, and what's unresolved?"
+    >The team (contractor support role — two Technical SMEs, two Portfolio Managers, one Comms Specialist) develops the work product the leader decides on. Under discussion: expanding a team member's role to own AI capability orchestration on the leader's behalf — connective tissue across cyber/data/risk, arming the leader with frameworks before deployments. Open gap: no owner yet for token pricing / AI portfolio management or broader budget planning (that team member's certification doesn't cover budgeting).</div>
+    <div class="drillrow">
+      <div class="lab">Feeds from / drills into</div>
+      <div class="drilltags">
+        <a href="Team_Operating_Model_Architect_v3.html" target="_blank">Team Operating Model (Architect v3)</a>
+        <span class="gap">Role-expansion alignment conversation (template, not in this set)</span>
+        <span class="gap">Budget / token-pricing owner — unresolved</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCK 5 -->
+  <div class="block">
+    <div class="block-head">
+      <span class="block-num">05</span>
+      <h2 class="block-title">External Interfaces</h2>
+    </div>
+    <div class="block-q">Who does the leader coordinate across, and what does each relationship need from them?</div>
+    <div contenteditable="true" spellcheck="false" data-ph="Who's outside the team but load-bearing?"
+    >Senior leadership above them (chain-of-command discipline matters; routing goes through the proper chain, not around it). Cyber, data, and risk stakeholders for AI capability vetting. Org-wide counterparts operating under the same governance mandate.</div>
+    <div class="drillrow">
+      <div class="lab">Feeds from / drills into</div>
+      <div class="drilltags">
+        <a href="Team_Operating_Model_Architect_v3.html" target="_blank">Stakeholder Engagement section (Architect v3)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCK 6 -->
+  <div class="block">
+    <div class="block-head">
+      <span class="block-num">06</span>
+      <h2 class="block-title">Maturity Signals</h2>
+    </div>
+    <div class="block-q">A year from now, how will you know this ecosystem is working?</div>
+    <div contenteditable="true" spellcheck="false" data-ph="What does 'working' look like?"
+    >Fewer ad hoc, off-cadence asks. Items that reach the leader's decision surface are genuinely theirs to decide — nothing trivial gets through. The team surfaces reality early rather than needing rescue (recoverability over perfection). Rhythm feels predictable rather than reactive, to the leader and to the team.</div>
+  </div>
+
+  <div class="contract">
+    <b class="title">The contract, restated</b>
+    <p>The team develops and recommends. The leader decides and promulgates. Every tool in the
+    drill-down map exists to make one of the six pieces above sharper — not to replace this page.
+    If a new tool doesn't obviously feed one of these six blocks, that's worth a second look before
+    you build it.</p>
+  </div>
+
+  <div class="footer-note">Draft shape — refine each block as the drill-down tools get used, not before</div>
+
+</div>
+
+<script>
+  const KEY = "leader-operating-ecosystem-v1";
+  const app = document.getElementById("app");
+  let saveTimer = null;
+
+  app.addEventListener("input", function(e){
+    if(!e.target.hasAttribute || !e.target.hasAttribute("contenteditable")) return;
+    const status = document.getElementById("savenote");
+    status.textContent = "saving...";
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(save, 600);
+  });
+
+  function collect(){
+    const data = {};
+    document.querySelectorAll("[contenteditable]").forEach((el,i)=>{
+      const key = el.id || ("block_"+i);
+      data[key] = el.innerHTML;
+    });
+    return data;
+  }
+
+  function apply(data){
+    document.querySelectorAll("[contenteditable]").forEach((el,i)=>{
+      const key = el.id || ("block_"+i);
+      if(data[key] !== undefined) el.innerHTML = data[key];
+    });
+  }
+
+  async function save(){
+    const status = document.getElementById("savenote");
+    try{
+      if(window.storage && window.storage.set){
+        await window.storage.set(KEY, JSON.stringify(collect()), false);
+        status.textContent = "saved";
+        setTimeout(()=>{ if(status.textContent==="saved") status.textContent = "edits save automatically"; }, 1400);
+      }
+    }catch(err){
+      status.textContent = "save failed — your changes stay on screen for now";
+    }
+  }
+
+  async function load(){
+    try{
+      if(window.storage && window.storage.get){
+        const r = await window.storage.get(KEY, false);
+        if(r && r.value) apply(JSON.parse(r.value));
+      }
+    }catch(err){}
+  }
+
+  async function resetDoc(){
+    if(!confirm("Reset to the draft shape? Your edits will be cleared.")) return;
+    try{ if(window.storage && window.storage.delete) await window.storage.delete(KEY, false); }catch(err){}
+    location.reload();
+  }
+
+  load();
+</script>
+</body>
+</html>
