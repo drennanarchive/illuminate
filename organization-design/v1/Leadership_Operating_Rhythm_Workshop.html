@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Leadership Operating Rhythm Workshop</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;background:#f3f5f7;margin:0}
+.container{max-width:1100px;margin:auto;padding:30px}
+.card{background:white;border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+h1{margin-top:0}
+.step{display:none}
+.step.active{display:block}
+.progress{display:flex;gap:8px;margin:20px 0}
+.dot{height:10px;flex:1;background:#d6dbe1;border-radius:20px}
+.dot.active,.dot.done{background:#356ae6}
+textarea,input{width:100%;padding:10px;margin:6px 0 14px;border:1px solid #ccd2d8;border-radius:8px}
+button{padding:10px 18px;border:none;border-radius:8px;cursor:pointer}
+.primary{background:#356ae6;color:white}
+.secondary{background:#6b7280;color:white}
+.nav{display:flex;justify-content:space-between;margin-top:20px}
+.summary{white-space:pre-wrap;background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #d8dee5}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.note{background:#eef4ff;padding:12px;border-radius:8px;margin-bottom:15px}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="card">
+<h1>Leadership Operating Rhythm Workshop</h1>
+<p>Designed for a leader whose responsibilities expanded. Focuses on protecting time, reducing mental load, and creating intentional information flow.</p>
+
+<div class="progress" id="progress"></div>
+
+<div class="step active">
+<h2>1. Reality Check</h2>
+<div class="note">Start with the change. What is different now that the organization was flattened?</div>
+<label>What responsibilities increased?</label>
+<textarea id="change"></textarea>
+<label>What is most likely to drain her time or energy?</label>
+<textarea id="drain"></textarea>
+<label>What absolutely cannot fall through the cracks?</label>
+<textarea id="critical"></textarea>
+</div>
+
+<div class="step">
+<h2>2. Protect the Leader</h2>
+<div class="grid">
+<div>
+<label>What should still come to her?</label>
+<textarea id="should"></textarea>
+</div>
+<div>
+<label>What should NOT require her involvement?</label>
+<textarea id="shouldnot"></textarea>
+</div>
+</div>
+<label>What information should arrive in a predictable format?</label>
+<textarea id="format"></textarea>
+</div>
+
+<div class="step">
+<h2>3. Team ↔ Leader Information Flow</h2>
+<label>What does the team consistently need from her?</label>
+<textarea id="needfrom"></textarea>
+<label>What does she consistently need from the team?</label>
+<textarea id="needto"></textarea>
+<label>Where do surprises usually come from?</label>
+<textarea id="surprises"></textarea>
+</div>
+
+<div class="step">
+<h2>4. Friction Mapping</h2>
+<label>Current bottlenecks, confusion, duplicate work, or interruptions</label>
+<textarea id="friction"></textarea>
+<label>What causes context switching?</label>
+<textarea id="context"></textarea>
+<label>What could be handled asynchronously?</label>
+<textarea id="async"></textarea>
+</div>
+
+<div class="step">
+<h2>5. Rhythm Builder</h2>
+<label>Weekly touchpoints worth protecting</label>
+<textarea id="weekly"></textarea>
+<label>Monthly touchpoints worth protecting</label>
+<textarea id="monthly"></textarea>
+<label>Quarterly touchpoints worth protecting</label>
+<textarea id="quarterly"></textarea>
+</div>
+
+<div class="step">
+<h2>6. Executive Summary</h2>
+<button class="primary" onclick="buildSummary()">Generate Artifact</button>
+<div id="summary" class="summary" style="margin-top:15px">Click Generate Artifact.</div>
+</div>
+
+<div class="nav">
+<button class="secondary" onclick="prevStep()">Back</button>
+<button class="primary" onclick="nextStep()">Next</button>
+</div>
+</div>
+</div>
+
+<script>
+let step=0;
+const steps=document.querySelectorAll('.step');
+
+function drawProgress(){
+ const p=document.getElementById('progress');
+ p.innerHTML='';
+ for(let i=0;i<steps.length;i++){
+   const d=document.createElement('div');
+   d.className='dot '+(i<step?'done':(i===step?'active':''));
+   p.appendChild(d);
+ }
+}
+function showStep(){
+ steps.forEach((s,i)=>s.classList.toggle('active',i===step));
+ drawProgress();
+}
+function nextStep(){ if(step<steps.length-1){step++;showStep();}}
+function prevStep(){ if(step>0){step--;showStep();}}
+
+function val(id){return document.getElementById(id).value.trim();}
+
+function buildSummary(){
+ let t=`LEADERSHIP OPERATING RHYTHM RECOMMENDATION
+
+WHY THIS MATTERS
+${val('change')}
+
+RISKS TO TIME / ENERGY
+${val('drain')}
+
+CRITICAL ITEMS
+${val('critical')}
+
+WHAT SHOULD REACH THE LEADER
+${val('should')}
+
+WHAT SHOULD BE DELEGATED OR HANDLED WITHOUT LEADER INVOLVEMENT
+${val('shouldnot')}
+
+PREFERRED INFORMATION FORMAT
+${val('format')}
+
+TEAM NEEDS FROM LEADER
+${val('needfrom')}
+
+LEADER NEEDS FROM TEAM
+${val('needto')}
+
+COMMON SURPRISES
+${val('surprises')}
+
+FRICTION POINTS
+${val('friction')}
+
+CONTEXT SWITCHING SOURCES
+${val('context')}
+
+ASYNC CANDIDATES
+${val('async')}
+
+RECOMMENDED WEEKLY RHYTHM
+${val('weekly')}
+
+RECOMMENDED MONTHLY RHYTHM
+${val('monthly')}
+
+RECOMMENDED QUARTERLY RHYTHM
+${val('quarterly')}
+`;
+ document.getElementById('summary').textContent=t;
+}
+drawProgress();
+</script>
+</body>
+</html>

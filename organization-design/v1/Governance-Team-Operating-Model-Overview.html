@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style>
+
+body {
+    margin:0;
+    background:#edf2f7;
+    font-family:"Segoe UI", Arial, sans-serif;
+    color:#263238;
+}
+
+
+.container {
+
+    width:1200px;
+    margin:30px auto;
+    background:white;
+    padding:45px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+
+h1 {
+
+    color:#16324f;
+    font-size:38px;
+    margin-bottom:5px;
+
+}
+
+
+.subtitle {
+
+    color:#607080;
+    font-size:19px;
+
+}
+
+
+.hero {
+
+    margin-top:30px;
+    padding:25px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#eef4f8,#f8fbfd);
+    line-height:1.6;
+
+}
+
+
+
+.map {
+
+    margin-top:35px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+
+}
+
+
+
+.tile {
+
+    background:#16324f;
+    color:white;
+    padding:22px;
+    border-radius:14px;
+    cursor:pointer;
+    transition:.2s;
+    text-align:center;
+
+}
+
+
+.tile:hover {
+
+    transform:translateY(-5px);
+    box-shadow:0 8px 18px rgba(0,0,0,.15);
+
+}
+
+
+
+.tile span {
+
+    font-size:30px;
+    display:block;
+    margin-bottom:10px;
+
+}
+
+
+
+.panel {
+
+    display:none;
+    margin-top:15px;
+    padding:25px;
+    background:#fafbfd;
+    border-left:5px solid #16324f;
+    border-radius:10px;
+
+}
+
+
+
+.panel h2 {
+
+    color:#16324f;
+
+}
+
+
+
+.section {
+
+    margin-top:35px;
+
+}
+
+
+
+.practice {
+
+    background:#f8fafc;
+    padding:20px;
+    border-radius:12px;
+    border:1px solid #d8e0e8;
+
+}
+
+
+
+button {
+
+    background:#16324f;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+
+}
+
+
+
+.answer {
+
+    display:none;
+    margin-top:15px;
+    background:#eef7ee;
+    padding:15px;
+    border-radius:8px;
+
+}
+
+
+
+.footer {
+
+    margin-top:40px;
+    color:#607080;
+    font-size:14px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>
+Governance Team Operating Model Map
+</h1>
+
+
+<div class="subtitle">
+How information flow, leadership engagement, portfolio visibility, and ownership connect
+</div>
+
+
+
+
+<div class="hero">
+
+<b>The mental model:</b>
+
+<br><br>
+
+A mature governance team is not defined by the number of meetings or documents it produces.
+
+It creates an intentional system that answers:
+
+<br><br>
+
+🔹 What information needs to flow?  
+<br>
+🔹 Who needs it?  
+<br>
+🔹 What decision does it support?  
+<br>
+🔹 Who owns the outcome?  
+<br>
+🔹 What structure enables success?
+
+</div>
+
+
+
+
+
+<div class="map">
+
+
+<div class="tile" onclick="toggle('rhythm')">
+
+<span>🧭</span>
+
+Operating Rhythm
+
+</div>
+
+
+<div class="tile" onclick="toggle('touch')">
+
+<span>🤝</span>
+
+Leadership Touchpoints
+
+</div>
+
+
+<div class="tile" onclick="toggle('pmr')">
+
+<span>📊</span>
+
+PMR Lite
+
+</div>
+
+
+<div class="tile" onclick="toggle('roles')">
+
+<span>👥</span>
+
+Role Alignment
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div id="rhythm" class="panel">
+
+<h2>
+Operating Rhythm
+</h2>
+
+<b>The question:</b>
+
+<br>
+How should information and decisions move through the organization?
+
+<br><br>
+
+<b>Solves:</b>
+
+<ul>
+<li>Reactive requests</li>
+<li>Unclear escalation paths</li>
+<li>Leadership overload</li>
+</ul>
+
+<b>Remember:</b>
+
+This is the architecture. Decide the flow before deciding the meetings.
+
+</div>
+
+
+
+
+
+
+<div id="touch" class="panel">
+
+<h2>
+Leadership Touchpoints
+</h2>
+
+<b>The question:</b>
+
+<br>
+Which conversations deserve leadership attention?
+
+<br><br>
+
+<b>Solves:</b>
+
+<ul>
+<li>Random status updates</li>
+<li>Unclear meeting purpose</li>
+<li>Too much information, not enough decisions</li>
+</ul>
+
+<b>Remember:</b>
+
+Every meeting should answer:
+"What value does leadership add here?"
+
+</div>
+
+
+
+
+
+
+
+<div id="pmr" class="panel">
+
+<h2>
+PMR Lite
+</h2>
+
+<b>The question:</b>
+
+<br>
+What does leadership need to know this month?
+
+<br><br>
+
+<b>Solves:</b>
+
+<ul>
+<li>Portfolio visibility</li>
+<li>Strategic alignment</li>
+<li>Decision preparation</li>
+</ul>
+
+
+<b>Remember:</b>
+
+Not:
+"What did everyone do?"
+
+Instead:
+"Where are we, where are we going, and what needs attention?"
+
+</div>
+
+
+
+
+
+
+
+<div id="roles" class="panel">
+
+<h2>
+Role Alignment
+</h2>
+
+<b>The question:</b>
+
+<br>
+What capability do we need, who owns it, and how do we enable success?
+
+<br><br>
+
+<b>Solves:</b>
+
+<ul>
+<li>Ownership overlap</li>
+<li>Capability gaps</li>
+<li>Unclear responsibilities</li>
+</ul>
+
+<b>Remember:</b>
+
+Capability + Boundaries + Accountability = Sustainable ownership
+
+</div>
+
+
+
+
+
+
+
+<div class="section">
+
+<h2>
+Practice: Which Tool Applies?
+</h2>
+
+
+<div class="practice">
+
+
+<b>Scenario:</b>
+
+<br><br>
+
+Your leader says:
+
+"I have more meetings, but I still don't know what information I should expect from the team."
+
+<br><br>
+
+
+<button onclick="toggle('answer1')">
+Reveal Answer
+</button>
+
+
+<div id="answer1" class="answer">
+
+<b>Operating Rhythm</b>
+
+<br><br>
+
+The problem is not the meeting itself. The problem is the information flow model.
+
+</div>
+
+
+</div>
+
+
+
+
+<br>
+
+
+
+<div class="practice">
+
+
+<b>Scenario:</b>
+
+<br><br>
+
+Everyone gives updates during a monthly leadership meeting, but the discussion never gets to decisions.
+
+<br><br>
+
+
+<button onclick="toggle('answer2')">
+Reveal Answer
+</button>
+
+
+<div id="answer2" class="answer">
+
+<b>PMR Lite</b>
+
+<br><br>
+
+The team needs a leadership-level product focused on decisions, signals, and direction.
+
+</div>
+
+
+</div>
+
+
+
+
+<br>
+
+
+
+<div class="practice">
+
+
+<b>Scenario:</b>
+
+<br><br>
+
+Two people are both helping with an emerging capability and ownership is unclear.
+
+<br><br>
+
+
+<button onclick="toggle('answer3')">
+Reveal Answer
+</button>
+
+
+<div id="answer3" class="answer">
+
+<b>Role Alignment</b>
+
+<br><br>
+
+The missing piece is ownership, accountability, and success criteria.
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="hero">
+
+<h2>
+The Governance Leader Lens
+</h2>
+
+
+When designing a team:
+
+<br><br>
+
+1️⃣ Define the information flow  
+<br>
+2️⃣ Establish leadership touchpoints  
+<br>
+3️⃣ Create portfolio visibility  
+<br>
+4️⃣ Clarify ownership  
+<br>
+5️⃣ Build structures that sustain success  
+
+</div>
+
+
+
+
+<div class="footer">
+
+Built from:
+Operating Rhythm • Leadership Touchpoints • PMR Lite • Role Alignment
+
+Click any tile or answer again to collapse.
+
+</div>
+
+
+
+
+</div>
+
+
+
+<script>
+
+
+function toggle(id){
+
+let element=document.getElementById(id);
+
+
+if(element.style.display==="block"){
+
+element.style.display="none";
+
+}
+
+else {
+
+element.style.display="block";
+
+}
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>

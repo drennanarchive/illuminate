@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Team cadence builder</title>
+<style>
+  :root{
+    --ink:#232722; --paper:#F6F4EE; --card:#FFFFFF;
+    --line:#DAD6C9; --muted:#75766C; --accent:#3E6259; --accent-soft:#E3ECE7;
+    --accent-text:#264840; --warn:#B4642C; --warn-soft:#F5E6DA; --warn-text:#7A3E17;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Iowan Old Style','Georgia',serif;}
+  #app{max-width:760px;margin:0 auto;padding:28px 20px 60px;}
+  .eyebrow{font-family:'Courier New',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  h1{font-size:26px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em;}
+  .sub{font-size:14px;color:var(--muted);font-family:Georgia,serif;margin-bottom:22px;}
+  .steps{display:flex;gap:6px;margin-bottom:26px;}
+  .step-dot{flex:1;height:4px;background:var(--line);border-radius:2px;position:relative;cursor:pointer;transition:background .2s;}
+  .step-dot.done{background:var(--accent);}
+  .step-dot.active{background:var(--warn);}
+  .step-labels{display:flex;justify-content:space-between;font-family:'Courier New',monospace;font-size:10px;color:var(--muted);margin-bottom:24px;text-transform:uppercase;letter-spacing:.06em;}
+  .step-labels span{flex:1;text-align:left;}
+  .step-labels span:last-child{text-align:right;}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:26px 26px 22px;}
+  .panel h2{font-size:18px;margin:0 0 4px;font-weight:600;}
+  .panel p.desc{font-size:13.5px;color:var(--muted);margin:0 0 20px;line-height:1.55;font-family:Georgia,serif;}
+  .row{margin-bottom:16px;}
+  .row label{display:block;font-family:'Courier New',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-text);margin-bottom:5px;}
+  .row .hint{font-size:12px;color:var(--muted);margin:2px 0 6px;font-family:Georgia,serif;}
+  input[type=text], textarea{
+    width:100%;font-family:Georgia,serif;font-size:14px;color:var(--ink);
+    background:var(--paper);border:1px solid var(--line);border-radius:2px;
+    padding:9px 10px;resize:vertical;
+  }
+  input[type=text]:focus, textarea:focus{outline:none;border-color:var(--accent);background:#fff;}
+  textarea{min-height:52px;line-height:1.5;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  table.matrix{width:100%;border-collapse:collapse;font-size:13px;}
+  table.matrix th{font-family:'Courier New',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:0 8px 8px 0;font-weight:400;border-bottom:1px solid var(--line);}
+  table.matrix td{padding:6px 8px 6px 0;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.matrix input, table.matrix textarea{font-size:12.5px;padding:6px 7px;min-height:32px;}
+  table.matrix tr:last-child td{border-bottom:none;}
+  .freq{font-family:'Courier New',monospace;font-size:11px;color:var(--warn-text);background:var(--warn-soft);padding:4px 6px;border-radius:2px;white-space:nowrap;display:inline-block;margin-top:4px;}
+  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:22px;}
+  button{font-family:'Courier New',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.05em;
+    background:var(--card);border:1px solid var(--ink);color:var(--ink);padding:10px 18px;border-radius:2px;cursor:pointer;}
+  button:hover{background:var(--ink);color:var(--paper);}
+  button.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  button.primary:hover{background:var(--accent-text);border-color:var(--accent-text);}
+  button:disabled{opacity:.35;cursor:default;}
+  button:disabled:hover{background:var(--card);color:var(--ink);}
+  .save-status{font-family:'Courier New',monospace;font-size:10.5px;color:var(--muted);text-align:center;margin-top:14px;letter-spacing:.03em;}
+  .summary-block{margin-bottom:20px;}
+  .summary-block h3{font-size:13px;text-transform:uppercase;font-family:'Courier New',monospace;letter-spacing:.05em;color:var(--accent-text);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:10px;}
+  .summary-entry{font-size:13.5px;margin-bottom:8px;line-height:1.5;}
+  .summary-entry .k{color:var(--muted);font-family:'Courier New',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:2px;}
+  .empty{color:var(--muted);font-style:italic;}
+  .export-actions{display:flex;gap:10px;margin-top:20px;}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="eyebrow">Team cadence builder</div>
+  <h1>Step through your cadence</h1>
+  <div class="sub">Fill this in with your leader. Autosaves as you go — come back anytime.</div>
+
+  <div class="steps" id="steps"></div>
+  <div class="step-labels" id="stepLabels"></div>
+
+  <div class="panel" id="panel"></div>
+  <div class="save-status" id="saveStatus">&nbsp;</div>
+</div>
+
+<script>
+const STORAGE_KEY = 'cadence-worksheet-v1';
+const STEP_TITLES = ['Touchpoints','The key loop','Team scope','Sanity check','Summary'];
+
+let data = {
+  touchpoints: [
+    {freq:'Daily', name:'', purpose:'', attendees:'', owner:'', output:''},
+    {freq:'Weekly', name:'', purpose:'', attendees:'', owner:'', output:''},
+    {freq:'Weekly/Biweekly', name:'', purpose:'', attendees:'', owner:'', output:''},
+    {freq:'Monthly', name:'', purpose:'', attendees:'', owner:'', output:''},
+    {freq:'Monthly', name:'', purpose:'', attendees:'', owner:'', output:''},
+    {freq:'Quarterly', name:'', purpose:'', attendees:'', owner:'', output:''}
+  ],
+  loop: {upFormat:'', upDeadline:'', downSpeed:'', downMin:'', escalation:''},
+  scope: {decideAlone:'', decideSignoff:'', sheNeeds:'', teamNeeds:'', priorityShift:''},
+  check: {overlap:'', feedback:'', lightest:''}
+};
+let step = 0;
+let saveTimer = null;
+
+function fieldsMissingOnStep(){ return false; }
+
+async function loadData(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, false);
+    if(res && res.value){
+      const parsed = JSON.parse(res.value);
+      data = Object.assign(data, parsed);
+    }
+  }catch(e){}
+  render();
+}
+
+function queueSave(){
+  const status = document.getElementById('saveStatus');
+  status.textContent = 'saving...';
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async ()=>{
+    try{
+      await window.storage.set(STORAGE_KEY, JSON.stringify(data), false);
+      status.textContent = 'saved';
+      setTimeout(()=>{ if(status.textContent==='saved') status.innerHTML='&nbsp;'; }, 1500);
+    }catch(e){
+      status.textContent = 'save failed — your changes stay on screen for now';
+    }
+  }, 500);
+}
+
+function renderSteps(){
+  const stepsEl = document.getElementById('steps');
+  const labelsEl = document.getElementById('stepLabels');
+  stepsEl.innerHTML = '';
+  labelsEl.innerHTML = '';
+  STEP_TITLES.forEach((t,i)=>{
+    const dot = document.createElement('div');
+    dot.className = 'step-dot' + (i===step?' active':(i<step?' done':''));
+    dot.onclick = ()=>{ step=i; render(); };
+    stepsEl.appendChild(dot);
+    const lab = document.createElement('span');
+    lab.textContent = t;
+    labelsEl.appendChild(lab);
+  });
+}
+
+function inputRow(labelText, hint, value, onChange, multiline){
+  const row = document.createElement('div');
+  row.className = 'row';
+  const label = document.createElement('label');
+  label.textContent = labelText;
+  row.appendChild(label);
+  if(hint){
+    const h = document.createElement('div');
+    h.className = 'hint';
+    h.textContent = hint;
+    row.appendChild(h);
+  }
+  const el = document.createElement(multiline ? 'textarea' : 'input');
+  if(!multiline) el.type = 'text';
+  el.value = value || '';
+  el.addEventListener('input', (e)=>{ onChange(e.target.value); queueSave(); });
+  row.appendChild(el);
+  return row;
+}
+
+function renderStep0(panel){
+  panel.innerHTML = '';
+  const h = document.createElement('h2'); h.textContent = 'Inventory your touchpoints';
+  const p = document.createElement('p'); p.className='desc';
+  p.textContent = 'For each recurring meeting, name it and define the one thing it must accomplish. If a purpose is hard to write, that meeting may not need to exist.';
+  panel.appendChild(h); panel.appendChild(p);
+
+  const table = document.createElement('table');
+  table.className = 'matrix';
+  table.innerHTML = '<tr><th style="width:14%">Cadence</th><th style="width:18%">Name</th><th style="width:26%">Purpose</th><th style="width:16%">Attendees</th><th style="width:12%">Owner</th><th style="width:14%">Output</th></tr>';
+  data.touchpoints.forEach((tp, idx)=>{
+    const tr = document.createElement('tr');
+    const tdFreq = document.createElement('td');
+    const freqSpan = document.createElement('span');
+    freqSpan.className='freq'; freqSpan.textContent = tp.freq;
+    tdFreq.appendChild(freqSpan);
+    tr.appendChild(tdFreq);
+    ['name','purpose','attendees','owner','output'].forEach(field=>{
+      const td = document.createElement('td');
+      const inp = document.createElement(field==='purpose'?'textarea':'input');
+      if(field!=='purpose') inp.type='text';
+      inp.value = tp[field] || '';
+      inp.addEventListener('input', e=>{ data.touchpoints[idx][field] = e.target.value; queueSave(); });
+      td.appendChild(inp);
+      tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  });
+  panel.appendChild(table);
+}
+
+function renderStep1(panel){
+  panel.innerHTML = '';
+  const h = document.createElement('h2'); h.textContent = 'The loop that matters most right now';
+  const p = document.createElement('p'); p.className='desc';
+  p.textContent = 'Your leader now sits between the team and decision-holders. This is usually the gap in a newly elevated team — worth designing on purpose rather than letting it happen by accident.';
+  panel.appendChild(h); panel.appendChild(p);
+
+  panel.appendChild(inputRow('Upward — format', 'What format makes it easiest for her to carry team input into her meetings?', data.loop.upFormat, v=>data.loop.upFormat=v, true));
+  panel.appendChild(inputRow('Upward — deadline', 'Does she need input by a certain day before she meets with decision-holders?', data.loop.upDeadline, v=>data.loop.upDeadline=v));
+  panel.appendChild(inputRow('Downward — speed', 'How fast after her meetings should the team hear what happened?', data.loop.downSpeed, v=>data.loop.downSpeed=v));
+  panel.appendChild(inputRow('Downward — minimum', 'What\'s the minimum she relays, even when there\'s "nothing new"?', data.loop.downMin, v=>data.loop.downMin=v, true));
+  panel.appendChild(inputRow('Escalation path', 'If something urgent comes up off-cadence, what\'s the channel, and what counts as urgent?', data.loop.escalation, v=>data.loop.escalation=v, true));
+}
+
+function renderStep2(panel){
+  panel.innerHTML = '';
+  const h = document.createElement('h2'); h.textContent = 'Define the support team\'s scope';
+  const p = document.createElement('p'); p.className='desc';
+  p.textContent = 'Get concrete about what the team owns outright versus what needs her sign-off, and what each side needs from the other to do the job well.';
+  panel.appendChild(h); panel.appendChild(p);
+
+  panel.appendChild(inputRow('Decisions the team makes alone', '', data.scope.decideAlone, v=>data.scope.decideAlone=v, true));
+  panel.appendChild(inputRow('Decisions that need her sign-off', '', data.scope.decideSignoff, v=>data.scope.decideSignoff=v, true));
+  panel.appendChild(inputRow('What she needs from the team', 'To represent it well upward', data.scope.sheNeeds, v=>data.scope.sheNeeds=v, true));
+  panel.appendChild(inputRow('What the team needs from her', 'To do its job', data.scope.teamNeeds, v=>data.scope.teamNeeds=v, true));
+  panel.appendChild(inputRow('How the team will know priorities changed', '', data.scope.priorityShift, v=>data.scope.priorityShift=v, true));
+}
+
+function renderStep3(panel){
+  panel.innerHTML = '';
+  const h = document.createElement('h2'); h.textContent = 'Sanity-check the whole cadence';
+  const p = document.createElement('p'); p.className='desc';
+  p.textContent = 'Once it\'s mapped, zoom out. Easier to add structure later than to strip away meetings people already resent.';
+  panel.appendChild(h); panel.appendChild(p);
+
+  panel.appendChild(inputRow('Any overlapping purposes?', 'Does every recurring meeting have a distinct job, or do two overlap?', data.check.overlap, v=>data.check.overlap=v, true));
+  panel.appendChild(inputRow('How will the cadence get feedback on itself?', '', data.check.feedback, v=>data.check.feedback=v, true));
+  panel.appendChild(inputRow('What\'s the lightest version that still works?', '', data.check.lightest, v=>data.check.lightest=v, true));
+}
+
+function renderSummary(panel){
+  panel.innerHTML = '';
+  const h = document.createElement('h2'); h.textContent = 'Summary';
+  const p = document.createElement('p'); p.className='desc';
+  p.textContent = 'Everything you\'ve filled in, in one place. Copy it into a doc or bring this screen straight into the conversation.';
+  panel.appendChild(h); panel.appendChild(p);
+
+  function block(title, entries){
+    const b = document.createElement('div');
+    b.className = 'summary-block';
+    const bh = document.createElement('h3'); bh.textContent = title;
+    b.appendChild(bh);
+    let any = false;
+    entries.forEach(([k,v])=>{
+      if(!v) return;
+      any = true;
+      const e = document.createElement('div');
+      e.className='summary-entry';
+      const kSpan = document.createElement('span'); kSpan.className='k'; kSpan.textContent = k;
+      e.appendChild(kSpan);
+      e.appendChild(document.createTextNode(v));
+      b.appendChild(e);
+    });
+    if(!any){
+      const em = document.createElement('div'); em.className='empty'; em.textContent = 'Nothing filled in yet.';
+      b.appendChild(em);
+    }
+    return b;
+  }
+
+  panel.appendChild(block('Touchpoints', data.touchpoints.filter(t=>t.name).map(t=>[t.freq + ' — ' + t.name, t.purpose])));
+  panel.appendChild(block('The key loop', [
+    ['Upward format', data.loop.upFormat],
+    ['Upward deadline', data.loop.upDeadline],
+    ['Downward speed', data.loop.downSpeed],
+    ['Downward minimum', data.loop.downMin],
+    ['Escalation path', data.loop.escalation]
+  ]));
+  panel.appendChild(block('Team scope', [
+    ['Team decides alone', data.scope.decideAlone],
+    ['Needs her sign-off', data.scope.decideSignoff],
+    ['She needs from team', data.scope.sheNeeds],
+    ['Team needs from her', data.scope.teamNeeds],
+    ['Priority-shift signal', data.scope.priorityShift]
+  ]));
+  panel.appendChild(block('Sanity check', [
+    ['Overlaps', data.check.overlap],
+    ['Feedback on cadence', data.check.feedback],
+    ['Lightest viable version', data.check.lightest]
+  ]));
+
+  const actions = document.createElement('div');
+  actions.className = 'export-actions';
+  const copyBtn = document.createElement('button');
+  copyBtn.textContent = 'Copy as text';
+  copyBtn.onclick = ()=>{
+    const text = buildExportText();
+    navigator.clipboard.writeText(text).then(()=>{
+      copyBtn.textContent = 'Copied';
+      setTimeout(()=>copyBtn.textContent='Copy as text', 1500);
+    });
+  };
+  const resetBtn = document.createElement('button');
+  resetBtn.textContent = 'Reset all';
+  resetBtn.onclick = ()=>{
+    if(confirm('Clear everything you\'ve filled in?')){
+      data = JSON.parse(JSON.stringify(defaultData()));
+      step = 0;
+      queueSave();
+      render();
+    }
+  };
+  actions.appendChild(copyBtn);
+  actions.appendChild(resetBtn);
+  panel.appendChild(actions);
+}
+
+function defaultData(){
+  return {
+    touchpoints: [
+      {freq:'Daily', name:'', purpose:'', attendees:'', owner:'', output:''},
+      {freq:'Weekly', name:'', purpose:'', attendees:'', owner:'', output:''},
+      {freq:'Weekly/Biweekly', name:'', purpose:'', attendees:'', owner:'', output:''},
+      {freq:'Monthly', name:'', purpose:'', attendees:'', owner:'', output:''},
+      {freq:'Monthly', name:'', purpose:'', attendees:'', owner:'', output:''},
+      {freq:'Quarterly', name:'', purpose:'', attendees:'', owner:'', output:''}
+    ],
+    loop: {upFormat:'', upDeadline:'', downSpeed:'', downMin:'', escalation:''},
+    scope: {decideAlone:'', decideSignoff:'', sheNeeds:'', teamNeeds:'', priorityShift:''},
+    check: {overlap:'', feedback:'', lightest:''}
+  };
+}
+
+function buildExportText(){
+  let out = 'TEAM CADENCE WORKSHEET\n\n';
+  out += 'TOUCHPOINTS\n';
+  data.touchpoints.filter(t=>t.name).forEach(t=>{
+    out += `- [${t.freq}] ${t.name}: ${t.purpose}\n  Attendees: ${t.attendees} | Owner: ${t.owner} | Output: ${t.output}\n`;
+  });
+  out += '\nTHE KEY LOOP\n';
+  out += `Upward format: ${data.loop.upFormat}\nUpward deadline: ${data.loop.upDeadline}\nDownward speed: ${data.loop.downSpeed}\nDownward minimum: ${data.loop.downMin}\nEscalation: ${data.loop.escalation}\n`;
+  out += '\nTEAM SCOPE\n';
+  out += `Decides alone: ${data.scope.decideAlone}\nNeeds sign-off: ${data.scope.decideSignoff}\nShe needs: ${data.scope.sheNeeds}\nTeam needs: ${data.scope.teamNeeds}\nPriority-shift signal: ${data.scope.priorityShift}\n`;
+  out += '\nSANITY CHECK\n';
+  out += `Overlaps: ${data.check.overlap}\nFeedback loop: ${data.check.feedback}\nLightest version: ${data.check.lightest}\n`;
+  return out;
+}
+
+function render(){
+  renderSteps();
+  const panel = document.getElementById('panel');
+  [renderStep0, renderStep1, renderStep2, renderStep3, renderSummary][step](panel);
+
+  const nav = document.createElement('div');
+  nav.className = 'nav';
+  const back = document.createElement('button');
+  back.textContent = 'Back';
+  back.disabled = step===0;
+  back.onclick = ()=>{ step--; render(); };
+  const next = document.createElement('button');
+  next.className = 'primary';
+  next.textContent = step===STEP_TITLES.length-1 ? 'Done' : 'Next';
+  next.disabled = step===STEP_TITLES.length-1;
+  next.onclick = ()=>{ step++; render(); };
+  nav.appendChild(back);
+  nav.appendChild(next);
+  panel.appendChild(nav);
+}
+
+loadData();
+</script>
+</body>
+</html>

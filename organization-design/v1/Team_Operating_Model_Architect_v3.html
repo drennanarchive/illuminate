@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+Team Operating Model Architect
+</title>
+
+
+<style>
+
+body {
+    margin:0;
+    font-family:"Segoe UI", Arial, sans-serif;
+    background:#f8fafc;
+    color:#1e293b;
+}
+
+
+.container {
+    max-width:1200px;
+    margin:auto;
+    padding:40px;
+}
+
+
+.header {
+
+    background:#0f172a;
+    color:white;
+    padding:35px;
+    border-radius:18px;
+    margin-bottom:30px;
+
+}
+
+
+.header h1 {
+
+    font-size:42px;
+    margin:0 0 10px 0;
+
+}
+
+
+.header p {
+
+    color:#cbd5e1;
+    font-size:18px;
+
+}
+
+
+.card {
+
+    background:white;
+    border-radius:16px;
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+}
+
+
+.stage {
+
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+    margin-bottom:18px;
+    overflow:hidden;
+
+}
+
+
+.stage-header {
+
+    background:#f1f5f9;
+    padding:20px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+
+.stage-header:hover {
+
+    background:#e2e8f0;
+
+}
+
+
+.stage-title {
+
+    font-size:22px;
+    font-weight:700;
+
+}
+
+
+.stage-purpose {
+
+    font-size:14px;
+    color:#64748b;
+    margin-top:5px;
+
+}
+
+
+.stage-body {
+
+    display:none;
+    padding:25px;
+
+}
+
+
+.question {
+
+    margin-bottom:22px;
+
+}
+
+
+.question label {
+
+    display:block;
+    font-weight:600;
+    margin-bottom:8px;
+
+}
+
+
+textarea {
+
+    width:100%;
+    min-height:100px;
+    border-radius:10px;
+    border:1px solid #cbd5e1;
+    padding:12px;
+    font-family:inherit;
+    font-size:15px;
+    box-sizing:border-box;
+
+}
+
+
+textarea:focus {
+
+    outline:2px solid #38bdf8;
+
+}
+
+
+.button-bar {
+
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+
+}
+
+
+button {
+
+    background:#0284c7;
+    color:white;
+    border:none;
+    border-radius:10px;
+    padding:14px 20px;
+    cursor:pointer;
+    font-weight:600;
+
+}
+
+
+button:hover {
+
+    background:#0369a1;
+
+}
+
+
+.secondary {
+
+    background:#475569;
+
+}
+
+
+.secondary:hover {
+
+    background:#334155;
+
+}
+
+
+.output {
+
+    margin-top:25px;
+    background:#0f172a;
+    color:#f8fafc;
+    padding:30px;
+    border-radius:14px;
+    white-space:pre-wrap;
+    display:none;
+    line-height:1.6;
+
+}
+
+
+.tip {
+
+    background:#eff6ff;
+    border-left:5px solid #0284c7;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:20px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="header">
+
+<h1>🏛️ Team Operating Model Architect</h1>
+
+<p>
+Design your team's identity, operating model, decision rights, and leadership engagement approach.
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>How This Works</h2>
+
+<div class="tip">
+
+<strong>Think before you document.</strong><br><br>
+
+This tool helps you answer:
+<br><br>
+
+• Why does this team exist?<br>
+• What value do we provide?<br>
+• What do we own vs enable?<br>
+• How should work move through the team?<br>
+• How should leadership engage with us?
+
+</div>
+
+
+<p>
+Complete sections over time. Your progress saves automatically.
+</p>
+
+
+</div>
+
+
+
+<div id="builder"></div>
+
+
+
+<div class="card">
+
+<h2>Generate Outputs</h2>
+
+
+<p>
+When your draft is ready, generate different views depending on your audience.
+</p>
+
+
+<div class="button-bar">
+
+<button onclick="generateExecutive()">
+📄 Executive Operating Model
+</button>
+
+
+<button onclick="generateTeamVersion()">
+🧭 Team Working Version
+</button>
+
+
+<button onclick="generatePrompt()">
+🤖 ChatGPT Review Prompt
+</button>
+
+
+<button class="secondary" onclick="clearAll()">
+Reset
+</button>
+
+
+</div>
+
+
+<div id="output" class="output"></div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+const modelSections = [
+
+
+{
+id:"identity",
+title:"1. Team Identity & Strategic Purpose",
+purpose:"Define why the team exists beyond its day-to-day activities.",
+questions:[
+["Executive Mission Statement",
+"Example: We enable ___ by providing ___ so that ___."],
+
+["Problem We Solve",
+"What challenge, gap, or risk requires this team?"],
+
+["Strategic Role",
+"Are we primarily governance, integration, advisory, enablement, oversight, execution, or a combination?"],
+
+["Value Proposition",
+"What unique value does this team provide?"]
+]
+},
+
+
+{
+id:"capabilities",
+title:"2. Core Capabilities",
+purpose:"Describe what the team enables, not just what tasks it performs.",
+questions:[
+["Capability 1",
+"What capability do we provide?"],
+
+["Capability 2",
+"What capability do we provide?"],
+
+["Capability 3",
+"What capability do we provide?"],
+
+["What Changes Without Us",
+"What becomes harder, slower, or riskier without this team?"]
+]
+},
+
+
+{
+id:"scope",
+title:"3. Scope & Guardrails",
+purpose:"Clarify ownership boundaries.",
+questions:[
+["We Own",
+"What are we accountable for?"],
+
+["We Enable",
+"What do we support but not execute?"],
+
+["We Advise",
+"Where do we provide expertise or recommendations?"],
+
+["We Do Not Own",
+"What responsibilities intentionally belong elsewhere?"]
+]
+},
+
+
+{
+id:"operations",
+title:"4. Operating Model",
+purpose:"Define how work enters, moves, and exits the team.",
+questions:[
+["Work Intake",
+"How does work come to the team?"],
+
+["Prioritization",
+"How do we determine what receives focus?"],
+
+["Assignment Model",
+"How do we assign ownership?"],
+
+["Reporting & Visibility",
+"How do we communicate progress and risks?"]
+]
+},
+
+
+{
+id:"decisions",
+title:"5. Decision Rights & Accountability",
+purpose:"Clarify who recommends, decides, executes, and escalates.",
+questions:[
+["Decision Ownership",
+"Who owns key decisions?"],
+
+["Recommendation Process",
+"How are recommendations developed?"],
+
+["Escalation Model",
+"When does something require leadership involvement?"]
+]
+},
+
+
+{
+id:"stakeholders",
+title:"6. Stakeholder Engagement Model",
+purpose:"Define how others should interact with the team.",
+questions:[
+["Key Stakeholders",
+"Who relies on or interacts with this team?"],
+
+["Stakeholder Needs",
+"What do stakeholders need from us?"],
+
+["Team Needs",
+"What do we need from stakeholders?"]
+]
+},
+
+
+{
+id:"ways",
+title:"7. Ways of Working",
+purpose:"Establish expectations for collaboration.",
+questions:[
+["Communication Norms",
+"How do we communicate?"],
+
+["Meeting Philosophy",
+"What purpose do meetings serve?"],
+
+["Handling Ambiguity",
+"How do we resolve unclear ownership or direction?"]
+]
+},
+
+
+{
+id:"leadership",
+title:"8. Leadership Engagement",
+purpose:"Define how leadership receives confidence and visibility.",
+questions:[
+["Leadership Expectations",
+"What should leadership expect from us?"],
+
+["Visibility Model",
+"What information should leadership receive?"],
+
+["Decision Support",
+"How do we help leaders make decisions?"]
+]
+},
+
+
+{
+id:"maturity",
+title:"9. Future State & Maturity",
+purpose:"Define where the team is going.",
+questions:[
+["Current State",
+"Where are we today?"],
+
+["Future State",
+"What does a mature version of this team look like?"],
+
+["Next Improvements",
+"What changes should happen first?"]
+]
+}
+
+
+];
+
+
+
+const builder=document.getElementById("builder");
+
+modelSections.forEach(section=>{
+
+
+let html=`
+
+<div class="stage">
+
+
+<div class="stage-header" onclick="toggleStage('${section.id}')">
+
+<div>
+
+<div class="stage-title">
+${section.title}
+</div>
+
+<div class="stage-purpose">
+${section.purpose}
+</div>
+
+</div>
+
+
+<div>
+▼
+</div>
+
+
+</div>
+
+
+<div class="stage-body" id="${section.id}">
+
+`;
+
+
+section.questions.forEach(q=>{
+
+
+let key=section.id+"_"+q[0];
+
+
+html+=`
+
+<div class="question">
+
+<label>${q[0]}</label>
+
+<textarea 
+id="${key}"
+placeholder="${q[1]}"
+oninput="save('${key}')"></textarea>
+
+</div>
+
+`;
+
+});
+
+
+html+=`
+
+</div>
+
+</div>
+
+`;
+
+
+builder.innerHTML+=html;
+
+
+});
+
+
+// ==============================
+// STORAGE FUNCTIONS
+// ==============================
+
+
+function save(key){
+
+    localStorage.setItem(
+        key,
+        document.getElementById(key).value
+    );
+
+}
+
+
+
+function getValue(key){
+
+    return localStorage.getItem(key) || "[Not yet defined]";
+
+}
+
+
+
+function loadSaved(){
+
+    document.querySelectorAll("textarea").forEach(box=>{
+
+        let saved = localStorage.getItem(box.id);
+
+        if(saved){
+
+            box.value = saved;
+
+        }
+
+    });
+
+}
+
+
+
+window.onload = loadSaved;
+
+
+
+function toggleStage(id){
+
+    let section = document.getElementById(id);
+
+    if(section.style.display==="block"){
+
+        section.style.display="none";
+
+    }
+
+    else {
+
+        section.style.display="block";
+
+    }
+
+}
+
+
+
+// ==============================
+// DOCUMENT BUILDER HELPERS
+// ==============================
+
+
+function sectionText(sectionID, title){
+
+    let output = "\n\n" + title.toUpperCase() + "\n";
+    output += "----------------------------------\n";
+
+    modelSections
+    .find(x=>x.id===sectionID)
+    .questions
+    .forEach(question=>{
+
+        output += "\n" + question[0] + ":\n";
+
+        output += getValue(sectionID+"_"+question[0]);
+
+        output += "\n";
+
+    });
+
+
+    return output;
+
+}
+
+
+
+
+function showOutput(text){
+
+    let output=document.getElementById("output");
+
+    output.style.display="block";
+
+    output.innerText=text;
+
+    window.scrollTo({
+
+        top:document.body.scrollHeight,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+
+// ==============================
+// EXECUTIVE DOCUMENT
+// ==============================
+
+
+function generateExecutive(){
+
+
+let doc = `
+
+
+TEAM OPERATING MODEL
+
+Executive Alignment Draft
+
+
+Prepared for Leadership Review
+
+
+Purpose:
+This document defines the team's mission, strategic role, operating model, decision framework, and engagement approach.
+
+
+EXECUTIVE SUMMARY
+
+This team exists to provide clarity, alignment, and strategic value by establishing an intentional operating model that enables effective collaboration, decision-making, and execution.
+
+
+${sectionText("identity","1. Mission & Strategic Purpose")}
+
+
+${sectionText("capabilities","2. Core Capabilities")}
+
+
+${sectionText("scope","3. Scope & Guardrails")}
+
+
+${sectionText("operations","4. Operating Model")}
+
+
+${sectionText("decisions","5. Decision Rights & Accountability")}
+
+
+${sectionText("stakeholders","6. Stakeholder Engagement Model")}
+
+
+${sectionText("ways","7. Ways of Working")}
+
+
+${sectionText("leadership","8. Leadership Engagement")}
+
+
+${sectionText("maturity","9. Future State & Maturity Roadmap")}
+
+
+
+FINAL ALIGNMENT QUESTIONS
+
+Before formalizing this operating model, leadership alignment is requested on:
+
+• Are the team's responsibilities appropriately defined?
+
+• Are ownership boundaries clear?
+
+• Are decision rights understood?
+
+• Are stakeholder engagement expectations aligned?
+
+• Are additional guardrails needed?
+
+
+`;
+
+
+showOutput(doc);
+
+
+}
+
+
+
+
+// ==============================
+// TEAM WORKING VERSION
+// ==============================
+
+
+function generateTeamVersion(){
+
+
+let doc = `
+
+
+TEAM OPERATING MODEL
+
+Internal Working Version
+
+
+Purpose:
+
+This document supports team alignment by defining how we work together, how responsibilities are assigned, and how we engage stakeholders.
+
+
+
+CURRENT DESIGN QUESTIONS
+
+Use this document as a living artifact.
+
+Areas requiring continued refinement:
+
+- Ownership boundaries
+- Decision authority
+- Stakeholder expectations
+- Operating cadence
+- Future maturity goals
+
+
+
+${sectionText("identity","1. Team Identity")}
+
+
+${sectionText("capabilities","2. Capabilities")}
+
+
+${sectionText("scope","3. Ownership Boundaries")}
+
+
+${sectionText("operations","4. Operating Workflow")}
+
+
+${sectionText("decisions","5. Decision Framework")}
+
+
+${sectionText("stakeholders","6. Stakeholder Model")}
+
+
+${sectionText("ways","7. Team Norms")}
+
+
+${sectionText("leadership","8. Leadership Alignment")}
+
+
+${sectionText("maturity","9. Growth Roadmap")}
+
+
+`;
+
+
+showOutput(doc);
+
+
+}
+
+
+
+
+// ==============================
+// CHATGPT REVIEW PROMPT
+// ==============================
+
+
+function generatePrompt(){
+
+
+let prompt=`
+
+
+I am designing a Team Operating Model.
+
+
+Below is our current draft:
+
+
+==============================
+
+
+${buildCompleteSummary()}
+
+
+==============================
+
+
+
+Act as an organizational design advisor.
+
+Review this operating model and help me improve it.
+
+
+Please analyze:
+
+
+1. Does the mission clearly explain why the team exists?
+
+2. Are we describing capabilities or just activities?
+
+3. Are ownership boundaries clear?
+
+4. Are there areas where we may unintentionally absorb responsibilities that belong elsewhere?
+
+5. Are decision rights clear?
+
+6. Would leadership understand how and when to engage us?
+
+7. Does this represent a mature strategic partner model?
+
+
+Please provide:
+
+- Strengths
+- Risks
+- Missing elements
+- Recommended improvements
+- Suggested leadership messaging
+
+
+`;
+
+
+showOutput(prompt);
+
+
+}
+
+
+
+function buildCompleteSummary(){
+
+
+let text="";
+
+
+modelSections.forEach(section=>{
+
+
+text += "\n\n"+section.title+"\n";
+
+
+section.questions.forEach(q=>{
+
+
+text += "\n"+q[0]+":\n";
+
+text += getValue(section.id+"_"+q[0]);
+
+text += "\n";
+
+
+});
+
+
+});
+
+
+return text;
+
+
+}
+
+
+
+
+function clearAll(){
+
+
+if(confirm("Delete all saved information?")){
+
+
+localStorage.clear();
+
+location.reload();
+
+
+}
+
+
+}
+
+
+// ==============================
+// EXECUTIVE PRESENTATION MODE
+// ==============================
+
+
+function copyOutput(){
+
+    let text=document.getElementById("output").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Copied to clipboard!");
+
+}
+
+
+
+function printExecutive(){
+
+    let content=document.getElementById("output").innerText;
+
+
+    let printWindow = window.open(
+        "",
+        "",
+        "width=900,height=900"
+    );
+
+
+    printWindow.document.write(`
+
+    <html>
+
+    <head>
+
+    <title>
+    Team Operating Model
+    </title>
+
+
+    <style>
+
+    body {
+
+        font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+        margin:60px;
+
+        color:#1e293b;
+
+        line-height:1.6;
+
+    }
+
+
+    h1 {
+
+        font-size:34px;
+
+        color:#0f172a;
+
+    }
+
+
+    .header {
+
+        border-bottom:
+        3px solid #0284c7;
+
+        padding-bottom:20px;
+
+        margin-bottom:30px;
+
+    }
+
+
+    .section {
+
+        margin-top:35px;
+
+    }
+
+
+    .footer {
+
+        margin-top:60px;
+
+        font-size:12px;
+
+        color:#64748b;
+
+        border-top:1px solid #cbd5e1;
+
+        padding-top:10px;
+
+    }
+
+
+    </style>
+
+
+    </head>
+
+
+    <body>
+
+
+    <div class="header">
+
+    <h1>
+    Team Operating Model
+    </h1>
+
+    <p>
+    Executive Alignment Draft
+    </p>
+
+    </div>
+
+
+
+    <div>
+
+    ${content.replace(/\n/g,"<br>")}
+
+    </div>
+
+
+
+    <div class="footer">
+
+    Prepared for leadership alignment discussion.
+    <br>
+    This document represents a proposed operating model for review and refinement.
+
+    </div>
+
+
+    </body>
+
+    </html>
+
+
+    `);
+
+
+    printWindow.document.close();
+
+
+    printWindow.print();
+
+
+}
+
+
+
+
+// ==============================
+// LEADERSHIP REVIEW PACKAGE
+// ==============================
+
+
+function generateLeadershipPackage(){
+
+
+let packageText=`
+
+
+TEAM OPERATING MODEL
+
+Leadership Review Package
+
+
+
+EXECUTIVE PURPOSE
+
+This document provides leadership with visibility into the team's purpose, strategic role, responsibilities, operating approach, and areas requiring alignment.
+
+
+
+1. WHY THIS TEAM EXISTS
+
+${getValue("identity_Executive Mission Statement")}
+
+
+
+2. STRATEGIC VALUE
+
+${getValue("identity_Value Proposition")}
+
+
+
+3. CORE CAPABILITIES
+
+${getValue("capabilities_Capability 1")}
+
+${getValue("capabilities_Capability 2")}
+
+${getValue("capabilities_Capability 3")}
+
+
+
+4. OWNERSHIP MODEL
+
+
+WE OWN:
+
+${getValue("scope_We Own")}
+
+
+WE ENABLE:
+
+${getValue("scope_We Enable")}
+
+
+WE ADVISE:
+
+${getValue("scope_We Advise")}
+
+
+WE DO NOT OWN:
+
+${getValue("scope_We Do Not Own")}
+
+
+
+5. HOW LEADERSHIP ENGAGES WITH US
+
+
+Leadership can expect:
+
+${getValue("leadership_Leadership Expectations")}
+
+
+Leadership receives visibility through:
+
+${getValue("leadership_Visibility Model")}
+
+
+
+6. ALIGNMENT REQUESTS
+
+
+Leadership feedback is requested on:
+
+• Mission alignment
+
+• Scope boundaries
+
+• Decision authority
+
+• Stakeholder expectations
+
+• Future maturity goals
+
+
+
+`;
+
+
+showOutput(packageText);
+
+
+}
+
+
+
+
+// ==============================
+// ADD BUTTONS AFTER PAGE LOAD
+// ==============================
+
+
+window.addEventListener(
+"load",
+()=>{
+
+
+let buttonBar=document.querySelector(".button-bar");
+
+
+let copy=document.createElement("button");
+
+copy.innerText="📋 Copy Output";
+
+copy.onclick=copyOutput;
+
+
+
+let print=document.createElement("button");
+
+print.innerText="🖨️ Print Executive Version";
+
+print.onclick=printExecutive;
+
+
+
+let leadership=document.createElement("button");
+
+leadership.innerText="⭐ Leadership Review Package";
+
+leadership.onclick=generateLeadershipPackage;
+
+
+
+buttonBar.appendChild(copy);
+
+buttonBar.appendChild(print);
+
+buttonBar.appendChild(leadership);
+
+
+}
+
+);
+

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DAIG state of play</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --base:#0A0A0F;
+    --title:#F7F5EF; --text:#F4F2EC; --dt:#F2F0E9; --sn:#DEDBD1;
+    --sec:#918D82; --faint:#6C6A62;
+    --copper:#C07A30; --copper-soft:#D08E45;
+    --teal:#00D9B8; --violet:#8B6FE8; --red:#E2726F;
+    --hair:rgba(255,255,255,.08); --hair-strong:rgba(255,255,255,.16);
+    --seal-tx:#B9B4A6;
+    --edit:rgba(192,122,48,.16);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:#060609;
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;
+    padding:26px 16px 60px;
+  }
+  .toolbar{max-width:780px;margin:0 auto 14px;display:flex;gap:8px;align-items:center}
+  .savenote{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--faint);margin-right:auto;letter-spacing:.03em}
+  .btn{
+    font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.04em;
+    color:var(--sec);background:#111117;border:0.5px solid var(--hair-strong);
+    padding:7px 12px;cursor:pointer;border-radius:0;transition:all .12s;
+  }
+  .btn:hover{color:var(--text);border-color:var(--sec)}
+  .btn.primary{color:#0A0A0F;background:var(--copper);border-color:var(--copper)}
+  .btn.primary:hover{background:var(--copper-soft)}
+
+  .sheet{max-width:780px;margin:0 auto;background:var(--base);border:0.5px solid var(--hair);padding:40px 46px 34px}
+
+  .eye{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--copper)}
+  .eye.m{color:var(--faint)}
+
+  header.doc .titlerow{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+  h1{font-size:29px;font-weight:600;letter-spacing:-.015em;margin:8px 0 0;color:var(--title);outline:none}
+  .seal{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--seal-tx);border:0.5px solid var(--hair-strong);padding:5px 10px;white-space:nowrap;outline:none}
+  .meta{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);margin-top:12px;letter-spacing:.02em}
+  .meta b{color:var(--sec);font-weight:400}
+
+  .mastrule{height:1px;background:var(--copper);opacity:.55;margin:16px 0 26px}
+  .hair{height:1px;background:var(--hair);margin:22px 0}
+
+  .blockhead{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}
+  .counter{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--faint);margin-left:auto;letter-spacing:.04em}
+
+  .decision{display:flex;gap:14px;margin-bottom:17px;position:relative}
+  .idx{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--copper);padding-top:3px;letter-spacing:.05em;flex-shrink:0;width:34px}
+  .dbody{flex:1}
+  .d-title{font-size:15.5px;font-weight:500;color:var(--dt);line-height:1.35;outline:none}
+  .d-sub{font-size:13px;color:var(--sec);margin-top:3px;line-height:1.45;outline:none}
+
+  .stream{display:flex;align-items:center;gap:12px;padding:8px 0}
+  .s-name{flex:1;font-size:13.5px;color:var(--sn);outline:none}
+  .status{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none;padding:2px 4px}
+  .status .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+  .status .lab{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.05em}
+  .status[data-s="ontrack"] .dot{background:var(--teal)} .status[data-s="ontrack"] .lab{color:var(--teal)}
+  .status[data-s="watch"]   .dot{background:var(--faint)} .status[data-s="watch"] .lab{color:var(--sec)}
+  .status[data-s="nudge"]   .dot{background:var(--copper)} .status[data-s="nudge"] .lab{color:var(--copper)}
+  .status[data-s="blocked"] .dot{background:var(--red)} .status[data-s="blocked"] .lab{color:var(--red)}
+
+  .remove{opacity:0;border:none;background:none;cursor:pointer;color:var(--faint);font-size:15px;line-height:1;padding:2px 4px;transition:opacity .12s,color .12s;position:absolute;left:-22px;top:2px}
+  .stream .remove{position:static;margin-left:-6px}
+  .decision:hover .remove,.stream:hover .remove{opacity:1}
+  .remove:hover{color:var(--red)}
+
+  .add{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);background:none;border:none;cursor:pointer;padding:8px 0 0 48px;letter-spacing:.03em}
+  .stream-add{padding-left:0}
+  .add:hover{color:var(--copper)}
+
+  .foot{font-size:12px;color:var(--sec);line-height:1.55;max-width:58ch}
+  .foot b{color:#C6C2B6;font-weight:400}
+  .contract{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--faint);margin-top:12px;letter-spacing:.05em;text-transform:uppercase}
+
+  [contenteditable]:focus{background:var(--edit)}
+  [contenteditable]:empty:before{content:attr(data-ph);color:var(--faint)}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .toolbar{display:none}
+    .sheet{background:#fff;border:none;max-width:none;padding:0.4in 0.55in}
+    h1{color:#17171B} .d-title{color:#1C1C20} .s-name{color:#33322C}
+    .meta{color:#7A796F} .meta b{color:#4A4941}
+    .d-sub{color:#5E5D55} .foot{color:#4A4941} .foot b{color:#1C1C20}
+    .eye.m{color:#8A8780} .seal{color:#5A594F;border-color:#CDC9BD}
+    .hair{background:#E1DED4} .mastrule{opacity:.7}
+    .status[data-s="ontrack"] .lab{color:#0F6E56} .status[data-s="ontrack"] .dot{background:#0F6E56}
+    .status[data-s="watch"] .lab{color:#6B6A64} .status[data-s="watch"] .dot{background:#B4B2A9}
+    .contract{color:#8A8780}
+    .remove,.add{display:none !important}
+    [contenteditable]:focus{background:none}
+  }
+  @media (max-width:600px){
+    .sheet{padding:28px 22px} body{padding:14px 8px 40px}
+    header.doc .titlerow{flex-direction:column;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span class="savenote" id="savenote">edits save automatically</span>
+  <button class="btn" onclick="resetDoc()">Reset to sample</button>
+  <button class="btn primary" onclick="window.print()">Print / save PDF</button>
+</div>
+
+<div class="sheet">
+<div id="doc">
+
+  <header class="doc">
+    <div class="titlerow">
+      <div>
+        <div class="eye">DAIG · decision support</div>
+        <h1 contenteditable="true" spellcheck="false">State of play</h1>
+      </div>
+      <div class="seal" contenteditable="true" spellcheck="false">For ED</div>
+    </div>
+    <div class="meta">Week of <b contenteditable="true" spellcheck="false" data-ph="Jul 21">Jul 21</b> &nbsp;·&nbsp; refreshed in standup — Mon / Wed / Fri</div>
+    <div class="mastrule"></div>
+  </header>
+
+  <section>
+    <div class="blockhead">
+      <span class="eye">Needs your call</span>
+      <span class="counter" id="dcount"></span>
+    </div>
+    <div id="decisions">
+      <div class="decision">
+        <button class="remove" title="Remove" aria-label="Remove item">&times;</button>
+        <div class="idx">D·01</div>
+        <div class="dbody">
+          <div class="d-title" contenteditable="true" spellcheck="false">AI capability orchestration — who owns it</div>
+          <div class="d-sub" contenteditable="true" spellcheck="false">DAIG recommends expanding M's role. Your decision to promulgate.</div>
+        </div>
+      </div>
+      <div class="decision">
+        <button class="remove" title="Remove" aria-label="Remove item">&times;</button>
+        <div class="idx">D·02</div>
+        <div class="dbody">
+          <div class="d-title" contenteditable="true" spellcheck="false">PPBE / token-pricing owner</div>
+          <div class="d-sub" contenteditable="true" spellcheck="false">Gap flagged. DAIG has options ready for you to weigh.</div>
+        </div>
+      </div>
+      <div class="decision">
+        <button class="remove" title="Remove" aria-label="Remove item">&times;</button>
+        <div class="idx">D·03</div>
+        <div class="dbody">
+          <div class="d-title" contenteditable="true" spellcheck="false">Foundations deck — sign-off</div>
+          <div class="d-sub" contenteditable="true" spellcheck="false">Ready for your review.</div>
+        </div>
+      </div>
+    </div>
+    <button class="add" onclick="addDecision()">+ add a decision</button>
+  </section>
+
+  <div class="hair"></div>
+
+  <section>
+    <div class="blockhead"><span class="eye m">In motion</span></div>
+    <div id="streams">
+      <div class="stream">
+        <button class="remove" title="Remove" aria-label="Remove row">&times;</button>
+        <span class="s-name" contenteditable="true" spellcheck="false">ICD 504/505 framework drafting</span>
+        <span class="status" data-s="ontrack"><span class="dot"></span><span class="lab"></span></span>
+      </div>
+      <div class="stream">
+        <button class="remove" title="Remove" aria-label="Remove row">&times;</button>
+        <span class="s-name" contenteditable="true" spellcheck="false">Rena onboarding</span>
+        <span class="status" data-s="ontrack"><span class="dot"></span><span class="lab"></span></span>
+      </div>
+      <div class="stream">
+        <button class="remove" title="Remove" aria-label="Remove row">&times;</button>
+        <span class="s-name" contenteditable="true" spellcheck="false">SRT deliverables (contract)</span>
+        <span class="status" data-s="watch"><span class="dot"></span><span class="lab"></span></span>
+      </div>
+      <div class="stream">
+        <button class="remove" title="Remove" aria-label="Remove row">&times;</button>
+        <span class="s-name" contenteditable="true" spellcheck="false">Cyber / data / risk coordination</span>
+        <span class="status" data-s="nudge"><span class="dot"></span><span class="lab"></span></span>
+      </div>
+    </div>
+    <button class="add stream-add" onclick="addStream()">+ add a workstream</button>
+  </section>
+
+  <div class="hair"></div>
+
+  <footer>
+    <div class="eye m" style="margin-bottom:8px">What earns a spot here</div>
+    <div class="foot">An item rises to this page only when it <b>needs ED</b> — she has to decide it, she'll be asked about it, or something changed materially. Everything else stays in the standup: handled, retrievable, off her plate.</div>
+    <div class="contract">DAIG develops and recommends · SR/ED decide and promulgate</div>
+  </footer>
+
+</div>
+</div>
+
+<script>
+  const STATUS={ontrack:"on track",watch:"watch",nudge:"needs a nudge",blocked:"blocked"};
+  const ORDER=["ontrack","watch","nudge","blocked"];
+  const KEY="daig-state-of-play-dm-v1";
+  const doc=document.getElementById("doc");
+  let saveTimer=null;
+
+  function pad(n){return (n<10?"0":"")+n;}
+  function renumber(){
+    document.querySelectorAll("#decisions .decision .idx").forEach((el,i)=>{el.textContent="D·"+pad(i+1);});
+    const n=document.querySelectorAll("#decisions .decision").length;
+    const c=document.getElementById("dcount");
+    if(c)c.textContent=n+" of 3–5 · keep it short";
+  }
+  function renderStatus(el){
+    const k=el.getAttribute("data-s")||"watch";
+    const lab=el.querySelector(".lab");
+    if(lab)lab.textContent=(STATUS[k]||"watch").toUpperCase();
+  }
+  function renderAllStatus(){document.querySelectorAll(".status").forEach(renderStatus);}
+
+  function addDecision(){
+    const d=document.createElement("div");
+    d.className="decision";
+    d.innerHTML='<button class="remove" title="Remove" aria-label="Remove item">&times;</button>'+
+      '<div class="idx"></div><div class="dbody">'+
+      '<div class="d-title" contenteditable="true" spellcheck="false" data-ph="What needs her call?"></div>'+
+      '<div class="d-sub" contenteditable="true" spellcheck="false" data-ph="DAIG recommends … / your decision to …"></div></div>';
+    document.getElementById("decisions").appendChild(d);
+    renumber();save();
+    d.querySelector(".d-title").focus();
+  }
+  function addStream(){
+    const s=document.createElement("div");
+    s.className="stream";
+    s.innerHTML='<button class="remove" title="Remove" aria-label="Remove row">&times;</button>'+
+      '<span class="s-name" contenteditable="true" spellcheck="false" data-ph="Workstream name"></span>'+
+      '<span class="status" data-s="watch"><span class="dot"></span><span class="lab"></span></span>';
+    document.getElementById("streams").appendChild(s);
+    renderStatus(s.querySelector(".status"));save();
+    s.querySelector(".s-name").focus();
+  }
+
+  doc.addEventListener("click",function(e){
+    const rm=e.target.closest(".remove");
+    if(rm){rm.closest(".decision,.stream").remove();renumber();save();return;}
+    const st=e.target.closest(".status");
+    if(st){
+      const cur=st.getAttribute("data-s");
+      const next=ORDER[(ORDER.indexOf(cur)+1)%ORDER.length];
+      st.setAttribute("data-s",next);renderStatus(st);save();
+    }
+  });
+  doc.addEventListener("input",function(){clearTimeout(saveTimer);saveTimer=setTimeout(save,600);});
+
+  async function save(){
+    try{
+      if(window.storage&&window.storage.set){
+        await window.storage.set(KEY,doc.innerHTML);
+        flash("saved");
+      }
+    }catch(err){}
+  }
+  function flash(msg){
+    const el=document.getElementById("savenote");if(!el)return;
+    el.textContent=msg;clearTimeout(flash._t);
+    flash._t=setTimeout(()=>{el.textContent="edits save automatically";},1400);
+  }
+  async function load(){
+    try{
+      if(window.storage&&window.storage.get){
+        const r=await window.storage.get(KEY);
+        if(r&&r.value)doc.innerHTML=r.value;
+      }
+    }catch(err){}
+    renderAllStatus();renumber();
+  }
+  async function resetDoc(){
+    if(!confirm("Reset to the sample content? Your current edits will be cleared."))return;
+    try{if(window.storage&&window.storage.delete)await window.storage.delete(KEY);}catch(err){}
+    location.reload();
+  }
+  load();
+</script>
+</body>
+</html>

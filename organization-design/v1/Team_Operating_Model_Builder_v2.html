@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<title>Team Operating Model Builder v2</title>
+
+<style>
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:#0f172a;
+    color:#e5e7eb;
+    margin:0;
+}
+
+.container {
+    max-width:1200px;
+    margin:auto;
+    padding:35px;
+}
+
+h1 {
+    font-size:40px;
+    margin-bottom:5px;
+}
+
+.subtitle {
+    color:#94a3b8;
+    font-size:18px;
+    margin-bottom:25px;
+}
+
+.card {
+    background:#1e293b;
+    border-radius:15px;
+    padding:25px;
+    margin-bottom:25px;
+    border:1px solid #334155;
+}
+
+
+.stage {
+    background:#1e293b;
+    border-radius:15px;
+    margin:15px 0;
+    overflow:hidden;
+    border:1px solid #334155;
+}
+
+
+.stage-header {
+    padding:20px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+}
+
+
+.stage-header:hover {
+    background:#273449;
+}
+
+
+.content {
+    display:none;
+    padding:25px;
+    border-top:1px solid #334155;
+}
+
+
+h2 {
+    color:#7dd3fc;
+}
+
+
+h3 {
+    color:#38bdf8;
+}
+
+
+textarea {
+
+    width:100%;
+    min-height:100px;
+    background:#0f172a;
+    color:white;
+    border:1px solid #475569;
+    border-radius:10px;
+    padding:12px;
+    margin-bottom:15px;
+}
+
+
+button {
+
+    background:#38bdf8;
+    color:#082f49;
+    border:none;
+    border-radius:8px;
+    padding:12px 18px;
+    cursor:pointer;
+    font-weight:bold;
+    margin:5px;
+
+}
+
+
+button:hover {
+    opacity:.85;
+}
+
+
+.output {
+
+    background:#020617;
+    border-radius:12px;
+    padding:20px;
+    white-space:pre-wrap;
+    margin-top:20px;
+}
+
+
+label {
+
+    display:block;
+    margin-top:15px;
+    margin-bottom:5px;
+    color:#cbd5e1;
+
+}
+
+
+.small {
+
+font-size:13px;
+color:#94a3b8;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<h1>🏛️ Team Operating Model Builder</h1>
+
+<div class="subtitle">
+Version 2 — Design, Document, Validate
+</div>
+
+
+<div class="card">
+
+<h2>How to Use</h2>
+
+<p>
+This tool guides you through designing your team's operating model.
+</p>
+
+<p>
+Complete sections gradually. Your work automatically saves in your browser.
+</p>
+
+<p>
+When ready, generate:
+</p>
+
+<ul>
+<li>An executive-ready operating model document</li>
+<li>A coaching prompt to review your design</li>
+</ul>
+
+</div>
+
+
+
+<div id="sections"></div>
+
+
+
+<div class="card">
+
+<button onclick="generateDocument()">
+Generate Executive Operating Model
+</button>
+
+<button onclick="generatePrompt()">
+Generate ChatGPT Coaching Prompt
+</button>
+
+<button onclick="clearData()">
+Clear All Data
+</button>
+
+
+<div id="output" class="output">
+
+Your generated documents will appear here.
+
+</div>
+
+</div>
+
+
+<script>
+
+
+const fields = [
+
+{
+id:"purpose",
+title:"1. Mission & Purpose",
+why:"Define why the team exists and the outcomes it creates.",
+questions:[
+["Mission Statement","We exist to..."],
+["Problem We Solve","Leadership needs us because..."],
+["Value We Provide","Our unique value is..."]
+]
+},
+
+
+{
+id:"capabilities",
+title:"2. Team Capabilities",
+why:"Define capabilities instead of just activities.",
+questions:[
+["Capabilities We Provide","Examples: governance, integration, oversight..."],
+["How We Create Value","We create value by..."],
+["What Would Be Missing Without Us","Without this team..."]
+]
+},
+
+
+{
+id:"scope",
+title:"3. Scope & Guardrails",
+why:"Clarify ownership boundaries.",
+questions:[
+["We Own","Things we are accountable for..."],
+["We Enable","Things we support but do not execute..."],
+["We Advise","Things where we provide expertise..."],
+["We Do Not Own","Things outside our responsibility..."]
+]
+},
+
+
+{
+id:"workflow",
+title:"4. Operating Model",
+why:"Define how work moves through the team.",
+questions:[
+["How Work Enters","Requests come from..."],
+["How Work Is Prioritized","We prioritize based on..."],
+["How Work Is Assigned","Ownership is determined by..."],
+["How Progress Is Communicated","We report through..."]
+]
+},
+
+
+{
+id:"decisions",
+title:"5. Decision Rights",
+why:"Clarify who recommends, decides, and executes.",
+questions:[
+["Decision Ownership","Key decisions belong to..."],
+["Recommendation Process","Recommendations are developed by..."],
+["Escalation Rules","Escalation occurs when..."]
+]
+},
+
+
+{
+id:"stakeholders",
+title:"6. Stakeholder Engagement",
+why:"Define how others work with your team.",
+questions:[
+["Key Stakeholders","Important partners include..."],
+["What They Need From Us","Stakeholders need..."],
+["What We Need From Them","We need..."]
+]
+},
+
+
+{
+id:"ways",
+title:"7. Ways of Working",
+why:"Define team behaviors and norms.",
+questions:[
+["Communication Norms","We communicate through..."],
+["Meeting Philosophy","Meetings exist to..."],
+["Handling Ambiguity","When unclear, we..."]
+]
+},
+
+
+{
+id:"leadership",
+title:"8. Leadership Engagement",
+why:"Define what leadership should expect.",
+questions:[
+["Leadership Expectations","Leadership can expect..."],
+["Visibility Needs","Leadership needs visibility into..."],
+["Decision Support","We help leadership by..."]
+]
+},
+
+
+{
+id:"future",
+title:"9. Future State",
+why:"Define maturity goals.",
+questions:[
+["Future Vision","A mature version of this team looks like..."],
+["Current Challenges","The biggest gaps today are..."],
+["Next Improvements","Our next steps are..."]
+]
+}
+
+];
+
+
+const container=document.getElementById("sections");
+
+
+fields.forEach(section=>{
+
+
+let html=`
+
+<div class="stage">
+
+
+<div class="stage-header" onclick="toggle('${section.id}')">
+
+<div>
+<h2>${section.title}</h2>
+<div class="small">${section.why}</div>
+</div>
+
+
+<div>▼</div>
+
+</div>
+
+
+<div class="content" id="${section.id}">
+
+`;
+
+
+section.questions.forEach(q=>{
+
+
+let key=section.id+"_"+q[0];
+
+
+html+=`
+
+<label>${q[0]}</label>
+
+<textarea 
+id="${key}"
+placeholder="${q[1]}"
+oninput="saveData('${key}')"></textarea>
+
+
+`;
+
+});
+
+
+html+=`
+
+</div>
+
+</div>
+
+`;
+
+
+container.innerHTML+=html;
+
+
+});
+
+
+function toggle(id){
+
+let x=document.getElementById(id);
+
+x.style.display=
+x.style.display==="block"
+?"none"
+:"block";
+
+}
+
+
+function saveData(id){
+
+localStorage.setItem(
+id,
+document.getElementById(id).value
+);
+
+}
+
+
+function loadData(){
+
+document.querySelectorAll("textarea").forEach(t=>{
+
+let saved=localStorage.getItem(t.id);
+
+if(saved){
+
+t.value=saved;
+
+}
+
+});
+
+}
+
+
+window.onload=loadData;
+
+
+
+function getValue(id){
+
+return localStorage.getItem(id)||"";
+
+}
+
+function generateDocument(){
+
+let doc = `
+
+TEAM OPERATING MODEL
+
+Executive Review Draft
+
+
+1. Mission & Purpose
+
+Mission Statement:
+${getValue("purpose_Mission Statement")}
+
+
+Problem We Solve:
+${getValue("purpose_Problem We Solve")}
+
+
+Value We Provide:
+${getValue("purpose_Value We Provide")}
+
+
+
+2. Team Capabilities
+
+
+Capabilities We Provide:
+${getValue("capabilities_Capabilities We Provide")}
+
+
+How We Create Value:
+${getValue("capabilities_How We Create Value")}
+
+
+What Would Be Missing Without Us:
+${getValue("capabilities_What Would Be Missing Without Us")}
+
+
+
+3. Scope & Guardrails
+
+
+We Own:
+${getValue("scope_We Own")}
+
+
+We Enable:
+${getValue("scope_We Enable")}
+
+
+We Advise:
+${getValue("scope_We Advise")}
+
+
+We Do Not Own:
+${getValue("scope_We Do Not Own")}
+
+
+
+4. Operating Model
+
+
+How Work Enters:
+${getValue("workflow_How Work Enters")}
+
+
+How Work Is Prioritized:
+${getValue("workflow_How Work Is Prioritized")}
+
+
+How Work Is Assigned:
+${getValue("workflow_How Work Is Assigned")}
+
+
+How Progress Is Communicated:
+${getValue("workflow_How Progress Is Communicated")}
+
+
+
+5. Decision Rights
+
+
+Decision Ownership:
+${getValue("decisions_Decision Ownership")}
+
+
+Recommendation Process:
+${getValue("decisions_Recommendation Process")}
+
+
+Escalation Rules:
+${getValue("decisions_Escalation Rules")}
+
+
+
+6. Stakeholder Engagement
+
+
+Key Stakeholders:
+${getValue("stakeholders_Key Stakeholders")}
+
+
+What They Need From Us:
+${getValue("stakeholders_What They Need From Us")}
+
+
+What We Need From Them:
+${getValue("stakeholders_What We Need From Them")}
+
+
+
+7. Ways of Working
+
+
+Communication Norms:
+${getValue("ways_Communication Norms")}
+
+
+Meeting Philosophy:
+${getValue("ways_Meeting Philosophy")}
+
+
+Handling Ambiguity:
+${getValue("ways_Handling Ambiguity")}
+
+
+
+8. Leadership Engagement
+
+
+Leadership Expectations:
+${getValue("leadership_Leadership Expectations")}
+
+
+Visibility Needs:
+${getValue("leadership_Visibility Needs")}
+
+
+Decision Support:
+${getValue("leadership_Decision Support")}
+
+
+
+9. Future State
+
+
+Future Vision:
+${getValue("future_Future Vision")}
+
+
+Current Challenges:
+${getValue("future_Current Challenges")}
+
+
+Next Improvements:
+${getValue("future_Next Improvements")}
+
+
+`;
+
+displayOutput(doc);
+
+}
+
+
+
+function generatePrompt(){
+
+let prompt = `
+
+I am designing a team operating model.
+
+I have completed a first draft below:
+
+-----------------------------
+
+${buildSummary()}
+
+-----------------------------
+
+
+Please act as an organizational design advisor.
+
+Review this operating model and help me:
+
+1. Identify gaps or missing elements
+2. Challenge unclear ownership boundaries
+3. Identify where responsibilities overlap
+4. Recommend improvements to decision rights
+5. Evaluate whether the team appears mature and scalable
+6. Suggest leadership-ready messaging
+
+
+Pay special attention to:
+
+- Governance clarity
+- Strategic positioning
+- Ownership boundaries
+- Stakeholder engagement
+- Operating cadence
+- Leadership visibility
+
+
+`;
+
+displayOutput(prompt);
+
+}
+
+
+
+function buildSummary(){
+
+let sections="";
+
+fields.forEach(section=>{
+
+sections += "\n\n"+section.title+"\n";
+
+section.questions.forEach(q=>{
+
+sections += 
+q[0]+":\n"+
+getValue(section.id+"_"+q[0])+
+"\n\n";
+
+});
+
+});
+
+return sections;
+
+}
+
+
+
+
+function displayOutput(text){
+
+document.getElementById("output").innerText=text;
+
+}
+
+
+
+function clearData(){
+
+if(confirm("Clear all saved information?")){
+
+localStorage.clear();
+
+location.reload();
+
+}
+
+}
+
+
+
+</script>
+
+</body>
+</html>
