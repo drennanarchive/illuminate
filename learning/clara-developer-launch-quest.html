@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clara's Developer Launch Quest</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(16, 29, 48, 0.92);
+      --panel-2: rgba(24, 42, 66, 0.92);
+      --text: #edf6ff;
+      --muted: #9fb4c9;
+      --border: rgba(151, 184, 218, 0.22);
+      --accent: #66e3ff;
+      --accent-2: #ba8cff;
+      --accent-3: #ffd27a;
+      --success: #75efbd;
+      --danger: #ff8096;
+      --shadow: 0 24px 70px rgba(0,0,0,.34);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(102, 227, 255, .16), transparent 30rem),
+        radial-gradient(circle at 88% 5%, rgba(186, 140, 255, .14), transparent 28rem),
+        linear-gradient(180deg, #06101d 0%, #091827 48%, #07111f 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .55;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.65) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(102,227,255,.45) 0 1px, transparent 1.5px);
+      background-size: 113px 113px, 167px 167px;
+      background-position: 12px 18px, 54px 73px;
+      mask-image: linear-gradient(to bottom, black, transparent 78%);
+    }
+
+    button, input { font: inherit; }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(980px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 34px 0 72px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: clamp(24px, 5vw, 48px);
+      background:
+        radial-gradient(circle at 88% 14%, rgba(102,227,255,.18), transparent 25rem),
+        linear-gradient(145deg, rgba(18, 32, 53, .97), rgba(8, 20, 35, .97));
+      box-shadow: var(--shadow);
+    }
+
+    .orbit {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      right: -110px;
+      top: -125px;
+      border: 1px solid rgba(102,227,255,.3);
+      border-radius: 50%;
+    }
+
+    .orbit::before,
+    .orbit::after {
+      content: "";
+      position: absolute;
+      inset: 48px;
+      border: 1px dashed rgba(186,140,255,.3);
+      border-radius: inherit;
+    }
+
+    .orbit::after {
+      inset: 105px;
+      border-style: solid;
+      border-color: rgba(255,210,122,.3);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid rgba(102,227,255,.3);
+      border-radius: 999px;
+      padding: 7px 11px;
+      background: rgba(102,227,255,.1);
+      color: #c8f6ff;
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 700px;
+      margin: 18px 0 10px;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    .subtitle {
+      max-width: 680px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.2vw, 1.16rem);
+      line-height: 1.65;
+    }
+
+    .progress-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .progress-label {
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .progress-value {
+      font-size: 2rem;
+      font-weight: 750;
+      letter-spacing: -.04em;
+    }
+
+    .rank {
+      border: 1px solid rgba(186,140,255,.34);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: #e2d2ff;
+      background: rgba(186,140,255,.11);
+      font-size: .85rem;
+    }
+
+    .progress-track {
+      height: 12px;
+      margin-top: 12px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width .35s ease;
+    }
+
+    .encouragement {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 26px 0 14px;
+    }
+
+    .toolbar h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 650;
+    }
+
+    .button {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 9px 12px;
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .button:hover { border-color: rgba(102,227,255,.62); }
+    .button:focus-visible, a:focus-visible, .mission-toggle:focus-visible, input:focus-visible {
+      outline: 3px solid rgba(102,227,255,.42);
+      outline-offset: 3px;
+    }
+
+    .route {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .route-node {
+      min-width: 0;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 12px 8px;
+      text-align: center;
+      background: rgba(255,255,255,.035);
+      transition: .25s ease;
+    }
+
+    .route-node strong {
+      display: block;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .route-node span {
+      display: block;
+      margin-top: 3px;
+      font-size: .82rem;
+    }
+
+    .route-node.ready {
+      border-color: rgba(117,239,189,.6);
+      background: rgba(117,239,189,.09);
+    }
+
+    .missions {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mission {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--panel);
+      box-shadow: 0 14px 38px rgba(0,0,0,.16);
+      transition: border-color .2s ease, background .2s ease;
+    }
+
+    .mission.open { border-color: rgba(102,227,255,.48); }
+    .mission.complete {
+      border-color: rgba(117,239,189,.42);
+      background: linear-gradient(145deg, rgba(17,49,53,.92), rgba(16,29,48,.95));
+    }
+
+    .mission-toggle {
+      width: 100%;
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      align-items: center;
+      gap: 14px;
+      border: 0;
+      padding: 17px;
+      background: transparent;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .mission-number {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(255,255,255,.04);
+      font-weight: 750;
+    }
+
+    .complete .mission-number {
+      border-color: rgba(117,239,189,.7);
+      background: rgba(117,239,189,.16);
+      color: var(--success);
+    }
+
+    .mission-title {
+      display: block;
+      font-weight: 700;
+    }
+
+    .mission-subtitle {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.4;
+    }
+
+    .mission-status {
+      color: var(--muted);
+      font-size: .82rem;
+      white-space: nowrap;
+    }
+
+    .chevron {
+      display: inline-block;
+      color: var(--muted);
+      transition: transform .22s ease;
+    }
+
+    .open .chevron { transform: rotate(180deg); }
+
+    .mission-body {
+      display: none;
+      padding: 0 17px 18px;
+    }
+
+    .mission.open .mission-body { display: block; }
+
+    .task {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      padding: 15px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .task input {
+      width: 19px;
+      height: 19px;
+      margin-top: 3px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .task-title {
+      display: block;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    .task-desc {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.55;
+    }
+
+    code {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 6px;
+      padding: .08em .38em;
+      background: rgba(255,255,255,.06);
+      color: #dff9ff;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 11px;
+    }
+
+    .resource-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid rgba(102,227,255,.28);
+      border-radius: 11px;
+      padding: 9px 11px;
+      text-decoration: none;
+      color: #d8f9ff;
+      background: rgba(102,227,255,.08);
+      font-size: .86rem;
+      transition: border-color .18s ease, background .18s ease, transform .18s ease;
+    }
+
+    .resource-link:hover {
+      border-color: rgba(102,227,255,.72);
+      background: rgba(102,227,255,.13);
+      transform: translateY(-1px);
+    }
+
+    .resource-link.secondary {
+      border-color: var(--border);
+      background: rgba(255,255,255,.035);
+      color: var(--text);
+    }
+
+    .gotcha {
+      margin-top: 12px;
+      border-left: 3px solid var(--accent-3);
+      border-radius: 0 12px 12px 0;
+      padding: 12px 13px;
+      background: rgba(255,210,122,.08);
+      color: #f9e7bf;
+      font-size: .88rem;
+      line-height: 1.55;
+    }
+
+    .callout, .glossary {
+      margin-top: 18px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      background: rgba(16,29,48,.82);
+    }
+
+    .callout {
+      border-color: rgba(186,140,255,.32);
+      background: rgba(186,140,255,.07);
+    }
+
+    .callout h2, .glossary h2 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .callout p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px 24px;
+      margin-top: 14px;
+    }
+
+    .glossary dt { font-weight: 700; }
+    .glossary dd {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.45;
+    }
+
+    .completion-note {
+      display: none;
+      margin-top: 18px;
+      border: 1px solid rgba(117,239,189,.48);
+      border-radius: 20px;
+      padding: 20px;
+      background: rgba(117,239,189,.09);
+    }
+
+    .completion-note.visible { display: block; }
+
+    .completion-note h2 { margin: 0 0 7px; }
+    .completion-note p { margin: 0; color: #ccecdf; }
+
+    .footer {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    @media (max-width: 700px) {
+      .route { grid-template-columns: repeat(2, 1fr); }
+      .route-node:last-child { grid-column: 1 / -1; }
+      .mission-toggle { grid-template-columns: auto 1fr auto; }
+      .chevron { display: none; }
+      .mission-status { grid-column: 3; grid-row: 1; }
+      .glossary-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="orbit" aria-hidden="true"></div>
+      <span class="eyebrow">Clara + Cari + CJ</span>
+      <h1>Developer Launch Quest</h1>
+      <p class="subtitle">
+        A gentle path from “AI made this for me” to “I can safely open it,
+        change it, inspect it, and guide what happens next.”
+      </p>
+
+      <div class="progress-head">
+        <div>
+          <div class="progress-label">Launch readiness</div>
+          <div id="progressValue" class="progress-value">0%</div>
+        </div>
+        <div id="rank" class="rank">Curious Explorer</div>
+      </div>
+
+      <div class="progress-track" aria-label="Overall quest progress">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+      <p id="encouragement" class="encouragement" aria-live="polite">
+        Start with Mission 1. Nothing scary happens there.
+      </p>
+    </section>
+
+    <div class="toolbar">
+      <h2>Your route</h2>
+      <button id="resetButton" class="button" type="button">Reset progress</button>
+    </div>
+
+    <section class="route" aria-label="Mission route">
+      <div class="route-node" data-node="1"><strong>MISSION 01</strong><span>Workshop</span></div>
+      <div class="route-node" data-node="2"><strong>MISSION 02</strong><span>Repository</span></div>
+      <div class="route-node" data-node="3"><strong>MISSION 03</strong><span>Preview</span></div>
+      <div class="route-node" data-node="4"><strong>MISSION 04</strong><span>Agents</span></div>
+      <div class="route-node" data-node="5"><strong>MISSION 05</strong><span>Practice</span></div>
+    </section>
+
+    <section id="missions" class="missions">
+
+      <article class="mission open" data-mission="1">
+        <button class="mission-toggle" type="button" aria-expanded="true">
+          <span class="mission-number">01</span>
+          <span>
+            <span class="mission-title">Build the workshop</span>
+            <span class="mission-subtitle">Install only the tools that earn their keep.</span>
+          </span>
+          <span class="mission-status">0/3</span>
+          <span class="chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="mission-body">
+          <div class="task">
+            <input id="vscode" type="checkbox" />
+            <div>
+              <label class="task-title" for="vscode">Install Visual Studio Code</label>
+              <span class="task-desc">
+                This becomes your visual home for files, previews, changes, and coding agents.
+                For Windows, Microsoft recommends the normal User Installer for most people.
+              </span>
+              <div class="links">
+                <a class="resource-link" href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer">Download VS Code ↗</a>
+                <a class="resource-link secondary" href="https://code.visualstudio.com/docs/setup/windows" target="_blank" rel="noopener noreferrer">Windows installation guide ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="github-desktop" type="checkbox" />
+            <div>
+              <label class="task-title" for="github-desktop">Install GitHub Desktop</label>
+              <span class="task-desc">
+                This is your friendly change-history and publishing control panel.
+              </span>
+              <div class="links">
+                <a class="resource-link" href="https://desktop.github.com/download/" target="_blank" rel="noopener noreferrer">Download GitHub Desktop ↗</a>
+                <a class="resource-link secondary" href="https://docs.github.com/en/desktop/installing-and-authenticating-to-github-desktop/installing-github-desktop" target="_blank" rel="noopener noreferrer">Installation guide ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="github-signin" type="checkbox" />
+            <div>
+              <label class="task-title" for="github-signin">Sign into GitHub Desktop as <code>drennanarchive</code></label>
+              <span class="task-desc">Use your existing GitHub identity. Do not create a second account.</span>
+            </div>
+          </div>
+
+          <div class="gotcha"><strong>Gotcha:</strong> choose regular Visual Studio Code—not Visual Studio and not VS Code Insiders. Those are different products.</div>
+        </div>
+      </article>
+
+      <article class="mission" data-mission="2">
+        <button class="mission-toggle" type="button" aria-expanded="false">
+          <span class="mission-number">02</span>
+          <span>
+            <span class="mission-title">Bring GitHub onto your computer</span>
+            <span class="mission-subtitle">Clone the repository instead of downloading a loose ZIP.</span>
+          </span>
+          <span class="mission-status">0/3</span>
+          <span class="chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="mission-body">
+          <div class="task">
+            <input id="clone" type="checkbox" />
+            <div>
+              <label class="task-title" for="clone">Clone your existing repository</label>
+              <span class="task-desc">
+                In GitHub Desktop: <strong>File → Clone repository</strong>. Choose a permanent home such as
+                <code>Documents\GitHub</code>.
+              </span>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="open-vscode" type="checkbox" />
+            <div>
+              <label class="task-title" for="open-vscode">Open the repository in VS Code</label>
+              <span class="task-desc">
+                In GitHub Desktop: <strong>Repository → Open in Visual Studio Code</strong>.
+              </span>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="find-index" type="checkbox" />
+            <div>
+              <label class="task-title" for="find-index">Find one of your existing <code>index.html</code> files</label>
+              <span class="task-desc">
+                Click it once and notice the Explorer, editor, tabs, and file path. No coding required.
+              </span>
+            </div>
+          </div>
+
+          <div class="gotcha"><strong>Gotcha:</strong> a clone remains connected to GitHub. A ZIP is only a disconnected snapshot.</div>
+        </div>
+      </article>
+
+      <article class="mission" data-mission="3">
+        <button class="mission-toggle" type="button" aria-expanded="false">
+          <span class="mission-number">03</span>
+          <span>
+            <span class="mission-title">Preview before publishing</span>
+            <span class="mission-subtitle">Create a private rehearsal stage on your own computer.</span>
+          </span>
+          <span class="mission-status">0/3</span>
+          <span class="chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="mission-body">
+          <div class="task">
+            <input id="live-server" type="checkbox" />
+            <div>
+              <label class="task-title" for="live-server">Install a local preview extension</label>
+              <span class="task-desc">
+                In the VS Code Extensions panel, search for <strong>Live Server</strong>. Check the publisher,
+                rating, and install count before installing any extension.
+              </span>
+              <div class="links">
+                <a class="resource-link secondary" href="https://marketplace.visualstudio.com/search?term=Live%20Server&target=VSCode&category=All%20categories&sortBy=Relevance" target="_blank" rel="noopener noreferrer">Search VS Code Marketplace ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="preview" type="checkbox" />
+            <div>
+              <label class="task-title" for="preview">Open an HTML page locally</label>
+              <span class="task-desc">
+                Right-click the HTML file and choose <strong>Open with Live Server</strong>. A local address commonly begins with
+                <code>localhost</code> or <code>127.0.0.1</code>.
+              </span>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="tiny-edit" type="checkbox" />
+            <div>
+              <label class="task-title" for="tiny-edit">Make one reversible test edit</label>
+              <span class="task-desc">
+                Change one visible word, press <strong>Ctrl+S</strong>, observe the preview, then press <strong>Ctrl+Z</strong>.
+              </span>
+            </div>
+          </div>
+
+          <div class="gotcha"><strong>Gotcha:</strong> localhost is not the public internet. Your rehearsal remains on your computer.</div>
+        </div>
+      </article>
+
+      <article class="mission" data-mission="4">
+        <button class="mission-toggle" type="button" aria-expanded="false">
+          <span class="mission-number">04</span>
+          <span>
+            <span class="mission-title">Invite Cari and CJ into the workshop</span>
+            <span class="mission-subtitle">Install official coding integrations and avoid look-alikes.</span>
+          </span>
+          <span class="mission-status">0/4</span>
+          <span class="chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="mission-body">
+          <div class="task">
+            <input id="codex" type="checkbox" />
+            <div>
+              <label class="task-title" for="codex">Follow OpenAI’s official Codex IDE setup</label>
+              <span class="task-desc">
+                Use the official OpenAI instructions. Confirm the extension publisher before installing.
+              </span>
+              <div class="links">
+                <a class="resource-link" href="https://developers.openai.com/codex/ide" target="_blank" rel="noopener noreferrer">Open Codex IDE guide ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="codex-login" type="checkbox" />
+            <div>
+              <label class="task-title" for="codex-login">Sign into Codex through the supported account flow</label>
+              <span class="task-desc">
+                Follow the sign-in prompts shown by the current extension rather than creating credentials from an unofficial guide.
+              </span>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="claude-code" type="checkbox" />
+            <div>
+              <label class="task-title" for="claude-code">Install Claude Code for VS Code</label>
+              <span class="task-desc">
+                Anthropic’s current guide covers installation, inline diffs, context mentions, and plan review.
+              </span>
+              <div class="links">
+                <a class="resource-link" href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noopener noreferrer">Open Claude Code VS Code guide ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="one-editor" type="checkbox" />
+            <div>
+              <label class="task-title" for="one-editor">Adopt the one-active-editor rule</label>
+              <span class="task-desc">
+                Cari/Codex and CJ/Claude Code can review one another, but only one should actively edit the same working folder at a time.
+              </span>
+            </div>
+          </div>
+
+          <div class="gotcha"><strong>Windows note:</strong> begin with the graphical VS Code integrations. WSL2 and terminal-heavy setup remain optional until a real project needs them.</div>
+        </div>
+      </article>
+
+      <article class="mission" data-mission="5">
+        <button class="mission-toggle" type="button" aria-expanded="false">
+          <span class="mission-number">05</span>
+          <span>
+            <span class="mission-title">Complete your first safe change cycle</span>
+            <span class="mission-subtitle">Branch → edit → preview → inspect → commit → push.</span>
+          </span>
+          <span class="mission-status">0/5</span>
+          <span class="chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="mission-body">
+          <div class="task">
+            <input id="branch" type="checkbox" />
+            <div>
+              <label class="task-title" for="branch">Create a practice branch</label>
+              <span class="task-desc">Use a clear name such as <code>practice/clara-first-edit</code>.</span>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="visual-change" type="checkbox" />
+            <div>
+              <label class="task-title" for="visual-change">Make one harmless visual change</label>
+              <span class="task-desc">Adjust a heading, sentence, or spacing value—not the whole design system.</span>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="diff" type="checkbox" />
+            <div>
+              <label class="task-title" for="diff">Review the diff in GitHub Desktop</label>
+              <span class="task-desc">Green lines were added; red lines were removed. Check that the change matches your intention.</span>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="commit" type="checkbox" />
+            <div>
+              <label class="task-title" for="commit">Commit your checkpoint</label>
+              <span class="task-desc">Try: <code>Practice editing homepage heading</code>.</span>
+            </div>
+          </div>
+
+          <div class="task">
+            <input id="push" type="checkbox" />
+            <div>
+              <label class="task-title" for="push">Push the branch to GitHub</label>
+              <span class="task-desc">
+                Publishing the branch preserves your experiment without automatically replacing your primary branch.
+              </span>
+            </div>
+          </div>
+
+          <div class="gotcha"><strong>Victory condition:</strong> you do not need to memorize Git commands. Recognize the safe rhythm and use the visual controls.</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="completionNote" class="completion-note" aria-live="polite">
+      <h2>Workshop online ✦</h2>
+      <p>You can now safely enter the heavier project era with Cari and CJ.</p>
+    </section>
+
+    <section class="callout">
+      <h2>Deliberately locked for later</h2>
+      <p>
+        Node.js, WSL2, frameworks, Docker, databases, MCP servers, and paid AI editors stay outside
+        the required path until a real project demonstrates the need. This is restraint—not falling behind.
+      </p>
+    </section>
+
+    <section class="glossary">
+      <h2>Five words worth recognizing</h2>
+      <dl class="glossary-grid">
+        <div><dt>Repository</dt><dd>A project folder with tracked history.</dd></div>
+        <div><dt>Clone</dt><dd>A connected copy of a GitHub repository on your computer.</dd></div>
+        <div><dt>Branch</dt><dd>A safe alternate path for an experiment.</dd></div>
+        <div><dt>Commit</dt><dd>A named checkpoint you can return to.</dd></div>
+        <div><dt>Diff</dt><dd>The exact before-and-after view of changed lines.</dd></div>
+      </dl>
+    </section>
+
+    <p class="footer">Progress saves automatically in this browser on this computer.</p>
+  </main>
+
+  <script>
+    (() => {
+      const STORAGE_KEY = "claraDeveloperLaunchQuestV2";
+      const missions = [...document.querySelectorAll(".mission")];
+      const checkboxes = [...document.querySelectorAll('.task input[type="checkbox"]')];
+      const progressFill = document.getElementById("progressFill");
+      const progressValue = document.getElementById("progressValue");
+      const rank = document.getElementById("rank");
+      const encouragement = document.getElementById("encouragement");
+      const resetButton = document.getElementById("resetButton");
+      const completionNote = document.getElementById("completionNote");
+
+      const ranks = [
+        [100, "Workshop Commander", "Launch ready. You own the project—not just the generated output."],
+        [75, "Confident Builder", "The workshop is nearly ready for heavier builds."],
+        [50, "Local Alchemist", "You can now experiment without publishing every attempt."],
+        [25, "Repository Ranger", "Your files and GitHub are beginning to behave like one system."],
+        [1, "Workshop Apprentice", "A real start. Small, visible steps count."],
+        [0, "Curious Explorer", "Start with Mission 1. Nothing scary happens there."]
+      ];
+
+      function saveState() {
+        const state = Object.fromEntries(checkboxes.map(box => [box.id, box.checked]));
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (error) {
+          console.warn("Progress could not be saved:", error);
+        }
+      }
+
+      function loadState() {
+        try {
+          const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+          checkboxes.forEach(box => {
+            if (typeof stored[box.id] === "boolean") box.checked = stored[box.id];
+          });
+        } catch (error) {
+          console.warn("Saved progress could not be loaded:", error);
+        }
+      }
+
+      function update() {
+        const done = checkboxes.filter(box => box.checked).length;
+        const percent = Math.round((done / checkboxes.length) * 100);
+
+        progressFill.style.width = percent + "%";
+        progressValue.textContent = percent + "%";
+
+        const currentRank = ranks.find(([threshold]) => percent >= threshold);
+        rank.textContent = currentRank[1];
+        encouragement.textContent = currentRank[2];
+        completionNote.classList.toggle("visible", percent === 100);
+
+        missions.forEach(mission => {
+          const missionBoxes = [...mission.querySelectorAll('.task input[type="checkbox"]')];
+          const missionDone = missionBoxes.filter(box => box.checked).length;
+          const complete = missionDone === missionBoxes.length;
+
+          mission.querySelector(".mission-status").textContent = `${missionDone}/${missionBoxes.length}`;
+          mission.classList.toggle("complete", complete);
+
+          const node = document.querySelector(`[data-node="${mission.dataset.mission}"]`);
+          if (node) node.classList.toggle("ready", complete);
+        });
+
+        saveState();
+      }
+
+      missions.forEach(mission => {
+        const toggle = mission.querySelector(".mission-toggle");
+        toggle.addEventListener("click", () => {
+          const shouldOpen = !mission.classList.contains("open");
+
+          missions.forEach(item => {
+            item.classList.remove("open");
+            item.querySelector(".mission-toggle").setAttribute("aria-expanded", "false");
+          });
+
+          if (shouldOpen) {
+            mission.classList.add("open");
+            toggle.setAttribute("aria-expanded", "true");
+          }
+        });
+      });
+
+      checkboxes.forEach(box => box.addEventListener("change", update));
+
+      resetButton.addEventListener("click", () => {
+        const confirmed = window.confirm("Reset every checkbox and erase saved quest progress?");
+        if (!confirmed) return;
+
+        checkboxes.forEach(box => { box.checked = false; });
+        try { localStorage.removeItem(STORAGE_KEY); } catch (error) {}
+        missions.forEach((mission, index) => {
+          mission.classList.toggle("open", index === 0);
+          mission.querySelector(".mission-toggle").setAttribute("aria-expanded", index === 0 ? "true" : "false");
+        });
+        update();
+      });
+
+      loadState();
+      update();
+    })();
+  </script>
+</body>
+</html>
