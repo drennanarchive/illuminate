@@ -715,6 +715,293 @@
       .breakdown-item,
       .breakdowns .section-heading { border-color: var(--line); }
     }
+  
+
+    /* Professional typography refinement */
+    :root {
+      --display: "Aptos Display", "Segoe UI Variable Display", "Segoe UI", Arial, sans-serif;
+      --sans: "Aptos", "Segoe UI Variable Text", "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      letter-spacing: 0;
+    }
+
+    .monogram,
+    h1,
+    h2,
+    h3,
+    .hero__subtitle,
+    .hero__aside-label,
+    .component__number,
+    .example__content,
+    .section-heading__number,
+    .breakdown-item__number,
+    .meta-point__label,
+    .workflow-step__number,
+    .work-section__index,
+    .closing__label {
+      font-family: var(--display);
+      font-style: normal;
+    }
+
+    h1 {
+      font-weight: 650;
+      letter-spacing: -0.048em;
+      line-height: 0.94;
+    }
+
+    .hero__subtitle {
+      font-weight: 600;
+      letter-spacing: -0.018em;
+      line-height: 1.4;
+    }
+
+    .eyebrow,
+    .masthead__kicker,
+    .masthead__meta,
+    .resource-row__type,
+    .section-kicker,
+    .component__nickname,
+    .definition-grid dt,
+    .example__label,
+    .scenario__label,
+    .question-group h4,
+    .workflow-step__subtitle {
+      letter-spacing: 0.095em;
+    }
+
+    .print-header {
+      display: none;
+    }
+
+
+    h1 { font-size: clamp(3.3rem, 5.9vw, 6.25rem); }
+    .hero__subtitle { font-size: clamp(1.18rem, 1.6vw, 1.58rem); }
+    .component h2 { font-size: clamp(2.35rem, 3.8vw, 4.35rem); font-weight: 650; }
+    .definition-grid dd { font-family: var(--sans); font-size: clamp(1.05rem, 1.25vw, 1.22rem); }
+    .example__content { font-family: var(--sans); font-size: clamp(1.12rem, 1.55vw, 1.48rem); font-weight: 600; }
+    .section-heading h2 { font-size: clamp(2.55rem, 4.4vw, 4.8rem); font-weight: 650; }
+    .relationship__table th { font-family: var(--sans); font-weight: 700; }
+    .relationship__table em { font-family: var(--sans); font-style: normal; font-weight: 650; }
+    .breakdown-item h3 { font-size: clamp(1.38rem, 1.8vw, 1.95rem); font-weight: 650; }
+    .meta-point__lead { font-size: clamp(1.9rem, 3.4vw, 3.65rem); font-weight: 650; }
+
+    @page {
+      size: letter portrait;
+      margin: 0.52in 0.55in 0.6in;
+    }
+
+    @media print {
+      html, body {
+        width: auto;
+        color: #17262c;
+        background: white !important;
+        font-family: Arial, sans-serif;
+        font-size: 9.2pt;
+        line-height: 1.42;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .skip-link,
+      .masthead,
+      .framework-nav,
+      .footer,
+      .hero,
+      .print-button,
+      .text-link {
+        display: none !important;
+      }
+
+      .print-header {
+        display: block;
+        margin: 0 0 18pt;
+        padding: 10pt 0 11pt;
+        border-top: 5pt solid #123f50;
+        border-bottom: 0.75pt solid #819095;
+      }
+
+      .print-header__kicker {
+        margin: 0 0 4pt;
+        color: #2d6c6b;
+        font-size: 7.4pt;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .print-header h1 {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 24pt;
+        font-weight: 700;
+        letter-spacing: -0.035em;
+        line-height: 1;
+      }
+
+      .print-header__subtitle {
+        margin: 6pt 0 0;
+        max-width: 520pt;
+        color: #405258;
+        font-size: 9.5pt;
+        font-weight: 600;
+      }
+
+      .print-header__sequence {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5pt;
+        margin: 10pt 0 0;
+        color: #5e6a6d;
+        font-size: 7.4pt;
+        font-weight: 700;
+        letter-spacing: 0.045em;
+        text-transform: uppercase;
+      }
+
+      .print-header__sequence span:not(:last-child)::after {
+        content: "  →";
+        color: #a56f37;
+      }
+
+      .site-shell {
+        width: 100%;
+        max-width: none;
+      }
+
+      .content-section {
+        border: 0;
+        background: transparent;
+      }
+
+      .component {
+        display: grid;
+        grid-template-columns: 118pt minmax(0, 1fr);
+        gap: 18pt;
+        padding: 17pt 0 18pt;
+        border-bottom: 0.75pt solid #9aa5a8;
+        break-inside: auto;
+      }
+
+      .component:first-child { border-top: 1.5pt solid #17262c; }
+      .component__identity { position: static; }
+      .component__number { margin: 0 0 4pt; font-size: 7.5pt; font-weight: 700; }
+      .component h2 { font-size: 17pt; line-height: 1.04; }
+      .component__nickname { margin-top: 5pt; font-size: 6.8pt; line-height: 1.35; }
+      .component__body { max-width: none; }
+
+      .definition-grid {
+        grid-template-columns: 78pt minmax(0, 1fr);
+        border-top: 0.75pt solid #8e9b9f;
+      }
+
+      .definition-grid dt,
+      .definition-grid dd {
+        padding: 7pt 0;
+        border-bottom: 0.5pt solid #c1c8ca;
+      }
+
+      .definition-grid dt { padding-right: 10pt; font-size: 6.6pt; }
+      .definition-grid dd { font-family: Arial, sans-serif; font-size: 9.3pt; line-height: 1.4; }
+      .definition-grid li + li { margin-top: 3pt; }
+
+      .example {
+        grid-template-columns: 78pt minmax(0, 1fr);
+        gap: 10pt;
+        margin-top: 10pt;
+        padding-top: 8pt;
+        border-top: 2pt solid #a56f37;
+        break-inside: avoid;
+      }
+
+      .example__label { font-size: 6.6pt; }
+      .example__content { font-family: Arial, sans-serif; font-size: 9.5pt; font-weight: 650; line-height: 1.4; }
+
+      .scenario {
+        margin-top: 10pt;
+        padding: 9pt 10pt;
+        border: 0.75pt solid #9ca7aa;
+        border-left: 3pt solid #8d493a;
+        background: #f4f1e9 !important;
+        break-inside: avoid;
+      }
+
+      .scenario__label { margin-bottom: 5pt; font-size: 6.6pt; }
+      .scenario p + p { margin-top: 3pt; }
+      .scenario__note { margin-top: 6pt !important; padding-top: 6pt; }
+
+      .relationship {
+        padding: 24pt 0 20pt;
+        border-bottom: 1.5pt solid #17262c;
+        break-before: page;
+      }
+
+      .section-heading {
+        display: grid;
+        grid-template-columns: 145pt minmax(0, 1fr);
+        gap: 18pt;
+        margin-bottom: 12pt;
+      }
+
+      .section-heading__number { margin-bottom: 3pt; font-size: 7.5pt; font-weight: 700; }
+      .section-heading h2 { font-size: 19pt; line-height: 1.04; }
+      .section-heading__intro { font-size: 8.6pt; line-height: 1.45; }
+
+      .relationship__table { font-size: 8.4pt; }
+      .relationship__table th,
+      .relationship__table td { padding: 7pt 7pt; }
+      .relationship__table th { width: 22%; font-size: 9.5pt; }
+      .relationship__table td { font-size: 8.3pt; }
+      .relationship__table em { font-size: 8.8pt; }
+
+      .breakdowns {
+        margin: 0;
+        padding: 24pt 0 18pt;
+        color: #17262c;
+        background: white !important;
+        break-before: page;
+      }
+
+      .breakdowns .section-heading {
+        padding-bottom: 12pt;
+        border-bottom: 1.5pt solid #8d493a;
+      }
+
+      .breakdowns .section-heading__intro,
+      .breakdown-item__copy { color: #405258; }
+      .breakdowns .section-heading__number { color: #8d493a; }
+      .breakdown-list { border-top: 0; }
+
+      .breakdown-item {
+        display: grid;
+        grid-template-columns: 24pt 155pt minmax(0, 1fr);
+        gap: 10pt;
+        padding: 10pt 0;
+        border-bottom: 0.5pt solid #bac1c3;
+        break-inside: avoid;
+      }
+
+      .breakdown-item__number { color: #8d493a; font-size: 7.5pt; font-weight: 700; }
+      .breakdown-item h3 { color: #17262c; font-size: 10.5pt; line-height: 1.22; }
+      .breakdown-item__copy { font-size: 8.2pt; line-height: 1.42; }
+      .breakdown-item__copy p + p { margin-top: 5pt; }
+      .breakdown-item__copy strong { color: #17262c; }
+
+      .meta-point {
+        display: grid;
+        grid-template-columns: 112pt minmax(0, 1fr);
+        gap: 18pt;
+        padding: 18pt 0 0;
+        break-inside: avoid;
+      }
+
+      .meta-point__label { font-size: 7.5pt; font-weight: 700; }
+      .meta-point__lead { font-size: 15pt; line-height: 1.12; }
+      .meta-point__support { margin-top: 8pt !important; font-size: 8.7pt; line-height: 1.45; }
+    }
+
   </style>
 </head>
 <body>
@@ -731,9 +1018,17 @@
       </div>
       <div class="masthead__actions">
         <a class="text-link" href="./strategy-landing-page.html">← Landing page</a>
-        <button class="print-button" type="button" onclick="window.print()">Print / Save PDF</button>
+        <button class="print-button" type="button" onclick="window.print()">Print this page</button>
       </div>
     </header>
+
+
+    <section class="print-header" aria-hidden="true">
+      <p class="print-header__kicker">Reference guide · Resource 01</p>
+      <h1>DO Strategy Component Outline</h1>
+      <p class="print-header__subtitle">Strategy planning terms from highest-level vision down to daily execution steps</p>
+      <div class="print-header__sequence"><span>Goal</span><span>Objective</span><span>Key Result</span><span>KPI</span><span>Milestone</span></div>
+    </section>
 
     <main id="main-content">
       <section class="hero" aria-labelledby="page-title">

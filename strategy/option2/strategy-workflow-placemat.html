@@ -749,6 +749,350 @@
       .check-item input:checked ~ span:last-child { text-decoration: none; }
       .diagnostic-grid { break-inside: avoid; }
     }
+  
+
+    /* Professional typography refinement */
+    :root {
+      --display: "Aptos Display", "Segoe UI Variable Display", "Segoe UI", Arial, sans-serif;
+      --sans: "Aptos", "Segoe UI Variable Text", "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      letter-spacing: 0;
+    }
+
+    .monogram,
+    h1,
+    h2,
+    h3,
+    .hero__subtitle,
+    .hero__aside-label,
+    .component__number,
+    .example__content,
+    .section-heading__number,
+    .breakdown-item__number,
+    .meta-point__label,
+    .workflow-step__number,
+    .work-section__index,
+    .closing__label {
+      font-family: var(--display);
+      font-style: normal;
+    }
+
+    h1 {
+      font-weight: 650;
+      letter-spacing: -0.048em;
+      line-height: 0.94;
+    }
+
+    .hero__subtitle {
+      font-weight: 600;
+      letter-spacing: -0.018em;
+      line-height: 1.4;
+    }
+
+    .eyebrow,
+    .masthead__kicker,
+    .masthead__meta,
+    .resource-row__type,
+    .section-kicker,
+    .component__nickname,
+    .definition-grid dt,
+    .example__label,
+    .scenario__label,
+    .question-group h4,
+    .workflow-step__subtitle {
+      letter-spacing: 0.095em;
+    }
+
+    .print-header {
+      display: none;
+    }
+
+
+    h1 { font-size: clamp(3.25rem, 5.7vw, 6.1rem); }
+    .hero__subtitle { font-size: clamp(1.18rem, 1.6vw, 1.58rem); }
+    .placemat-intro h2 { font-size: clamp(2.2rem, 3.65vw, 4.05rem); font-weight: 650; }
+    .workflow-step h2 { font-size: clamp(2.35rem, 3.8vw, 4.25rem); font-weight: 650; }
+    .work-section__heading h3,
+    .diagnostic-grid h3 { font-size: clamp(1.55rem, 2.15vw, 2.2rem); font-weight: 650; }
+    .question-line { font-family: var(--sans); font-size: clamp(1.02rem, 1.2vw, 1.18rem); }
+    .validation legend strong { font-size: clamp(1.4rem, 1.85vw, 1.85rem); font-weight: 650; }
+    .closing__lead { font-size: clamp(1.9rem, 3.35vw, 3.55rem); font-weight: 650; }
+
+    @page {
+      size: letter portrait;
+      margin: 0.48in 0.52in 0.56in;
+    }
+
+    @media print {
+      html, body {
+        width: auto;
+        color: #17262c;
+        background: white !important;
+        font-family: Arial, sans-serif;
+        font-size: 8.8pt;
+        line-height: 1.38;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .skip-link,
+      .masthead,
+      .workflow-nav,
+      .footer,
+      .hero,
+      .action-button,
+      .text-link,
+      .closing {
+        display: none !important;
+      }
+
+      .print-header {
+        display: block;
+        margin: 0 0 16pt;
+        padding: 9pt 0 10pt;
+        border-top: 5pt solid #123f50;
+        border-bottom: 0.75pt solid #819095;
+      }
+
+      .print-header__kicker {
+        margin: 0 0 4pt;
+        color: #2d6c6b;
+        font-size: 7pt;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .print-header h1 {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 23pt;
+        font-weight: 700;
+        letter-spacing: -0.035em;
+        line-height: 1;
+      }
+
+      .print-header__subtitle {
+        margin: 5pt 0 0;
+        color: #405258;
+        font-size: 9pt;
+        font-weight: 600;
+      }
+
+      .print-header__instructions {
+        display: grid;
+        grid-template-columns: 42pt minmax(0, 1fr);
+        gap: 8pt;
+        margin-top: 9pt;
+        padding: 7pt 9pt;
+        border-left: 3pt solid #a56f37;
+        background: #f4f1e9 !important;
+        font-size: 7.8pt;
+        line-height: 1.4;
+      }
+
+      .print-header__instructions strong {
+        color: #8d493a;
+        font-size: 6.7pt;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .site-shell {
+        width: 100%;
+        max-width: none;
+      }
+
+      .placemat-intro {
+        display: grid;
+        grid-template-columns: 130pt minmax(0, 1fr);
+        gap: 18pt;
+        padding: 0 0 14pt;
+        border-bottom: 1.5pt solid #17262c;
+      }
+
+      .placemat-intro h2 { font-size: 16pt; line-height: 1.06; }
+      .placemat-intro__copy { font-size: 8.2pt; line-height: 1.42; }
+      .placemat-intro__copy p + p { margin-top: 5pt; }
+
+      .workflow-step {
+        display: grid;
+        grid-template-columns: 112pt minmax(0, 1fr);
+        gap: 16pt;
+        padding: 16pt 0 0;
+        border-bottom: 0;
+        break-before: page;
+      }
+
+      .workflow-step:first-of-type { break-before: auto; }
+      .workflow-step__identity { position: static; margin: 0; }
+      .workflow-step__number { margin: 0 0 4pt; font-size: 7pt; font-weight: 700; }
+      .workflow-step h2 { font-size: 17pt; line-height: 1.04; }
+      .workflow-step__subtitle { margin-top: 5pt; font-size: 6.4pt; line-height: 1.35; }
+
+      .characteristics {
+        margin-top: 12pt;
+        padding-top: 8pt;
+        border-top: 1pt solid #2d6c6b;
+      }
+
+      .section-kicker { font-size: 6.3pt; }
+      .characteristics ul { margin-top: 5pt; }
+      .characteristics li { padding: 4pt 0 4pt 12pt; font-size: 7.6pt; line-height: 1.35; }
+      .characteristics li::before { left: 1pt; top: 8pt; width: 4pt; height: 4pt; }
+
+      .work-section { padding-bottom: 11pt; }
+      .work-section__heading { grid-template-columns: 25pt minmax(0, 1fr); gap: 7pt; margin-bottom: 8pt; }
+      .work-section__index { margin-top: 1pt; font-size: 7pt; font-weight: 700; }
+      .work-section__heading h3 { font-size: 12pt; line-height: 1.08; }
+      .work-section__heading p { margin-top: 3pt; font-size: 7.6pt; }
+
+      .question-groups { border-top: 0.75pt solid #17262c; }
+      .question-group {
+        grid-template-columns: 92pt minmax(0, 1fr);
+        gap: 10pt;
+        padding: 7pt 0;
+        border-bottom: 0.5pt solid #b7c0c2;
+        break-inside: avoid;
+      }
+
+      .question-group h4 { font-size: 6.5pt; line-height: 1.4; }
+      .question-line { grid-template-columns: 20pt minmax(0, 1fr); gap: 5pt; padding-bottom: 4pt; font-family: Arial, sans-serif; font-size: 8.2pt; line-height: 1.35; }
+      .question-line__number { padding-top: 1pt; font-size: 6pt; }
+
+      .validation {
+        margin-top: 11pt;
+        border: 0.9pt solid #2d6c6b;
+        background: white !important;
+        break-inside: avoid-page;
+      }
+
+      .validation legend {
+        grid-template-columns: 25pt minmax(0, 1fr);
+        gap: 7pt;
+        width: calc(100% - 24pt);
+        margin: 0 12pt;
+        padding-bottom: 6pt;
+        background: white;
+      }
+
+      .validation legend strong { font-size: 11pt; }
+      .validation legend small { margin-top: 2pt; font-size: 6.5pt; }
+      .check-list { padding: 0 11pt 8pt; }
+
+      .check-item {
+        grid-template-columns: 15pt minmax(0, 1fr);
+        gap: 6pt;
+        padding: 4.3pt 0;
+        border-bottom: 0.45pt solid #c4cbcd;
+        cursor: default;
+        font-size: 7.8pt;
+        line-height: 1.35;
+      }
+
+      .check-item__mark {
+        width: 12pt;
+        height: 12pt;
+        margin-top: 0;
+        border: 0.8pt solid #2d6c6b;
+      }
+
+      .check-item input:checked + .check-item__mark { background: #2d6c6b !important; }
+      .check-item input:checked + .check-item__mark::after {
+        left: 3.5pt;
+        top: 1pt;
+        width: 3pt;
+        height: 6pt;
+        border-width: 0 1.3pt 1.3pt 0;
+      }
+      .check-item input:checked ~ span:last-child { color: #17262c; text-decoration: none; }
+
+      .diagnostic-grid {
+        grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+        gap: 14pt;
+        margin-top: 11pt;
+        break-inside: avoid;
+      }
+
+      .pitfalls,
+      .examples { padding-top: 7pt; border-top-width: 1.5pt; }
+      .diagnostic-grid h3 { margin-top: 3pt; font-size: 10pt; line-height: 1.12; }
+      .pitfalls > ul { margin-top: 6pt; padding-left: 12pt; font-size: 7.4pt; line-height: 1.35; }
+      .pitfalls > ul li + li { margin-top: 3pt; }
+      .example-columns { gap: 7pt; margin-top: 6pt; }
+      .example-column { padding: 6pt; background: #f8f6ef !important; }
+      .example-column h4 { margin-bottom: 4pt; font-size: 6.2pt; }
+      .example-column li { grid-template-columns: 10pt minmax(0, 1fr); gap: 3pt; padding: 3.2pt 0; font-size: 7pt; line-height: 1.3; }
+    }
+
+  
+
+    .print-workflow-map { display: none; }
+
+    @media print {
+      .print-workflow-map {
+        display: block;
+        margin-top: 18pt;
+        padding-top: 12pt;
+        border-top: 1.5pt solid #17262c;
+      }
+
+      .print-workflow-map__kicker {
+        margin: 0 0 7pt;
+        color: #2d6c6b;
+        font-size: 7pt;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .print-workflow-map ol {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-top: 0.75pt solid #9aa5a8;
+      }
+
+      .print-workflow-map li {
+        display: grid;
+        grid-template-columns: 28pt minmax(0, .7fr) minmax(150pt, 1fr);
+        gap: 10pt;
+        align-items: baseline;
+        padding: 8pt 0;
+        border-bottom: 0.5pt solid #c1c8ca;
+      }
+
+      .print-workflow-map li span {
+        color: #a56f37;
+        font-size: 7pt;
+        font-weight: 700;
+      }
+
+      .print-workflow-map li strong {
+        font-size: 10pt;
+      }
+
+      .print-workflow-map li em {
+        color: #5e6a6d;
+        font-size: 8pt;
+        font-style: normal;
+        text-align: right;
+      }
+
+      .print-workflow-map__note {
+        margin: 11pt 0 0;
+        padding: 8pt 10pt;
+        border-left: 3pt solid #2d6c6b;
+        background: #f4f1e9 !important;
+        color: #405258;
+        font-size: 7.8pt;
+        line-height: 1.4;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -767,9 +1111,17 @@
         <a class="text-link" href="./strategy-landing-page.html">← Landing page</a>
         <a class="text-link" href="./strategy-builder.html">Component outline</a>
         <button class="action-button action-button--quiet" id="reset-checks" type="button">Reset checks</button>
-        <button class="action-button" type="button" onclick="window.print()">Print / Save PDF</button>
+        <button class="action-button" type="button" onclick="window.print()">Print this page</button>
       </div>
     </header>
+
+
+    <section class="print-header" aria-hidden="true">
+      <p class="print-header__kicker">Guided placemat · Resource 02</p>
+      <h1>DO Strategy Workflow Placemat</h1>
+      <p class="print-header__subtitle">Question guide to validate your strategy inputs at each step</p>
+      <div class="print-header__instructions"><strong>Print use</strong><span>Move through each component in sequence. Use the development questions to shape the input, then mark the validation checks by hand or preserve any checks already completed on screen.</span></div>
+    </section>
 
     <main id="main-content">
       <section class="hero" aria-labelledby="page-title">
@@ -829,7 +1181,18 @@
       </div>
     </section>
 
-    
+    <section class="print-workflow-map" aria-hidden="true">
+      <p class="print-workflow-map__kicker">Five-part strategy architecture</p>
+      <ol>
+        <li><span>01</span><strong>Goal</strong><em>Strategic direction</em></li>
+        <li><span>02</span><strong>Objective</strong><em>Specific target</em></li>
+        <li><span>03</span><strong>Key Result</strong><em>Evidence of success</em></li>
+        <li><span>04</span><strong>KPI</strong><em>Operational health</em></li>
+        <li><span>05</span><strong>Milestone</strong><em>Execution checkpoint</em></li>
+      </ol>
+      <p class="print-workflow-map__note"><strong>One component per page.</strong> The pages that follow preserve space, hierarchy, and checkboxes for facilitated discussion or individual review.</p>
+    </section>
+
     <section id="goal" class="workflow-step" aria-labelledby="goal-title">
       <div class="workflow-step__identity">
         <p class="workflow-step__number">Step 01</p>
