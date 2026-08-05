@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reference guide to goals, objectives, key results, KPIs, and milestones.">
+  <title>DO Strategy Component Outline</title>
+  <style>
+    :root {
+      --paper: #f4f1e9;
+      --paper-deep: #e9e2d4;
+      --white: #fffdf8;
+      --ink: #17262c;
+      --muted: #5f6b6e;
+      --line: rgba(23, 38, 44, 0.18);
+      --line-soft: rgba(23, 38, 44, 0.09);
+      --navy: #123f50;
+      --teal: #2d6c6b;
+      --gold: #a56f37;
+      --rust: #8d493a;
+      --focus: #0a69a8;
+      --display: Georgia, "Times New Roman", serif;
+      --sans: "Aptos", "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(23, 38, 44, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 38, 44, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 34px 34px;
+      font-family: var(--sans);
+      line-height: 1.58;
+    }
+
+    a { color: inherit; }
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      left: 18px;
+      top: 18px;
+      transform: translateY(-180%);
+      padding: 10px 14px;
+      color: white;
+      background: var(--ink);
+      text-decoration: none;
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .site-shell {
+      width: min(1480px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .masthead {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+      padding: 24px 0 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .masthead__identity {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .monogram {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.08rem;
+      letter-spacing: -0.04em;
+      background: rgba(255, 253, 248, 0.58);
+      flex: 0 0 auto;
+    }
+
+    .masthead__kicker,
+    .masthead__meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .masthead__title {
+      margin: 1px 0 0;
+      font-size: 0.94rem;
+      font-weight: 650;
+      letter-spacing: 0.015em;
+    }
+
+    .masthead__actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .text-link,
+    .print-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font: inherit;
+      font-size: 0.77rem;
+      font-weight: 750;
+      letter-spacing: 0.09em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .text-link { border-bottom: 1px solid currentColor; }
+
+    .print-button {
+      padding: 9px 12px;
+      border: 1px solid var(--navy);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .print-button:hover {
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr);
+      gap: clamp(54px, 9vw, 140px);
+      align-items: end;
+      padding: clamp(72px, 9vw, 132px) 0 clamp(60px, 8vw, 112px);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 28px;
+      color: var(--teal);
+      font-size: 0.77rem;
+      font-weight: 750;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 44px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 930px;
+      font-family: var(--display);
+      font-size: clamp(4.1rem, 7.3vw, 8.5rem);
+      font-weight: 400;
+      letter-spacing: -0.06em;
+      line-height: 0.84;
+    }
+
+    .hero__subtitle {
+      margin: 32px 0 0;
+      max-width: 720px;
+      color: var(--navy);
+      font-family: var(--display);
+      font-size: clamp(1.35rem, 2.1vw, 2.05rem);
+      font-style: italic;
+      line-height: 1.28;
+    }
+
+    .hero__aside {
+      padding: 0 0 8px 28px;
+      border-left: 1px solid var(--line);
+    }
+
+    .hero__aside-label {
+      margin: 0 0 18px;
+      color: var(--gold);
+      font-family: var(--display);
+      font-style: italic;
+    }
+
+    .hero__aside p:last-child {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .framework-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      background: rgba(244, 241, 233, 0.96);
+      backdrop-filter: blur(12px);
+    }
+
+    .framework-nav__inner {
+      display: grid;
+      grid-template-columns: auto repeat(5, minmax(0, 1fr)) auto;
+      align-items: stretch;
+    }
+
+    .framework-nav__label,
+    .framework-nav__link,
+    .framework-nav__companion {
+      display: flex;
+      align-items: center;
+      min-height: 66px;
+      padding: 10px 16px;
+      border-right: 1px solid var(--line);
+    }
+
+    .framework-nav__label {
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 750;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .framework-nav__link,
+    .framework-nav__companion {
+      color: var(--ink);
+      font-size: 0.83rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .framework-nav__link span {
+      margin-right: 8px;
+      color: var(--gold);
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .framework-nav__link:hover,
+    .framework-nav__companion:hover {
+      background: var(--white);
+    }
+
+    .framework-nav__companion {
+      justify-content: center;
+      border-right: 0;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
+    .content-section {
+      border-bottom: 1px solid var(--ink);
+      background: rgba(255, 253, 248, 0.48);
+    }
+
+    .component {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.54fr) minmax(0, 1.46fr);
+      gap: clamp(54px, 8vw, 128px);
+      padding: clamp(72px, 8vw, 118px) 0;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 82px;
+    }
+
+    .component:last-child { border-bottom: 0; }
+
+    .component__identity {
+      align-self: start;
+      position: sticky;
+      top: 102px;
+    }
+
+    .component__number {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-family: var(--display);
+      font-size: 1rem;
+      font-style: italic;
+    }
+
+    .component h2 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2.7rem, 4.5vw, 5.4rem);
+      font-weight: 400;
+      letter-spacing: -0.045em;
+      line-height: 0.96;
+    }
+
+    .component__nickname {
+      margin: 16px 0 0;
+      color: var(--teal);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .component__body {
+      max-width: 860px;
+    }
+
+    .definition-grid {
+      display: grid;
+      grid-template-columns: minmax(130px, 0.32fr) minmax(0, 1fr);
+      border-top: 1px solid var(--line);
+    }
+
+    .definition-grid dt,
+    .definition-grid dd {
+      margin: 0;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .definition-grid dt {
+      padding-right: 28px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .definition-grid dd {
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: clamp(1.15rem, 1.55vw, 1.4rem);
+      line-height: 1.48;
+    }
+
+    .definition-grid ul {
+      margin: 0;
+      padding-left: 1.2em;
+    }
+
+    .definition-grid li + li { margin-top: 7px; }
+
+    .example {
+      display: grid;
+      grid-template-columns: 130px minmax(0, 1fr);
+      gap: 28px;
+      margin-top: 34px;
+      padding: 28px 0 0;
+      border-top: 2px solid var(--gold);
+    }
+
+    .example__label {
+      color: var(--gold);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .example__content {
+      margin: 0;
+      color: var(--navy);
+      font-family: var(--display);
+      font-size: clamp(1.35rem, 2vw, 1.85rem);
+      font-style: italic;
+      line-height: 1.48;
+    }
+
+    .example__content ul {
+      margin: 0;
+      padding-left: 1.1em;
+    }
+
+    .scenario {
+      margin-top: 30px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      background: rgba(233, 226, 212, 0.48);
+    }
+
+    .scenario__label {
+      margin: 0 0 14px;
+      color: var(--rust);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .scenario p { margin: 0; }
+    .scenario p + p { margin-top: 7px; }
+    .scenario__note {
+      margin-top: 18px !important;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .relationship {
+      padding: clamp(78px, 9vw, 132px) 0;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(230px, 0.55fr) minmax(0, 1.45fr);
+      gap: clamp(48px, 8vw, 120px);
+      align-items: end;
+      margin-bottom: 52px;
+    }
+
+    .section-heading__number {
+      margin: 0 0 10px;
+      color: var(--gold);
+      font-family: var(--display);
+      font-style: italic;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2.8rem, 5vw, 6rem);
+      font-weight: 400;
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+    }
+
+    .section-heading__intro {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+      line-height: 1.75;
+    }
+
+    .relationship__table {
+      width: 100%;
+      border-collapse: collapse;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .relationship__table th,
+    .relationship__table td {
+      padding: 20px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .relationship__table tr:last-child th,
+    .relationship__table tr:last-child td { border-bottom: 0; }
+
+    .relationship__table th {
+      width: 25%;
+      padding-left: 0;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: 1.45rem;
+      font-weight: 400;
+    }
+
+    .relationship__table td {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .relationship__table em {
+      color: var(--navy);
+      font-family: var(--display);
+      font-size: 1.18rem;
+    }
+
+    .breakdowns {
+      margin-inline: calc(50% - 50vw);
+      padding: clamp(80px, 9vw, 138px) max(24px, calc((100vw - min(1480px, calc(100vw - 48px))) / 2));
+      color: var(--paper);
+      background: var(--ink);
+    }
+
+    .breakdowns .section-heading {
+      border-bottom: 1px solid rgba(244, 241, 233, 0.25);
+      padding-bottom: 48px;
+    }
+
+    .breakdowns .section-heading__intro { color: rgba(244, 241, 233, 0.7); }
+    .breakdowns .section-heading__number { color: #d4a56e; }
+
+    .breakdown-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid rgba(244, 241, 233, 0.2);
+    }
+
+    .breakdown-item {
+      display: grid;
+      grid-template-columns: 72px minmax(280px, 0.7fr) minmax(0, 1.3fr);
+      gap: clamp(24px, 4vw, 60px);
+      padding: 34px 0;
+      border-bottom: 1px solid rgba(244, 241, 233, 0.2);
+    }
+
+    .breakdown-item__number {
+      color: #d4a56e;
+      font-family: var(--display);
+      font-style: italic;
+    }
+
+    .breakdown-item h3 {
+      margin: 0;
+      color: var(--white);
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 2.2vw, 2.35rem);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.18;
+    }
+
+    .breakdown-item__copy {
+      color: rgba(244, 241, 233, 0.76);
+      font-size: 0.98rem;
+      line-height: 1.75;
+    }
+
+    .breakdown-item__copy p { margin: 0; }
+    .breakdown-item__copy p + p { margin-top: 14px; }
+    .breakdown-item__copy strong { color: var(--white); }
+
+    .meta-point {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.42fr) minmax(0, 1.58fr);
+      gap: clamp(44px, 8vw, 120px);
+      padding: clamp(78px, 9vw, 132px) 0;
+    }
+
+    .meta-point__label {
+      margin: 0;
+      color: var(--gold);
+      font-family: var(--display);
+      font-style: italic;
+    }
+
+    .meta-point__content p {
+      margin: 0;
+      max-width: 1000px;
+    }
+
+    .meta-point__lead {
+      color: var(--navy);
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 4.7rem);
+      letter-spacing: -0.04em;
+      line-height: 1.02;
+    }
+
+    .meta-point__support {
+      margin-top: 28px !important;
+      max-width: 780px !important;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.78;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 26px;
+      padding: 24px 0 34px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .footer p { margin: 0; }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .component,
+      .section-heading,
+      .meta-point {
+        grid-template-columns: 1fr;
+      }
+
+      .hero__aside {
+        max-width: 760px;
+      }
+
+      .component__identity {
+        position: static;
+      }
+
+      .framework-nav__inner {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+
+      .framework-nav__label,
+      .framework-nav__companion { display: none; }
+
+      .framework-nav__link {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .breakdown-item {
+        grid-template-columns: 54px minmax(220px, 0.75fr) minmax(0, 1.25fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-shell { width: min(100% - 28px, 1480px); }
+
+      .masthead {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .masthead__actions { padding-left: 52px; }
+
+      .hero { padding: 62px 0 70px; }
+      h1 { font-size: clamp(3.9rem, 20vw, 6.4rem); }
+
+      .framework-nav { position: static; }
+      .framework-nav__inner { grid-template-columns: 1fr; }
+      .framework-nav__link {
+        justify-content: flex-start;
+        min-height: 48px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .framework-nav__link:last-child { border-bottom: 0; }
+
+      .definition-grid,
+      .example {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .definition-grid dt {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .definition-grid dd { padding-top: 8px; }
+
+      .example__content { margin-top: 10px; }
+
+      .relationship__table,
+      .relationship__table tbody,
+      .relationship__table tr,
+      .relationship__table th,
+      .relationship__table td {
+        display: block;
+        width: 100%;
+      }
+
+      .relationship__table tr { padding: 22px 0; border-bottom: 1px solid var(--line); }
+      .relationship__table tr:last-child { border-bottom: 0; }
+      .relationship__table th,
+      .relationship__table td { border: 0; padding: 4px 0; }
+
+      .breakdown-item {
+        grid-template-columns: 42px minmax(0, 1fr);
+      }
+
+      .breakdown-item__copy { grid-column: 2; }
+
+      .footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; }
+    }
+
+    @media print {
+      body { background: white; }
+      .site-shell { width: 100%; }
+      .framework-nav,
+      .print-button { display: none !important; }
+      .component { break-inside: avoid; }
+      .component__identity { position: static; }
+      .breakdowns {
+        margin-inline: 0;
+        padding: 40px 0;
+        color: var(--ink);
+        background: white;
+      }
+      .breakdowns .section-heading__intro,
+      .breakdown-item__copy { color: var(--muted); }
+      .breakdown-item h3 { color: var(--ink); }
+      .breakdown-list,
+      .breakdown-item,
+      .breakdowns .section-heading { border-color: var(--line); }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="site-shell">
+    <header class="masthead">
+      <div class="masthead__identity">
+        <span class="monogram" aria-hidden="true">DO</span>
+        <div>
+          <p class="masthead__kicker">Strategy development resources</p>
+          <p class="masthead__title">DO Strategy Component Outline</p>
+        </div>
+      </div>
+      <div class="masthead__actions">
+        <a class="text-link" href="./strategy-landing-page.html">← Landing page</a>
+        <button class="print-button" type="button" onclick="window.print()">Print / Save PDF</button>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Reference guide · Resource 01</p>
+          <h1 id="page-title">DO Strategy<br>Component Outline</h1>
+          <p class="hero__subtitle">Strategy planning terms from highest-level vision down to daily execution steps</p>
+        </div>
+        <aside class="hero__aside">
+          <p class="hero__aside-label">Purpose</p>
+          <p>This resource establishes a shared vocabulary for five related strategy components, clarifies how each one serves a different purpose, and surfaces the breakdowns that commonly weaken planning.</p>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <nav class="framework-nav" aria-label="Component navigation">
+    <div class="site-shell framework-nav__inner">
+      <span class="framework-nav__label">Jump to</span>
+      <a class="framework-nav__link" href="#goal"><span>01</span>Goal</a>
+      <a class="framework-nav__link" href="#objective"><span>02</span>Objective</a>
+      <a class="framework-nav__link" href="#key-result"><span>03</span>Key Result</a>
+      <a class="framework-nav__link" href="#kpi"><span>04</span>KPI</a>
+      <a class="framework-nav__link" href="#milestone"><span>05</span>Milestone</a>
+      <a class="framework-nav__companion" href="./strategy-workflow-placemat.html">Open placemat →</a>
+    </div>
+  </nav>
+
+  <div class="site-shell">
+    <section class="content-section" aria-label="Strategy components">
+      <article class="component" id="goal">
+        <div class="component__identity">
+          <span class="component__number">01</span>
+          <h2>Goal</h2>
+          <p class="component__nickname">The strategic vision</p>
+        </div>
+        <div class="component__body">
+          <dl class="definition-grid">
+            <dt>What it is</dt>
+            <dd>The broad, long-term destination your organization wants to reach.</dd>
+            <dt>Characteristics</dt>
+            <dd>High-level, aspirational, and often qualitative.</dd>
+          </dl>
+          <div class="example">
+            <span class="example__label">Example</span>
+            <p class="example__content">“Become the most customer-centric software company in our industry.”</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="component" id="objective">
+        <div class="component__identity">
+          <span class="component__number">02</span>
+          <h2>Objective</h2>
+          <p class="component__nickname">The specific target</p>
+        </div>
+        <div class="component__body">
+          <dl class="definition-grid">
+            <dt>What it is</dt>
+            <dd>A specific outcome that advances the goal.</dd>
+            <dt>Characteristics</dt>
+            <dd>Mid-term, clearly defined, and aligned directly with the overarching Goal.</dd>
+          </dl>
+          <div class="example">
+            <span class="example__label">Example</span>
+            <p class="example__content">“Launch a brand new customer loyalty reward program by Q3.”</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="component" id="key-result">
+        <div class="component__identity">
+          <span class="component__number">03</span>
+          <h2>Key Result</h2>
+          <p class="component__nickname">The success metric</p>
+        </div>
+        <div class="component__body">
+          <dl class="definition-grid">
+            <dt>What it is</dt>
+            <dd>The quantifiable outcome that proves you successfully achieved your Objective.</dd>
+            <dt>Characteristics</dt>
+            <dd>
+              <ul>
+                <li>Measurable outcomes used to determine progress toward an objective</li>
+                <li>Most organizations actually score Key Results</li>
+              </ul>
+            </dd>
+          </dl>
+          <div class="example">
+            <span class="example__label">Examples</span>
+            <div class="example__content">
+              <ul>
+                <li>Increase adoption from 42% to 70%</li>
+                <li>Reduce cycle time from 28 days to 14 days</li>
+                <li>Complete 90% of modernization roadmap</li>
+              </ul>
+            </div>
+          </div>
+          <div class="scenario">
+            <p class="scenario__label">Interpretation note</p>
+            <p>Even if you only reach 63%, you’ve still measured meaningful progress.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="component" id="kpi">
+        <div class="component__identity">
+          <span class="component__number">04</span>
+          <h2>KPI</h2>
+          <p class="component__nickname">The health check</p>
+        </div>
+        <div class="component__body">
+          <dl class="definition-grid">
+            <dt>What it is</dt>
+            <dd>An ongoing operational metric that tells you how efficiently your daily business is running.</dd>
+            <dt>Characteristics</dt>
+            <dd>Tracked continuously (weekly/monthly) to monitor steady-state health and flag problems early.</dd>
+          </dl>
+          <div class="example">
+            <span class="example__label">Example</span>
+            <p class="example__content">“Monthly Customer Churn Rate” or “Average Support Ticket Resolution Time.”</p>
+          </div>
+          <div class="scenario">
+            <p class="scenario__label">Example scenario</p>
+            <p><strong>Objective:</strong> Improve customer retention.</p>
+            <p><strong>Key Result:</strong> Increase retention from 78% to 88%.</p>
+            <p><strong>KPI:</strong> Monthly churn rate.</p>
+            <p class="scenario__note">Once you’ve achieved the objective, the KPI keeps watching to make sure you don’t backslide.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="component" id="milestone">
+        <div class="component__identity">
+          <span class="component__number">05</span>
+          <h2>Milestone</h2>
+          <p class="component__nickname">The progress checkpoint</p>
+        </div>
+        <div class="component__body">
+          <dl class="definition-grid">
+            <dt>What it is</dt>
+            <dd>A specific, time-bound event or output (not measures) on a project schedule that shows you are moving forward.</dd>
+            <dt>Characteristics</dt>
+            <dd>Fixed deadlines, output-focused, and non-numerical (usually a “done/not done” task).</dd>
+          </dl>
+          <div class="example">
+            <span class="example__label">Example</span>
+            <p class="example__content">“Finalize the loyalty program software vendor contract by March 15th.”</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="relationship" aria-labelledby="relationship-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-heading__number">II.</p>
+          <h2 id="relationship-title">How they connect</h2>
+        </div>
+        <p class="section-heading__intro">Each component answers a different strategic question. Together, they connect long-term direction to measurable progress and operational execution.</p>
+      </div>
+
+      <table class="relationship__table">
+        <tbody>
+          <tr>
+            <th scope="row">Goal</th>
+            <td>tells you <em>Why</em> you are moving.</td>
+          </tr>
+          <tr>
+            <th scope="row">Objective</th>
+            <td>tells you <em>Where</em> you are going next.</td>
+          </tr>
+          <tr>
+            <th scope="row">Key Result</th>
+            <td>tells you <em>If</em> you successfully arrived.</td>
+          </tr>
+          <tr>
+            <th scope="row">KPI</th>
+            <td>tells you <em>How Fast/Smoothly</em> you are driving.</td>
+          </tr>
+          <tr>
+            <th scope="row">Milestone</th>
+            <td>tells you <em>What Markers</em> you passed along the way.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="breakdowns" aria-labelledby="breakdowns-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-heading__number">III.</p>
+          <h2 id="breakdowns-title">Where organizations actually break down</h2>
+        </div>
+        <p class="section-heading__intro">Watching how organizations actually use these tools, the framework is rarely where things break down. Here’s where they do:</p>
+      </div>
+
+      <ol class="breakdown-list">
+        <li class="breakdown-item">
+          <span class="breakdown-item__number">01</span>
+          <h3>Goals get written to sound good, not to mean something.</h3>
+          <div class="breakdown-item__copy">
+            <p>“Become the most customer-centric organization in our industry” is the example above, and it’s also exactly the kind of goal that gets approved in a leadership offsite and then never touched again. If you can’t describe what <em>not</em> achieving it looks like, it’s not functioning as a goal—it’s functioning as a values statement wearing a goal’s clothes.</p>
+            <p><strong>Those two things aren’t the same, and conflating them is one of the most common strategic planning failures.</strong></p>
+          </div>
+        </li>
+        <li class="breakdown-item">
+          <span class="breakdown-item__number">02</span>
+          <h3>Objectives get written at the wrong altitude.</h3>
+          <div class="breakdown-item__copy">
+            <p>Too high and they’re just restatements of the goal. Too low and they’re tasks. The useful zone is narrow—specific enough to create focus, broad enough to allow multiple paths to success. Most organizations err toward too high because it feels safer. Vague objectives are harder to fail.</p>
+          </div>
+        </li>
+        <li class="breakdown-item">
+          <span class="breakdown-item__number">03</span>
+          <h3>Key Results get written to be achievable, not to be meaningful.</h3>
+          <div class="breakdown-item__copy">
+            <p>This is the sandbagging problem. If your Key Results are things you’re already confident you’ll hit, they’re not measuring ambition—they’re measuring activity. The OKR literature (John Doerr especially) suggests that hitting 70% of a well-written Key Result is better than hitting 100% of a poorly written one. Most organizations don’t have the psychological safety to operate that way, so they quietly write easier targets.</p>
+          </div>
+        </li>
+        <li class="breakdown-item">
+          <span class="breakdown-item__number">04</span>
+          <h3>KPIs multiply until they lose meaning.</h3>
+          <div class="breakdown-item__copy">
+            <p>A dashboard with 40 KPIs is not a health check—it’s noise. The discipline of KPIs isn’t in defining them, it’s in <em>cutting</em> them until only the ones that actually drive decisions remain. Most organizations accumulate KPIs over time and never retire them, so the dashboard grows and the signal shrinks.</p>
+          </div>
+        </li>
+        <li class="breakdown-item">
+          <span class="breakdown-item__number">05</span>
+          <h3>Milestones get treated as progress when they’re actually just schedule.</h3>
+          <div class="breakdown-item__copy">
+            <p>“Milestone achieved” means the plan is intact. It says nothing about whether the work is good, whether the objective is still the right one, or whether the environment has changed since the plan was written. In fast-moving or ambiguous environments, where the Agency finds itself today, milestones can create a false sense of forward motion.</p>
+          </div>
+        </li>
+        <li class="breakdown-item">
+          <span class="breakdown-item__number">06</span>
+          <h3>The Deliverables Point, Extended</h3>
+          <div class="breakdown-item__copy">
+            <p>In certain work, Deliverables are often the only thing that’s unambiguously real. Goals can shift, Objectives can be reframed, Key Results can be rescored—but a deliverable either exists or it doesn’t. That concreteness is actually an asset if you use it right. The risk is treating deliverable completion as a proxy for objective achievement, which it isn’t. You can produce every deliverable on time and still fail the mission if the deliverables were the wrong ones.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="meta-point" aria-labelledby="meta-title">
+      <p class="meta-point__label">The meta-point</p>
+      <div class="meta-point__content">
+        <p class="meta-point__lead" id="meta-title">These frameworks are vocabulary tools first and measurement tools second.</p>
+        <p class="meta-point__support">Their primary value is forcing a team to have explicit conversations about what success looks like <em>before</em> the work starts—not giving leadership a dashboard to check afterward. When organizations skip the conversation and go straight to populating the template, they get the cost of the framework without the benefit.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>DO Strategy Component Outline</p>
+      <p><a href="./strategy-workflow-placemat.html">Continue to the Workflow Placemat →</a></p>
+    </footer>
+  </div>
+</body>
+</html>

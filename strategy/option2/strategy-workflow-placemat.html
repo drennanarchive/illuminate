@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Question guide to develop and validate strategy goals, objectives, key results, KPIs, and milestones.">
+  <title>DO Strategy Workflow Placemat</title>
+  <style>
+    :root {
+      --paper: #f4f1e9;
+      --paper-deep: #e9e2d4;
+      --white: #fffdf8;
+      --ink: #17262c;
+      --muted: #5f6b6e;
+      --line: rgba(23, 38, 44, 0.18);
+      --line-soft: rgba(23, 38, 44, 0.09);
+      --navy: #123f50;
+      --teal: #2d6c6b;
+      --gold: #a56f37;
+      --rust: #8d493a;
+      --green: #356b57;
+      --focus: #0a69a8;
+      --display: Georgia, "Times New Roman", serif;
+      --sans: "Aptos", "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(23, 38, 44, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 38, 44, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 34px 34px;
+      font-family: var(--sans);
+      line-height: 1.58;
+    }
+
+    a { color: inherit; }
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible + .check-item__mark {
+      outline: 3px solid var(--focus);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      left: 18px;
+      top: 18px;
+      transform: translateY(-180%);
+      padding: 10px 14px;
+      color: white;
+      background: var(--ink);
+      text-decoration: none;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .site-shell {
+      width: min(1480px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .masthead {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+      padding: 24px 0 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .masthead__identity {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .monogram {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.08rem;
+      letter-spacing: -0.04em;
+      background: rgba(255, 253, 248, 0.58);
+      flex: 0 0 auto;
+    }
+
+    .masthead__kicker,
+    .masthead__meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .masthead__title {
+      margin: 1px 0 0;
+      font-size: 0.94rem;
+      font-weight: 650;
+      letter-spacing: 0.015em;
+    }
+
+    .masthead__actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .text-link,
+    .action-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font: inherit;
+      font-size: 0.77rem;
+      font-weight: 750;
+      letter-spacing: 0.09em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .text-link { border-bottom: 1px solid currentColor; }
+
+    .action-button {
+      padding: 9px 12px;
+      border: 1px solid var(--navy);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .action-button:hover {
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    .action-button--quiet {
+      border-color: var(--line);
+      color: var(--muted);
+    }
+
+    .action-button--quiet:hover {
+      color: var(--white);
+      border-color: var(--rust);
+      background: var(--rust);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr);
+      gap: clamp(54px, 9vw, 140px);
+      align-items: end;
+      padding: clamp(72px, 9vw, 132px) 0 clamp(60px, 8vw, 112px);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 28px;
+      color: var(--teal);
+      font-size: 0.77rem;
+      font-weight: 750;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 44px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 980px;
+      font-family: var(--display);
+      font-size: clamp(4rem, 7.1vw, 8.2rem);
+      font-weight: 400;
+      letter-spacing: -0.06em;
+      line-height: 0.84;
+    }
+
+    .hero__subtitle {
+      margin: 32px 0 0;
+      max-width: 780px;
+      color: var(--navy);
+      font-family: var(--display);
+      font-size: clamp(1.35rem, 2.1vw, 2.05rem);
+      font-style: italic;
+      line-height: 1.28;
+    }
+
+    .hero__aside {
+      padding: 0 0 8px 28px;
+      border-left: 1px solid var(--line);
+    }
+
+    .hero__aside-label {
+      margin: 0 0 18px;
+      color: var(--gold);
+      font-family: var(--display);
+      font-style: italic;
+    }
+
+    .hero__aside p:last-child {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .workflow-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      background: rgba(244, 241, 233, 0.97);
+      backdrop-filter: blur(12px);
+    }
+
+    .workflow-nav__inner {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.55fr) repeat(5, minmax(120px, 1fr));
+      align-items: stretch;
+    }
+
+    .progress-summary {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 12px 18px 12px 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .progress-summary__label {
+      color: var(--muted);
+      font-size: 0.66rem;
+      font-weight: 750;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .progress-summary__value {
+      margin-top: 3px;
+      color: var(--navy);
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-style: italic;
+    }
+
+    .workflow-nav__link {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 8px;
+      align-items: center;
+      min-height: 70px;
+      padding: 10px 14px;
+      border-right: 1px solid var(--line);
+      text-decoration: none;
+    }
+
+    .workflow-nav__link:last-child { border-right: 0; }
+    .workflow-nav__link:hover { background: var(--white); }
+    .workflow-nav__link.is-active { color: var(--white); background: var(--navy); }
+
+    .workflow-nav__number {
+      color: var(--gold);
+      font-family: var(--display);
+      font-style: italic;
+    }
+
+    .workflow-nav__link.is-active .workflow-nav__number { color: #e8c28f; }
+
+    .workflow-nav__name {
+      font-size: 0.79rem;
+      font-weight: 750;
+    }
+
+    .workflow-nav__count {
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .workflow-nav__link.is-active .workflow-nav__count { color: rgba(255,255,255,.72); }
+
+    .placemat-intro {
+      display: grid;
+      grid-template-columns: minmax(260px, .52fr) minmax(0, 1.48fr);
+      gap: clamp(50px, 8vw, 124px);
+      padding: clamp(64px, 8vw, 104px) 0;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .placemat-intro h2 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2.5rem, 4.3vw, 5rem);
+      font-weight: 400;
+      letter-spacing: -0.045em;
+      line-height: .98;
+    }
+
+    .placemat-intro__copy {
+      max-width: 850px;
+      color: var(--muted);
+      font-size: 1.03rem;
+      line-height: 1.78;
+    }
+
+    .placemat-intro__copy p { margin: 0; }
+    .placemat-intro__copy p + p { margin-top: 18px; }
+    .placemat-intro__copy strong { color: var(--ink); }
+
+    .workflow-step {
+      display: grid;
+      grid-template-columns: minmax(280px, .52fr) minmax(0, 1.48fr);
+      gap: clamp(54px, 8vw, 128px);
+      padding: clamp(84px, 9vw, 132px) 0;
+      border-bottom: 1px solid var(--ink);
+      scroll-margin-top: 88px;
+    }
+
+    .workflow-step__identity {
+      position: sticky;
+      top: 104px;
+      align-self: start;
+    }
+
+    .workflow-step__number {
+      margin: 0 0 18px;
+      color: var(--gold);
+      font-family: var(--display);
+      font-style: italic;
+    }
+
+    .workflow-step h2 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2.75rem, 4.4vw, 5.25rem);
+      font-weight: 400;
+      letter-spacing: -0.05em;
+      line-height: .96;
+    }
+
+    .workflow-step__subtitle {
+      margin: 20px 0 0;
+      color: var(--teal);
+      font-size: .77rem;
+      font-weight: 750;
+      letter-spacing: .11em;
+      line-height: 1.65;
+      text-transform: uppercase;
+    }
+
+    .characteristics {
+      margin-top: 38px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-kicker {
+      margin: 0;
+      color: var(--gold);
+      font-size: .69rem;
+      font-weight: 750;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .characteristics ul {
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .characteristics li {
+      position: relative;
+      padding: 10px 0 10px 22px;
+      border-top: 1px solid var(--line-soft);
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    .characteristics li:last-child { border-bottom: 1px solid var(--line-soft); }
+    .characteristics li::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 18px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .workflow-step__work { min-width: 0; }
+
+    .work-section {
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .work-section__heading {
+      display: grid;
+      grid-template-columns: 38px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 34px;
+    }
+
+    .work-section__index {
+      margin: 4px 0 0;
+      color: var(--gold);
+      font-family: var(--display);
+      font-style: italic;
+    }
+
+    .work-section__heading h3,
+    .diagnostic-grid h3 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(1.75rem, 2.5vw, 2.65rem);
+      font-weight: 400;
+      letter-spacing: -.025em;
+      line-height: 1.08;
+    }
+
+    .work-section__heading p {
+      margin: 9px 0 0;
+      color: var(--muted);
+    }
+
+    .question-groups { border-top: 1px solid var(--ink); }
+
+    .question-group {
+      display: grid;
+      grid-template-columns: minmax(150px, .35fr) minmax(0, 1fr);
+      gap: 26px;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .question-group h4 {
+      margin: 0;
+      color: var(--navy);
+      font-size: .76rem;
+      font-weight: 750;
+      letter-spacing: .09em;
+      line-height: 1.55;
+      text-transform: uppercase;
+    }
+
+    .question-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .question-line {
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr);
+      gap: 12px;
+      padding: 0 0 14px;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: clamp(1.08rem, 1.5vw, 1.32rem);
+      line-height: 1.48;
+    }
+
+    .question-line:last-child { padding-bottom: 0; }
+
+    .question-line__number {
+      padding-top: 3px;
+      color: var(--gold);
+      font-family: var(--sans);
+      font-size: .68rem;
+      font-weight: 750;
+      letter-spacing: .08em;
+    }
+
+    .validation {
+      min-width: 0;
+      margin: 48px 0 0;
+      padding: 0;
+      border: 1px solid var(--teal);
+      background: rgba(255, 253, 248, .58);
+    }
+
+    .validation legend {
+      display: grid;
+      grid-template-columns: 38px minmax(0, 1fr);
+      gap: 18px;
+      width: calc(100% - 56px);
+      margin: 0 28px;
+      padding: 0 0 18px;
+      transform: translateY(-2px);
+      background: var(--paper);
+    }
+
+    .validation legend strong {
+      display: block;
+      font-family: var(--display);
+      font-size: clamp(1.55rem, 2.2vw, 2.25rem);
+      font-weight: 400;
+      letter-spacing: -.02em;
+    }
+
+    .validation legend small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 600;
+      letter-spacing: .035em;
+    }
+
+    .check-list { padding: 4px 28px 28px; }
+
+    .check-item {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+    }
+
+    .check-item:last-child { border-bottom: 0; }
+    .check-item input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .check-item__mark {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      border: 1px solid var(--teal);
+      background: var(--white);
+    }
+
+    .check-item input:checked + .check-item__mark { background: var(--teal); }
+    .check-item input:checked + .check-item__mark::after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .check-item input:checked ~ span:last-child {
+      color: var(--muted);
+      text-decoration: line-through;
+      text-decoration-thickness: 1px;
+    }
+
+    .diagnostic-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      gap: 42px;
+      margin-top: 54px;
+    }
+
+    .pitfalls,
+    .examples {
+      padding-top: 24px;
+      border-top: 2px solid var(--rust);
+    }
+
+    .examples { border-top-color: var(--navy); }
+
+    .diagnostic-grid h3 {
+      margin-top: 12px;
+      font-size: clamp(1.55rem, 2vw, 2.1rem);
+    }
+
+    .pitfalls > ul {
+      margin: 22px 0 0;
+      padding-left: 1.15em;
+      color: var(--muted);
+    }
+
+    .pitfalls > ul li + li { margin-top: 10px; }
+
+    .example-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .example-column {
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, .45);
+    }
+
+    .example-column h4 {
+      margin: 0 0 14px;
+      color: var(--green);
+      font-size: .71rem;
+      font-weight: 750;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .example-column--bad h4 { color: var(--rust); }
+
+    .example-column ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .example-column li {
+      display: grid;
+      grid-template-columns: 18px minmax(0, 1fr);
+      gap: 9px;
+      padding: 11px 0;
+      border-top: 1px solid var(--line-soft);
+      color: var(--muted);
+      font-size: .91rem;
+    }
+
+    .example-column li:first-child { border-top: 0; }
+    .example-column--good li span { color: var(--green); font-weight: 800; }
+    .example-column--bad li span { color: var(--rust); font-weight: 800; }
+
+    .closing {
+      display: grid;
+      grid-template-columns: minmax(240px, .45fr) minmax(0, 1.55fr);
+      gap: clamp(50px, 8vw, 120px);
+      padding: clamp(78px, 9vw, 132px) 0;
+    }
+
+    .closing__label {
+      margin: 0;
+      color: var(--gold);
+      font-family: var(--display);
+      font-style: italic;
+    }
+
+    .closing__lead {
+      margin: 0;
+      color: var(--navy);
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 4.7rem);
+      letter-spacing: -.04em;
+      line-height: 1.02;
+    }
+
+    .closing__support {
+      margin: 28px 0 0;
+      max-width: 820px;
+      color: var(--muted);
+      font-size: 1.03rem;
+      line-height: 1.78;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 26px;
+      padding: 24px 0 34px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .75rem;
+      letter-spacing: .05em;
+    }
+    .footer p { margin: 0; }
+
+    @media (max-width: 1120px) {
+      .hero,
+      .placemat-intro,
+      .workflow-step,
+      .closing { grid-template-columns: 1fr; }
+      .workflow-step__identity { position: static; }
+      .workflow-nav__inner { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .progress-summary { display: none; }
+      .workflow-nav__link { grid-template-columns: auto 1fr; }
+      .workflow-nav__count { grid-column: 2; }
+    }
+
+    @media (max-width: 790px) {
+      .site-shell { width: min(100% - 28px, 1480px); }
+      .masthead { grid-template-columns: 1fr; gap: 16px; }
+      .masthead__actions { justify-content: flex-start; padding-left: 52px; }
+      .hero { padding: 62px 0 70px; }
+      h1 { font-size: clamp(3.6rem, 18vw, 6.1rem); }
+
+      .workflow-nav { position: static; }
+      .workflow-nav__inner { grid-template-columns: 1fr; }
+      .workflow-nav__link {
+        grid-template-columns: 34px 1fr auto;
+        min-height: 50px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .workflow-nav__count { grid-column: auto; }
+
+      .question-group,
+      .diagnostic-grid,
+      .example-columns { grid-template-columns: 1fr; }
+      .question-group { gap: 16px; }
+      .validation legend { width: calc(100% - 32px); margin-inline: 16px; }
+      .check-list { padding-inline: 18px; }
+      .footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; }
+    }
+
+    @media print {
+      body { background: white; }
+      .site-shell { width: 100%; }
+      .workflow-nav,
+      .action-button,
+      .text-link { display: none !important; }
+      .hero { padding: 36px 0; }
+      h1 { font-size: 4rem; }
+      .workflow-step { display: block; padding: 46px 0; break-before: page; }
+      .workflow-step:first-of-type { break-before: auto; }
+      .workflow-step__identity { position: static; margin-bottom: 34px; }
+      .characteristics { max-width: 760px; }
+      .check-item { cursor: default; }
+      .check-item input:checked ~ span:last-child { text-decoration: none; }
+      .diagnostic-grid { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="site-shell">
+    <header class="masthead">
+      <div class="masthead__identity">
+        <span class="monogram" aria-hidden="true">DO</span>
+        <div>
+          <p class="masthead__kicker">Strategy development resources</p>
+          <p class="masthead__title">DO Strategy Workflow Placemat</p>
+        </div>
+      </div>
+      <div class="masthead__actions">
+        <a class="text-link" href="./strategy-landing-page.html">← Landing page</a>
+        <a class="text-link" href="./strategy-builder.html">Component outline</a>
+        <button class="action-button action-button--quiet" id="reset-checks" type="button">Reset checks</button>
+        <button class="action-button" type="button" onclick="window.print()">Print / Save PDF</button>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Guided placemat · Resource 02</p>
+          <h1 id="page-title">DO Strategy<br>Workflow Placemat</h1>
+          <p class="hero__subtitle">Question guide to validate your strategy inputs at each step</p>
+        </div>
+        <aside class="hero__aside">
+          <p class="hero__aside-label">How to use it</p>
+          <p>Move through the five components in sequence. Use the development questions to shape each input, then apply the checklist, pitfalls, and examples as a quality review before moving forward.</p>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <nav class="workflow-nav" aria-label="Workflow step navigation">
+    <div class="site-shell workflow-nav__inner">
+      <div class="progress-summary" aria-live="polite">
+        <span class="progress-summary__label">Checklist progress</span>
+        <span class="progress-summary__value"><span id="completed-count">0</span> of <span id="total-count">29</span> checked</span>
+      </div>
+      <a class="workflow-nav__link" href="#goal" data-step-link="goal">
+      <span class="workflow-nav__number">01</span>
+      <span class="workflow-nav__name">Goal</span>
+      <span class="workflow-nav__count" data-count-for="goal">0/5</span>
+    </a>
+<a class="workflow-nav__link" href="#objective" data-step-link="objective">
+      <span class="workflow-nav__number">02</span>
+      <span class="workflow-nav__name">Objective</span>
+      <span class="workflow-nav__count" data-count-for="objective">0/6</span>
+    </a>
+<a class="workflow-nav__link" href="#key-result" data-step-link="key-result">
+      <span class="workflow-nav__number">03</span>
+      <span class="workflow-nav__name">Key Result</span>
+      <span class="workflow-nav__count" data-count-for="key-result">0/6</span>
+    </a>
+<a class="workflow-nav__link" href="#kpi" data-step-link="kpi">
+      <span class="workflow-nav__number">04</span>
+      <span class="workflow-nav__name">KPI</span>
+      <span class="workflow-nav__count" data-count-for="kpi">0/6</span>
+    </a>
+<a class="workflow-nav__link" href="#milestone" data-step-link="milestone">
+      <span class="workflow-nav__number">05</span>
+      <span class="workflow-nav__name">Milestone</span>
+      <span class="workflow-nav__count" data-count-for="milestone">0/6</span>
+    </a>
+    </div>
+  </nav>
+
+  <div class="site-shell">
+    <section class="placemat-intro" aria-labelledby="placemat-intro-title">
+      <h2 id="placemat-intro-title">A working guide, not a form to fill blindly.</h2>
+      <div class="placemat-intro__copy">
+        <p><strong>The questions are prompts for discussion.</strong> They are intentionally static: read them, use them in a workshop, or print the page for a facilitated review.</p>
+        <p><strong>The validation statements are optional working controls.</strong> They are the only checkable elements on the page, and selections are saved locally in the current browser.</p>
+      </div>
+    </section>
+
+    
+    <section id="goal" class="workflow-step" aria-labelledby="goal-title">
+      <div class="workflow-step__identity">
+        <p class="workflow-step__number">Step 01</p>
+        <h2 id="goal-title">Goal (The Strategic Vision)</h2>
+        <p class="workflow-step__subtitle">The broad, long-term destination your organization wants to reach</p>
+        <div class="characteristics">
+          <p class="section-kicker">Expected characteristics</p>
+          <ul><li>High-level and aspirational</li><li>Often qualitative, not quantitative</li><li>Provides the &quot;why&quot; - the reason you&#x27;re moving</li><li>Long-term oriented (typically 3-5+ years)</li></ul>
+        </div>
+      </div>
+
+      <div class="workflow-step__work">
+        <div class="work-section development-questions">
+          <div class="work-section__heading">
+            <p class="work-section__index">A</p>
+            <div>
+              <h3>Development questions</h3>
+              <p>Use these prompts to sharpen the component before it enters a plan or review.</p>
+            </div>
+          </div>
+          <div class="question-groups"><section class="question-group" aria-labelledby="goal-q-1">
+          <h4 id="goal-q-1">Purpose &amp; Direction</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">01</span>
+              <span>What fundamental change do we want to create in our organization or market?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">02</span>
+              <span>What does ultimate success look like for us in 3-5 years?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">03</span>
+              <span>Why does this matter to our stakeholders and mission?</span>
+            </li></ol>
+        </section><section class="question-group" aria-labelledby="goal-q-2">
+          <h4 id="goal-q-2">Clarity &amp; Meaning</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">04</span>
+              <span>Can we describe what NOT achieving this would look like?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">05</span>
+              <span>Is this a meaningful destination or just a values statement in disguise?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">06</span>
+              <span>Would different teams interpret this goal the same way?</span>
+            </li></ol>
+        </section></div>
+        </div>
+
+        <fieldset class="work-section validation" data-validation-step="goal">
+          <legend>
+            <span class="work-section__index">B</span>
+            <span>
+              <strong>Validation checklist</strong>
+              <small>Optional working checks · progress is saved in this browser</small>
+            </span>
+          </legend>
+          <div class="check-list"><label class="check-item">
+          <input type="checkbox" data-check-key="goal-1" data-step="goal">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It&#x27;s aspirational and inspiring, not just incremental improvement</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="goal-2" data-step="goal">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It provides clear direction without prescribing specific tactics</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="goal-3" data-step="goal">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>You can picture what failure to achieve it looks like</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="goal-4" data-step="goal">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It&#x27;s qualitative - not a number to hit</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="goal-5" data-step="goal">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>Everyone can explain it without reading it verbatim</span>
+        </label></div>
+        </fieldset>
+
+        <div class="diagnostic-grid">
+          <section class="pitfalls" aria-labelledby="goal-pitfalls">
+            <p class="section-kicker">Common pitfalls</p>
+            <h3 id="goal-pitfalls">Watch for these failure modes</h3>
+            <ul><li>Written to sound impressive rather than to guide action</li><li>So vague that any outcome could be claimed as success</li><li>Confusing a values statement (&quot;be customer-centric&quot;) with a goal</li><li>Approved once and never referenced again</li></ul>
+          </section>
+
+          <section class="examples" aria-labelledby="goal-examples">
+            <p class="section-kicker">Examples</p>
+            <h3 id="goal-examples">What strong and weak versions look like</h3>
+            <div class="example-columns">
+              <div class="example-column example-column--good">
+                <h4>Strong</h4>
+                <ul><li><span aria-hidden="true">✓</span>Become the most customer-centric software company in our industry</li><li><span aria-hidden="true">✓</span>Transform into a data-driven decision-making organization</li></ul>
+              </div>
+              <div class="example-column example-column--bad">
+                <h4>Needs work</h4>
+                <ul><li><span aria-hidden="true">×</span>Increase revenue (this is an objective, not a goal)</li><li><span aria-hidden="true">×</span>Deliver excellence (too vague, really a value)</li></ul>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+    <section id="objective" class="workflow-step" aria-labelledby="objective-title">
+      <div class="workflow-step__identity">
+        <p class="workflow-step__number">Step 02</p>
+        <h2 id="objective-title">Objective (The Specific Target)</h2>
+        <p class="workflow-step__subtitle">A specific outcome that advances the goal</p>
+        <div class="characteristics">
+          <p class="section-kicker">Expected characteristics</p>
+          <ul><li>Mid-term and time-bound (quarterly or annual)</li><li>Clearly defined and specific</li><li>Directly aligned with the overarching Goal</li><li>At the right altitude - not too high (restating goal) or too low (a task)</li></ul>
+        </div>
+      </div>
+
+      <div class="workflow-step__work">
+        <div class="work-section development-questions">
+          <div class="work-section__heading">
+            <p class="work-section__index">A</p>
+            <div>
+              <h3>Development questions</h3>
+              <p>Use these prompts to sharpen the component before it enters a plan or review.</p>
+            </div>
+          </div>
+          <div class="question-groups"><section class="question-group" aria-labelledby="objective-q-1">
+          <h4 id="objective-q-1">Specificity &amp; Focus</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">01</span>
+              <span>What specific outcome will move us closer to our goal?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">02</span>
+              <span>By when do we need to achieve this?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">03</span>
+              <span>What will be fundamentally different when this is complete?</span>
+            </li></ol>
+        </section><section class="question-group" aria-labelledby="objective-q-2">
+          <h4 id="objective-q-2">Altitude Check</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">04</span>
+              <span>Is this a stepping stone to the goal, or just restating the goal?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">05</span>
+              <span>Are there multiple ways to achieve this, or is it prescribing one task?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">06</span>
+              <span>Does this create focus without eliminating all optionality?</span>
+            </li></ol>
+        </section><section class="question-group" aria-labelledby="objective-q-3">
+          <h4 id="objective-q-3">Alignment</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">07</span>
+              <span>How does achieving this advance our stated goal?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">08</span>
+              <span>If we achieve this but nothing else, will we feel we made progress?</span>
+            </li></ol>
+        </section></div>
+        </div>
+
+        <fieldset class="work-section validation" data-validation-step="objective">
+          <legend>
+            <span class="work-section__index">B</span>
+            <span>
+              <strong>Validation checklist</strong>
+              <small>Optional working checks · progress is saved in this browser</small>
+            </span>
+          </legend>
+          <div class="check-list"><label class="check-item">
+          <input type="checkbox" data-check-key="objective-1" data-step="objective">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It&#x27;s specific enough to create focus and prioritization</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="objective-2" data-step="objective">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It&#x27;s broad enough to allow multiple paths to success</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="objective-3" data-step="objective">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It has a clear timeframe (by Q3, by end of year, etc.)</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="objective-4" data-step="objective">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>You can picture what &quot;done&quot; looks like</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="objective-5" data-step="objective">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It directly contributes to achieving the Goal</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="objective-6" data-step="objective">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It&#x27;s an outcome, not an activity or task</span>
+        </label></div>
+        </fieldset>
+
+        <div class="diagnostic-grid">
+          <section class="pitfalls" aria-labelledby="objective-pitfalls">
+            <p class="section-kicker">Common pitfalls</p>
+            <h3 id="objective-pitfalls">Watch for these failure modes</h3>
+            <ul><li>Too high: just restating the goal in different words</li><li>Too low: actually a task or deliverable</li><li>Written vaguely because specific targets feel risky</li><li>No clear timeframe or deadline</li></ul>
+          </section>
+
+          <section class="examples" aria-labelledby="objective-examples">
+            <p class="section-kicker">Examples</p>
+            <h3 id="objective-examples">What strong and weak versions look like</h3>
+            <div class="example-columns">
+              <div class="example-column example-column--good">
+                <h4>Strong</h4>
+                <ul><li><span aria-hidden="true">✓</span>Launch a customer loyalty rewards program by Q3</li><li><span aria-hidden="true">✓</span>Establish a real-time data pipeline for analytics by end of year</li></ul>
+              </div>
+              <div class="example-column example-column--bad">
+                <h4>Needs work</h4>
+                <ul><li><span aria-hidden="true">×</span>Improve customer experience (too high - restates goal)</li><li><span aria-hidden="true">×</span>Configure the database schema (too low - it&#x27;s a task)</li></ul>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+    <section id="key-result" class="workflow-step" aria-labelledby="key-result-title">
+      <div class="workflow-step__identity">
+        <p class="workflow-step__number">Step 03</p>
+        <h2 id="key-result-title">Key Result (The Success Metric)</h2>
+        <p class="workflow-step__subtitle">The quantifiable outcome that proves you achieved your objective</p>
+        <div class="characteristics">
+          <p class="section-kicker">Expected characteristics</p>
+          <ul><li>Quantifiable and measurable</li><li>Shows progress toward the objective</li><li>Often scored (reaching 70% is meaningful progress)</li><li>Ambitious but achievable</li></ul>
+        </div>
+      </div>
+
+      <div class="workflow-step__work">
+        <div class="work-section development-questions">
+          <div class="work-section__heading">
+            <p class="work-section__index">A</p>
+            <div>
+              <h3>Development questions</h3>
+              <p>Use these prompts to sharpen the component before it enters a plan or review.</p>
+            </div>
+          </div>
+          <div class="question-groups"><section class="question-group" aria-labelledby="key-result-q-1">
+          <h4 id="key-result-q-1">Measurement</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">01</span>
+              <span>What metrics will prove we achieved the objective?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">02</span>
+              <span>What are we measuring from (baseline) and to (target)?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">03</span>
+              <span>Can we actually collect this data reliably?</span>
+            </li></ol>
+        </section><section class="question-group" aria-labelledby="key-result-q-2">
+          <h4 id="key-result-q-2">Ambition vs. Achievability</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">04</span>
+              <span>Are we already confident we&#x27;ll hit this, or does it require real effort?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">05</span>
+              <span>What would reaching 70% of this target tell us?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">06</span>
+              <span>Is this measuring ambition or just measuring activity?</span>
+            </li></ol>
+        </section><section class="question-group" aria-labelledby="key-result-q-3">
+          <h4 id="key-result-q-3">Outcome Focus</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">07</span>
+              <span>Does this measure the outcome of the objective, not just output?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">08</span>
+              <span>If we hit this number but the objective failed, would we know something&#x27;s wrong?</span>
+            </li></ol>
+        </section></div>
+        </div>
+
+        <fieldset class="work-section validation" data-validation-step="key-result">
+          <legend>
+            <span class="work-section__index">B</span>
+            <span>
+              <strong>Validation checklist</strong>
+              <small>Optional working checks · progress is saved in this browser</small>
+            </span>
+          </legend>
+          <div class="check-list"><label class="check-item">
+          <input type="checkbox" data-check-key="key-result-1" data-step="key-result">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It&#x27;s a number with a clear starting point and target</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="key-result-2" data-step="key-result">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It measures outcome (impact) not just output (activity)</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="key-result-3" data-step="key-result">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>We know how to measure it and have access to the data</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="key-result-4" data-step="key-result">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It&#x27;s ambitious enough that 70% completion still shows real progress</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="key-result-5" data-step="key-result">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>Multiple key results together prove objective success</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="key-result-6" data-step="key-result">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>Hitting this number actually means the objective was achieved</span>
+        </label></div>
+        </fieldset>
+
+        <div class="diagnostic-grid">
+          <section class="pitfalls" aria-labelledby="key-result-pitfalls">
+            <p class="section-kicker">Common pitfalls</p>
+            <h3 id="key-result-pitfalls">Watch for these failure modes</h3>
+            <ul><li>Sandbagging - setting targets you&#x27;re already confident you&#x27;ll hit</li><li>Measuring activity (tasks completed) instead of outcome (impact achieved)</li><li>Too many key results for one objective (more than 3-5 is noise)</li><li>Unmeasurable or requiring data you don&#x27;t have</li></ul>
+          </section>
+
+          <section class="examples" aria-labelledby="key-result-examples">
+            <p class="section-kicker">Examples</p>
+            <h3 id="key-result-examples">What strong and weak versions look like</h3>
+            <div class="example-columns">
+              <div class="example-column example-column--good">
+                <h4>Strong</h4>
+                <ul><li><span aria-hidden="true">✓</span>Increase adoption from 42% to 70%</li><li><span aria-hidden="true">✓</span>Reduce cycle time from 28 days to 14 days</li><li><span aria-hidden="true">✓</span>Complete 90% of modernization roadmap</li></ul>
+              </div>
+              <div class="example-column example-column--bad">
+                <h4>Needs work</h4>
+                <ul><li><span aria-hidden="true">×</span>Launch 5 features (measures output, not outcome)</li><li><span aria-hidden="true">×</span>Improve satisfaction (not quantified)</li></ul>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+    <section id="kpi" class="workflow-step" aria-labelledby="kpi-title">
+      <div class="workflow-step__identity">
+        <p class="workflow-step__number">Step 04</p>
+        <h2 id="kpi-title">KPI (The Health Check)</h2>
+        <p class="workflow-step__subtitle">An ongoing operational metric monitoring how efficiently your business runs</p>
+        <div class="characteristics">
+          <p class="section-kicker">Expected characteristics</p>
+          <ul><li>Tracked continuously (weekly/monthly)</li><li>Monitors steady-state health</li><li>Flags problems early</li><li>Persists after objectives are achieved to prevent backsliding</li></ul>
+        </div>
+      </div>
+
+      <div class="workflow-step__work">
+        <div class="work-section development-questions">
+          <div class="work-section__heading">
+            <p class="work-section__index">A</p>
+            <div>
+              <h3>Development questions</h3>
+              <p>Use these prompts to sharpen the component before it enters a plan or review.</p>
+            </div>
+          </div>
+          <div class="question-groups"><section class="question-group" aria-labelledby="kpi-q-1">
+          <h4 id="kpi-q-1">Operational Health</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">01</span>
+              <span>What metric tells us our operations are running smoothly?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">02</span>
+              <span>What would we watch to catch problems before they become crises?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">03</span>
+              <span>What should we monitor even after our objective is achieved?</span>
+            </li></ol>
+        </section><section class="question-group" aria-labelledby="kpi-q-2">
+          <h4 id="kpi-q-2">Cadence &amp; Actionability</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">04</span>
+              <span>How often do we need to check this to be useful?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">05</span>
+              <span>If this metric moves in the wrong direction, what action do we take?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">06</span>
+              <span>Is this measuring something we can actually influence?</span>
+            </li></ol>
+        </section><section class="question-group" aria-labelledby="kpi-q-3">
+          <h4 id="kpi-q-3">Focus</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">07</span>
+              <span>Do we actually make decisions based on this metric?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">08</span>
+              <span>Would removing this from our dashboard change our behavior?</span>
+            </li></ol>
+        </section></div>
+        </div>
+
+        <fieldset class="work-section validation" data-validation-step="kpi">
+          <legend>
+            <span class="work-section__index">B</span>
+            <span>
+              <strong>Validation checklist</strong>
+              <small>Optional working checks · progress is saved in this browser</small>
+            </span>
+          </legend>
+          <div class="check-list"><label class="check-item">
+          <input type="checkbox" data-check-key="kpi-1" data-step="kpi">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It monitors ongoing operations, not a one-time achievement</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="kpi-2" data-step="kpi">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It&#x27;s tracked regularly (weekly, monthly, not annually)</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="kpi-3" data-step="kpi">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>Movement in this metric triggers specific actions</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="kpi-4" data-step="kpi">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It&#x27;s truly a &quot;key&quot; metric - not just interesting data</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="kpi-5" data-step="kpi">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It helps prevent backsliding after objectives are met</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="kpi-6" data-step="kpi">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>The team knows who owns it and who acts on it</span>
+        </label></div>
+        </fieldset>
+
+        <div class="diagnostic-grid">
+          <section class="pitfalls" aria-labelledby="kpi-pitfalls">
+            <p class="section-kicker">Common pitfalls</p>
+            <h3 id="kpi-pitfalls">Watch for these failure modes</h3>
+            <ul><li>KPI proliferation - tracking 40 metrics until none are actionable</li><li>Never retiring old KPIs when they&#x27;re no longer relevant</li><li>Confusing KPIs (ongoing health) with Key Results (one-time achievement)</li><li>Tracking things that don&#x27;t drive decisions</li></ul>
+          </section>
+
+          <section class="examples" aria-labelledby="kpi-examples">
+            <p class="section-kicker">Examples</p>
+            <h3 id="kpi-examples">What strong and weak versions look like</h3>
+            <div class="example-columns">
+              <div class="example-column example-column--good">
+                <h4>Strong</h4>
+                <ul><li><span aria-hidden="true">✓</span>Monthly customer churn rate</li><li><span aria-hidden="true">✓</span>Average support ticket resolution time</li><li><span aria-hidden="true">✓</span>Weekly system uptime percentage</li></ul>
+              </div>
+              <div class="example-column example-column--bad">
+                <h4>Needs work</h4>
+                <ul><li><span aria-hidden="true">×</span>Project completion by Q3 (that&#x27;s a milestone, not ongoing)</li><li><span aria-hidden="true">×</span>Annual revenue (too infrequent to be a health check)</li></ul>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+    <section id="milestone" class="workflow-step" aria-labelledby="milestone-title">
+      <div class="workflow-step__identity">
+        <p class="workflow-step__number">Step 05</p>
+        <h2 id="milestone-title">Milestone (The Progress Checkpoint)</h2>
+        <p class="workflow-step__subtitle">A time-bound event showing you&#x27;re moving forward</p>
+        <div class="characteristics">
+          <p class="section-kicker">Expected characteristics</p>
+          <ul><li>Specific and time-bound</li><li>Output-focused (deliverable or event)</li><li>Non-numerical - usually done/not done</li><li>Shows schedule integrity, not outcome quality</li></ul>
+        </div>
+      </div>
+
+      <div class="workflow-step__work">
+        <div class="work-section development-questions">
+          <div class="work-section__heading">
+            <p class="work-section__index">A</p>
+            <div>
+              <h3>Development questions</h3>
+              <p>Use these prompts to sharpen the component before it enters a plan or review.</p>
+            </div>
+          </div>
+          <div class="question-groups"><section class="question-group" aria-labelledby="milestone-q-1">
+          <h4 id="milestone-q-1">Deliverable &amp; Deadline</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">01</span>
+              <span>What specific output or event marks this checkpoint?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">02</span>
+              <span>By what date must this be completed?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">03</span>
+              <span>What deliverable exists after this milestone that didn&#x27;t exist before?</span>
+            </li></ol>
+        </section><section class="question-group" aria-labelledby="milestone-q-2">
+          <h4 id="milestone-q-2">Progress Indication</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">04</span>
+              <span>Does hitting this milestone mean we&#x27;re on track to the objective?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">05</span>
+              <span>What dependencies unlock when this milestone is achieved?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">06</span>
+              <span>Is this milestone a clear &quot;done/not done&quot; without ambiguity?</span>
+            </li></ol>
+        </section><section class="question-group" aria-labelledby="milestone-q-3">
+          <h4 id="milestone-q-3">Schedule vs. Success</h4>
+          <ol class="question-list"><li class="question-line">
+              <span class="question-line__number">07</span>
+              <span>Could we achieve this milestone on time but still fail the objective?</span>
+            </li><li class="question-line">
+              <span class="question-line__number">08</span>
+              <span>What would tell us the deliverable is quality, not just on schedule?</span>
+            </li></ol>
+        </section></div>
+        </div>
+
+        <fieldset class="work-section validation" data-validation-step="milestone">
+          <legend>
+            <span class="work-section__index">B</span>
+            <span>
+              <strong>Validation checklist</strong>
+              <small>Optional working checks · progress is saved in this browser</small>
+            </span>
+          </legend>
+          <div class="check-list"><label class="check-item">
+          <input type="checkbox" data-check-key="milestone-1" data-step="milestone">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It&#x27;s a clear deliverable or event, not a measurement</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="milestone-2" data-step="milestone">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It has a specific deadline</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="milestone-3" data-step="milestone">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It&#x27;s unambiguously done or not done</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="milestone-4" data-step="milestone">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>Achieving it indicates forward progress on the plan</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="milestone-5" data-step="milestone">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>It&#x27;s meaningful enough to be worth tracking</span>
+        </label><label class="check-item">
+          <input type="checkbox" data-check-key="milestone-6" data-step="milestone">
+          <span class="check-item__mark" aria-hidden="true"></span>
+          <span>The team knows what &quot;done&quot; looks like</span>
+        </label></div>
+        </fieldset>
+
+        <div class="diagnostic-grid">
+          <section class="pitfalls" aria-labelledby="milestone-pitfalls">
+            <p class="section-kicker">Common pitfalls</p>
+            <h3 id="milestone-pitfalls">Watch for these failure modes</h3>
+            <ul><li>Treating milestone completion as proof of objective success</li><li>Too many milestones - creating tracking overhead without value</li><li>Milestones that are actually Key Results (measurements, not deliverables)</li><li>False sense of progress in fast-moving environments where plans change</li></ul>
+          </section>
+
+          <section class="examples" aria-labelledby="milestone-examples">
+            <p class="section-kicker">Examples</p>
+            <h3 id="milestone-examples">What strong and weak versions look like</h3>
+            <div class="example-columns">
+              <div class="example-column example-column--good">
+                <h4>Strong</h4>
+                <ul><li><span aria-hidden="true">✓</span>Finalize vendor contract by March 15th</li><li><span aria-hidden="true">✓</span>Complete user testing by end of Q2</li><li><span aria-hidden="true">✓</span>Deploy to production by June 30th</li></ul>
+              </div>
+              <div class="example-column example-column--bad">
+                <h4>Needs work</h4>
+                <ul><li><span aria-hidden="true">×</span>Improve adoption by 20% (that&#x27;s a Key Result)</li><li><span aria-hidden="true">×</span>Work on the prototype (not specific or time-bound)</li></ul>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="closing-title">
+      <p class="closing__label">The discipline beneath the framework</p>
+      <div>
+        <p class="closing__lead" id="closing-title">A shared vocabulary is useful only when it improves the quality of the conversation.</p>
+        <p class="closing__support">Use the placemat to expose ambiguity before work begins, distinguish outcomes from activity, and make success concrete enough for teams to act with confidence.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>DO Strategy Development Resource Set</p>
+      <p>Workflow Placemat · Guided strategy review</p>
+    </footer>
+  </div>
+
+  <script>
+    (() => {
+      const storageKey = 'do-strategy-workflow-placemat-checks-v2';
+      const checkboxes = [...document.querySelectorAll('[data-check-key]')];
+      const stepLinks = [...document.querySelectorAll('[data-step-link]')];
+      const completedEl = document.getElementById('completed-count');
+      const totalEl = document.getElementById('total-count');
+      const resetButton = document.getElementById('reset-checks');
+
+      totalEl.textContent = String(checkboxes.length);
+
+      const readState = () => {
+        try { return JSON.parse(localStorage.getItem(storageKey) || '{}'); }
+        catch { return {}; }
+      };
+
+      const writeState = () => {
+        const state = Object.fromEntries(checkboxes.map(box => [box.dataset.checkKey, box.checked]));
+        try { localStorage.setItem(storageKey, JSON.stringify(state)); } catch {}
+      };
+
+      const updateProgress = () => {
+        const completed = checkboxes.filter(box => box.checked).length;
+        completedEl.textContent = String(completed);
+
+        document.querySelectorAll('[data-count-for]').forEach(counter => {
+          const step = counter.dataset.countFor;
+          const stepBoxes = checkboxes.filter(box => box.dataset.step === step);
+          const stepCompleted = stepBoxes.filter(box => box.checked).length;
+          counter.textContent = `${stepCompleted}/${stepBoxes.length}`;
+        });
+      };
+
+      const saved = readState();
+      checkboxes.forEach(box => {
+        box.checked = Boolean(saved[box.dataset.checkKey]);
+        box.addEventListener('change', () => { writeState(); updateProgress(); });
+      });
+      updateProgress();
+
+      resetButton.addEventListener('click', () => {
+        if (!checkboxes.some(box => box.checked)) return;
+        const confirmed = window.confirm('Clear all saved validation checks on this placemat?');
+        if (!confirmed) return;
+        checkboxes.forEach(box => { box.checked = false; });
+        try { localStorage.removeItem(storageKey); } catch {}
+        updateProgress();
+      });
+
+      if ('IntersectionObserver' in window) {
+        const sections = [...document.querySelectorAll('.workflow-step')];
+        const observer = new IntersectionObserver(entries => {
+          const visible = entries
+            .filter(entry => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!visible) return;
+          stepLinks.forEach(link => link.classList.toggle('is-active', link.dataset.stepLink === visible.target.id));
+        }, { rootMargin: '-22% 0px -62% 0px', threshold: [0, .1, .25, .5] });
+        sections.forEach(section => observer.observe(section));
+      }
+    })();
+  </script>
+</body>
+</html>

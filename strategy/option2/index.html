@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Strategy development resources for understanding and validating goals, objectives, key results, KPIs, and milestones.">
+  <title>Strategy Landing Page</title>
+  <style>
+    :root {
+      --paper: #f4f1e9;
+      --paper-deep: #ebe5d8;
+      --ink: #17262c;
+      --muted: #5e6a6d;
+      --line: rgba(23, 38, 44, 0.18);
+      --line-soft: rgba(23, 38, 44, 0.09);
+      --navy: #123f50;
+      --teal: #2d6c6b;
+      --gold: #a56f37;
+      --white: #fffdf8;
+      --focus: #0a69a8;
+      --display: Georgia, "Times New Roman", serif;
+      --sans: "Aptos", "Segoe UI", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(23, 38, 44, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 38, 44, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 34px 34px;
+      font-family: var(--sans);
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 5px;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      left: 18px;
+      top: 18px;
+      transform: translateY(-180%);
+      padding: 10px 14px;
+      color: white;
+      background: var(--ink);
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .site-shell {
+      width: min(1480px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .masthead {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+      padding: 24px 0 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .masthead__identity {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .monogram {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.08rem;
+      letter-spacing: -0.04em;
+      background: rgba(255, 253, 248, 0.58);
+    }
+
+    .masthead__kicker,
+    .masthead__meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .masthead__title {
+      margin: 1px 0 0;
+      font-size: 0.94rem;
+      font-weight: 650;
+      letter-spacing: 0.015em;
+    }
+
+    .masthead__meta {
+      white-space: nowrap;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(440px, 0.96fr);
+      gap: clamp(52px, 8vw, 132px);
+      align-items: center;
+      min-height: 620px;
+      padding: clamp(62px, 8vw, 118px) 0 clamp(68px, 8vw, 112px);
+    }
+
+    .hero__copy {
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 30px;
+      color: var(--teal);
+      font-size: 0.77rem;
+      font-weight: 750;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 44px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-family: var(--display);
+      font-size: clamp(4.25rem, 8vw, 8.8rem);
+      font-weight: 400;
+      letter-spacing: -0.065em;
+      line-height: 0.82;
+    }
+
+    .hero__subtitle {
+      margin: 34px 0 0;
+      max-width: 640px;
+      color: var(--navy);
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 2.2vw, 2.15rem);
+      font-style: italic;
+      line-height: 1.25;
+    }
+
+    .hero__intro {
+      max-width: 690px;
+      margin: 26px 0 0;
+      padding-left: 22px;
+      border-left: 2px solid var(--gold);
+      color: var(--muted);
+      font-size: clamp(1rem, 1.15vw, 1.16rem);
+      line-height: 1.75;
+    }
+
+    .architecture {
+      position: relative;
+      min-height: 500px;
+      padding: 28px 0 18px 36px;
+    }
+
+    .architecture::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 24px;
+      bottom: 34px;
+      width: 1px;
+      background: linear-gradient(var(--navy), rgba(18, 63, 80, 0.1));
+    }
+
+    .architecture__label {
+      margin: 0 0 30px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 750;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .architecture__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .architecture__item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: baseline;
+      min-height: 78px;
+      padding: 19px 0 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .architecture__item:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .architecture__item::before {
+      content: "";
+      position: absolute;
+      left: -27px;
+      top: 32px;
+      width: 11px;
+      height: 11px;
+      border: 2px solid var(--paper);
+      border-radius: 50%;
+      background: var(--navy);
+      box-shadow: 0 0 0 1px var(--navy);
+    }
+
+    .architecture__number {
+      color: var(--gold);
+      font-family: var(--display);
+      font-size: 1rem;
+      font-style: italic;
+    }
+
+    .architecture__term {
+      display: block;
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .architecture__role {
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .architecture__caption {
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.6;
+    }
+
+    .resources {
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      background: rgba(255, 253, 248, 0.55);
+    }
+
+    .resources__intro {
+      display: grid;
+      grid-template-columns: minmax(240px, 0.58fr) minmax(0, 1.42fr);
+      gap: clamp(44px, 8vw, 120px);
+      padding: 42px 0 38px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-number {
+      margin: 0 0 10px;
+      color: var(--gold);
+      font-family: var(--display);
+      font-style: italic;
+    }
+
+    .resources__intro h2 {
+      margin: 0;
+      max-width: 470px;
+      font-family: var(--display);
+      font-size: clamp(2.1rem, 4.2vw, 4.5rem);
+      font-weight: 400;
+      letter-spacing: -0.045em;
+      line-height: 0.98;
+    }
+
+    .resources__intro p:last-child {
+      align-self: end;
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.72;
+    }
+
+    .resource-row {
+      display: grid;
+      grid-template-columns: 86px minmax(280px, 0.9fr) minmax(300px, 1.1fr) auto;
+      gap: clamp(20px, 4vw, 64px);
+      align-items: center;
+      min-height: 190px;
+      padding: 34px 0;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+      transition: background-color 180ms ease, padding 180ms ease;
+    }
+
+    .resource-row:last-of-type {
+      border-bottom: 0;
+    }
+
+    .resource-row:hover {
+      margin-inline: -24px;
+      padding-inline: 24px;
+      background: var(--white);
+    }
+
+    .resource-row__number {
+      align-self: start;
+      padding-top: 5px;
+      color: var(--gold);
+      font-family: var(--display);
+      font-size: 1.1rem;
+      font-style: italic;
+    }
+
+    .resource-row__title {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2rem, 3vw, 3.25rem);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      line-height: 1.03;
+    }
+
+    .resource-row__type {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .resource-row__description {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+
+    .resource-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      justify-self: start;
+      padding: 8px 0;
+      color: var(--navy);
+      font-size: 0.8rem;
+      font-weight: 750;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .resource-button__arrow {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      border: 1px solid var(--navy);
+      border-radius: 50%;
+      font-family: var(--sans);
+      font-size: 1.25rem;
+      transition: transform 180ms ease, background-color 180ms ease, color 180ms ease;
+    }
+
+    .resource-button:hover .resource-button__arrow {
+      color: var(--white);
+      background: var(--navy);
+      transform: translateX(4px);
+    }
+
+    .sequence-note {
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr);
+      gap: clamp(20px, 4vw, 64px);
+      align-items: start;
+      padding: 36px 0 42px;
+    }
+
+    .sequence-note__label {
+      color: var(--gold);
+      font-family: var(--display);
+      font-style: italic;
+    }
+
+    .sequence-note p {
+      max-width: 870px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .sequence-note strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 26px;
+      padding: 24px 0 34px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+
+    @media (max-width: 1120px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 68px;
+      }
+
+      .hero__copy {
+        max-width: 840px;
+      }
+
+      .architecture {
+        max-width: 800px;
+      }
+
+      .resource-row {
+        grid-template-columns: 64px minmax(240px, 0.9fr) minmax(260px, 1.1fr);
+      }
+
+      .resource-button {
+        grid-column: 2 / 4;
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-shell {
+        width: min(100% - 28px, 1480px);
+      }
+
+      .masthead {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .masthead__meta {
+        padding-left: 52px;
+        white-space: normal;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 62px 0 72px;
+      }
+
+      h1 {
+        font-size: clamp(4rem, 22vw, 6.2rem);
+      }
+
+      .architecture {
+        min-height: 0;
+        padding-left: 28px;
+      }
+
+      .architecture::before {
+        left: 10px;
+      }
+
+      .architecture__item {
+        grid-template-columns: 34px minmax(0, 1fr);
+      }
+
+      .architecture__item::before {
+        left: -23px;
+      }
+
+      .architecture__role {
+        grid-column: 2;
+        text-align: left;
+        white-space: normal;
+      }
+
+      .resources__intro {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .resource-row {
+        grid-template-columns: 40px minmax(0, 1fr);
+        gap: 18px;
+        padding: 32px 0;
+      }
+
+      .resource-row:hover {
+        margin-inline: -10px;
+        padding-inline: 10px;
+      }
+
+      .resource-row__description,
+      .resource-button {
+        grid-column: 2;
+      }
+
+      .resource-button {
+        margin-top: 8px;
+      }
+
+      .sequence-note {
+        grid-template-columns: 40px minmax(0, 1fr);
+        gap: 18px;
+      }
+
+      .footer {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .site-shell {
+        width: 100%;
+      }
+
+      .resource-button__arrow {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="site-shell">
+    <header class="masthead">
+      <div class="masthead__identity">
+        <span class="monogram" aria-hidden="true">DO</span>
+        <div>
+          <p class="masthead__kicker">Strategy development resources</p>
+          <p class="masthead__title">From organizational vision to execution</p>
+        </div>
+      </div>
+      <p class="masthead__meta">Two companion learning tools</p>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero__copy">
+          <p class="eyebrow">Strategy learning system</p>
+          <h1 id="page-title">Strategy<br>Landing Page</h1>
+          <p class="hero__subtitle">Building effective strategy from vision to execution</p>
+          <p class="hero__intro">Understanding strategy development requires clarity at every level—from high-level organizational vision down to measurable outcomes and execution checkpoints. These resources establish a shared language, then help teams apply it with precision and purpose.</p>
+        </div>
+
+        <aside class="architecture" aria-labelledby="architecture-title">
+          <p class="architecture__label" id="architecture-title">Shared strategy architecture</p>
+          <ol class="architecture__list">
+            <li class="architecture__item">
+              <span class="architecture__number">01</span>
+              <span class="architecture__term">Goal</span>
+              <span class="architecture__role">Strategic direction</span>
+            </li>
+            <li class="architecture__item">
+              <span class="architecture__number">02</span>
+              <span class="architecture__term">Objective</span>
+              <span class="architecture__role">Specific target</span>
+            </li>
+            <li class="architecture__item">
+              <span class="architecture__number">03</span>
+              <span class="architecture__term">Key Result</span>
+              <span class="architecture__role">Evidence of success</span>
+            </li>
+            <li class="architecture__item">
+              <span class="architecture__number">04</span>
+              <span class="architecture__term">KPI</span>
+              <span class="architecture__role">Operational health</span>
+            </li>
+            <li class="architecture__item">
+              <span class="architecture__number">05</span>
+              <span class="architecture__term">Milestone</span>
+              <span class="architecture__role">Execution checkpoint</span>
+            </li>
+          </ol>
+          <p class="architecture__caption">The two resources below use this same vocabulary so users can move from understanding the framework to applying it without changing mental models.</p>
+        </aside>
+      </section>
+
+      <section class="resources" aria-labelledby="resources-title">
+        <div class="resources__intro">
+          <div>
+            <p class="section-number">I.</p>
+            <h2 id="resources-title">Choose the resource that fits the task.</h2>
+          </div>
+          <p>The first resource teaches the components and how they relate. The second guides development and validation. Only the two resource rows below are interactive.</p>
+        </div>
+
+        <article class="resource-row">
+          <span class="resource-row__number">01</span>
+          <h3 class="resource-row__title">
+            <span class="resource-row__type">Learn the framework</span>
+            DO Strategy Component Outline
+          </h3>
+          <p class="resource-row__description">Learn the core definitions, characteristics, examples, relationships, and common organizational breakdowns across the five strategy components.</p>
+          <a class="resource-button" href="./strategy-builder.html" target="_self">Open resource <span class="resource-button__arrow" aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="resource-row">
+          <span class="resource-row__number">02</span>
+          <h3 class="resource-row__title">
+            <span class="resource-row__type">Develop and validate</span>
+            DO Strategy Workflow Placemat
+          </h3>
+          <p class="resource-row__description">Work through development questions, validation checks, common pitfalls, and examples to strengthen each element of a strategy.</p>
+          <a class="resource-button" href="./strategy-workflow-placemat.html" target="_self">Open resource <span class="resource-button__arrow" aria-hidden="true">→</span></a>
+        </article>
+
+        <div class="sequence-note">
+          <span class="sequence-note__label">Use</span>
+          <p><strong>Recommended sequence:</strong> begin with the DO Strategy Component Outline to establish a shared vocabulary, then use the DO Strategy Workflow Placemat to develop or review strategy inputs. Experienced users may enter directly through either resource.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Strategy Landing Page</p>
+      <p>Professional strategy development resource</p>
+    </footer>
+  </div>
+</body>
+</html>
