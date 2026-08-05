@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<title>DO Strategy Workflow Placemat</title>
+<style>
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { margin: 0; background: #F2F1EC; color: #1F2430; font-family: Alegreya, Georgia, serif; }
+  a { color: #33406B; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: #262F4D; text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 3px solid #33406B; outline-offset: 3px; border-radius: 3px; }
+  ::selection { background: #E5E7F0; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+</style>
+</helmet>
+<div lang="en" style="--ink:#1F2430; --ink-soft:#4A4F5C; --paper:#F2F1EC; --surface:#FBFAF8; --rule:#D9D6CE; --indigo:#33406B; --indigo-deep:#262F4D; --indigo-tint:#E5E7F0; --rose:#8A3F52; --rose-tint:#F2E7E7; --measure:{{measure}}; background:var(--paper); color:var(--ink); font-family:Alegreya, Georgia, serif; font-size:1.1875rem; line-height:1.6; min-height:100%; padding:0 0 5rem">
+
+  <a href="#placemat-content" style="position:absolute; left:-9999px; top:0; z-index:20; background:var(--indigo-deep); color:#F2F1EC; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; padding:0.75rem 1.25rem; border-radius:0 0 6px 0; text-decoration:none" style-focus="left:0; outline:3px solid var(--indigo); outline-offset:2px">Skip to main content</a>
+
+  <div style="max-width:76rem; margin:0 auto; padding:0 clamp(1.25rem, 4vw, 3rem)">
+
+    <nav aria-label="Page navigation" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; padding:1.75rem 0 1.25rem; border-bottom:1px solid var(--rule)">
+      <a href="Strategy%20Landing%20Page.dc.html" style="font-family:Archivo, Helvetica, sans-serif; font-size:0.9rem; font-weight:600; color:var(--indigo); text-decoration:none; border-bottom:2px solid var(--indigo-tint); padding-bottom:2px; transition:border-color 140ms ease" style-hover="border-bottom-color:var(--indigo)"><span aria-hidden="true" style="margin-right:0.45rem">&#8592;</span>Return to Strategy Landing Page</a>
+      <a href="strategy-workflow-placemat-print.html" target="_blank" rel="noopener" style="font-family:Archivo, Helvetica, sans-serif; font-size:0.8rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); text-decoration:none; border:1px solid var(--rule); border-radius:5px; padding:0.5rem 0.9rem; background:var(--surface); transition:border-color 140ms ease, color 140ms ease" style-hover="border-color:var(--ink-soft); color:var(--ink)">Print this page<span style="font-weight:400; text-transform:none; letter-spacing:0; margin-left:0.4rem">(opens in a new tab)</span></a>
+    </nav>
+
+    <header style="padding:clamp(3rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 2.75rem)">
+      <p style="margin:0 0 1.1rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.75rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--rose)">Working document &#183; keep open while drafting</p>
+      <h1 style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(2.2rem, 5.2vw, 3.4rem); font-weight:600; line-height:1.08; letter-spacing:-0.022em; color:var(--indigo-deep); text-wrap:balance">DO Strategy Workflow Placemat</h1>
+      <p style="margin:1.4rem 0 0; max-width:52ch; font-size:1.3rem; line-height:1.5; font-style:italic; color:var(--ink-soft); text-wrap:pretty">Question guide to validate your strategy inputs at each step</p>
+    </header>
+
+    <div style="display:flex; flex-wrap:wrap; align-items:flex-start; gap:clamp(2rem, 4vw, 3.5rem)">
+
+      <nav aria-labelledby="quicknav-heading" style="flex:1 1 13rem; max-width:17rem; position:sticky; top:1.5rem; background:var(--surface); border:1px solid var(--rule); border-radius:8px; padding:1.35rem 1.25rem">
+        <h2 id="quicknav-heading" style="margin:0 0 1rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft)">Quick Navigation</h2>
+        <ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.15rem">
+          <li><a href="#step-1" style="display:flex; align-items:baseline; gap:0.75rem; padding:0.5rem 0.5rem 0.5rem 0; font-family:Archivo, Helvetica, sans-serif; font-size:0.98rem; font-weight:500; color:var(--indigo); text-decoration:none; border-radius:4px; transition:background-color 140ms ease, padding-left 140ms ease" style-hover="background:var(--indigo-tint); padding-left:0.5rem"><span aria-hidden="true" style="font-size:0.78rem; font-weight:700; color:var(--ink-soft)">01</span>Goal</a></li>
+          <li><a href="#step-2" style="display:flex; align-items:baseline; gap:0.75rem; padding:0.5rem 0.5rem 0.5rem 0; font-family:Archivo, Helvetica, sans-serif; font-size:0.98rem; font-weight:500; color:var(--indigo); text-decoration:none; border-radius:4px; transition:background-color 140ms ease, padding-left 140ms ease" style-hover="background:var(--indigo-tint); padding-left:0.5rem"><span aria-hidden="true" style="font-size:0.78rem; font-weight:700; color:var(--ink-soft)">02</span>Objective</a></li>
+          <li><a href="#step-3" style="display:flex; align-items:baseline; gap:0.75rem; padding:0.5rem 0.5rem 0.5rem 0; font-family:Archivo, Helvetica, sans-serif; font-size:0.98rem; font-weight:500; color:var(--indigo); text-decoration:none; border-radius:4px; transition:background-color 140ms ease, padding-left 140ms ease" style-hover="background:var(--indigo-tint); padding-left:0.5rem"><span aria-hidden="true" style="font-size:0.78rem; font-weight:700; color:var(--ink-soft)">03</span>Key Result</a></li>
+          <li><a href="#step-4" style="display:flex; align-items:baseline; gap:0.75rem; padding:0.5rem 0.5rem 0.5rem 0; font-family:Archivo, Helvetica, sans-serif; font-size:0.98rem; font-weight:500; color:var(--indigo); text-decoration:none; border-radius:4px; transition:background-color 140ms ease, padding-left 140ms ease" style-hover="background:var(--indigo-tint); padding-left:0.5rem"><span aria-hidden="true" style="font-size:0.78rem; font-weight:700; color:var(--ink-soft)">04</span>KPI</a></li>
+          <li><a href="#step-5" style="display:flex; align-items:baseline; gap:0.75rem; padding:0.5rem 0.5rem 0.5rem 0; font-family:Archivo, Helvetica, sans-serif; font-size:0.98rem; font-weight:500; color:var(--indigo); text-decoration:none; border-radius:4px; transition:background-color 140ms ease, padding-left 140ms ease" style-hover="background:var(--indigo-tint); padding-left:0.5rem"><span aria-hidden="true" style="font-size:0.78rem; font-weight:700; color:var(--ink-soft)">05</span>Milestone</a></li>
+        </ol>
+      </nav>
+
+      <main id="placemat-content" style="flex:999 1 30rem; min-width:0">
+
+        <!-- ============ STEP 1 ============ -->
+        <section id="step-1" aria-labelledby="step-1-heading" style="scroll-margin-top:1.5rem; border-top:2px solid var(--indigo-deep); padding:2rem 0 clamp(2.5rem, 5vw, 3.5rem)">
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem 1.5rem; margin:0 0 2.25rem">
+            <p style="flex:0 0 3.5rem; margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:2.4rem; font-weight:700; line-height:0.95; letter-spacing:-0.03em; color:var(--indigo)">01</p>
+            <div style="flex:1 1 22rem; min-width:0">
+              <h2 id="step-1-heading" style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.55rem, 3vw, 1.95rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em; color:var(--indigo-deep)">Goal <span style="color:var(--ink-soft); font-weight:400">(The Strategic Vision)</span></h2>
+              <p style="margin:0.6rem 0 0; max-width:var(--measure, 66ch); font-style:italic; color:var(--ink-soft); text-wrap:pretty">The broad, long-term destination your organization wants to reach</p>
+            </div>
+          </div>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Expected Characteristics</h3>
+          <ul style="margin:0 0 2.25rem; padding-left:1.3rem; max-width:var(--measure, 66ch)">
+            <li style="margin-bottom:0.35rem">High-level and aspirational</li>
+            <li style="margin-bottom:0.35rem">Often qualitative, not quantitative</li>
+            <li style="margin-bottom:0.35rem">Provides the &#8220;why&#8221; &#8212; the reason you&#8217;re moving</li>
+            <li>Long-term oriented (typically 3-5+ years)</li>
+          </ul>
+
+          <h3 style="margin:0 0 1.25rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Development Questions</h3>
+          <div style="margin:0 0 2.25rem; display:flex; flex-direction:column; gap:1.5rem">
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Purpose &amp; Direction</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What fundamental change do we want to create in our organization or market?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What does ultimate success look like for us in 3-5 years?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Why does this matter to our stakeholders and mission?</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Clarity &amp; Meaning</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Can we describe what NOT achieving this would look like?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Is this a meaningful destination or just a values statement in disguise?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Would different teams interpret this goal the same way?</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Validation Checklist</h3>
+          <ul style="list-style:none; margin:0 0 2.25rem; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column">
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It&#8217;s aspirational and inspiring, not just incremental improvement</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It provides clear direction without prescribing specific tactics</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>You can picture what failure to achieve it looks like</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It&#8217;s qualitative &#8212; not a number to hit</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>Everyone can explain it without reading it verbatim</span></li>
+          </ul>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Common Pitfalls</h3>
+          <ul style="list-style:none; margin:0 0 2.25rem; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Written to sound impressive rather than to guide action</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>So vague that any outcome could be claimed as success</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Confusing a values statement (&#8220;be customer-centric&#8221;) with a goal</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Approved once and never referenced again</span></li>
+          </ul>
+
+          <h3 style="margin:0 0 1.1rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Examples</h3>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(17rem, 1fr)); gap:1rem">
+            <div style="background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--indigo); border-radius:0 6px 6px 0; padding:1rem 1.15rem">
+              <p style="margin:0 0 0.7rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--indigo)">Right</p>
+              <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.55rem">
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Become the most customer-centric software company in our industry</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Transform into a data-driven decision-making organization</span></li>
+              </ul>
+            </div>
+            <div style="background:transparent; border:1px dashed var(--ink-soft); border-radius:6px; padding:1rem 1.15rem">
+              <p style="margin:0 0 0.7rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--rose)">Avoid</p>
+              <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.55rem">
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--rose)">&#10007;</span><span>Increase revenue (this is an objective, not a goal)</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--rose)">&#10007;</span><span>Deliver excellence (too vague, really a value)</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ STEP 2 ============ -->
+        <section id="step-2" aria-labelledby="step-2-heading" style="scroll-margin-top:1.5rem; border-top:2px solid var(--indigo-deep); padding:2rem 0 clamp(2.5rem, 5vw, 3.5rem)">
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem 1.5rem; margin:0 0 2.25rem">
+            <p style="flex:0 0 3.5rem; margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:2.4rem; font-weight:700; line-height:0.95; letter-spacing:-0.03em; color:var(--indigo)">02</p>
+            <div style="flex:1 1 22rem; min-width:0">
+              <h2 id="step-2-heading" style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.55rem, 3vw, 1.95rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em; color:var(--indigo-deep)">Objective <span style="color:var(--ink-soft); font-weight:400">(The Specific Target)</span></h2>
+              <p style="margin:0.6rem 0 0; max-width:var(--measure, 66ch); font-style:italic; color:var(--ink-soft); text-wrap:pretty">A specific outcome that advances the goal</p>
+            </div>
+          </div>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Expected Characteristics</h3>
+          <ul style="margin:0 0 2.25rem; padding-left:1.3rem; max-width:var(--measure, 66ch)">
+            <li style="margin-bottom:0.35rem">Mid-term and time-bound (quarterly or annual)</li>
+            <li style="margin-bottom:0.35rem">Clearly defined and specific</li>
+            <li style="margin-bottom:0.35rem">Directly aligned with the overarching Goal</li>
+            <li>At the right altitude &#8212; not too high (restating goal) or too low (a task)</li>
+          </ul>
+
+          <h3 style="margin:0 0 1.25rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Development Questions</h3>
+          <div style="margin:0 0 2.25rem; display:flex; flex-direction:column; gap:1.5rem">
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Specificity &amp; Focus</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What specific outcome will move us closer to our goal?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>By when do we need to achieve this?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What will be fundamentally different when this is complete?</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Altitude Check</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Is this a stepping stone to the goal, or just restating the goal?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Are there multiple ways to achieve this, or is it prescribing one task?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Does this create focus without eliminating all optionality?</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Alignment</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>How does achieving this advance our stated goal?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>If we achieve this but nothing else, will we feel we made progress?</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Validation Checklist</h3>
+          <ul style="list-style:none; margin:0 0 2.25rem; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column">
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It&#8217;s specific enough to create focus and prioritization</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It&#8217;s broad enough to allow multiple paths to success</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It has a clear timeframe (by Q3, by end of year, etc.)</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>You can picture what &#8220;done&#8221; looks like</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It directly contributes to achieving the Goal</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It&#8217;s an outcome, not an activity or task</span></li>
+          </ul>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Common Pitfalls</h3>
+          <ul style="list-style:none; margin:0 0 2.25rem; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Too high: just restating the goal in different words</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Too low: actually a task or deliverable</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Written vaguely because specific targets feel risky</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>No clear timeframe or deadline</span></li>
+          </ul>
+
+          <h3 style="margin:0 0 1.1rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Examples</h3>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(17rem, 1fr)); gap:1rem">
+            <div style="background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--indigo); border-radius:0 6px 6px 0; padding:1rem 1.15rem">
+              <p style="margin:0 0 0.7rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--indigo)">Right</p>
+              <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.55rem">
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Launch a customer loyalty rewards program by Q3</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Establish a real-time data pipeline for analytics by end of year</span></li>
+              </ul>
+            </div>
+            <div style="background:transparent; border:1px dashed var(--ink-soft); border-radius:6px; padding:1rem 1.15rem">
+              <p style="margin:0 0 0.7rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--rose)">Avoid</p>
+              <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.55rem">
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--rose)">&#10007;</span><span>Improve customer experience (too high &#8212; restates goal)</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--rose)">&#10007;</span><span>Configure the database schema (too low &#8212; it&#8217;s a task)</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ STEP 3 ============ -->
+        <section id="step-3" aria-labelledby="step-3-heading" style="scroll-margin-top:1.5rem; border-top:2px solid var(--indigo-deep); padding:2rem 0 clamp(2.5rem, 5vw, 3.5rem)">
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem 1.5rem; margin:0 0 2.25rem">
+            <p style="flex:0 0 3.5rem; margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:2.4rem; font-weight:700; line-height:0.95; letter-spacing:-0.03em; color:var(--indigo)">03</p>
+            <div style="flex:1 1 22rem; min-width:0">
+              <h2 id="step-3-heading" style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.55rem, 3vw, 1.95rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em; color:var(--indigo-deep)">Key Result <span style="color:var(--ink-soft); font-weight:400">(The Success Metric)</span></h2>
+              <p style="margin:0.6rem 0 0; max-width:var(--measure, 66ch); font-style:italic; color:var(--ink-soft); text-wrap:pretty">The quantifiable outcome that proves you achieved your objective</p>
+            </div>
+          </div>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Expected Characteristics</h3>
+          <ul style="margin:0 0 2.25rem; padding-left:1.3rem; max-width:var(--measure, 66ch)">
+            <li style="margin-bottom:0.35rem">Quantifiable and measurable</li>
+            <li style="margin-bottom:0.35rem">Shows progress toward the objective</li>
+            <li style="margin-bottom:0.35rem">Often scored (reaching 70% is meaningful progress)</li>
+            <li>Ambitious but achievable</li>
+          </ul>
+
+          <h3 style="margin:0 0 1.25rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Development Questions</h3>
+          <div style="margin:0 0 2.25rem; display:flex; flex-direction:column; gap:1.5rem">
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Measurement</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What metrics will prove we achieved the objective?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What are we measuring from (baseline) and to (target)?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Can we actually collect this data reliably?</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Ambition vs. Achievability</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Are we already confident we&#8217;ll hit this, or does it require real effort?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What would reaching 70% of this target tell us?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Is this measuring ambition or just measuring activity?</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Outcome Focus</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Does this measure the outcome of the objective, not just output?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>If we hit this number but the objective failed, would we know something&#8217;s wrong?</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Validation Checklist</h3>
+          <ul style="list-style:none; margin:0 0 2.25rem; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column">
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It&#8217;s a number with a clear starting point and target</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It measures outcome (impact) not just output (activity)</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>We know how to measure it and have access to the data</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It&#8217;s ambitious enough that 70% completion still shows real progress</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>Multiple key results together prove objective success</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>Hitting this number actually means the objective was achieved</span></li>
+          </ul>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Common Pitfalls</h3>
+          <ul style="list-style:none; margin:0 0 2.25rem; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Sandbagging &#8212; setting targets you&#8217;re already confident you&#8217;ll hit</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Measuring activity (tasks completed) instead of outcome (impact achieved)</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Too many key results for one objective (more than 3-5 is noise)</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Unmeasurable or requiring data you don&#8217;t have</span></li>
+          </ul>
+
+          <h3 style="margin:0 0 1.1rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Examples</h3>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(17rem, 1fr)); gap:1rem">
+            <div style="background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--indigo); border-radius:0 6px 6px 0; padding:1rem 1.15rem">
+              <p style="margin:0 0 0.7rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--indigo)">Right</p>
+              <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.55rem">
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Increase adoption from 42% to 70%</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Reduce cycle time from 28 days to 14 days</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Complete 90% of modernization roadmap</span></li>
+              </ul>
+            </div>
+            <div style="background:transparent; border:1px dashed var(--ink-soft); border-radius:6px; padding:1rem 1.15rem">
+              <p style="margin:0 0 0.7rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--rose)">Avoid</p>
+              <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.55rem">
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--rose)">&#10007;</span><span>Launch 5 features (measures output, not outcome)</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--rose)">&#10007;</span><span>Improve satisfaction (not quantified)</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ STEP 4 ============ -->
+        <section id="step-4" aria-labelledby="step-4-heading" style="scroll-margin-top:1.5rem; border-top:2px solid var(--indigo-deep); padding:2rem 0 clamp(2.5rem, 5vw, 3.5rem)">
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem 1.5rem; margin:0 0 2.25rem">
+            <p style="flex:0 0 3.5rem; margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:2.4rem; font-weight:700; line-height:0.95; letter-spacing:-0.03em; color:var(--indigo)">04</p>
+            <div style="flex:1 1 22rem; min-width:0">
+              <h2 id="step-4-heading" style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.55rem, 3vw, 1.95rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em; color:var(--indigo-deep)">KPI <span style="color:var(--ink-soft); font-weight:400">(The Health Check)</span></h2>
+              <p style="margin:0.6rem 0 0; max-width:var(--measure, 66ch); font-style:italic; color:var(--ink-soft); text-wrap:pretty">An ongoing operational metric monitoring how efficiently your business runs</p>
+            </div>
+          </div>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Expected Characteristics</h3>
+          <ul style="margin:0 0 2.25rem; padding-left:1.3rem; max-width:var(--measure, 66ch)">
+            <li style="margin-bottom:0.35rem">Tracked continuously (weekly/monthly)</li>
+            <li style="margin-bottom:0.35rem">Monitors steady-state health</li>
+            <li style="margin-bottom:0.35rem">Flags problems early</li>
+            <li>Persists after objectives are achieved to prevent backsliding</li>
+          </ul>
+
+          <h3 style="margin:0 0 1.25rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Development Questions</h3>
+          <div style="margin:0 0 2.25rem; display:flex; flex-direction:column; gap:1.5rem">
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Operational Health</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What metric tells us our operations are running smoothly?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What would we watch to catch problems before they become crises?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What should we monitor even after our objective is achieved?</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Cadence &amp; Actionability</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>How often do we need to check this to be useful?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>If this metric moves in the wrong direction, what action do we take?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Is this measuring something we can actually influence?</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Focus</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Do we actually make decisions based on this metric?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Would removing this from our dashboard change our behavior?</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Validation Checklist</h3>
+          <ul style="list-style:none; margin:0 0 2.25rem; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column">
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It monitors ongoing operations, not a one-time achievement</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It&#8217;s tracked regularly (weekly, monthly, not annually)</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>Movement in this metric triggers specific actions</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It&#8217;s truly a &#8220;key&#8221; metric &#8212; not just interesting data</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It helps prevent backsliding after objectives are met</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>The team knows who owns it and who acts on it</span></li>
+          </ul>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Common Pitfalls</h3>
+          <ul style="list-style:none; margin:0 0 2.25rem; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>KPI proliferation &#8212; tracking 40 metrics until none are actionable</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Never retiring old KPIs when they&#8217;re no longer relevant</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Confusing KPIs (ongoing health) with Key Results (one-time achievement)</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Tracking things that don&#8217;t drive decisions</span></li>
+          </ul>
+
+          <h3 style="margin:0 0 1.1rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Examples</h3>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(17rem, 1fr)); gap:1rem">
+            <div style="background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--indigo); border-radius:0 6px 6px 0; padding:1rem 1.15rem">
+              <p style="margin:0 0 0.7rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--indigo)">Right</p>
+              <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.55rem">
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Monthly customer churn rate</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Average support ticket resolution time</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Weekly system uptime percentage</span></li>
+              </ul>
+            </div>
+            <div style="background:transparent; border:1px dashed var(--ink-soft); border-radius:6px; padding:1rem 1.15rem">
+              <p style="margin:0 0 0.7rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--rose)">Avoid</p>
+              <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.55rem">
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--rose)">&#10007;</span><span>Project completion by Q3 (that&#8217;s a milestone, not ongoing)</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--rose)">&#10007;</span><span>Annual revenue (too infrequent to be a health check)</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ STEP 5 ============ -->
+        <section id="step-5" aria-labelledby="step-5-heading" style="scroll-margin-top:1.5rem; border-top:2px solid var(--indigo-deep); padding:2rem 0 clamp(2.5rem, 5vw, 3.5rem)">
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem 1.5rem; margin:0 0 2.25rem">
+            <p style="flex:0 0 3.5rem; margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:2.4rem; font-weight:700; line-height:0.95; letter-spacing:-0.03em; color:var(--indigo)">05</p>
+            <div style="flex:1 1 22rem; min-width:0">
+              <h2 id="step-5-heading" style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.55rem, 3vw, 1.95rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em; color:var(--indigo-deep)">Milestone <span style="color:var(--ink-soft); font-weight:400">(The Progress Checkpoint)</span></h2>
+              <p style="margin:0.6rem 0 0; max-width:var(--measure, 66ch); font-style:italic; color:var(--ink-soft); text-wrap:pretty">A time-bound event showing you&#8217;re moving forward</p>
+            </div>
+          </div>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Expected Characteristics</h3>
+          <ul style="margin:0 0 2.25rem; padding-left:1.3rem; max-width:var(--measure, 66ch)">
+            <li style="margin-bottom:0.35rem">Specific and time-bound</li>
+            <li style="margin-bottom:0.35rem">Output-focused (deliverable or event)</li>
+            <li style="margin-bottom:0.35rem">Non-numerical &#8212; usually done/not done</li>
+            <li>Shows schedule integrity, not outcome quality</li>
+          </ul>
+
+          <h3 style="margin:0 0 1.25rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Development Questions</h3>
+          <div style="margin:0 0 2.25rem; display:flex; flex-direction:column; gap:1.5rem">
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Deliverable &amp; Deadline</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What specific output or event marks this checkpoint?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>By what date must this be completed?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What deliverable exists after this milestone that didn&#8217;t exist before?</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Progress Indication</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Does hitting this milestone mean we&#8217;re on track to the objective?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What dependencies unlock when this milestone is achieved?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Is this milestone a clear &#8220;done/not done&#8221; without ambiguity?</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="margin:0 0 0.6rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo)">Schedule vs. Success</h4>
+              <ul style="list-style:none; margin:0; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>Could we achieve this milestone on time but still fail the objective?</span></li>
+                <li style="display:flex; gap:0.75rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--indigo-tint)">?</span><span>What would tell us the deliverable is quality, not just on schedule?</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Validation Checklist</h3>
+          <ul style="list-style:none; margin:0 0 2.25rem; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column">
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It&#8217;s a clear deliverable or event, not a measurement</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It has a specific deadline</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It&#8217;s unambiguously done or not done</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>Achieving it indicates forward progress on the plan</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0; border-bottom:1px dotted var(--rule)"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>It&#8217;s meaningful enough to be worth tracking</span></li>
+            <li style="display:flex; gap:0.8rem; padding:0.6rem 0"><span aria-hidden="true" style="flex:0 0 auto; width:0.85rem; height:0.85rem; margin-top:0.42rem; border:1.5px solid var(--indigo); border-radius:2px"></span><span>The team knows what &#8220;done&#8221; looks like</span></li>
+          </ul>
+
+          <h3 style="margin:0 0 0.9rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Common Pitfalls</h3>
+          <ul style="list-style:none; margin:0 0 2.25rem; padding:0; max-width:var(--measure, 66ch); display:flex; flex-direction:column; gap:0.5rem">
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Treating milestone completion as proof of objective success</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Too many milestones &#8212; creating tracking overhead without value</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>Milestones that are actually Key Results (measurements, not deliverables)</span></li>
+            <li style="display:flex; gap:0.8rem"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-weight:700; color:var(--ink-soft)">&#8213;</span><span>False sense of progress in fast-moving environments where plans change</span></li>
+          </ul>
+
+          <h3 style="margin:0 0 1.1rem; padding-bottom:0.5rem; border-bottom:1px solid var(--rule); font-family:Archivo, Helvetica, sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-soft)">Examples</h3>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(17rem, 1fr)); gap:1rem">
+            <div style="background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--indigo); border-radius:0 6px 6px 0; padding:1rem 1.15rem">
+              <p style="margin:0 0 0.7rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--indigo)">Right</p>
+              <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.55rem">
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Finalize vendor contract by March 15th</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Complete user testing by end of Q2</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Deploy to production by June 30th</span></li>
+              </ul>
+            </div>
+            <div style="background:transparent; border:1px dashed var(--ink-soft); border-radius:6px; padding:1rem 1.15rem">
+              <p style="margin:0 0 0.7rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--rose)">Avoid</p>
+              <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.55rem">
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--rose)">&#10007;</span><span>Improve adoption by 20% (that&#8217;s a Key Result)</span></li>
+                <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--rose)">&#10007;</span><span>Work on the prototype (not specific or time-bound)</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <footer style="padding-top:1.75rem; border-top:1px solid var(--rule); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem">
+          <a href="Strategy%20Landing%20Page.dc.html" style="font-family:Archivo, Helvetica, sans-serif; font-size:0.9rem; font-weight:600; color:var(--indigo); text-decoration:none; border-bottom:2px solid var(--indigo-tint); padding-bottom:2px; transition:border-color 140ms ease" style-hover="border-bottom-color:var(--indigo)"><span aria-hidden="true" style="margin-right:0.45rem">&#8592;</span>Return to Strategy Landing Page</a>
+          <p style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:0.8rem; letter-spacing:0.04em; color:var(--ink-soft)">Companion document: DO Strategy Component Outline</p>
+        </footer>
+      </main>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;measure&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:66,&quot;min&quot;:56,&quot;max&quot;:80,&quot;step&quot;:1,&quot;unit&quot;:&quot;ch&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Reading&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { measure: (this.props.measure ?? 66) + "ch" };
+  }
+}
+</script>
+</body>
+</html>

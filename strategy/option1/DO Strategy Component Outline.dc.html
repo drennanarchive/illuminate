@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<title>DO Strategy Component Outline</title>
+<style>
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: #F2F1EC; color: #1F2430; font-family: Alegreya, Georgia, serif; }
+  a { color: #33406B; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: #262F4D; text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 3px solid #33406B; outline-offset: 3px; border-radius: 2px; }
+  ::selection { background: #E5E7F0; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</helmet>
+<div lang="en" style="--ink:#1F2430; --ink-soft:#4A4F5C; --paper:#F2F1EC; --surface:#FBFAF8; --rule:#D9D6CE; --indigo:#33406B; --indigo-deep:#262F4D; --indigo-tint:#E5E7F0; --rose:#8A3F52; --rose-tint:#F2E7E7; --measure:{{measure}}; --label:{{labelBasis}}; --sig-bg:{{sigBg}}; --sig-fg:{{sigFg}}; --sig-accent:{{sigAccent}}; --sig-rule:{{sigRule}}; background:var(--paper); color:var(--ink); font-family:Alegreya, Georgia, serif; font-size:1.1875rem; line-height:1.65; min-height:100%; padding:0 0 5rem">
+
+  <a href="#outline-content" style="position:absolute; left:-9999px; top:0; z-index:20; background:var(--indigo-deep); color:#F2F1EC; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; padding:0.75rem 1.25rem; border-radius:0 0 6px 0; text-decoration:none" style-focus="left:0; outline:3px solid var(--indigo); outline-offset:2px">Skip to main content</a>
+
+  <div style="max-width:64rem; margin:0 auto; padding:0 clamp(1.25rem, 5vw, 3.5rem)">
+
+    <nav aria-label="Page navigation" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; padding:1.75rem 0 0; border-bottom:1px solid var(--rule); padding-bottom:1.25rem">
+      <a href="Strategy%20Landing%20Page.dc.html" style="font-family:Archivo, Helvetica, sans-serif; font-size:0.9rem; font-weight:600; letter-spacing:0.01em; color:var(--indigo); text-decoration:none; border-bottom:2px solid var(--indigo-tint); padding-bottom:2px; transition:border-color 140ms ease" style-hover="border-bottom-color:var(--indigo)"><span aria-hidden="true" style="margin-right:0.45rem">&#8592;</span>Return to Strategy Landing Page</a>
+      <a href="strategy-builder-print.html" target="_blank" rel="noopener" style="font-family:Archivo, Helvetica, sans-serif; font-size:0.8rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); text-decoration:none; border:1px solid var(--rule); border-radius:5px; padding:0.5rem 0.9rem; background:var(--surface); transition:border-color 140ms ease, color 140ms ease" style-hover="border-color:var(--ink-soft); color:var(--ink)">Print this page<span style="font-weight:400; text-transform:none; letter-spacing:0; margin-left:0.4rem">(opens in a new tab)</span></a>
+    </nav>
+
+    <header style="padding:clamp(3rem, 7vw, 5rem) 0 clamp(2rem, 4vw, 3rem)">
+      <p style="margin:0 0 1.1rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.75rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--rose)">Reference &#183; read once</p>
+      <h1 style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(2.3rem, 5.4vw, 3.5rem); font-weight:600; line-height:1.08; letter-spacing:-0.022em; color:var(--indigo-deep); text-wrap:balance">DO Strategy Component Outline</h1>
+      <p style="margin:1.5rem 0 0; max-width:52ch; font-size:1.35rem; line-height:1.5; color:var(--ink-soft); font-style:italic; text-wrap:pretty">Strategy planning terms from highest-level vision down to daily execution steps</p>
+    </header>
+
+    <main id="outline-content" style="display:block">
+
+      <!-- ===== THE FIVE COMPONENTS ===== -->
+
+      <article style="border-top:1px solid var(--rule); padding:2.75rem 0 0.5rem">
+        <div style="display:flex; flex-wrap:wrap; gap:0.25rem 2.25rem; margin:0 0 2rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:2.6rem; font-weight:700; line-height:1; letter-spacing:-0.03em; color:var(--indigo-tint)"><span style="color:var(--indigo)">1</span></p>
+          <h2 style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.6rem, 3vw, 2rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em; color:var(--indigo-deep)">Goal <span style="color:var(--ink-soft); font-weight:400">(The Strategic Vision)</span></h2>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 1.6rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.5rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">What it is</p>
+          <p style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; font-size:1.28rem; line-height:1.55; color:var(--ink); text-wrap:pretty">The broad, long-term destination your organization wants to reach.</p>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 1.6rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.35rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Characteristics</p>
+          <p style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; text-wrap:pretty">High-level, aspirational, and often qualitative.</p>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 2.5rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.85rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Example</p>
+          <div style="flex:1 1 26rem; max-width:var(--measure, 66ch); background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--indigo); border-radius:0 5px 5px 0; padding:0.85rem 1.15rem">
+            <p style="display:flex; gap:0.7rem; margin:0; font-style:italic; color:var(--ink)"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>&#8220;Become the most customer-centric software company in our industry.&#8221;</span></p>
+          </div>
+        </div>
+      </article>
+
+      <article style="border-top:1px solid var(--rule); padding:2.75rem 0 0.5rem">
+        <div style="display:flex; flex-wrap:wrap; gap:0.25rem 2.25rem; margin:0 0 2rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:2.6rem; font-weight:700; line-height:1; letter-spacing:-0.03em; color:var(--indigo)">2</p>
+          <h2 style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.6rem, 3vw, 2rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em; color:var(--indigo-deep)">Objective <span style="color:var(--ink-soft); font-weight:400">(The Specific Target)</span></h2>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 1.6rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.5rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">What it is</p>
+          <p style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; font-size:1.28rem; line-height:1.55; color:var(--ink); text-wrap:pretty">A specific outcome that advances the goal.</p>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 1.6rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.35rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Characteristics</p>
+          <p style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; text-wrap:pretty">Mid-term, clearly defined, and aligned directly with the overarching Goal.</p>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 2.5rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.85rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Example</p>
+          <div style="flex:1 1 26rem; max-width:var(--measure, 66ch); background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--indigo); border-radius:0 5px 5px 0; padding:0.85rem 1.15rem">
+            <p style="display:flex; gap:0.7rem; margin:0; font-style:italic; color:var(--ink)"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>&#8220;Launch a brand new customer loyalty reward program by Q3.&#8221;</span></p>
+          </div>
+        </div>
+      </article>
+
+      <article style="border-top:1px solid var(--rule); padding:2.75rem 0 0.5rem">
+        <div style="display:flex; flex-wrap:wrap; gap:0.25rem 2.25rem; margin:0 0 2rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:2.6rem; font-weight:700; line-height:1; letter-spacing:-0.03em; color:var(--indigo)">3</p>
+          <h2 style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.6rem, 3vw, 2rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em; color:var(--indigo-deep)">Key Result <span style="color:var(--ink-soft); font-weight:400">(The Success Metric)</span></h2>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 1.6rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.5rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">What it is</p>
+          <p style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; font-size:1.28rem; line-height:1.55; color:var(--ink); text-wrap:pretty">The quantifiable outcome that proves you successfully achieved your Objective.</p>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 1.6rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.35rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Characteristics</p>
+          <ul style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; padding-left:1.25rem">
+            <li style="margin-bottom:0.4rem; text-wrap:pretty">Measurable outcomes used to determine progress toward an objective</li>
+            <li style="text-wrap:pretty">Most organizations actually score Key Results</li>
+          </ul>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 2.5rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.85rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Examples</p>
+          <div style="flex:1 1 26rem; max-width:var(--measure, 66ch); background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--indigo); border-radius:0 5px 5px 0; padding:0.85rem 1.15rem">
+            <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.5rem">
+              <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Increase adoption from 42% to 70%</span></li>
+              <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Reduce cycle time from 28 days to 14 days</span></li>
+              <li style="display:flex; gap:0.7rem; font-style:italic"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>Complete 90% of modernization roadmap</span></li>
+            </ul>
+            <p style="margin:0.9rem 0 0; padding-top:0.85rem; border-top:1px solid var(--rule); color:var(--ink)">Even if you only reach 63%, You&#8217;ve still measured meaningful progress.</p>
+          </div>
+        </div>
+      </article>
+
+      <article style="border-top:1px solid var(--rule); padding:2.75rem 0 0.5rem">
+        <div style="display:flex; flex-wrap:wrap; gap:0.25rem 2.25rem; margin:0 0 2rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:2.6rem; font-weight:700; line-height:1; letter-spacing:-0.03em; color:var(--indigo)">4</p>
+          <h2 style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.6rem, 3vw, 2rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em; color:var(--indigo-deep)">KPI - Key Performance Indicator <span style="color:var(--ink-soft); font-weight:400">(The Health Check)</span></h2>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 1.6rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.5rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">What it is</p>
+          <p style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; font-size:1.28rem; line-height:1.55; color:var(--ink); text-wrap:pretty">An ongoing operational metric that tells you how efficiently your daily business is running.</p>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 1.6rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.35rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Characteristics</p>
+          <p style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; text-wrap:pretty">Tracked continuously (weekly/monthly) to monitor steady-state health and flag problems early.</p>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 2rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.85rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Example</p>
+          <div style="flex:1 1 26rem; max-width:var(--measure, 66ch); background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--indigo); border-radius:0 5px 5px 0; padding:0.85rem 1.15rem">
+            <p style="display:flex; gap:0.7rem; margin:0; font-style:italic; color:var(--ink)"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>&#8220;Monthly Customer Churn Rate&#8221; or &#8220;Average Support Ticket Resolution Time.&#8221;</span></p>
+          </div>
+        </div>
+
+        <!-- worked scenario: the one set-piece of its kind -->
+        <div style="max-width:calc(var(--label, 9.5rem) + var(--measure, 66ch) + 2.25rem); margin:0 0 3rem; background:var(--surface); border:1px solid var(--indigo-tint); border-radius:8px; padding:clamp(1.5rem, 3vw, 2.25rem)">
+          <p style="margin:0 0 1.4rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--indigo)">Example scenario &#183; the three working together</p>
+          <dl style="margin:0; display:grid; grid-template-columns:minmax(7rem, auto) 1fr; gap:0.85rem 1.75rem; align-items:baseline">
+            <dt style="font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo-deep)">Objective</dt>
+            <dd style="margin:0; font-size:1.2rem; border-bottom:1px solid var(--rule); padding-bottom:0.85rem">Improve customer retention.</dd>
+            <dt style="font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo-deep)">Key Result</dt>
+            <dd style="margin:0; font-size:1.2rem; border-bottom:1px solid var(--rule); padding-bottom:0.85rem">Increase retention from 78% to 88%.</dd>
+            <dt style="font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; color:var(--indigo-deep)">KPI</dt>
+            <dd style="margin:0; font-size:1.2rem">Monthly churn rate.</dd>
+          </dl>
+          <p style="margin:1.6rem 0 0; max-width:60ch; font-size:1.2rem; line-height:1.55; color:var(--ink); text-wrap:pretty">Once you&#8217;ve achieved the objective, the KPI keeps watching to make sure you don&#8217;t backslide.</p>
+        </div>
+      </article>
+
+      <article style="border-top:1px solid var(--rule); padding:2.75rem 0 0.5rem">
+        <div style="display:flex; flex-wrap:wrap; gap:0.25rem 2.25rem; margin:0 0 2rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:2.6rem; font-weight:700; line-height:1; letter-spacing:-0.03em; color:var(--indigo)">5</p>
+          <h2 style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.6rem, 3vw, 2rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em; color:var(--indigo-deep)">Milestone <span style="color:var(--ink-soft); font-weight:400">(The Progress Checkpoint)</span></h2>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 1.6rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.5rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">What it is</p>
+          <p style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; font-size:1.28rem; line-height:1.55; color:var(--ink); text-wrap:pretty">A specific, time-bound event or output (not measures) on a project schedule that shows you are moving forward.</p>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 1.6rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.35rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Characteristics</p>
+          <p style="flex:1 1 26rem; max-width:var(--measure, 66ch); margin:0; text-wrap:pretty">Fixed deadlines, output-focused, and non-numerical (usually a &#8220;done/not done&#8221; task).</p>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.3rem 2.25rem; margin:0 0 3rem">
+          <p style="flex:0 0 var(--label, 9.5rem); margin:0; padding-top:0.85rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Example</p>
+          <div style="flex:1 1 26rem; max-width:var(--measure, 66ch); background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--indigo); border-radius:0 5px 5px 0; padding:0.85rem 1.15rem">
+            <p style="display:flex; gap:0.7rem; margin:0; font-style:italic; color:var(--ink)"><span aria-hidden="true" style="font-family:Archivo, Helvetica, sans-serif; font-style:normal; font-weight:700; color:var(--indigo)">&#10003;</span><span>&#8220;Finalize the loyalty program software vendor contract by March 15th.&#8221;</span></p>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <!-- ===== SIGNATURE: the mapping band ===== -->
+  <section aria-labelledby="summary-heading" style="background:var(--sig-bg, #262F4D); color:var(--sig-fg, #F2F1EC); padding:clamp(3.5rem, 8vw, 6rem) 0; margin:1rem 0 0">
+    <div style="max-width:64rem; margin:0 auto; padding:0 clamp(1.25rem, 5vw, 3.5rem)">
+      <h2 id="summary-heading" style="margin:0 0 clamp(2.25rem, 5vw, 3.5rem); font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.75rem, 4vw, 2.6rem); font-weight:600; line-height:1.1; letter-spacing:-0.02em; color:var(--sig-fg, #F2F1EC)">Summary of How They Connect</h2>
+      <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column">
+        <li style="display:flex; flex-wrap:wrap; align-items:baseline; gap:0.35rem 1.5rem; padding:1.15rem 0; border-top:1px solid var(--sig-rule, #46507A)">
+          <span style="flex:0 0 11rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.05rem; font-weight:700; letter-spacing:0.02em; color:var(--sig-fg, #F2F1EC)">Goal</span>
+          <span style="flex:1 1 22rem; font-size:1.2rem; color:var(--sig-fg, #F2F1EC)">tells you <strong style="display:block; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.9rem, 4.5vw, 2.9rem); font-weight:600; line-height:1.08; letter-spacing:-0.02em; color:var(--sig-accent, #C9CDE4); margin:0.15rem 0">Why</strong> you are moving.</span>
+        </li>
+        <li style="display:flex; flex-wrap:wrap; align-items:baseline; gap:0.35rem 1.5rem; padding:1.15rem 0; border-top:1px solid var(--sig-rule, #46507A)">
+          <span style="flex:0 0 11rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.05rem; font-weight:700; letter-spacing:0.02em; color:var(--sig-fg, #F2F1EC)">Objective</span>
+          <span style="flex:1 1 22rem; font-size:1.2rem; color:var(--sig-fg, #F2F1EC)">tells you <strong style="display:block; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.9rem, 4.5vw, 2.9rem); font-weight:600; line-height:1.08; letter-spacing:-0.02em; color:var(--sig-accent, #C9CDE4); margin:0.15rem 0">Where</strong> you are going next.</span>
+        </li>
+        <li style="display:flex; flex-wrap:wrap; align-items:baseline; gap:0.35rem 1.5rem; padding:1.15rem 0; border-top:1px solid var(--sig-rule, #46507A)">
+          <span style="flex:0 0 11rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.05rem; font-weight:700; letter-spacing:0.02em; color:var(--sig-fg, #F2F1EC)">Key Result</span>
+          <span style="flex:1 1 22rem; font-size:1.2rem; color:var(--sig-fg, #F2F1EC)">tells you <strong style="display:block; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.9rem, 4.5vw, 2.9rem); font-weight:600; line-height:1.08; letter-spacing:-0.02em; color:var(--sig-accent, #C9CDE4); margin:0.15rem 0">If</strong> you successfully arrived.</span>
+        </li>
+        <li style="display:flex; flex-wrap:wrap; align-items:baseline; gap:0.35rem 1.5rem; padding:1.15rem 0; border-top:1px solid var(--sig-rule, #46507A)">
+          <span style="flex:0 0 11rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.05rem; font-weight:700; letter-spacing:0.02em; color:var(--sig-fg, #F2F1EC)">KPI</span>
+          <span style="flex:1 1 22rem; font-size:1.2rem; color:var(--sig-fg, #F2F1EC)">tells you <strong style="display:block; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.9rem, 4.5vw, 2.9rem); font-weight:600; line-height:1.08; letter-spacing:-0.02em; color:var(--sig-accent, #C9CDE4); margin:0.15rem 0">How Fast/Smoothly</strong> you are driving.</span>
+        </li>
+        <li style="display:flex; flex-wrap:wrap; align-items:baseline; gap:0.35rem 1.5rem; padding:1.15rem 0; border-top:1px solid var(--sig-rule, #46507A); border-bottom:1px solid var(--sig-rule, #46507A)">
+          <span style="flex:0 0 11rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.05rem; font-weight:700; letter-spacing:0.02em; color:var(--sig-fg, #F2F1EC)">Milestone</span>
+          <span style="flex:1 1 22rem; font-size:1.2rem; color:var(--sig-fg, #F2F1EC)">tells you <strong style="display:block; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.9rem, 4.5vw, 2.9rem); font-weight:600; line-height:1.08; letter-spacing:-0.02em; color:var(--sig-accent, #C9CDE4); margin:0.15rem 0">What Markers</strong> you passed along the way.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <div style="max-width:64rem; margin:0 auto; padding:0 clamp(1.25rem, 5vw, 3.5rem)">
+
+    <!-- ===== EDITORIAL: where organizations break down ===== -->
+    <section aria-labelledby="breakdown-heading" style="padding:clamp(3.5rem, 7vw, 5.5rem) 0 0">
+      <p style="margin:0 0 1rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--rose)">Editorial commentary &#183; the author&#8217;s view, not neutral reference</p>
+      <h2 id="breakdown-heading" style="margin:0; max-width:34ch; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.9rem, 4.2vw, 2.7rem); font-weight:600; line-height:1.1; letter-spacing:-0.02em; color:var(--indigo-deep); text-wrap:balance">Where Organizations Actually Break Down</h2>
+      <p style="margin:1.5rem 0 0; max-width:var(--measure, 66ch); font-size:1.3rem; line-height:1.55; color:var(--ink); border-left:3px solid var(--rose); padding-left:1.5rem; text-wrap:pretty">Watching how organizations actually use these tools, the framework is rarely where things break down. Here&#8217;s where they do:</p>
+
+      <ol style="list-style:none; margin:3rem 0 0; padding:0; display:flex; flex-direction:column; gap:2.75rem; counter-reset:breakdown">
+        <li>
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem 2.25rem">
+            <div style="flex:0 0 var(--label, 9.5rem)">
+              <p style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Pitfall 1</p>
+              <p style="margin:0.35rem 0 0; font-family:Archivo, Helvetica, sans-serif; font-size:0.9rem; font-weight:500; color:var(--rose)">Goals</p>
+            </div>
+            <div style="flex:1 1 26rem; max-width:var(--measure, 66ch)">
+              <h3 style="margin:0 0 0.85rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.35rem; font-weight:600; line-height:1.25; letter-spacing:-0.01em; color:var(--indigo-deep); text-wrap:pretty">Goals get written to sound good, not to mean something.</h3>
+              <p style="margin:0 0 0.9rem; text-wrap:pretty">&#8220;Become the most customer-centric organization in our industry&#8221; is the example above, and it&#8217;s also exactly the kind of goal that gets approved in a leadership offsite and then never touched again. If you can&#8217;t describe what <em>not</em> achieving it looks like, it&#8217;s not functioning as a goal &#8212; it&#8217;s functioning as a values statement wearing a goal&#8217;s clothes.</p>
+              <p style="margin:0; font-weight:700; color:var(--indigo-deep); text-wrap:pretty">Those two things aren&#8217;t the same, and conflating them is one of the most common strategic planning failures.</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem 2.25rem">
+            <div style="flex:0 0 var(--label, 9.5rem)">
+              <p style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Pitfall 2</p>
+              <p style="margin:0.35rem 0 0; font-family:Archivo, Helvetica, sans-serif; font-size:0.9rem; font-weight:500; color:var(--rose)">Objectives</p>
+            </div>
+            <div style="flex:1 1 26rem; max-width:var(--measure, 66ch)">
+              <h3 style="margin:0 0 0.85rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.35rem; font-weight:600; line-height:1.25; letter-spacing:-0.01em; color:var(--indigo-deep); text-wrap:pretty">Objectives get written at the wrong altitude.</h3>
+              <p style="margin:0; text-wrap:pretty">Too high and they&#8217;re just restatements of the goal. Too low and they&#8217;re tasks. The useful zone is narrow &#8212; specific enough to create focus, broad enough to allow multiple paths to success. Most organizations err toward too high because it feels safer. Vague objectives are harder to fail.</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem 2.25rem">
+            <div style="flex:0 0 var(--label, 9.5rem)">
+              <p style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Pitfall 3</p>
+              <p style="margin:0.35rem 0 0; font-family:Archivo, Helvetica, sans-serif; font-size:0.9rem; font-weight:500; color:var(--rose)">Key Results</p>
+            </div>
+            <div style="flex:1 1 26rem; max-width:var(--measure, 66ch)">
+              <h3 style="margin:0 0 0.85rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.35rem; font-weight:600; line-height:1.25; letter-spacing:-0.01em; color:var(--indigo-deep); text-wrap:pretty">Key Results get written to be achievable, not to be meaningful.</h3>
+              <p style="margin:0; text-wrap:pretty">This is the sandbagging problem. If your Key Results are things you&#8217;re already confident you&#8217;ll hit, they&#8217;re not measuring ambition &#8212; they&#8217;re measuring activity. The OKR literature (John Doerr especially) suggests that hitting 70% of a well-written Key Result is better than hitting 100% of a poorly written one. Most organizations don&#8217;t have the psychological safety to operate that way, so they quietly write easier targets.</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem 2.25rem">
+            <div style="flex:0 0 var(--label, 9.5rem)">
+              <p style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Pitfall 4</p>
+              <p style="margin:0.35rem 0 0; font-family:Archivo, Helvetica, sans-serif; font-size:0.9rem; font-weight:500; color:var(--rose)">KPIs</p>
+            </div>
+            <div style="flex:1 1 26rem; max-width:var(--measure, 66ch)">
+              <h3 style="margin:0 0 0.85rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.35rem; font-weight:600; line-height:1.25; letter-spacing:-0.01em; color:var(--indigo-deep); text-wrap:pretty">KPIs multiply until they lose meaning.</h3>
+              <p style="margin:0; text-wrap:pretty">A dashboard with 40 KPIs is not a health check &#8212; it&#8217;s noise. The discipline of KPIs isn&#8217;t in defining them, it&#8217;s in <em>cutting</em> them until only the ones that actually drive decisions remain. Most organizations accumulate KPIs over time and never retire them, so the dashboard grows and the signal shrinks.</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem 2.25rem">
+            <div style="flex:0 0 var(--label, 9.5rem)">
+              <p style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Pitfall 5</p>
+              <p style="margin:0.35rem 0 0; font-family:Archivo, Helvetica, sans-serif; font-size:0.9rem; font-weight:500; color:var(--rose)">Milestones</p>
+            </div>
+            <div style="flex:1 1 26rem; max-width:var(--measure, 66ch)">
+              <h3 style="margin:0 0 0.85rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.35rem; font-weight:600; line-height:1.25; letter-spacing:-0.01em; color:var(--indigo-deep); text-wrap:pretty">Milestones get treated as progress when they&#8217;re actually just schedule.</h3>
+              <p style="margin:0; text-wrap:pretty">&#8220;Milestone achieved&#8221; means the plan is intact. It says nothing about whether the work is good, whether the objective is still the right one, or whether the environment has changed since the plan was written. In fast-moving or ambiguous environments, where the Agency finds itself today, milestones can create a false sense of forward motion.</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <div style="display:flex; flex-wrap:wrap; gap:0.4rem 2.25rem; margin:3rem 0 0; padding:2.25rem 0 0; border-top:1px solid var(--rule)">
+        <p style="flex:0 0 var(--label, 9.5rem); margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Extension</p>
+        <div style="flex:1 1 26rem; max-width:var(--measure, 66ch)">
+          <h3 style="margin:0 0 0.85rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.35rem; font-weight:600; line-height:1.25; letter-spacing:-0.01em; color:var(--indigo-deep)">The Deliverables Point, Extended</h3>
+          <p style="margin:0; text-wrap:pretty">In certain work, Deliverables are often the only thing that&#8217;s unambiguously real. Goals can shift, Objectives can be reframed, Key Results can be rescored &#8212; but a deliverable either exists or it doesn&#8217;t. That concreteness is actually an asset if you use it right. The risk is treating deliverable completion as a proxy for objective achievement, which it isn&#8217;t. You can produce every deliverable on time and still fail the mission if the deliverables were the wrong ones.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EDITORIAL: the meta-point ===== -->
+    <section aria-labelledby="meta-heading" style="margin:clamp(3.5rem, 7vw, 5.5rem) 0 0; background:var(--rose-tint); border-radius:10px; padding:clamp(2rem, 5vw, 3.25rem)">
+      <p style="margin:0 0 1rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--rose)">Editorial commentary</p>
+      <h2 id="meta-heading" style="margin:0 0 1.5rem; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.5rem, 3vw, 1.9rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em; color:var(--indigo-deep)">The Meta-Point</h2>
+      <p style="margin:0 0 1.35rem; max-width:52ch; font-size:clamp(1.4rem, 2.6vw, 1.75rem); line-height:1.35; font-weight:500; color:var(--ink); text-wrap:pretty">These frameworks are vocabulary tools first and measurement tools second.</p>
+      <p style="margin:0; max-width:var(--measure, 66ch); text-wrap:pretty">Their primary value is forcing a team to have explicit conversations about what success looks like <em>before</em> the work starts &#8212; not giving leadership a dashboard to check afterward. When organizations skip the conversation and go straight to populating the template, they get the cost of the framework without the benefit.</p>
+    </section>
+
+    <footer style="margin:clamp(3.5rem, 7vw, 5rem) 0 0; padding-top:1.75rem; border-top:1px solid var(--rule); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem">
+      <a href="Strategy%20Landing%20Page.dc.html" style="font-family:Archivo, Helvetica, sans-serif; font-size:0.9rem; font-weight:600; color:var(--indigo); text-decoration:none; border-bottom:2px solid var(--indigo-tint); padding-bottom:2px; transition:border-color 140ms ease" style-hover="border-bottom-color:var(--indigo)"><span aria-hidden="true" style="margin-right:0.45rem">&#8592;</span>Return to Strategy Landing Page</a>
+      <p style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:0.8rem; letter-spacing:0.04em; color:var(--ink-soft)">Companion document: DO Strategy Workflow Placemat</p>
+    </footer>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;measure&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:66,&quot;min&quot;:56,&quot;max&quot;:80,&quot;step&quot;:1,&quot;unit&quot;:&quot;ch&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Reading&quot;},&quot;labelPlacement&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;margin&quot;,&quot;stacked&quot;],&quot;default&quot;:&quot;margin&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Reading&quot;},&quot;summaryBand&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;tinted&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Signature&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const dark = (this.props.summaryBand ?? "dark") === "dark";
+    return {
+      measure: (this.props.measure ?? 66) + "ch",
+      labelBasis: (this.props.labelPlacement ?? "margin") === "margin" ? "9.5rem" : "100%",
+      sigBg: dark ? "#262F4D" : "#E5E7F0",
+      sigFg: dark ? "#F2F1EC" : "#1F2430",
+      sigAccent: dark ? "#C9CDE4" : "#33406B",
+      sigRule: dark ? "#46507A" : "#C2C7DC"
+    };
+  }
+}
+</script>
+</body>
+</html>
