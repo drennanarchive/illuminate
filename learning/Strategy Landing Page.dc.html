@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<title>Strategy Landing Page</title>
+<style>
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: #F2F1EC; color: #1F2430; font-family: Alegreya, Georgia, serif; }
+  a { color: #33406B; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: #262F4D; text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 3px solid #33406B; outline-offset: 3px; border-radius: 4px; }
+  ::selection { background: #E5E7F0; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</helmet>
+<div lang="en" style="--ink:#1F2430; --ink-soft:#4A4F5C; --paper:#F2F1EC; --surface:#FBFAF8; --rule:#D9D6CE; --indigo:#33406B; --indigo-deep:#262F4D; --indigo-tint:#E5E7F0; --rose:#8A3F52; --rose-tint:#F2E7E7; --measure:{{measure}}; background:var(--paper); color:var(--ink); font-family:Alegreya, Georgia, serif; font-size:1.1875rem; line-height:1.65; min-height:100vh; padding:0 0 5rem">
+
+  <a href="#landing-content" style="position:absolute; left:-9999px; top:0; z-index:20; background:var(--indigo-deep); color:#F2F1EC; font-family:Archivo, Helvetica, sans-serif; font-size:0.95rem; font-weight:600; padding:0.75rem 1.25rem; border-radius:0 0 6px 0; text-decoration:none" style-focus="left:0; outline:3px solid var(--indigo); outline-offset:2px">Skip to main content</a>
+
+  <div style="max-width:64rem; margin:0 auto; padding:0 clamp(1.25rem, 5vw, 3.5rem)">
+    <header style="padding:clamp(3.5rem, 9vw, 7rem) 0 clamp(2rem, 4vw, 3rem)">
+      <p style="margin:0 0 1.1rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.75rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--rose)">Two documents &#183; one framework</p>
+      <h1 style="margin:0; font-family:Archivo, Helvetica, sans-serif; font-size:clamp(2.4rem, 6vw, 4rem); font-weight:600; line-height:1.05; letter-spacing:-0.025em; color:var(--indigo-deep); text-wrap:balance">Strategy Landing Page</h1>
+      <p style="margin:1.5rem 0 0; max-width:48ch; font-size:1.4rem; line-height:1.45; font-style:italic; color:var(--ink-soft); text-wrap:pretty">Building effective strategy from vision to execution</p>
+    </header>
+
+    <main id="landing-content" style="display:block">
+      <div style="display:flex; flex-wrap:wrap; gap:0.4rem 2.25rem; padding:2.25rem 0 0; border-top:1px solid var(--rule)">
+        <p style="flex:0 0 9.5rem; margin:0; padding-top:0.5rem; font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft)">Start here</p>
+        <div style="flex:1 1 26rem; max-width:var(--measure, 66ch)">
+          <p style="margin:0 0 1.25rem; font-size:1.3rem; line-height:1.55; text-wrap:pretty"><strong style="font-weight:700; color:var(--indigo-deep)">Understanding strategy development requires clarity at every level</strong> &#8212; from high-level organizational vision down to daily execution milestones. These tools help you navigate the strategic planning process with precision and purpose.</p>
+          <p style="margin:0; text-wrap:pretty">Whether you&#8217;re defining your first strategic goals or validating existing plans, these resources provide the frameworks and guidance to ensure your strategy is meaningful, measurable, and actionable.</p>
+        </div>
+      </div>
+
+      <nav aria-label="Strategy documents" style="margin:clamp(3rem, 6vw, 4.5rem) 0 0; display:grid; grid-template-columns:repeat(auto-fit, minmax(19rem, 1fr)); gap:1.5rem">
+        <a href="DO%20Strategy%20Component%20Outline.dc.html" style="display:flex; flex-direction:column; gap:1rem; background:var(--indigo-deep); color:#F2F1EC; border:2px solid var(--indigo-deep); border-radius:10px; padding:clamp(1.75rem, 3.5vw, 2.5rem); text-decoration:none; box-shadow:0 1px 0 rgba(31,36,48,0.14); transition:transform 150ms ease, box-shadow 150ms ease" style-hover="transform:translateY(-3px); box-shadow:0 10px 24px rgba(38,47,77,0.28)">
+          <span style="font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#C9CDE4">Read once &#183; learn the vocabulary</span>
+          <span style="font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.4rem, 3vw, 1.85rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em">DO Strategy Component Outline</span>
+          <span style="font-size:1.15rem; line-height:1.5; color:#E5E7F0; text-wrap:pretty">Learn the core concepts and definitions</span>
+          <span aria-hidden="true" style="margin-top:0.5rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.05rem; font-weight:600; color:#C9CDE4">&#8594;</span>
+        </a>
+        <a href="DO%20Strategy%20Workflow%20Placemat.dc.html" style="display:flex; flex-direction:column; gap:1rem; background:var(--surface); color:var(--ink); border:2px solid var(--indigo); border-radius:10px; padding:clamp(1.75rem, 3.5vw, 2.5rem); text-decoration:none; box-shadow:0 1px 0 rgba(31,36,48,0.1); transition:transform 150ms ease, box-shadow 150ms ease" style-hover="transform:translateY(-3px); box-shadow:0 10px 24px rgba(38,47,77,0.2)">
+          <span style="font-family:Archivo, Helvetica, sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--rose)">Keep open &#183; use while drafting</span>
+          <span style="font-family:Archivo, Helvetica, sans-serif; font-size:clamp(1.4rem, 3vw, 1.85rem); font-weight:600; line-height:1.15; letter-spacing:-0.015em; color:var(--indigo-deep)">DO Strategy Workflow Placemat</span>
+          <span style="font-size:1.15rem; line-height:1.5; color:var(--ink-soft); text-wrap:pretty">Step-by-step questions to validate your plan</span>
+          <span aria-hidden="true" style="margin-top:0.5rem; font-family:Archivo, Helvetica, sans-serif; font-size:1.05rem; font-weight:600; color:var(--indigo)">&#8594;</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;measure&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:66,&quot;min&quot;:56,&quot;max&quot;:80,&quot;step&quot;:1,&quot;unit&quot;:&quot;ch&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Reading&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { measure: (this.props.measure ?? 66) + "ch" };
+  }
+}
+</script>
+</body>
+</html>
