@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CDAO Compliance and Authority Brief</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --surface-1:      #1a1a19;
+    --page-plane:     #0d0d0d;
+    --surface-2:      #201f1e;
+    --text-primary:   #f5f4f1;
+    --text-secondary: #b9b8b0;
+    --text-muted:     #7c7b75;
+    --gridline:       #2a2a28;
+    --border:         rgba(255,255,255,0.09);
+    --rule:           rgba(255,255,255,0.14);
+    --ai:             #6ea3e8;
+    --data:           #e08a52;
+    --cyber:          #3aa89c;
+    --good:           #4fae5c;
+    --priority:       #d97575;
+    --pending:        #7c7b75;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--page-plane); }
+  body {
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 44px 24px 90px;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+
+  /* Header */
+  header.page-head { margin-bottom: 8px; padding-bottom: 26px; border-bottom: 1px solid var(--rule); }
+  .eyebrow {
+    font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--text-muted); margin-bottom: 10px;
+  }
+  header.page-head h1 {
+    font-size: 27px; font-weight: 650; margin: 0 0 10px; letter-spacing: -0.01em; line-height: 1.25;
+  }
+  header.page-head p.sub {
+    color: var(--text-secondary); font-size: 14.5px; margin: 0 0 18px;
+    max-width: 660px; line-height: 1.65;
+  }
+  .meta-row {
+    display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--text-muted);
+    align-items: center;
+  }
+  .meta-row .tag { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .swatch.ai { background: var(--ai); }
+  .swatch.data { background: var(--data); }
+  .swatch.cyber { background: var(--cyber); }
+
+  /* Stat row */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px; background: var(--gridline); margin: 26px 0 30px;
+    border: 1px solid var(--gridline); border-radius: 4px; overflow: hidden;
+  }
+  .stat-tile { background: var(--surface-1); padding: 16px 18px; }
+  .stat-tile .val { font-size: 26px; font-weight: 650; line-height: 1.1; color: var(--text-primary); }
+  .stat-tile .label { font-size: 11.5px; color: var(--text-muted); margin-top: 5px; line-height: 1.4; }
+
+  /* Callout */
+  .callout {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 4px;
+    padding: 20px 22px; margin-bottom: 32px;
+  }
+  .callout .tag {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--ai); font-weight: 650; margin-bottom: 12px; display: block;
+  }
+  .callout.amber .tag { color: #d9a441; }
+  .callout p { margin: 0 0 12px; font-size: 14px; line-height: 1.7; color: var(--text-secondary); }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout strong { color: var(--text-primary); font-weight: 600; }
+  .callout code {
+    background: var(--surface-2); padding: 1px 6px; border-radius: 3px;
+    font-size: 12.5px; color: var(--text-primary); font-family: ui-monospace, "SF Mono", monospace;
+  }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 2px; margin-bottom: 22px; border-bottom: 1px solid var(--gridline); }
+  .tabs input { display: none; }
+  .tabs label {
+    padding: 10px 18px; font-size: 13px; font-weight: 600; color: var(--text-muted);
+    cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    letter-spacing: 0.01em; transition: color 0.15s ease;
+  }
+  .tabs label:hover { color: var(--text-secondary); }
+  #tab-actions:checked ~ .tabs label[for="tab-actions"],
+  #tab-map:checked ~ .tabs label[for="tab-map"],
+  #tab-identity:checked ~ .tabs label[for="tab-identity"],
+  #tab-contract:checked ~ .tabs label[for="tab-contract"],
+  #tab-cio:checked ~ .tabs label[for="tab-cio"] {
+    color: var(--text-primary); border-bottom-color: var(--ai);
+  }
+  .panel { display: none; }
+  #tab-actions:checked ~ .panels #panel-actions { display: block; }
+  #tab-map:checked ~ .panels #panel-map { display: block; }
+  #tab-identity:checked ~ .panels #panel-identity { display: block; }
+  #tab-contract:checked ~ .panels #panel-contract { display: block; }
+  #tab-cio:checked ~ .panels #panel-cio { display: block; }
+
+  /* Section labels */
+  .group-title {
+    font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--text-muted); margin: 30px 0 12px; font-weight: 650;
+    padding-bottom: 8px; border-bottom: 1px solid var(--gridline);
+  }
+  .group-title:first-child { margin-top: 0; }
+
+  /* Action cards */
+  details.action {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 4px;
+    margin-bottom: 6px; overflow: hidden;
+  }
+  details.action summary {
+    list-style: none; cursor: pointer; padding: 14px 18px;
+    display: flex; align-items: baseline; gap: 12px; font-size: 14px; font-weight: 600;
+  }
+  details.action summary::-webkit-details-marker { display: none; }
+  details.action summary::before {
+    content: "+"; color: var(--text-muted); font-size: 14px; font-weight: 400;
+    width: 12px; flex-shrink: 0;
+  }
+  details.action[open] summary::before { content: "\2212"; }
+  details.action summary .title { flex: 1; color: var(--text-primary); }
+  .status-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    white-space: nowrap; padding-bottom: 1px; border-bottom: 1px solid currentColor;
+  }
+  .status-label.priority { color: var(--priority); }
+  .status-label.progress { color: #d9a441; }
+  .status-label.monitor  { color: var(--good); }
+  .status-label.pending  { color: var(--pending); }
+  .domain-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.04em; padding: 1px 6px;
+    border: 1px solid currentColor; border-radius: 3px; white-space: nowrap;
+  }
+  .domain-tag.ai { color: var(--ai); }
+  .domain-tag.data { color: var(--data); }
+  .domain-tag.cyber { color: var(--cyber); }
+  .action-body { padding: 0 18px 18px 42px; font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; }
+  .action-body .src {
+    margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--gridline);
+    font-size: 12px; color: var(--text-muted);
+  }
+  .action-body .src strong { color: var(--text-secondary); font-weight: 600; }
+
+  /* Authority map */
+  .domain-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 700px) { .domain-cols { grid-template-columns: 1fr; } }
+  .domain-col {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 4px;
+    padding: 20px; border-top: 2px solid var(--ai);
+  }
+  .domain-col.data { border-top-color: var(--data); }
+  .domain-col h3 { margin: 0 0 4px; font-size: 15px; font-weight: 650; }
+  .domain-col .sub { font-size: 12px; color: var(--text-muted); margin: 0 0 16px; line-height: 1.5; }
+  .domain-col details { border-top: 1px solid var(--gridline); padding: 11px 0; }
+  .domain-col details:first-of-type { border-top: none; }
+  .domain-col summary {
+    list-style: none; cursor: pointer; font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; gap: 8px; color: var(--text-primary);
+  }
+  .domain-col summary::-webkit-details-marker { display: none; }
+  .domain-col summary::before { content: "+"; color: var(--text-muted); width: 10px; flex-shrink: 0; }
+  .domain-col details[open] summary::before { content: "\2212"; }
+  .domain-col .body { font-size: 12.8px; color: var(--text-secondary); line-height: 1.7; padding: 9px 0 2px 18px; }
+  .domain-col .body ul { margin: 6px 0; padding-left: 18px; }
+  .domain-col .body li { margin-bottom: 5px; }
+  .domain-col table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 4px; }
+  .domain-col table td, .domain-col table th { text-align: left; padding: 5px 6px 5px 0; border-bottom: 1px solid var(--gridline); vertical-align: top; }
+  .domain-col table th { color: var(--text-muted); font-weight: 600; }
+
+  .compare-table {
+    width: 100%; border-collapse: collapse; margin-bottom: 26px; font-size: 13px;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+  }
+  .compare-table th, .compare-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--gridline); line-height: 1.6; }
+  .compare-table th { color: var(--text-muted); font-weight: 650; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td.ai-col { border-left: 2px solid var(--ai); color: var(--text-secondary); }
+  .compare-table td.data-col { border-left: 2px solid var(--data); color: var(--text-secondary); }
+  .compare-table td:first-child { color: var(--text-primary); font-weight: 600; }
+
+  /* Identity / mandate tab */
+  .brief-block {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 4px;
+    padding: 22px 24px; margin-bottom: 14px;
+  }
+  .brief-block h3 { margin: 0 0 12px; font-size: 15px; font-weight: 650; }
+  .brief-block p { font-size: 13.8px; color: var(--text-secondary); line-height: 1.75; margin: 0 0 10px; }
+  .brief-block p:last-child { margin-bottom: 0; }
+  .brief-block ul { margin: 8px 0 0; padding-left: 20px; }
+  .brief-block li { font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 7px; }
+  .brief-block li:last-child { margin-bottom: 0; }
+  .brief-block li strong { color: var(--text-primary); font-weight: 600; }
+
+  .waiting-block {
+    background: var(--surface-1); border: 1px solid var(--border); border-left: 2px solid var(--pending);
+    border-radius: 4px; padding: 16px 18px; margin-bottom: 6px;
+  }
+  .waiting-block .who {
+    display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 7px;
+  }
+  .waiting-block p { margin: 0; font-size: 13.5px; color: var(--text-secondary); line-height: 1.65; }
+  .waiting-block .q { color: var(--text-primary); font-weight: 600; margin-bottom: 5px; }
+
+  footer {
+    margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--gridline);
+    font-size: 11.5px; color: var(--text-muted); line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <div class="eyebrow">Prepared to support the Chief Data and AI Officer</div>
+    <h1>CDAO Compliance and Authority Analysis</h1>
+    <p class="sub">A working reference on what current policy requires of the Chief Data and AI Officer, what authority she holds directly, and where the picture is still unsettled. Prepared from unclassified public text by the support team.</p>
+    <div class="meta-row">
+      <span class="tag"><span class="swatch ai"></span> AI portfolio</span>
+      <span class="tag"><span class="swatch data"></span> Data portfolio</span>
+      <span class="tag"><span class="swatch cyber"></span> CIO / cyber support</span>
+      <span>Updated August 20, 2026</span>
+    </div>
+  </header>
+
+  <div class="stat-row">
+    <div class="stat-tile"><div class="val">2</div><div class="label">Actions due before September 3</div></div>
+    <div class="stat-tile"><div class="val">2</div><div class="label">Open structural gaps</div></div>
+    <div class="stat-tile"><div class="val">4</div><div class="label">Items in progress</div></div>
+    <div class="stat-tile"><div class="val">3</div><div class="label">Deadlines through October 3</div></div>
+  </div>
+
+  <div class="callout">
+    <span class="tag">Does NSPM-11 or NSPM-12 remove anything from ICD 505?</span>
+    <p><strong>No, not explicitly.</strong> NSPM-11's only rescission clause names NSM-25 by title and nothing else. NSPM-12 goes further in the opposite direction. Section 9 states the memorandum "shall not be construed to implicitly alter or supersede existing authorities or contravene existing law, Executive Orders, or Presidential Directives." Neither document names any IC Directive.</p>
+    <p>There is a catch worth the CDAO's attention. NSPM-11 Section 3(e) requires IC elements to update their internal guidance for consistency once the CNSS/OMB AI-in-NSS policy and classified annex are issued, due <strong>September 3, 2026</strong>, and to review it annually after that. ICD 505 is unchanged today, but it is on a clock. Getting ahead of that date is the point of the first item below.</p>
+  </div>
+
+  <input type="radio" name="tabs" id="tab-actions" checked>
+  <input type="radio" name="tabs" id="tab-map">
+  <input type="radio" name="tabs" id="tab-identity">
+  <input type="radio" name="tabs" id="tab-contract">
+  <input type="radio" name="tabs" id="tab-cio">
+  <div class="tabs">
+    <label for="tab-actions">Compliance Actions</label>
+    <label for="tab-map">Authority Map</label>
+    <label for="tab-identity">Mandate and Support</label>
+    <label for="tab-contract">Contract Scope</label>
+    <label for="tab-cio">CIO Support</label>
+  </div>
+
+  <div class="panels">
+    <div class="panel" id="panel-actions">
+
+      <div class="group-title">Due before September 3, 2026</div>
+
+      <details class="action" open>
+        <summary><span class="status-label priority">Priority</span><span class="title">Raise the ICD 505 gap with the policy office</span><span class="domain-tag ai">AI</span></summary>
+        <div class="action-body">
+          ICD 505, signed January 2025, is grounded in NSM-25 and its companion Framework, both rescinded by NSPM-11 in June 2026. No guidance has yet said whether ICD 505 stands as written, needs reissue, or will be folded into the September 3 policy. This should reach the policy office as a question the CDAO is raising, not a fix the support team proposes on its own.
+          <div class="src"><strong>Source:</strong> ICD 505 Section D.2; NSPM-11 Sections 3(e) and 3(f)</div>
+        </div>
+      </details>
+
+      <details class="action">
+        <summary><span class="status-label priority">Priority</span><span class="title">Prepare for the September 3 release</span><span class="domain-tag ai">AI</span></summary>
+        <div class="action-body">
+          The CNSS/OMB AI-in-NSS governance policy, the DOD Directive 3000.09 update, and NSPM-11's classified annex are all due September 3. The support team should monitor for release and be ready to brief the CDAO within 48 hours on whether it affects ICD 505, element CAIO duties, or IC-specific treatment.
+          <div class="src"><strong>Source:</strong> NSPM-11, 90-day deadlines from the June 5, 2026 signature</div>
+        </div>
+      </details>
+
+      <div class="group-title">In progress</div>
+
+      <details class="action">
+        <summary><span class="status-label progress">In progress</span><span class="title">Draft language distinguishing her AI and Data authority</span><span class="domain-tag ai">AI</span><span class="domain-tag data">DATA</span></summary>
+        <div class="action-body">
+          The CDAO's two portfolios carry different weight. Under ICD 505, her AI authority is coordinative: waivers and approvals sit with the element head. Under ICD 504, her Data authority is explicit: element CDOs hold direct authority over data governance decisions. She needs a clear, ready answer for when she is asked what she actually decides.
+          <div class="src"><strong>Source:</strong> ICD 505 Section D.5.b.(2); ICD 504, element CDO authority clause</div>
+        </div>
+      </details>
+
+      <details class="action">
+        <summary><span class="status-label progress">In progress</span><span class="title">Build Authority and Boundaries materials around both portfolios separately</span><span class="domain-tag ai">AI</span><span class="domain-tag data">DATA</span></summary>
+        <div class="action-body">
+          A single statement covering both roles understates her authority on data and overstates it on AI. The Authority Map tab is the source structure for that material.
+        </div>
+      </details>
+
+      <details class="action">
+        <summary><span class="status-label progress">In progress</span><span class="title">Decide, and document, whether the office takes on research security</span><span class="domain-tag ai">AI</span></summary>
+        <div class="action-body">
+          Neither NSPM-33 nor the NSSTS assigns research security execution, vetting, high-risk entity restrictions, counterintelligence support, to a CAIO by title. If the CDAO's office takes this on, it should be recorded as a deliberate choice, not treated as a policy requirement.
+          <div class="src"><strong>Source:</strong> NSSTS AI section (no reference to "CAIO"); NSPM-33 (2021, general R&D agencies)</div>
+        </div>
+      </details>
+
+      <div class="group-title">Monitoring</div>
+
+      <details class="action">
+        <summary><span class="status-label monitor">Monitor</span><span class="title">Track the CDO Council for new guidance</span><span class="domain-tag data">DATA</span></summary>
+        <div class="action-body">
+          OMB M-25-06 re-established the government-wide CDO Council in January 2025 after its charter lapsed. It is active again and may issue best practices relevant to her data governance duties.
+        </div>
+      </details>
+
+      <details class="action">
+        <summary><span class="status-label monitor">Sep 10</span><span class="title">CNSS harmonization review completes</span><span class="domain-tag ai">AI</span></summary>
+        <div class="action-body">
+          May affect which older NSS directives remain in force. Worth a short check once published for any effect on ICD-level policy.
+        </div>
+      </details>
+
+      <details class="action">
+        <summary><span class="status-label monitor">Oct 3</span><span class="title">Workforce and hiring authorities finalize</span><span class="domain-tag ai">AI</span></summary>
+        <div class="action-body">
+          Relevant to her workforce competency duty under ICD 505. Worth incorporating into workforce planning once published.
+        </div>
+      </details>
+
+      <div class="group-title">CIO support and cyber AI</div>
+
+      <details class="action">
+        <summary><span class="status-label progress">In progress</span><span class="title">Route CIO-tasked AI work through the same ICD 505 governance process</span><span class="domain-tag ai">AI</span><span class="domain-tag cyber">CYBER</span></summary>
+        <div class="action-body">
+          ICD 505's definition of AI carries no cybersecurity carve-out, so any AI-enabled tool built or deployed to support the CIO's cyber and infrastructure work is still subject to inventory, impact assessment, and waiver reporting, the same as any other AI use in the element. The CDAO directs this work and is also accountable for governing it, so documenting that it moves through the standard process matters more here than elsewhere.
+          <div class="src"><strong>Source:</strong> ICD 505 (AI definition, Section C); NSPM-12 (CIO/CISO as reporting channel, not an exclusivity clause)</div>
+        </div>
+      </details>
+
+      <details class="action">
+        <summary><span class="status-label pending">Pending</span><span class="title">Locate the element CIO's governing charter, if one exists</span><span class="domain-tag cyber">CYBER</span></summary>
+        <div class="action-body">
+          No public directive defines element-level CIO duties the way ICD 505 and ICD 504 define CAIO and CDO duties. ICD 500 covers only the DNI-level, community-wide IC CIO role and predates AI policy entirely. An internal charter or delegation memo, if one exists, is the next document to check.
+          <div class="src"><strong>Source:</strong> ICD 500 (Aug 2008, community-wide IC CIO authority)</div>
+        </div>
+      </details>
+
+      <div class="group-title">Pending input</div>
+
+      <details class="action">
+        <summary><span class="status-label pending">Pending</span><span class="title">Incorporate the internal element-level memos once available</span><span class="domain-tag ai">AI</span><span class="domain-tag data">DATA</span></summary>
+        <div class="action-body">
+          These may contain delegation-of-authority detail not present in the public ICD text, for example a CAIO Council charter or a local delegation order.
+        </div>
+      </details>
+
+    </div>
+
+    <div class="panel" id="panel-map">
+
+      <table class="compare-table">
+        <thead><tr><th>Dimension</th><th>AI portfolio</th><th>Data portfolio</th></tr></thead>
+        <tbody>
+          <tr><td>Legal foundation</td><td class="ai-col">Presidential memoranda, which any president can revoke</td><td class="data-col">Statute (Evidence Act, 2018), which only Congress can change</td></tr>
+          <tr><td>Track record</td><td class="ai-col">One full rescission already occurred: NSM-25 to NSPM-11, June 2026</td><td class="data-col">No rescissions across three administrations, 2019 to 2026</td></tr>
+          <tr><td>Decision authority</td><td class="ai-col">Coordinative. Waivers and approvals sit with the element head</td><td class="data-col">Explicit. ICD 504 grants direct authority over governance implementation</td></tr>
+          <tr><td>Accountability language</td><td class="ai-col">Not present for the element CAIO; the IC-wide CAIO role is coordinative</td><td class="data-col">The IC-wide CDO is named "the accountable official for the implementation of this Directive"</td></tr>
+        </tbody>
+      </table>
+
+      <div class="domain-cols">
+
+        <div class="domain-col ai">
+          <h3>AI portfolio</h3>
+          <p class="sub">Governed by ICD 505 (Jan 2025), under NSPM-11 (Jun 2026), NSPM-12 (Jun 2026), and the NSSTS (Aug 2026)</p>
+
+          <details open>
+            <summary>Governing authority</summary>
+            <div class="body">
+              <table>
+                <tr><th>Authority</th><th>Date</th><th>Status</th></tr>
+                <tr><td>ICD 505</td><td>Jan 2025</td><td>Current</td></tr>
+                <tr><td>NSPM-11</td><td>Jun 5, 2026</td><td>Current, rescinded NSM-25</td></tr>
+                <tr><td>NSPM-12</td><td>Jun 12, 2026</td><td>Current, NSS cyber governance</td></tr>
+                <tr><td>NSSTS</td><td>Aug 2026</td><td>Current, umbrella strategy</td></tr>
+                <tr><td>NSPM-33</td><td>Jan 2021</td><td>Current, reaffirmed</td></tr>
+                <tr><td>NSM-25 and Framework</td><td>Oct 2024</td><td>Rescinded; formerly the source of agency CAIO waiver authority</td></tr>
+              </table>
+            </div>
+          </details>
+
+          <details>
+            <summary>Her responsibilities under ICD 505</summary>
+            <div class="body">
+              <ul>
+                <li>Institute AI governance processes for the element</li>
+                <li>Maintain the AI use case inventory</li>
+                <li>Run impact assessments and periodic audits</li>
+                <li>Assess classification reconstruction risk in AI systems</li>
+                <li>Ensure workforce AI competency</li>
+                <li>Report element head waivers to the IC CAIO within three days</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>What sits outside her authority</summary>
+            <div class="body">
+              <ul>
+                <li>Waiver grant and revoke: held by the <strong>element head</strong> (ICD 505 D.5.b.(2))</li>
+                <li>AI-in-NSS governance policy: assigned to <strong>CNSS</strong>, due September 3</li>
+                <li>NSS cyber baselines and incident standards: <strong>CNSS and the National Manager</strong></li>
+                <li>NSPM-33 research security execution: <strong>not assigned to any titled role</strong></li>
+                <li>IC-wide AI strategy and model registry: the <strong>DNI-designated IC CAIO</strong>, a separate community-wide role</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>Open questions</summary>
+            <div class="body">
+              <ul>
+                <li>ICD 505's citation to NSM-25 has no current basis</li>
+                <li>Her role under the new CNSS-led governance structure is undefined</li>
+                <li>The NSPM-33 and NSSTS research security items are not hers by policy text</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>Deadlines</summary>
+            <div class="body">
+              <ul>
+                <li><strong>Sep 3</strong>: CNSS/OMB AI-in-NSS policy, DOD 3000.09 update, classified annex</li>
+                <li><strong>Sep 10</strong>: CNSS harmonization review complete</li>
+                <li><strong>Oct 3</strong>: Strategic reserve, hiring authorities, curriculum</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <div class="domain-col data">
+          <h3>Data portfolio</h3>
+          <p class="sub">Governed by ICD 504 (Jan 2025) and the Evidence Act chain (2018 to 2026)</p>
+
+          <details open>
+            <summary>Governing authority</summary>
+            <div class="body">
+              <table>
+                <tr><th>Authority</th><th>Date</th><th>Status</th></tr>
+                <tr><td>Evidence Act (44 U.S.C. 3520)</td><td>Jan 2019</td><td>Current, statutory</td></tr>
+                <tr><td>ICD 504</td><td>Jan 2025</td><td>Current, grounded in the National Security Act and EO 12333</td></tr>
+                <tr><td>OMB M-19-23</td><td>Jul 2019</td><td>Current, Phase 1</td></tr>
+                <tr><td>OMB M-25-05</td><td>Jan 2025</td><td>Current, Phase 2 and open data</td></tr>
+                <tr><td>OMB M-25-06</td><td>Jan 2025</td><td>Current, re-established the CDO Council</td></tr>
+                <tr><td>OMB M-26-10</td><td>Mar 2026</td><td>Current, CIO and IT reporting; does not touch CDO duties</td></tr>
+              </table>
+            </div>
+          </details>
+
+          <details>
+            <summary>Her responsibilities</summary>
+            <div class="body">
+              <ul>
+                <li>Lifecycle data management (44 U.S.C. 3520(c))</li>
+                <li>Coordinate with data stewards; standardize, share, and publish data assets</li>
+                <li>Support the Performance Improvement and Evaluation Officers</li>
+                <li>IC data management planning framework (ICD 504); maintain the IC Data Catalog</li>
+                <li>Civil liberties and privacy (ICD 107) and U.S. Persons protections (EO 12333) in data governance</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>What she holds directly</summary>
+            <div class="body">
+              ICD 504 states that element CDOs must possess "authority to make decisions about developing/implementing data governance." That is affirmative authority, not a coordinating role, and it is stronger than anything found on the AI side.
+            </div>
+          </details>
+
+          <details>
+            <summary>Carve-outs</summary>
+            <div class="body">
+              NSS data assets are excluded from the comprehensive data inventory requirement (44 U.S.C. 3511(a)(2)(B)). This does not exempt her other CDO duties.
+            </div>
+          </details>
+
+          <details>
+            <summary>Open questions</summary>
+            <div class="body">
+              None at the level found on the AI side. The main open item concerns coordination: how ICD 504 interfaces with the newly re-established government-wide CDO Council.
+            </div>
+          </details>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="panel" id="panel-identity">
+
+      <div class="brief-block">
+        <h3>The CDAO role</h3>
+        <p>The Chief Data and AI Officer holds the merged CAIO and CDO portfolio at the element level, and now reports to a higher leader following the recent organizational flattening. Her mandate spans two authorities of different legal weight: coordinative influence over AI governance under ICD 505, and direct decision authority over data governance under ICD 504.</p>
+      </div>
+
+      <div class="brief-block">
+        <h3>How the support team assists her</h3>
+        <p>The support team exists so the CDAO can make fully informed decisions. It tracks the policy environment, develops work product, drafts materials, and prepares briefings. She reviews, decides, and directs. The team holds no decision authority of its own; every output here is prepared for her review, not issued in the team's name.</p>
+      </div>
+
+      <div class="group-title">Awaiting a decision</div>
+
+      <div class="waiting-block">
+        <span class="who">Policy office</span>
+        <p class="q">Does ICD 505 stand as written, get reissued, or fold into the September 3 policy?</p>
+        <p>To be raised as a question the CDAO is asking, not an answer the support team is proposing. See the Compliance Actions tab for the preparation task.</p>
+      </div>
+
+      <div class="waiting-block">
+        <span class="who">CDAO decision</span>
+        <p class="q">Which portfolio leads the narrative: Data, where her authority is direct, or AI, where her influence is coordinative?</p>
+        <p>Policy does not settle this. It is a positioning decision, and it shapes everything downstream in the Foundations materials.</p>
+      </div>
+
+      <div class="waiting-block">
+        <span class="who">CDAO decision</span>
+        <p class="q">Does the office take on research security under NSPM-33, or stay outside it?</p>
+        <p>Nothing in current policy requires this. Taking it on is a deliberate expansion of scope and worth deciding consciously rather than by default.</p>
+      </div>
+
+      <div class="waiting-block">
+        <span class="who">Support team</span>
+        <p class="q">Obtain the element-level CAIO and CDO duty memos referenced earlier.</p>
+        <p>May contain delegation-of-authority detail that the public ICD text does not include.</p>
+      </div>
+
+    </div>
+
+    <div class="panel" id="panel-contract">
+
+      <div class="callout amber" style="margin-bottom: 22px;">
+        <span class="tag">Tied to the current contract vehicle</span>
+        <p>Everything on this tab reflects the current contract (PWS 3.2 / 3.2.1) and describes how the support team is presently organized to deliver, not what the CDAO role or this office's mandate require in principle. If the contract vehicle changes, this tab changes with it. The Mandate and Support tab does not depend on it and should stay accurate regardless.</p>
+      </div>
+
+      <div class="brief-block">
+        <h3>Support functions (PWS 3.2 / 3.2.1)</h3>
+        <p>Deliverables are scoped across 14 SRT categories under the current contract, grouped into four families:</p>
+        <ul>
+          <li><strong>Strategy and Planning</strong>: forward-looking analysis, including this brief</li>
+          <li><strong>Governance and Oversight</strong>: the compliance tracking in the Actions and Authority Map tabs</li>
+          <li><strong>Execution and Assessment</strong>: turning her decisions into finished work product</li>
+          <li><strong>Communication and Response</strong>: preparing her briefings and materials for leadership</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="panel" id="panel-cio">
+
+      <div class="callout">
+        <span class="tag">Does supporting the CIO on cyber and infrastructure AI create a conflict?</span>
+        <p><strong>No conflict found in the text reviewed.</strong> ICD 505 directs the CAIO to coordinate with the IC CIO so the IC Information Environment supports AI implementation, so this kind of cross-functional work is built into the framework rather than an edge case it overlooked. NSPM-12 names the CIO and CISO as the reporting channel for cybersecurity requirements to CNSS. It does not restrict who may perform the underlying work.</p>
+        <p>The open question is not permission. It is governance. Any AI capability built or deployed as part of this work still falls under ICD 505's inventory and audit requirements, the same as any other AI use in the element, regardless of which office requested it.</p>
+      </div>
+
+      <div class="brief-block">
+        <h3>What governs this work</h3>
+        <table style="width:100%; border-collapse: collapse; font-size: 13px;">
+          <tr style="color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">
+            <td style="padding: 6px 10px 6px 0;">Authority</td><td style="padding: 6px 10px 6px 0;">Date</td><td style="padding: 6px 0;">Relevance</td>
+          </tr>
+          <tr style="border-top: 1px solid var(--gridline);"><td style="padding: 8px 10px 8px 0; font-weight: 600; color: var(--text-primary);">ICD 505</td><td style="padding: 8px 10px 8px 0; color: var(--text-secondary);">Jan 2025</td><td style="padding: 8px 0; color: var(--text-secondary);">Applies in full. No cybersecurity carve-out in its AI definition or scope.</td></tr>
+          <tr style="border-top: 1px solid var(--gridline);"><td style="padding: 8px 10px 8px 0; font-weight: 600; color: var(--text-primary);">NSPM-12</td><td style="padding: 8px 10px 8px 0; color: var(--text-secondary);">Jun 2026</td><td style="padding: 8px 0; color: var(--text-secondary);">Names the CIO and CISO as the reporting channel for CNSS cybersecurity requirements. Not a staffing restriction.</td></tr>
+          <tr style="border-top: 1px solid var(--gridline);"><td style="padding: 8px 10px 8px 0; font-weight: 600; color: var(--text-primary);">ICD 500</td><td style="padding: 8px 10px 8px 0; color: var(--text-secondary);">Aug 2008</td><td style="padding: 8px 0; color: var(--text-secondary);">Establishes the community-wide IC CIO's authority over IT architecture and information security standards. Predates AI policy and contains no AI-specific content.</td></tr>
+        </table>
+      </div>
+
+      <div class="brief-block">
+        <h3>Where the real risk sits</h3>
+        <p>The CDAO both directs this work and is accountable for governing AI use under ICD 505. That is not a violation of anything written, but it places the same office in the position of doer and reviewer for its own output. The safeguard is procedural, not organizational: route this work through the same inventory, impact assessment, and reporting process any other AI use in the element goes through, rather than treating it as separate because it originated from a CIO tasking.</p>
+      </div>
+
+      <div class="brief-block">
+        <h3>What is not yet confirmed</h3>
+        <p>No public directive defines element-level CIO duties the way ICD 505 and ICD 504 define CAIO and CDO duties. ICD 500 covers the DNI-level, community-wide IC CIO role only. If an internal element CIO charter or delegation memo exists, it is the next document to check, and it belongs with the other pending items on the Compliance Actions tab.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="callout amber" style="margin-top: 34px;">
+    <span class="tag">Known limitations</span>
+    <p>This brief reflects unclassified public text, read directly and checked for rescission and supersession language. It does not include NSPM-11's classified annex, due September 3, which may resolve the ICD 505 question directly. It does not include any classified guidance beneath ICD 505 or ICD 504, the full text of DOD Directive 3000.09, or the underlying Executive Orders beyond how the memos cited them. Whether CNSS met its July 12 and August 11 deadlines is treated here as a textual fact, not a confirmed outcome. Most importantly, it does not yet include any internal ODNI delegation memo, CAIO or CDO Council charter, or office-specific instruction beneath the ICD level.</p>
+    <p>Treat this as the confirmed baseline to check the classified and internal layer against, not yet the final word on her operating authority.</p>
+  </div>
+
+  <footer>
+    Sources: NSPM-11, NSPM-12, NSSTS, NSPM-33, NSM-25, ICD 505, ICD 504, ICD 500, OMB M-19-23, M-25-05, M-25-06, M-26-10, and the Evidence Act (44 U.S.C. 3520). Full citations and section references are in the companion reference documents.
+  </footer>
+
+</div>
+</body>
+</html>
