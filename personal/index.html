@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b1d">
+  <meta name="description" content="Clara's Constellation — a luminous little archive of rituals, roadmaps, and ideas.">
+  <title>Clara's Constellation · A Little Universe of Things</title>
+  <style>
+    :root{color-scheme:dark;--night:#080b1d;--ink:#f9f5ff;--muted:#bcb6d8;--muted2:#8c86ae;--gold:#f5dca9;--lilac:#c4b0fc;--pink:#f5bfe3;--aqua:#a3f0ef;--line:rgba(219,207,255,.17);--pane:rgba(20,20,48,.72);--focus:#e7c7ff;--radius:26px}
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{min-width:320px;margin:0;background:var(--night);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;overflow-x:hidden}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit}
+    button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--focus);outline-offset:4px}
+    ::selection{background:#b08ce2;color:#0a0820}
+    .cosmos{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;background:radial-gradient(ellipse 64% 49% at 75% 18%,rgba(104,48,142,.34),transparent 75%),radial-gradient(ellipse 38% 39% at 5% 46%,rgba(39,87,132,.25),transparent 77%),radial-gradient(ellipse 40% 34% at 64% 83%,rgba(90,45,114,.20),transparent 79%),linear-gradient(165deg,#090b20 0%,#090b1c 48%,#10102b 100%)}
+    .cosmos::before{content:"";position:absolute;inset:-15%;background:radial-gradient(ellipse 27% 25% at 77% 22%,rgba(196,132,225,.22),transparent),radial-gradient(ellipse 20% 23% at 88% 37%,rgba(86,202,213,.14),transparent),radial-gradient(ellipse 24% 16% at 11% 75%,rgba(239,148,207,.12),transparent);filter:blur(38px);animation:nebula-breathe 22s ease-in-out infinite alternate}
+    @keyframes nebula-breathe{to{transform:translate(2%,-2%) scale(1.07);opacity:.76}}
+    .dust{position:absolute;inset:0}
+    .star{position:absolute;width:var(--size,2px);height:var(--size,2px);border-radius:50%;background:var(--tone,#fff8e7);opacity:var(--opacity,.5);box-shadow:0 0 7px 1px currentColor;animation:twinkle var(--duration,5s) ease-in-out infinite alternate;animation-delay:var(--delay,0s)}
+    .star.big::after,.star.big::before{content:"";position:absolute;background:currentColor;left:50%;top:50%;transform:translate(-50%,-50%);opacity:.65}.star.big::before{width:1px;height:17px}.star.big::after{height:1px;width:17px}
+    @keyframes twinkle{from{opacity:calc(var(--opacity,.5)*.35);transform:scale(.65)}to{opacity:var(--opacity,.5);transform:scale(1.15)}}
+    .shell{width:min(1220px,calc(100% - 72px));margin:auto}
+    .sitebar{height:88px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid rgba(225,216,255,.08)}
+    .identity{display:flex;align-items:center;gap:11px;text-decoration:none;font-family:Georgia,"Times New Roman",serif;font-size:21px;letter-spacing:-.025em;white-space:nowrap}
+    .brandmark{width:30px;height:30px;display:grid;place-items:center;color:var(--gold);filter:drop-shadow(0 0 10px rgba(248,216,158,.46));font-size:29px}
+    .sitebar .right{display:flex;gap:25px;align-items:center}
+    .top-link{font-size:12px;text-decoration:none;color:#dad2ed;letter-spacing:.15em;text-transform:uppercase;font-weight:700}
+    .quiet-button{color:#f4eefa;border:1px solid rgba(227,210,255,.28);border-radius:999px;background:rgba(255,255,255,.045);padding:10px 16px;display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.06em;font-weight:700;transition:.2s}
+    .quiet-button:hover{background:rgba(255,255,255,.12);border-color:#bba6d9}
+    .tiny-spark{color:var(--gold);font-size:16px}
+    .hero{min-height:493px;display:grid;grid-template-columns:1.13fr .87fr;gap:10px;align-items:center;position:relative;padding:68px 0 70px}
+    .eyebrow{display:flex;align-items:center;gap:12px;color:var(--gold);font-weight:700;font-size:11px;letter-spacing:.29em;text-transform:uppercase;margin-bottom:28px}
+    .eyebrow::before{content:"";display:inline-block;width:32px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+    h1,h2,h3,p{margin-top:0}
+    h1{font-family:Georgia,"Palatino Linotype",serif;font-weight:400;font-size:clamp(53px,6.4vw,94px);line-height:1.055;letter-spacing:-.057em;margin:0 0 24px;max-width:775px}
+    h1 em{font-weight:400;font-style:italic;background:linear-gradient(110deg,#f6e3bd 9%,#f6c9df 46%,#b9c5f8 95%);color:transparent;background-clip:text;-webkit-background-clip:text}
+    .hero-intro{color:#c4bed7;font-size:16px;line-height:1.78;max-width:480px;margin:0 0 30px}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+    .main-button{border:1px solid #ddc5f4;background:linear-gradient(120deg,#eedbf2,#d9c3ec);color:#231c35;border-radius:99px;padding:13px 21px;font-size:13px;font-weight:750;text-decoration:none;box-shadow:0 8px 35px rgba(191,144,214,.13);transition:transform .2s,box-shadow .2s}
+    .main-button:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(205,156,238,.25)}
+    .hero-cta .text-button{border:0;background:none;color:#d7c9ec;font-size:13px;padding:12px 3px}
+    .text-button:hover{text-decoration:underline;text-underline-offset:5px}
+    .hero-visual{position:relative;width:100%;max-width:510px;aspect-ratio:1;justify-self:center;isolation:isolate}
+    .halo{position:absolute;inset:11%;border-radius:50%;background:radial-gradient(circle at 54% 46%,rgba(195,173,238,.22),rgba(142,88,178,.14) 36%,rgba(104,53,155,.09) 57%,transparent 75%);box-shadow:0 0 110px rgba(136,96,195,.14),inset 0 0 58px rgba(201,180,250,.1);animation:halo-breathe 12s ease-in-out infinite alternate}
+    .ring{position:absolute;inset:15%;border-radius:50%;border:1px solid rgba(214,188,236,.16);box-shadow:0 0 0 32px rgba(177,139,236,.025),0 0 0 73px rgba(177,139,236,.022);transform:rotate(-21deg)}
+    .ring::after{content:"";position:absolute;inset:-22px;border-radius:50%;border:1px dashed rgba(214,188,236,.10)}
+    .moth-art{position:absolute;inset:8%;width:84%;height:84%;overflow:visible;filter:drop-shadow(0 0 18px rgba(240,200,243,.31));animation:moth-drift 10s ease-in-out infinite alternate}
+    @keyframes halo-breathe{to{transform:scale(1.075);opacity:.8}}
+    @keyframes moth-drift{to{transform:translateY(-10px) rotate(1.5deg)}}
+    .hero-glint{position:absolute;width:45px;height:45px;display:grid;place-items:center;font-size:35px;color:#e4d6f9;text-shadow:0 0 18px #d5bdf3;animation:twinkle 5s ease-in-out infinite alternate}.glint-a{left:15%;top:15%}.glint-b{right:8%;top:32%;font-size:23px;color:#fff0c8}.glint-c{right:27%;bottom:13%;font-size:18px;color:#b8f6f4}.glint-d{left:14%;bottom:25%;font-size:18px}
+    .orbit-label{position:absolute;bottom:0;right:3%;font-family:Georgia,serif;font-style:italic;font-size:18px;color:#c8b6dd;opacity:.8;transform:rotate(-5deg)}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(211,190,240,.36) 23%,rgba(211,190,240,.36) 77%,transparent);position:relative}
+    .divider::after{content:"✧";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#0b0b20;padding:0 15px;color:var(--gold);font-size:16px}
+    .collection{padding:49px 0 100px;scroll-margin-top:24px}
+    .collection-top{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:26px}
+    .section-kicker{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:8px}
+    h2{font-family:Georgia,"Palatino Linotype",serif;font-size:clamp(33px,4vw,48px);font-weight:400;letter-spacing:-.037em;line-height:1.16;margin:0 0 7px}
+    .section-desc{font-size:14px;color:var(--muted);margin:0}
+    .count{color:#b7a7d6;font-size:12px;letter-spacing:.06em;white-space:nowrap}
+    .toolbar{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-bottom:22px;align-items:center}
+    .searchfield{flex:1 1 280px;max-width:420px;position:relative}
+    .searchfield::before{content:"⌕";font-size:29px;position:absolute;left:17px;top:50%;transform:translateY(-55%);color:#bdb1d4;pointer-events:none}
+    .searchfield input{width:100%;height:46px;color:#fff;border:1px solid var(--line);border-radius:12px;background:rgba(21,21,47,.65);outline:none;padding:0 14px 0 46px;font-size:13px}
+    .searchfield input::placeholder{color:#9b91b6}
+    .searchfield input:focus{border-color:#bba5df;box-shadow:0 0 0 3px rgba(183,150,236,.14)}
+    .toolright{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+    .pill-select{height:46px;max-width:200px;padding:0 30px 0 14px;border:1px solid var(--line);background:#17162e;color:#ded6ec;border-radius:12px;font-size:12px;cursor:pointer}
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:29px}
+    .filter{background:transparent;border:1px solid transparent;color:#aca3c4;font-size:12px;padding:9px 13px;border-radius:22px;transition:.2s}
+    .filter:hover{color:#fff;border-color:rgba(225,211,251,.2)}
+    .filter[aria-pressed="true"]{border-color:rgba(232,205,251,.36);background:rgba(208,167,245,.12);color:#f5eaff}
+    .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:21px}
+    .project{min-width:0;display:flex;flex-direction:column;overflow:hidden;background:linear-gradient(147deg,rgba(38,34,72,.77),rgba(15,16,37,.87));border:1px solid rgba(215,197,250,.20);border-radius:23px;box-shadow:0 22px 70px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.05);transition:transform .24s,border-color .24s,box-shadow .24s}
+    .project:hover{transform:translateY(-5px);border-color:rgba(231,207,252,.48);box-shadow:0 25px 60px rgba(0,0,0,.28),0 0 28px rgba(153,113,191,.1)}
+    .art{height:185px;position:relative;overflow:hidden;border-bottom:1px solid rgba(219,203,249,.14);isolation:isolate}
+    .art::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 80% 12%,rgba(255,255,255,.18),transparent 36%)}
+    .art-skincare{background:radial-gradient(ellipse at 58% 34%,rgba(252,231,226,.78),transparent 38%),radial-gradient(ellipse at 25% 86%,rgba(209,134,168,.29),transparent 58%),linear-gradient(130deg,#5a415f,#98738a 58%,#4b4268)}
+    .art-forest{background:radial-gradient(ellipse at 48% 19%,rgba(234,218,153,.43),transparent 52%),linear-gradient(165deg,#274d4e,#2e4d48 52%,#172e31)}
+    .art-forest::before{content:"♠       ♠      ♠      ♠      ♠";position:absolute;white-space:nowrap;bottom:-55px;left:-18px;font-size:150px;letter-spacing:-.18em;color:rgba(13,31,29,.5);transform:scaleY(1.1)}
+    .art-sleep{background:radial-gradient(circle at 73% 26%,rgba(220,201,255,.27),transparent 33%),linear-gradient(135deg,#27345d,#484778 55%,#292d56)}
+    .art-spell{background:radial-gradient(ellipse at 60% 65%,rgba(253,206,233,.22),transparent 55%),linear-gradient(140deg,#4b2f69,#66538b,#2b335e)}
+    .art-lash{background:radial-gradient(ellipse at 68% 45%,rgba(251,185,215,.45),transparent 52%),linear-gradient(145deg,#865d88,#665480,#3e395e)}
+    .art-plan{background:radial-gradient(ellipse at 56% 25%,rgba(111,183,223,.26),transparent 48%),linear-gradient(140deg,#18314b,#293b67 59%,#31264f)}
+    .art-sparks{position:absolute;inset:0;display:block;background:radial-gradient(circle at 12% 28%,#fff8e7 0 1px,transparent 1.7px),radial-gradient(circle at 86% 25%,#fff8e7 0 1px,transparent 1.7px),radial-gradient(circle at 70% 75%,#fff8e7 0 1px,transparent 1.7px),radial-gradient(circle at 42% 68%,#fff8e7 0 1px,transparent 1.7px);opacity:.6}
+    .art-emblem{position:absolute;inset:0;display:grid;place-items:center;font-family:Georgia,serif;font-size:96px;color:rgba(255,243,229,.84);font-weight:400;text-shadow:0 0 35px rgba(246,210,248,.39);transform:translateY(-1px)}
+    .art-emblem.soft{opacity:.77;font-size:104px}
+    .art-emblem.lash{font-size:100px;transform:rotate(90deg) translateX(-2px)}
+    .art-forest .art-emblem{color:#f4edcb;font-size:86px}
+    .art-orbit{position:absolute;width:156px;height:156px;border:1px solid rgba(255,255,255,.24);border-radius:50%;top:16px;left:calc(50% - 78px);box-shadow:0 0 0 19px rgba(255,255,255,.025),0 0 0 45px rgba(255,255,255,.025)}
+    .art-artifact{position:absolute;bottom:13px;left:17px;color:rgba(255,255,255,.72);font-family:Georgia,serif;font-style:italic;font-size:12px;letter-spacing:.08em}
+    .project-copy{display:flex;flex-direction:column;flex:1;padding:22px 23px 20px}
+    .card-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+    .category{font-size:10px;text-transform:uppercase;letter-spacing:.17em;font-weight:800;color:#dbc2f0}
+    .edition{font-size:10px;color:#bab0d1;white-space:nowrap;border:1px solid rgba(214,199,246,.2);border-radius:99px;padding:5px 9px}
+    .project h3{font:400 25px/1.17 Georgia,"Palatino Linotype",serif;letter-spacing:-.025em;margin:0 0 11px}
+    .project-desc{font-size:12.5px;color:#b9b1cb;line-height:1.75;margin:0 0 23px;flex:1;min-height:66px}
+    .card-actions{border-top:1px solid rgba(210,200,244,.12);padding-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .open-link{text-decoration:none;color:#f4dbb6;font-size:12px;font-weight:750;display:flex;align-items:center;gap:8px}.open-link span{font-size:18px}.open-link:hover{text-decoration:underline;text-underline-offset:3px}
+    .card-buttons{display:flex;gap:6px}
+    .mini-action{width:34px;height:34px;border:1px solid transparent;background:transparent;border-radius:10px;color:#c4b9d9;font-size:16px;display:grid;place-items:center}.mini-action:hover{border-color:rgba(239,214,249,.28);background:rgba(231,209,255,.08)}.mini-action.is-pinned{color:var(--gold)}
+    .empty{grid-column:1/-1;text-align:center;background:rgba(22,21,44,.78);border:1px dashed rgba(238,223,252,.25);border-radius:23px;padding:62px 20px}.empty-icon{font-size:36px;color:var(--gold);margin-bottom:12px}.empty h3{font:400 26px Georgia,serif;margin-bottom:9px}.empty p{font-size:13px;color:var(--muted);margin-bottom:20px}
+    .foot{padding:0 0 49px;color:#8f85a9;font-size:12px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid rgba(226,210,253,.1);padding-top:25px}
+    .foot em{font:italic 17px Georgia,serif;color:#bcaed2}
+    dialog{border:1px solid rgba(226,207,251,.32);padding:0;max-width:min(665px,calc(100% - 28px));width:100%;max-height:min(88vh,930px);border-radius:25px;background:linear-gradient(155deg,#201d3b,#101327);color:var(--ink);box-shadow:0 30px 150px rgba(0,0,0,.72);overflow:auto}
+    dialog::backdrop{background:rgba(5,5,15,.78);backdrop-filter:blur(9px)}
+    .modal-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:27px 29px 19px;border-bottom:1px solid var(--line);background:rgba(26,23,48,.98)}
+    .modal-head h2{font-size:32px;margin-bottom:6px}.modal-head p{font-size:13px;color:#b7adcd;max-width:460px;margin:0;line-height:1.6}
+    .close{border:1px solid rgba(227,211,253,.28);border-radius:50%;background:rgba(255,255,255,.05);color:white;width:37px;height:37px;font-size:21px;flex:0 0 auto}
+    .modal-body{padding:22px 29px 28px}
+    .manager-note{padding:13px 16px;background:rgba(170,142,215,.1);border:1px solid rgba(215,189,255,.14);border-radius:13px;color:#cfc2e1;font-size:12px;line-height:1.6;margin-bottom:21px}
+    .manager-group{margin-top:19px}.manager-group h3{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin:0 0 9px}
+    .manager-entry{display:flex;gap:13px;align-items:center;padding:11px 0;border-bottom:1px solid rgba(232,214,254,.1)}
+    .manager-entry .entry-text{flex:1;min-width:0}.manager-entry strong{display:block;font-size:13px;font-weight:650}.manager-entry small{display:block;color:#968aaa;font-size:11px;margin-top:3px}
+    .switch{display:flex;align-items:center;gap:9px;color:#cfc4e0;font-size:11px;cursor:pointer;white-space:nowrap}
+    .switch input{appearance:none;width:38px;height:23px;border-radius:99px;background:#4d4668;border:1px solid #675f7c;position:relative;cursor:pointer;transition:.2s}
+    .switch input::after{content:"";position:absolute;width:15px;height:15px;background:#d3cbdc;border-radius:50%;top:3px;left:3px;transition:.2s}
+    .switch input:checked{background:#9d7dc3;border-color:#d7acec}.switch input:checked::after{transform:translateX(15px);background:#fff5f6}
+    .switch input:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+    .modal-foot{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-top:28px;padding-top:19px;border-top:1px solid var(--line)}
+    .reset{background:none;border:0;padding:10px 0;color:#dacbe7;text-decoration:underline;text-underline-offset:4px;font-size:12px}.reset:hover{color:white}
+    .small-note{font-size:11px;color:#9b8ead;margin:13px 0 0;line-height:1.6}
+    .toast{position:fixed;bottom:25px;left:50%;z-index:15;transform:translate(-50%,25px);color:#241c38;background:#f6e7f5;padding:11px 19px;border-radius:99px;box-shadow:0 12px 45px #0006;font-size:12px;pointer-events:none;opacity:0;transition:opacity .2s,transform .2s;max-width:calc(100% - 25px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(min-width:1050px){.project:first-child{grid-column:span 1}}
+    @media(max-width:990px){.shell{width:min(100% - 48px,1000px)}.hero{grid-template-columns:1fr .8fr;min-height:430px;padding:55px 0 60px}.hero-visual{max-width:370px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.project-desc{min-height:0}}
+    @media(max-width:670px){.shell{width:calc(100% - 34px)}.sitebar{height:74px}.identity{font-size:18px}.sitebar .right{gap:7px}.top-link{display:none}.quiet-button{padding:9px 11px;font-size:11px}.hero{display:flex;flex-direction:column;align-items:flex-start;min-height:0;padding:52px 0 45px;gap:4px}.hero-copy{position:relative;z-index:1}.hero-visual{max-width:350px;width:84%;align-self:center;margin-top:-14px;margin-bottom:-34px;opacity:.91}.eyebrow{font-size:10px;margin-bottom:20px}.hero-intro{font-size:14px;max-width:100%}h1{font-size:clamp(52px,12vw,75px)}.collection{padding:41px 0 65px}.collection-top{align-items:flex-start}.count{font-size:11px}.toolbar{align-items:stretch}.searchfield{max-width:none;flex-basis:100%}.toolright{width:100%;justify-content:space-between}.pill-select{flex:1;max-width:none}.cards{grid-template-columns:1fr;gap:15px}.art{height:157px}.project-copy{padding:20px}.project h3{font-size:25px}.project-desc{margin-bottom:14px}.filters{gap:4px}.filter{font-size:11px;padding:8px 10px}.modal-head{padding:22px 19px 17px}.modal-body{padding:18px 19px 23px}.modal-head h2{font-size:27px}.manager-entry{gap:8px}.switch{font-size:10px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="cosmos" aria-hidden="true"><div class="dust" id="dust"></div></div>
+  <div class="shell">
+    <header class="sitebar">
+      <a class="identity" href="#top" aria-label="Clara's Constellation, home"><span class="brandmark">✧</span> clara's constellation</a>
+      <nav class="right" aria-label="Main navigation"><a class="top-link" href="#collection">The collection</a><button class="quiet-button" type="button" id="openManager"><span class="tiny-spark">✦</span> Curate my sky</button></nav>
+    </header>
+    <main id="top">
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <div class="eyebrow">A PERSONAL LITTLE UNIVERSE</div>
+          <h1 id="heroTitle">Made of dreams <em>& stardust.</em></h1>
+          <p class="hero-intro">A gathering place for the things I imagine, explore, and create. Some are works in progress. Some are little rituals. All have a place among the stars.</p>
+          <div class="hero-cta"><a href="#collection" class="main-button">Wander through the stars <span aria-hidden="true">↗</span></a><button class="text-button" id="heroManage" type="button">Arrange my constellation&nbsp; ✧</button></div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="halo"></div><div class="ring"></div>
+          <svg class="moth-art" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="wing" x1="85" y1="135" x2="290" y2="365" gradientUnits="userSpaceOnUse"><stop stop-color="#B3FFFF" stop-opacity=".8"/><stop offset=".36" stop-color="#F1CBF7" stop-opacity=".76"/><stop offset=".7" stop-color="#CBB9FF" stop-opacity=".74"/><stop offset="1" stop-color="#F6D7A8" stop-opacity=".61"/></linearGradient>
+              <linearGradient id="wingStroke" x1="150" y1="90" x2="340" y2="420" gradientUnits="userSpaceOnUse"><stop stop-color="#A4F3F2"/><stop offset=".5" stop-color="#F2D3F8"/><stop offset="1" stop-color="#FDE3B4"/></linearGradient>
+              <radialGradient id="wingGlow"><stop stop-color="#E5A7F1" stop-opacity=".24"/><stop offset="1" stop-color="#B5A2EE" stop-opacity="0"/></radialGradient>
+              <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+            </defs>
+            <circle cx="250" cy="247" r="190" fill="url(#wingGlow)"/>
+            <g opacity=".36" filter="url(#softGlow)" stroke="#ECC9FC" stroke-width="7"><path d="M246 230 C204 94 114 73 61 119 C27 179 89 270 241 263"/><path d="M254 230 C296 94 386 73 439 119 C473 179 411 270 259 263"/></g>
+            <g fill="url(#wing)" fill-opacity=".19" stroke="url(#wingStroke)" stroke-width="2.1" stroke-linejoin="round">
+              <path d="M247 227 C215 130 133 81 86 103 C42 126 55 189 111 225 C147 251 203 259 245 251 C221 264 160 260 137 283 C117 312 131 359 178 381 C210 395 239 344 251 272 Z"/>
+              <path d="M253 227 C285 130 367 81 414 103 C458 126 445 189 389 225 C353 251 297 259 255 251 C279 264 340 260 363 283 C383 312 369 359 322 381 C290 395 261 344 249 272 Z"/>
+            </g>
+            <g stroke="#E7CBF9" stroke-opacity=".51" stroke-width="1.4" fill="none">
+              <path d="M246 251 C191 172 130 124 81 122 M241 251 C182 228 134 208 99 183 M243 266 C184 296 164 328 178 381 M249 266 C209 310 200 347 215 366"/>
+              <path d="M254 251 C309 172 370 124 419 122 M259 251 C318 228 366 208 401 183 M257 266 C316 296 336 328 322 381 M251 266 C291 310 300 347 285 366"/>
+              <path d="M250 229 C244 189 221 165 211 149 M250 229 C256 189 279 165 289 149" stroke="#FBE6CC" stroke-width="1.5"/>
+            </g>
+            <g fill="#EACDF8" opacity=".72"><circle cx="150" cy="162" r="12"/><circle cx="350" cy="162" r="12"/><circle cx="179" cy="331" r="7"/><circle cx="321" cy="331" r="7"/></g>
+            <g fill="none" stroke="#F9E5C6" opacity=".72"><circle cx="150" cy="162" r="19"/><circle cx="350" cy="162" r="19"/><circle cx="179" cy="331" r="12"/><circle cx="321" cy="331" r="12"/></g>
+            <ellipse cx="250" cy="254" rx="9" ry="57" fill="#F8E7D1" fill-opacity=".8"/>
+            <ellipse cx="250" cy="226" rx="13" ry="17" fill="#FFF3D9"/>
+            <g fill="#F7ECCF"><path d="M85 65 l2 9 9 2-9 2-2 9-2-9-9-2 9-2z"/><path d="M422 357 l2 12 12 2-12 2-2 12-2-12-12-2 12-2z"/><circle cx="406" cy="215" r="2"/><circle cx="96" cy="312" r="3"/><circle cx="382" cy="80" r="2"/><circle cx="118" cy="392" r="2"/></g>
+          </svg>
+          <span class="hero-glint glint-a">✧</span><span class="hero-glint glint-b">✦</span><span class="hero-glint glint-c">✧</span><span class="hero-glint glint-d">✳</span>
+          <div class="orbit-label">little worlds, big wonder</div>
+        </div>
+      </section>
+      <div class="divider"></div>
+      <section class="collection" id="collection" aria-labelledby="collectionTitle">
+        <div class="collection-top">
+          <div><div class="section-kicker">✧ &nbsp; THE ARCHIVE</div><h2 id="collectionTitle">The little worlds</h2><p class="section-desc">Every creation has its own kind of magic. Find one to wander into.</p></div>
+          <div class="count" id="visibleCount" aria-live="polite"></div>
+        </div>
+        <div class="toolbar">
+          <label class="searchfield"><span class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0)">Search pages</span><input id="search" type="search" placeholder="Search your little universe…" autocomplete="off" aria-label="Search pages"></label>
+          <div class="toolright"><select id="sort" class="pill-select" aria-label="Sort pages"><option value="curated">✧ Curated order</option><option value="alpha">Title A to Z</option><option value="category">By constellation</option><option value="pinned">Favorites first</option></select><button class="quiet-button" id="showHidden" type="button">Hidden pages <span id="hiddenCount">0</span></button></div>
+        </div>
+        <div class="filters" id="filters" role="group" aria-label="Filter projects">
+          <button type="button" class="filter" data-filter="all" aria-pressed="true">All little worlds</button>
+          <button type="button" class="filter" data-filter="sleep" aria-pressed="false">☾ &nbsp; Sleep & starlight</button>
+          <button type="button" class="filter" data-filter="skincare" aria-pressed="false">✿ &nbsp; Skincare rituals</button>
+          <button type="button" class="filter" data-filter="beauty" aria-pressed="false">✧ &nbsp; Beauty notes</button>
+          <button type="button" class="filter" data-filter="favorites" aria-pressed="false">☆ &nbsp; Favorites</button>
+        </div>
+        <div class="cards" id="cards" aria-live="polite"></div>
+      </section>
+    </main>
+    <footer class="foot"><div><em>A little magic, kept close.</em></div><div>✧ &nbsp; Dreamed up with care · Clara's Constellation</div></footer>
+  </div>
+  <dialog id="manager" aria-labelledby="managerTitle">
+    <div class="modal-head"><div><div class="section-kicker">THE CONSTELLATION KEEPER</div><h2 id="managerTitle">Curate your sky</h2><p>Choose which pages appear in your collection. You can bring any hidden page back whenever the mood strikes.</p></div><button type="button" class="close" id="closeManager" aria-label="Close settings">×</button></div>
+    <div class="modal-body"><div class="manager-note">✧ Your choices are saved <strong>in this browser only</strong>. Hiding a page removes its card from this index — it does not delete the page or make its URL private.</div><div id="managerList"></div><div class="modal-foot"><button class="reset" id="resetView" type="button">Restore original view</button><button class="main-button" id="doneManager" type="button">Done arranging ✧</button></div><p class="small-note">To make visibility changes the same for everyone, edit the <code>visibleByDefault</code> settings in this index.html file and publish it to GitHub. No original page needs to change.</p></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+/*
+  CLARA'S CONSTELLATION — HOW TO ADD/EDIT PAGES
+  ----------------------------------------------------
+  Keep this index.html beside the original HTML pages in your GitHub directory.
+  Add an item to PAGES below for each new HTML file.
+  Set file to the EXACT GitHub filename (without the temporary (1), (2), etc.
+  suffixes that sometimes appear on downloaded copies).
+  To hide a page by default for EVERYONE, set visibleByDefault: false.
+  Personal 'Curate my sky' visibility choices are stored only in each browser.
+*/
+const PAGES = [
+  {id:'skincare-clara',title:'Skincare, but make it Clara',file:'skincare-but-make-it-clara.html',category:'skincare',edition:'Ritual planner',description:'A thoughtful daily skincare ritual, weekly rhythm, and carefully gathered product edit.',symbol:'✿',art:'skincare',mood:'the gentle edit',visibleByDefault:true},
+  {id:'skincare-forest',title:'The Forest Skincare Ritual',file:'clara_skincare_forest_v1_5.html',category:'skincare',edition:'Forest · v1.5',description:'A woodland-inspired edition of the skincare ritual, tucked away in its own enchanted clearing.',symbol:'❀',art:'forest',mood:'into the woods',visibleByDefault:true},
+  {id:'starlight-interactive',title:'Project Starlight',file:'starlight-sleep-checklist-roadmap-interactive.html',category:'sleep',edition:'Interactive roadmap',description:'A little roadmap to a tiny sky: ideas, phases, and dreams for the Starlight experience.',symbol:'☽',art:'sleep',mood:'a tiny sky',visibleByDefault:true},
+  {id:'starlight-roadmap',title:'Starlight: The Roadmap',file:'starlight-sleep-checklist-roadmap.html',category:'sleep',edition:'Planning edition',description:'The original plan and roadmap, with guiding principles, priorities, and thoughtful checkpoints.',symbol:'✧',art:'plan',mood:'notes from the stars',visibleByDefault:true},
+  {id:'sleep-spell',title:"Clara's July Sleep Spell",file:'clara_sleep_plan.html',category:'sleep',edition:'Sleep ritual',description:'An encouraging little sleep spell for gentler evenings and softer landings.',symbol:'☾',art:'spell',mood:'moonlit moments',visibleByDefault:true},
+  {id:'lash-plan',title:"Cari's Lash Plan",file:'caris_lash_plan.html',category:'beauty',edition:'Beauty guide',description:'A playful guide to finding a comfortable, beautiful daily lash routine.',symbol:'✶',art:'lash',mood:'everyday enchantment',visibleByDefault:true}
+];
+const CAT={skincare:'Skincare rituals',sleep:'Sleep & starlight',beauty:'Beauty notes'};
+const KEY='clara-constellation-settings-v1';
+const $=id=>document.getElementById(id);
+let prefs=readPrefs();let filter='all';let toastTimer;
+function readPrefs(){try{const o=JSON.parse(localStorage.getItem(KEY)||'{}');return {hidden:Array.isArray(o.hidden)?o.hidden:[],pinned:Array.isArray(o.pinned)?o.pinned:[]}}catch{return {hidden:[],pinned:[]}}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(prefs))}catch{notice('Your browser is not allowing preferences to be saved.')}}
+function hidden(page){return prefs.hidden.includes(page.id)||(!page.visibleByDefault&&!prefs.hidden.includes('show:'+page.id))}
+function setVisibility(page,isVisible){const h=new Set(prefs.hidden);h.delete(page.id);h.delete('show:'+page.id);if(isVisible!==page.visibleByDefault)h.add(isVisible?'show:'+page.id:page.id);prefs.hidden=[...h];save();render();renderManager()}
+function pinned(page){return prefs.pinned.includes(page.id)}
+function togglePin(page){const set=new Set(prefs.pinned);set.has(page.id)?set.delete(page.id):set.add(page.id);prefs.pinned=[...set];save();render();notice(pinned(page)?'Added to your favorite stars ✧':'Removed from favorites')}
+function element(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el}
+function cardFor(page){
+ const card=element('article','project');
+ const art=element('div',`art art-${page.art}`);art.setAttribute('aria-hidden','true');
+ art.append(element('span','art-sparks'),element('div','art-orbit'),element('div','art-emblem',page.symbol),element('div','art-artifact',page.mood));card.append(art);
+ const content=element('div','project-copy');const meta=element('div','card-meta');meta.append(element('span','category',CAT[page.category]),element('span','edition',page.edition));
+ const h=element('h3','',page.title),desc=element('p','project-desc',page.description);
+ const actions=element('div','card-actions');const link=element('a','open-link');link.href='./'+encodeURI(page.file);link.textContent='Open this world';link.append(element('span','', '↗'));link.setAttribute('aria-label','Open '+page.title);
+ const buttons=element('div','card-buttons');const pin=element('button','mini-action'+(pinned(page)?' is-pinned':''),pinned(page)?'★':'☆');pin.type='button';pin.title=pinned(page)?'Remove from favorites':'Add to favorites';pin.setAttribute('aria-label',pin.title);pin.setAttribute('aria-pressed',String(pinned(page)));pin.addEventListener('click',()=>togglePin(page));
+ const hide=element('button','mini-action','◌');hide.type='button';hide.title='Hide page from this browser';hide.setAttribute('aria-label','Hide '+page.title);hide.addEventListener('click',()=>{setVisibility(page,false);notice('Page hidden · restore it under Hidden pages')});buttons.append(pin,hide);actions.append(link,buttons);content.append(meta,h,desc,actions);card.append(content);return card
+}
+function render(){
+ const query=$('search').value.toLocaleLowerCase().trim();let list=PAGES.filter(p=>!hidden(p));const total=list.length;
+ $('hiddenCount').textContent=String(PAGES.length-total);
+ $('visibleCount').textContent=`${total} ${total===1?'world':'worlds'} in your sky`;
+ list=list.filter(p=>(filter==='all'||(filter==='favorites'?pinned(p):p.category===filter))&&[p.title,p.edition,p.description,CAT[p.category]].join(' ').toLocaleLowerCase().includes(query));
+ const sort=$('sort').value;
+ if(sort==='alpha')list.sort((a,b)=>a.title.localeCompare(b.title));
+ if(sort==='category')list.sort((a,b)=>CAT[a.category].localeCompare(CAT[b.category])||a.title.localeCompare(b.title));
+ if(sort==='pinned')list.sort((a,b)=>Number(pinned(b))-Number(pinned(a))||PAGES.indexOf(a)-PAGES.indexOf(b));
+ const cards=$('cards');cards.replaceChildren(...list.map(cardFor));
+ if(!list.length){const none=element('div','empty');none.append(element('div','empty-icon','✧'),element('h3','','Nothing in this corner of the sky…'),element('p','',total?'Try another search or constellation.':'Every page is currently hidden, but your stars are still here.'));const btn=element('button','quiet-button',total?'Show all worlds':'Restore hidden pages');btn.type='button';btn.addEventListener('click',()=>{if(total){$('search').value='';setFilter('all')}else openManager()});none.append(btn);cards.append(none)}
+}
+function setFilter(value){filter=value;document.querySelectorAll('.filter').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===value)));render()}
+function renderManager(){
+ const list=$('managerList');list.replaceChildren();
+ for(const category of ['skincare','sleep','beauty']){
+  const group=element('section','manager-group');group.append(element('h3','',CAT[category]));
+  PAGES.filter(p=>p.category===category).forEach(p=>{
+   const line=element('div','manager-entry');const txt=element('div','entry-text');txt.append(element('strong','',p.title),element('small','',p.edition));
+   const label=element('label','switch');const input=element('input');input.type='checkbox';input.checked=!hidden(p);input.setAttribute('aria-label','Show '+p.title);const state=element('span','',input.checked?'Visible':'Hidden');input.addEventListener('change',()=>{setVisibility(p,input.checked);state.textContent=input.checked?'Visible':'Hidden';notice(input.checked?'Restored to your sky ✧':'Hidden from this view')});label.append(input,state);line.append(txt,label);group.append(line)
+  });list.append(group)
+ }
+}
+function openManager(){renderManager();$('manager').showModal()}
+function notice(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400)}
+$('openManager').addEventListener('click',openManager);$('heroManage').addEventListener('click',openManager);$('showHidden').addEventListener('click',openManager);
+$('closeManager').addEventListener('click',()=>$('manager').close());$('doneManager').addEventListener('click',()=>$('manager').close());
+$('manager').addEventListener('click',event=>{if(event.target===$('manager'))$('manager').close()});
+$('resetView').addEventListener('click',()=>{prefs={hidden:[],pinned:[]};save();render();renderManager();notice('The original constellation is restored ✧')});
+$('search').addEventListener('input',render);$('sort').addEventListener('change',render);
+document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>setFilter(b.dataset.filter)));
+(function makeStars(){const sky=$('dust');let seed=914371;function rand(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}const tones=['#fff3dc','#ecd9ff','#b9f1f4','#f6caeb'];const stars=document.createDocumentFragment();for(let i=0;i<130;i++){const s=element('i','star'+(i%27===0?' big':''));const size=1+rand()*2;s.style.left=(rand()*100)+'%';s.style.top=(rand()*100)+'%';s.style.setProperty('--size',size+'px');s.style.setProperty('--tone',tones[Math.floor(rand()*tones.length)]);s.style.setProperty('--opacity',(0.25+rand()*.62).toFixed(2));s.style.setProperty('--duration',(3+rand()*6).toFixed(1)+'s');s.style.setProperty('--delay',(-rand()*9).toFixed(1)+'s');s.style.color=tones[Math.floor(rand()*tones.length)];stars.append(s)}sky.append(stars)})();
+render();
+</script>
+</body>
+</html>
